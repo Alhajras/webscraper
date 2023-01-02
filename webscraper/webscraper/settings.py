@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base',
-    'django_simple_bulma',
+    'bulma',
 ]
 
 STATIC_URL = '/static/'
