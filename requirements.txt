@@ -1,1 +1,2 @@
 Django==3.2.10
+django-simple-bulma==2.5.0
