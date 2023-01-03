@@ -23,11 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1__lrqi@!3*o5p1202&b5__6%5p!yn2#p22vq@0rc9r$--i&=i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
 
 # Application definition
 
@@ -41,8 +42,6 @@ INSTALLED_APPS = [
     'base',
     'bulma',
 ]
-
-STATIC_URL = '/static/'
 
 STATICFILES_FINDERS = [
   # First add the two default Finders, since this will overwrite the default.
@@ -131,7 +130,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
