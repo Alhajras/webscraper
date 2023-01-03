@@ -31,9 +31,9 @@
             <table class = "table">
                <thead>
                   <tr>
-                     <th>Position</th>
+                     <th>ID</th>
                      <th>Name</th>
-                     <th>Country</th>
+                     <th>Url</th>
                   </tr>
                </thead>
                <tfoot>
@@ -46,21 +46,15 @@
                   </tr>
                </tfoot>
                <tbody>
+                            {% for spider in spiders %}
+
                   <tr>
-                     <td>1</td>
-                     <td>Sachin</td>
-                     <td>India</td>
+                     <td>{{spider.id}}</td>
+                     <td>{{spider.name}}</td>
+                     <td>{{spider.url}}</td>
                   </tr>
-                  <tr>
-                     <td>2</td>
-                     <td>Smith</td>
-                     <td>Australia</td>
-                  </tr>
-                  <tr>
-                     <td>3</td>
-                     <td>Joe Root</td>
-                     <td>England</td>
-                  </tr>
+                                        {% endfor %}
+
                </tbody>
             </table>
 
