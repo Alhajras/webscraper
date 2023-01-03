@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet"
           href="https://jenil.github.io/bulmaswatch/darkly/bulmaswatch.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -10,7 +12,7 @@
 </head>
 <body>
 <div class="columns">
-    <div class="column">
+    <div class="column is-one-fifth">
         <aside class="menu">
             <p class="menu-label">
                 General
@@ -39,6 +41,7 @@
                         <th>Status</th>
                         <th>Created at</th>
                         <th>Completed at</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,6 +53,24 @@
                         <td>{{spider.status}}</td>
                         <td>{{spider.created_at}}</td>
                         <td>{{spider.completed_at}}</td>
+                        <td>
+                            <p class="buttons">
+
+                                <button class="button is-info is-outlined">
+                                    <span>Edit</span>
+                                    <span class="icon is-small">
+      <i class="fa fa-gear"></i>
+    </span>
+                                </button>
+                                <button class="button is-danger is-outlined">
+                                    <span>Delete</span>
+                                    <span class="icon is-small">
+      <i class="fas fa-times"></i>
+    </span>
+                                </button>
+                            </p>
+
+                        </td>
                     </tr>
                     {% endfor %}
                     </tbody>
