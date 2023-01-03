@@ -19,7 +19,9 @@ class Spider(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(blank=True)
     deleted = models.BooleanField(default=False)
-    status = models.CharField(max_length=10, choices=SpiderStatus.choices, default=SpiderStatus.NEW)
+    status = models.CharField(
+        max_length=10, choices=SpiderStatus.choices, default=SpiderStatus.NEW
+    )
 
     def __str__(self) -> str:
         return self.name

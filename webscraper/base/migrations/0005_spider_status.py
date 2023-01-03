@@ -6,13 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('base', '0004_spider_deleted'),
+        ("base", "0004_spider_deleted"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='spider',
-            name='status',
-            field=models.CharField(choices=[('new', 'New'), ('running', 'Running'), ('completed', 'Completed'), ('exit', 'Exit')], default='new', max_length=10),
+            model_name="spider",
+            name="status",
+            field=models.CharField(
+                choices=[
+                    ("new", "New"),
+                    ("running", "Running"),
+                    ("completed", "Completed"),
+                    ("exit", "Exit"),
+                ],
+                default="new",
+                max_length=10,
+            ),
         ),
     ]
