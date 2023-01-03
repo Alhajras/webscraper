@@ -5,57 +5,61 @@
     <title>Title</title>
     <link rel="stylesheet"
           href="https://jenil.github.io/bulmaswatch/darkly/bulmaswatch.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 </head>
 <body>
 <div class="columns">
-  <div class="column">
-    <aside class="menu">
-  <p class="menu-label">
-    General
-  </p>
-  <ul class="menu-list">
-    <li><a>Spiders</a></li>
-    <li><a>Templates</a></li>
-    <li><a>Runners</a></li>
-  </ul>
-</aside>
-  </div>
-  <div class="column">
-     <section class = "section">
-         <div class = "container">
-            <span class = "is-size-5">
+    <div class="column">
+        <aside class="menu">
+            <p class="menu-label">
+                General
+            </p>
+            <ul class="menu-list">
+                <li><a>Spiders</a></li>
+                <li><a>Templates</a></li>
+                <li><a>Runners</a></li>
+            </ul>
+        </aside>
+    </div>
+    <div class="column">
+        <section class="section">
+            <div class="container">
+            <span class="is-size-5">
                Spiders
             </span>
-            <br>
+                <br>
 
-            <table class = "table">
-               <thead>
-                  <tr>
-                     <th>ID</th>
-                     <th>Name</th>
-                     <th>Url</th>
-                      <th>Status</th>
-                      <th>Created at</th>
-                     <th>Completed at</th>
-                  </tr>
-               </thead>
-               <tbody>
-               {% for spider in spiders %}
-               <tr>
-                   <td>{{spider.id}}</td>
-                   <td>{{spider.name}}</td>
-                   <td>{{spider.url}}</td>
-                   <td>{{spider.status}}</td>
-                   <td>{{spider.created_at}}</td>
-                   <td>{{spider.completed_at}}</td>
-               </tr>
-               {% endfor %}
-               </tbody>
-            </table>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Url</th>
+                        <th>Status</th>
+                        <th>Created at</th>
+                        <th>Completed at</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for spider in spiders %}
+                    <tr>
+                        <td>{{spider.id}}</td>
+                        <td>{{spider.name}}</td>
+                        <td>{{spider.url}}</td>
+                        <td>{{spider.status}}</td>
+                        <td>{{spider.created_at}}</td>
+                        <td>{{spider.completed_at}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
-         </div>
-      </section>
-  </div>
+            </div>
+        </section>
+    </div>
 </div>
 </body>
 </html>
+{% load static %}
+<script src='{% static "js/index.js" %}'></script>
