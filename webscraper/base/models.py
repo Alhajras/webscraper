@@ -20,3 +20,6 @@ class Spider(models.Model):
     completed_at = models.DateTimeField(blank=True)
     deleted = models.BooleanField(default=False)
     status = models.CharField(max_length=10, choices=SpiderStatus.choices, default=SpiderStatus.NEW)
+
+    def __str__(self) -> str:
+        return self.name

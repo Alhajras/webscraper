@@ -1,0 +1,24 @@
+[flake8]
+max-line-length=120
+extend-ignore=E203,I201  # whitespace before colons and around import groups
+extend-exclude=migrations
+application-import-names=preondock,preondock_rlm,e2e_tests
+class_attributes_order =
+    meta_class,
+    field,
+    nested_class,
+    magic_method,
+    method
+exclude =
+    .gitlab,
+    .mypy_cache,
+    logs,
+    media,
+    mount,
+    static,
+    venv,
+    .venv,
+    node_modules,
+    .cache
+
+
