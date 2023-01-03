@@ -34,27 +34,22 @@
                      <th>ID</th>
                      <th>Name</th>
                      <th>Url</th>
+                      <th>Status</th>
+                      <th>Created at</th>
+                     <th>Completed at</th>
                   </tr>
                </thead>
-               <tfoot>
-                  <tr>
-                     <th><abbr title = "Position">Pos</abbr></th>
-                     <th>Player</th>
-                     <th>
-                        <abbr title = "Played for the country">Country</abbr>
-                     </th>
-                  </tr>
-               </tfoot>
                <tbody>
-                            {% for spider in spiders %}
-
-                  <tr>
-                     <td>{{spider.id}}</td>
-                     <td>{{spider.name}}</td>
-                     <td>{{spider.url}}</td>
-                  </tr>
-                                        {% endfor %}
-
+               {% for spider in spiders %}
+               <tr>
+                   <td>{{spider.id}}</td>
+                   <td>{{spider.name}}</td>
+                   <td>{{spider.url}}</td>
+                   <td>{{spider.status}}</td>
+                   <td>{{spider.created_at}}</td>
+                   <td>{{spider.completed_at}}</td>
+               </tr>
+               {% endfor %}
                </tbody>
             </table>
 
