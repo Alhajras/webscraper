@@ -6,17 +6,19 @@ import { AppComponent } from './app.component';
 import { BaseComponent } from './base/base.component';
 import {MenuModule} from "primeng/menu";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {TableModule} from "primeng/table";
 @NgModule({
   declarations: [
     AppComponent,
     BaseComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MenuModule,
-      BrowserAnimationsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MenuModule,
+    BrowserAnimationsModule,
+    TableModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
