@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MenuItem} from "primeng/api";
+import {SpiderService} from "src/app/services/spider.service";
+import {Spider} from "src/app/models/spider.model";
 
 @Component({
   selector: 'app-base',
@@ -7,14 +9,17 @@ import {MenuItem} from "primeng/api";
   styleUrls: ['./base.component.scss']
 })
 export class BaseComponent {
-    public items: MenuItem[] = []
-    products1 = []
+  public items: MenuItem[] = [
+    {label: 'Spiders'},
+    {label: 'Templates'},
+    {label: 'Runners'}
+  ]
+  public spiders: Spider[] = []
 
-    ngOnInit() {
-        this.items = [
-            {label: 'Spiders'},
-            {label: 'Templates'},
-            {label: 'Runners'}
-        ];
-    }
+  public constructor(private readonly spiderService: SpiderService) {
+    spiderService.list().subscribe(spiders => {
+      this.spiders = spiders
+    })
+  }
+
 }

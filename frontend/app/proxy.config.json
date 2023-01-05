@@ -1,0 +1,22 @@
+{
+  "/api/": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/f2-ws/": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "ws": true
+  },
+  "/static/": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/get-image/": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

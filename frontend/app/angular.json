@@ -67,6 +67,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "frontend:build",
+            "proxyConfig": "proxy.config.json",
+            "hmr": true
+          },
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
@@ -101,11 +106,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "3a087e9e-ad08-4933-a7c9-781880c843fc"
+    "analytics": "3a087e9e-ad08-4933-a7c9-781880c843fc",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
