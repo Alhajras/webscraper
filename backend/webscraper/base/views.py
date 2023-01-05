@@ -1,24 +1,14 @@
-from django.shortcuts import render
-from . import models
-from .forms import SpiderForm
+from django.contrib.auth.models import User
+from rest_framework import viewsets
+from .models import Spider
+from .serializers import SpiderSerializer, UserSerializer
 
 
-def index(request):
-    spiders = models.Spider.objects.filter(deleted=False)
-    context = {"spiders": spiders}
-
-    return render(request, "index.html", context)
+class SpiderViewSet(viewsets.ModelViewSet):
+    queryset = Spider.objects.all()
+    serializer_class = SpiderSerializer
 
 
-def create_spider(request):
-    if request.method == "POST":
-        form = SpiderForm(request.POST)
-        if form.is_valid():
-            models.Spider.objects.create(
-                name=form.cleaned_data["name"],
-                url=form.cleaned_data["url"],
-                description=form.cleaned_data["description"],
-            )
-    spiders = models.Spider.objects.filter(deleted=False)
-    context = {"spiders": spiders}
-    return render(request, "index.html", context)
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
