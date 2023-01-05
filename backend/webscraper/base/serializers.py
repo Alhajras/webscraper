@@ -12,4 +12,4 @@ class UserSerializer(serializers.ModelSerializer):
 class SpiderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Spider
-        fields = ["name", "url", "description"]
+        fields = ["name", "url", "description", "created_at", "completed_at", "status"]

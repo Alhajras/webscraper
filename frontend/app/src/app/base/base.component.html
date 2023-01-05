@@ -8,16 +8,28 @@
       <th pSortableColumn="url" style="width:20%">Url
         <p-sortIcon field="url"></p-sortIcon>
       </th>
+      <th pSortableColumn="status" style="width:20%">Status
+        <p-sortIcon field="status"></p-sortIcon>
+      </th>
+      <th pSortableColumn="created_at" style="width:20%">Created at
+        <p-sortIcon field="created_at"></p-sortIcon>
+      </th>
+      <th pSortableColumn="completed_at" style="width:20%">Completed at
+        <p-sortIcon field="completed_at"></p-sortIcon>
+      </th>
       <th pSortableColumn="description" style="width:20%">Description
         <p-sortIcon field="description"></p-sortIcon>
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-product>
+  <ng-template pTemplate="body" let-spider>
     <tr>
-      <td>{{product.name}}</td>
-      <td>{{product.url}}</td>
-      <td>{{product.description}}</td>
+      <td>{{spider.name}}</td>
+      <td>{{spider.url}}</td>
+      <td>{{spider.status}}</td>
+      <td>{{spider.created_at}}</td>
+      <td>{{spider.completed_at}}</td>
+      <td>{{spider.description}}</td>
     </tr>
   </ng-template>
 </p-table>
