@@ -1,30 +1,33 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { BaseComponent } from './base/base.component';
-import {MenuModule} from "primeng/menu";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import {TableModule} from "primeng/table";
-import {HttpClientModule} from "@angular/common/http";
+import { BrowserModule } from '@angular/platform-browser';
+import { InputFieldComponent } from './shared/input-field/input-field.component';
+import { NgModule } from '@angular/core';
 import { SpiderComponent } from 'src/app/base/spider/spider.component';
-import {DialogModule} from "primeng/dialog";
+import { TimeAgoComponent } from './shared/time-ago/time-ago.component';
+import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
+import {DialogModule} from "primeng/dialog";
 import {DropdownModule} from "primeng/dropdown";
+import {HttpClientModule} from "@angular/common/http";
+import {InputTextModule} from "primeng/inputtext";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {MenuModule} from "primeng/menu";
 import {MessageModule} from "primeng/message";
 import {ReactiveFormsModule} from "@angular/forms";
-import {InputTextareaModule} from "primeng/inputtextarea";
-import {InputTextModule} from "primeng/inputtext";
-import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
-import { InputFieldComponent } from './shared/input-field/input-field.component';
+import {TableModule} from "primeng/table";
+import {TimeagoPipe} from "src/app/shared/pipes/timeago.pipe";
 @NgModule({
   declarations: [
     AppComponent,
     BaseComponent,
     SpiderComponent,
-    InputFieldComponent
+    InputFieldComponent,
+    TimeAgoComponent,
+    TimeagoPipe
   ],
   imports: [
     BrowserModule,

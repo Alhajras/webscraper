@@ -35,10 +35,18 @@
   <ng-template pTemplate="body" let-spider>
     <tr>
       <td>{{spider.name}}</td>
-      <td>{{spider.url}}</td>
+      <td><a [href]="spider.url">{{spider.url}}</a></td>
       <td>{{spider.status}}</td>
-      <td>{{spider.created_at}}</td>
-      <td>{{spider.completed_at}}</td>
+      <td>
+        <p>
+          <app-time-ago [time]="spider.created_at"></app-time-ago>
+        </p>
+      </td>
+      <td>
+        <p>
+          <app-time-ago [time]="spider.completed_at"></app-time-ago>
+        </p>
+      </td>
       <td>{{spider.description}}</td>
       <td>
         <div>
