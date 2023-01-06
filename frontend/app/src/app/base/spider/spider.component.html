@@ -169,7 +169,7 @@
       (click)="submit()"
       class="p-mr-2"
     >
-      <span>Create</span>
+      <span>{{ updatedSpider !== null ? 'Update' : 'Create'}}</span>
     </button>
     <button
       [disabled]="currentlySubmitting"

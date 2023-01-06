@@ -12,7 +12,7 @@ import {Spider} from "src/app/models/spider.model";
 })
 export class SpiderComponent {
   public spiders: Spider[] = []
-
+  public updatedSpider: Spider | null = null
   public breadcrumbs: MenuItem[] = []
   public description!: FormControl
   public template!: FormControl
@@ -59,6 +59,21 @@ export class SpiderComponent {
       name: this.name.value,
       url: this.url.value,
     }
+    if (this.updatedSpider !== null) {
+      this.spiderService.update(this.updatedSpider.id, spider).toPromise().then(() => {
+        this.spiderService.list().subscribe(spiders => {
+          this.spiders = spiders
+        })
+        this.closeModal()
+        this.currentlySubmitting = false
+        this.updatedSpider = null
+      }).catch((err: HttpErrorResponse) => {
+        this.errorMessage = err.error
+        this.currentlySubmitting = false
+        console.log(err)
+      })
+      return;
+    }
     this.spiderService.post(spider).toPromise().then(() => {
       this.spiderService.list().subscribe(spiders => {
         this.spiders = spiders
@@ -88,6 +103,15 @@ export class SpiderComponent {
   }
 
   public editSpider(spider: Spider): void {
-
+    this.updatedSpider = spider
+    this.description = this.fb.control(spider.description)
+    this.url = this.fb.control(spider.url)
+    this.name = this.fb.control(spider.name)
+    this.form = this.fb.group({
+      description: this.description,
+      url: this.url,
+      name: this.name,
+    })
+    this.displayModal = true
   }
 }
