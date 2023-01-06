@@ -22,6 +22,10 @@ export class SpiderService {
     return this.client.post<Spider>(`${this.endpointPath}`, spider)
   }
 
+  public update(id: number, spider: Partial<Spider>): Observable<Spider> {
+    return this.client.put<Spider>(`${this.endpointPath}${id}/`, spider)
+  }
+
   public list(additionalParams = {}): Observable<Spider[]> {
     const params = new HttpParams({fromObject: additionalParams})
     return this.client.getList<Spider>(this.endpointPath, params)

@@ -15,7 +15,7 @@ class EverythingButDestroyViewSet(
 
 
 class SpiderViewSet(EverythingButDestroyViewSet):
-    queryset = Spider.objects.all()
+    queryset = Spider.objects.filter(deleted=False)
     serializer_class = SpiderSerializer
 
 

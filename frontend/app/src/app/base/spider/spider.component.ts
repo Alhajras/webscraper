@@ -72,11 +72,22 @@ export class SpiderComponent {
     })
   }
 
-  public deleteSpider(): void {
-
+  public deleteSpider(spider: Spider): void {
+    spider.deleted = true
+    this.spiderService.update(spider.id, spider).toPromise().then(() => {
+      this.spiderService.list().subscribe(spiders => {
+        this.spiders = spiders
+      })
+      this.closeModal()
+      this.currentlySubmitting = false
+    }).catch((err: HttpErrorResponse) => {
+      this.errorMessage = err.error
+      this.currentlySubmitting = false
+      console.log(err)
+    })
   }
 
-  public editSpider(): void {
+  public editSpider(spider: Spider): void {
 
   }
 }
