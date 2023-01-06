@@ -7,26 +7,28 @@
   (click)="displayModal = true"
 ></button>
 
- <p-table [value]="spiders" [tableStyle]="{'min-width': '60rem'}">
+<p-table [value]="spiders" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="name" style="width:20%">Name
+      <th pSortableColumn="name">Name
         <p-sortIcon field="name"></p-sortIcon>
       </th>
-      <th pSortableColumn="url" style="width:20%">Url
+      <th pSortableColumn="url">Url
         <p-sortIcon field="url"></p-sortIcon>
       </th>
-      <th pSortableColumn="status" style="width:20%">Status
+      <th pSortableColumn="status">Status
         <p-sortIcon field="status"></p-sortIcon>
       </th>
-      <th pSortableColumn="created_at" style="width:20%">Created at
+      <th pSortableColumn="created_at">Created at
         <p-sortIcon field="created_at"></p-sortIcon>
       </th>
-      <th pSortableColumn="completed_at" style="width:20%">Completed at
+      <th pSortableColumn="completed_at">Completed at
         <p-sortIcon field="completed_at"></p-sortIcon>
       </th>
-      <th pSortableColumn="description" style="width:20%">Description
+      <th pSortableColumn="description">Description
         <p-sortIcon field="description"></p-sortIcon>
+      </th>
+      <th>Actions
       </th>
     </tr>
   </ng-template>
@@ -38,6 +40,36 @@
       <td>{{spider.created_at}}</td>
       <td>{{spider.completed_at}}</td>
       <td>{{spider.description}}</td>
+      <td>
+        <div>
+          <button
+            id="f2-close-project"
+            class="
+        p-ml-1 p-button-outlined p-button-sm
+        f2-project-control-btn
+        no-icon
+      "
+            type="button"
+            pButton
+            pRipple
+            label="Edit"
+            (click)="editSpider()"
+          ></button>
+          <button
+            id="f2-delete-project"
+            class="
+        p-ml-1 p-button-danger p-button-outlined p-button-sm
+        f2-project-control-btn
+        no-icon
+      "
+            type="button"
+            pButton
+            pRipple
+            label="Delete"
+            (click)="deleteSpider()"
+          ></button>
+        </div>
+      </td>
     </tr>
   </ng-template>
 </p-table>
@@ -66,12 +98,11 @@
             labelText="Template"
             helpText=""
           >
-
             <p-dropdown
               id="version-id"
               [formControl]="template"
               placeholder="Select a template"
-              [options]="[]"
+              [options]="templates"
               optionLabel="key"
               [filter]="true"
             ></p-dropdown>

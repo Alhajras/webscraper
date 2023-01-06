@@ -23,6 +23,7 @@ export class SpiderComponent {
   public header = 'Spider form'
   public name!: FormControl
   public errorMessage = ''
+  public templates = []
 
   public constructor(
     private readonly fb: FormBuilder,
@@ -69,5 +70,13 @@ export class SpiderComponent {
       this.currentlySubmitting = false
       console.log(err)
     })
+  }
+
+  public deleteSpider(): void {
+
+  }
+
+  public editSpider(): void {
+
   }
 }
