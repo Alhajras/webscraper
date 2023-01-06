@@ -18,8 +18,8 @@ export class SpiderService {
     return this.client.get<Spider>(`${this.endpointPath}${id}`)
   }
 
-  public post(id: number): Observable<Spider> {
-    return this.client.get<Spider>(`${this.endpointPath}${id}`)
+  public post(spider: Partial<Spider>): Observable<Spider> {
+    return this.client.post<Spider>(`${this.endpointPath}`, spider)
   }
 
   public list(additionalParams = {}): Observable<Spider[]> {

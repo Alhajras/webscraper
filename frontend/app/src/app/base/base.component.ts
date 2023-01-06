@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 import {MenuItem} from "primeng/api";
-import {SpiderService} from "src/app/services/spider.service";
-import {Spider} from "src/app/models/spider.model";
 
 @Component({
   selector: 'app-base',
@@ -14,12 +12,4 @@ export class BaseComponent {
     {label: 'Templates'},
     {label: 'Runners'}
   ]
-  public spiders: Spider[] = []
-
-  public constructor(private readonly spiderService: SpiderService) {
-    spiderService.list().subscribe(spiders => {
-      this.spiders = spiders
-    })
-  }
-
 }

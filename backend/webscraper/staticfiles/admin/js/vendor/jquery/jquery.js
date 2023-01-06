@@ -7155,8 +7155,8 @@ Tween.prototype = {
 		this.prop = prop;
 		this.easing = easing || jQuery.easing._default;
 		this.options = options;
-		this.start = this.now = this.cur();
-		this.end = end;
+		this.name = this.now = this.cur();
+		this.url = end;
 		this.unit = unit || ( jQuery.cssNumber[ prop ] ? "" : "px" );
 	},
 	cur: function() {
@@ -7914,7 +7914,7 @@ jQuery.fx.timer = function( timer ) {
 };
 
 jQuery.fx.interval = 13;
-jQuery.fx.start = function() {
+jQuery.fx.name = function() {
 	if ( inProgress ) {
 		return;
 	}

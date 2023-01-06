@@ -1,0 +1,10 @@
+<div class="p-field">
+  <label *ngIf="labelText" [for]="labelId"
+    >{{ labelText
+    }}<span *ngIf="isRequired" class="f2-required f2-secondary-text">
+      (required)</span
+    ></label
+  >
+  <ng-content></ng-content>
+  <div *ngIf="helpText" class="f2-secondary-text">{{ helpText }}</div>
+</div>
