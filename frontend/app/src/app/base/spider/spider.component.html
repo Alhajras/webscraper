@@ -19,6 +19,9 @@
       <th pSortableColumn="status">Status
         <p-sortIcon field="status"></p-sortIcon>
       </th>
+      <th pSortableColumn="template">Template
+        <p-sortIcon field="template"></p-sortIcon>
+      </th>
       <th pSortableColumn="created_at">Created at
         <p-sortIcon field="created_at"></p-sortIcon>
       </th>
@@ -37,6 +40,7 @@
       <td>{{spider.name}}</td>
       <td><a [href]="spider.url">{{spider.url}}</a></td>
       <td>{{spider.status}}</td>
+      <td>{{spider.template}}</td>
       <td>
         <p>
           <app-time-ago [time]="spider.created_at"></app-time-ago>
@@ -116,7 +120,7 @@
               id="version-id"
               [formControl]="template"
               placeholder="Select a template"
-              [options]="templates"
+              [options]="templatesList"
               optionLabel="key"
               [filter]="true"
             ></p-dropdown>

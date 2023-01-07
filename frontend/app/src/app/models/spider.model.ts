@@ -7,4 +7,5 @@ export interface Spider {
   completed_at: string,
   status: string,
   deleted: boolean,
+  template: number,
 }

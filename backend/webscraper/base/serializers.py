@@ -21,6 +21,7 @@ class SpiderSerializer(serializers.ModelSerializer):
             "completed_at",
             "status",
             "deleted",
+            "template",
         ]
 
 

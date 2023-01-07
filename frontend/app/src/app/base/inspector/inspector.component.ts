@@ -35,7 +35,6 @@ export class InspectorComponent implements OnInit {
 
   }
 
-
   public closeModal(): void {
     this.displayModal = false
   }

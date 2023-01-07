@@ -4,6 +4,13 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {SpiderService} from "src/app/services/spider.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Spider} from "src/app/models/spider.model";
+import {Template} from "src/app/models/template.model";
+import {TemplateService} from "src/app/services/template.service";
+
+export interface TemplateDropDown {
+  key: string
+  template: Template
+}
 
 @Component({
   selector: 'app-spider',
@@ -16,6 +23,7 @@ export class SpiderComponent {
   public breadcrumbs: MenuItem[] = []
   public description!: FormControl
   public template!: FormControl
+  public templatesList: TemplateDropDown[] = []
   public currentlySubmitting = false
   public displayModal = false
   public url!: FormControl
@@ -23,16 +31,24 @@ export class SpiderComponent {
   public header = 'Spider form'
   public name!: FormControl
   public errorMessage = ''
-  public templates = []
   public readonly columnCount = 8
 
   public constructor(
     private readonly fb: FormBuilder,
     private readonly spiderService: SpiderService,
+    private readonly templateService: TemplateService,
   ) {
     spiderService.list().subscribe(spiders => {
       this.spiders = spiders
     })
+
+    this.templateService.list().subscribe(templates => {
+      this.templatesList = templates.map(t => ({
+            key: t.name,
+            template: t,
+          }))
+    })
+
     this.description = this.fb.control('')
     this.url = this.fb.control('')
     this.name = this.fb.control('')
@@ -59,7 +75,9 @@ export class SpiderComponent {
       description: this.description.value,
       name: this.name.value,
       url: this.url.value,
+      template: this.template.value.template.id,
     }
+    console.log(spider)
     if (this.updatedSpider !== null) {
       this.spiderService.update(this.updatedSpider.id, spider).toPromise().then(() => {
         this.spiderService.list().subscribe(spiders => {
@@ -108,10 +126,12 @@ export class SpiderComponent {
     this.description = this.fb.control(spider.description)
     this.url = this.fb.control(spider.url)
     this.name = this.fb.control(spider.name)
+    this.template = this.fb.control(spider.template)
     this.form = this.fb.group({
       description: this.description,
       url: this.url,
       name: this.name,
+      template: this.template,
     })
     this.displayModal = true
   }
