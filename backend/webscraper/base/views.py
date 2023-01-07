@@ -4,7 +4,12 @@ from rest_framework import viewsets, mixins
 
 from .filters import InspectorFilter
 from .models import Spider, Template, Inspector
-from .serializers import SpiderSerializer, UserSerializer, TemplateSerializer, InspectorSerializer
+from .serializers import (
+    SpiderSerializer,
+    UserSerializer,
+    TemplateSerializer,
+    InspectorSerializer,
+)
 
 
 class EverythingButDestroyViewSet(
@@ -32,9 +37,7 @@ class InspectorViewSet(EverythingButDestroyViewSet):
     serializer_class = InspectorSerializer
     filterset_class = InspectorFilter
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ('template')
-
-
+    filterset_fields = "template"
 
 
 class UserViewSet(viewsets.ModelViewSet):

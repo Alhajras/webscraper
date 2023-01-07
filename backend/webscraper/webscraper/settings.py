@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "bulma",
     "rest_framework",
     "django_extensions",
-    "django_filters"
+    "django_filters",
 ]
 
 STATICFILES_FINDERS = [
