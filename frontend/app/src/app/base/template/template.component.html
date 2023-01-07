@@ -3,29 +3,52 @@
   pButton
   pRipple
   class="p-button-outlined"
-  label="Create a spider"
+  label="Create a template"
   (click)="displayModal = true"
 ></button>
 
-<p-treeTable [value]="templates">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Name</th>
-            <th>Size</th>
-            <th>Type</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-        <tr>
-            <td>
-                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-                {{rowData.name}}
-            </td>
-            <td>{{rowData.url}}</td>
-            <td>{{rowData.url}}</td>
-        </tr>
-    </ng-template>
-</p-treeTable>
+<p-table [value]="templates"
+         [autoLayout]="true"
+         dataKey="name"
+         [expandedRowKeys]="expandedRows"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Created at</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-template let-expanded="expanded">
+    <tr>
+      <td>
+        <button
+          id="expand-btn-{{ template.id }}"
+          type="button"
+          pButton
+          pRipple
+          [pRowToggler]="template"
+          class="
+            p-button-text p-button-rounded p-button-plain
+            f2-scene-expander-button
+          "
+          [icon]="expanded ? downIcon : rightIcon"
+        ></button>
+      </td>
+      <td>
+        {{template.name}}
+      </td>
+      <td>{{template.created_at | timeAgo}}</td>
+    </tr>
+  </ng-template>
+    <ng-template pTemplate="rowexpansion" let-template>
+    <tr class="f2-scene-overview-row">
+      <td  attr.colspan="{{ columnCount }}">
+        <app-inspector [template]="template"></app-inspector>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
 
 <p-dialog
   [(visible)]="displayModal"

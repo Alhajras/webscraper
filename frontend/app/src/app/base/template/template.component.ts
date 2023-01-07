@@ -19,7 +19,7 @@ export interface TreeNode {
   styleUrls: ['./template.component.scss']
 })
 export class TemplateComponent {
-  public templates: TreeNode[] = []
+  public templates: Template[] = []
   public updatedSpider: Spider | null = null
   public breadcrumbs: MenuItem[] = []
   public description!: FormControl
@@ -31,13 +31,17 @@ export class TemplateComponent {
   public header = 'Spider form'
   public name!: FormControl
   public errorMessage = ''
+  public downIcon = 'pi pi-chevron-down'
+  public rightIcon = 'pi pi-chevron-right'
+  public expandedRows: { [s: string]: boolean } = {}
+  public readonly columnCount = 8
 
   public constructor(
     private readonly fb: FormBuilder,
     private readonly templateService: TemplateService,
   ) {
     templateService.list().subscribe(templates => {
-      this.templates = templates.map(t => this.createTemplateNode(t))
+      this.templates = templates
     })
     this.description = this.fb.control('')
     this.url = this.fb.control('')
@@ -69,7 +73,7 @@ export class TemplateComponent {
     if (this.updatedSpider !== null) {
       this.templateService.update(this.updatedSpider.id, spider).toPromise().then(() => {
         this.templateService.list().subscribe(templates => {
-          this.templates = templates.map(t => this.createTemplateNode( t))
+          this.templates = templates
         })
         this.closeModal()
         this.currentlySubmitting = false
@@ -83,7 +87,7 @@ export class TemplateComponent {
     }
     this.templateService.post(spider).toPromise().then(() => {
       this.templateService.list().subscribe(templates => {
-        this.templates = templates.map(t => this.createTemplateNode(t))
+        this.templates = templates
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -105,7 +109,7 @@ export class TemplateComponent {
     spider.deleted = true
     this.templateService.update(spider.id, spider).toPromise().then(() => {
       this.templateService.list().subscribe(templates => {
-        this.templates = templates.map(t => this.createTemplateNode(t))
+        this.templates = templates
       })
       this.closeModal()
       this.currentlySubmitting = false
