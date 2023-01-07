@@ -10,7 +10,7 @@ import {Inspector} from "src/app/models/inspector.model";
 export class InspectorService {
 
 
-  private readonly endpointPath = 'inspector/'
+  private readonly endpointPath = 'inspectors/'
 
   public constructor(private readonly client: ApiService) {
   }

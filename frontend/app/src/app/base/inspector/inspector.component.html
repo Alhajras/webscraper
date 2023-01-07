@@ -7,26 +7,17 @@
   (click)="displayModal = true"
 ></button>
 
-<p-table [value]="spiders" [tableStyle]="{'min-width': '60rem'}">
+<p-table [value]="inspectors" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="header">
     <tr>
       <th pSortableColumn="name">Name
         <p-sortIcon field="name"></p-sortIcon>
       </th>
-      <th pSortableColumn="url">Url
-        <p-sortIcon field="url"></p-sortIcon>
-      </th>
-      <th pSortableColumn="status">Status
-        <p-sortIcon field="status"></p-sortIcon>
+      <th pSortableColumn="selector">Selector
+        <p-sortIcon field="selector"></p-sortIcon>
       </th>
       <th pSortableColumn="created_at">Created at
         <p-sortIcon field="created_at"></p-sortIcon>
-      </th>
-      <th pSortableColumn="completed_at">Completed at
-        <p-sortIcon field="completed_at"></p-sortIcon>
-      </th>
-      <th pSortableColumn="description">Description
-        <p-sortIcon field="description"></p-sortIcon>
       </th>
       <th>Actions
       </th>
@@ -35,19 +26,12 @@
   <ng-template pTemplate="body" let-spider>
     <tr>
       <td>{{spider.name}}</td>
-      <td><a [href]="spider.url">{{spider.url}}</a></td>
-      <td>{{spider.status}}</td>
+      <td>{{spider.selector}}</td>
       <td>
         <p>
           <app-time-ago [time]="spider.created_at"></app-time-ago>
         </p>
       </td>
-      <td>
-        <p>
-          <app-time-ago [time]="spider.completed_at"></app-time-ago>
-        </p>
-      </td>
-      <td>{{spider.description}}</td>
       <td>
         <div>
           <button
