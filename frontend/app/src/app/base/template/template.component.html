@@ -17,6 +17,7 @@
       <th></th>
       <th>Name</th>
       <th>Created at</th>
+      <th>Actions</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-template let-expanded="expanded">
@@ -39,11 +40,37 @@
         {{template.name}}
       </td>
       <td>{{template.created_at | timeAgo}}</td>
+      <td>
+        <div>
+          <button
+            class="
+        p-ml-1 p-button-outlined p-button-sm
+        no-icon
+      "
+            type="button"
+            pButton
+            pRipple
+            label="Edit"
+            (click)="editTemplate(template)"
+          ></button>
+          <button
+            class="
+        p-ml-1 p-button-danger p-button-outlined p-button-sm
+        no-icon
+      "
+            type="button"
+            pButton
+            pRipple
+            label="Delete"
+            (click)="deleteTemplate(template)"
+          ></button>
+        </div>
+      </td>
     </tr>
   </ng-template>
-    <ng-template pTemplate="rowexpansion" let-template>
+  <ng-template pTemplate="rowexpansion" let-template>
     <tr class="f2-scene-overview-row">
-      <td  attr.colspan="{{ columnCount }}">
+      <td attr.colspan="{{ columnCount }}">
         <app-inspector [template]="template"></app-inspector>
       </td>
     </tr>
@@ -64,25 +91,10 @@
         <p-message
           *ngIf="errorMessage"
           severity="error"
-          text="The spider could not be created:"
+          text="The template could not be created:"
           class="p-mr-2"
         ></p-message>
         <div>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Template"
-            helpText=""
-          >
-            <p-dropdown
-              id="version-id"
-              [formControl]="template"
-              placeholder="Select a template"
-              [options]="templates"
-              optionLabel="key"
-              [filter]="true"
-            ></p-dropdown>
-          </app-input-field>
           <app-input-field
             [isRequired]="true"
             labelId="version-label-id"
@@ -96,34 +108,6 @@
               pInputText
               [formControl]="name"
             />
-          </app-input-field>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Url"
-            helpText=""
-          >
-
-            <input
-              id="end-time-id"
-              type="text"
-              pInputText
-              [formControl]="url"
-            />
-          </app-input-field>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Description"
-            helpText=""
-          >
-            <textarea
-              [rows]="10"
-              [cols]="100"
-              pInputTextarea
-              [formControl]="description"
-              ngDefaultControl
-            ></textarea>
           </app-input-field>
         </div>
       </form>
@@ -141,7 +125,7 @@
       (click)="submit()"
       class="p-mr-2"
     >
-      <span>{{ updatedSpider !== null ? 'Update' : 'Create'}}</span>
+      <span>{{ updatedTemplate !== null ? 'Update' : 'Create'}}</span>
     </button>
     <button
       [disabled]="currentlySubmitting"

@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {Spider} from "src/app/models/spider.model";
 import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -20,7 +19,7 @@ export interface TreeNode {
 })
 export class TemplateComponent {
   public templates: Template[] = []
-  public updatedSpider: Spider | null = null
+  public updatedTemplate: Template | null = null
   public breadcrumbs: MenuItem[] = []
   public description!: FormControl
   public template!: FormControl
@@ -28,7 +27,7 @@ export class TemplateComponent {
   public displayModal = false
   public url!: FormControl
   public form!: FormGroup
-  public header = 'Spider form'
+  public header = 'Template form'
   public name!: FormControl
   public errorMessage = ''
   public downIcon = 'pi pi-chevron-down'
@@ -43,12 +42,8 @@ export class TemplateComponent {
     templateService.list().subscribe(templates => {
       this.templates = templates
     })
-    this.description = this.fb.control('')
-    this.url = this.fb.control('')
     this.name = this.fb.control('')
     this.form = this.fb.group({
-      description: this.description,
-      url: this.url,
       name: this.name,
     })
   }
@@ -65,19 +60,17 @@ export class TemplateComponent {
     }
 
     this.currentlySubmitting = true
-    const spider = {
-      description: this.description.value,
+    const template = {
       name: this.name.value,
-      url: this.url.value,
     }
-    if (this.updatedSpider !== null) {
-      this.templateService.update(this.updatedSpider.id, spider).toPromise().then(() => {
+    if (this.updatedTemplate !== null) {
+      this.templateService.update(this.updatedTemplate.id, template).toPromise().then(() => {
         this.templateService.list().subscribe(templates => {
           this.templates = templates
         })
         this.closeModal()
         this.currentlySubmitting = false
-        this.updatedSpider = null
+        this.updatedTemplate = null
       }).catch((err: HttpErrorResponse) => {
         this.errorMessage = err.error
         this.currentlySubmitting = false
@@ -85,7 +78,7 @@ export class TemplateComponent {
       })
       return;
     }
-    this.templateService.post(spider).toPromise().then(() => {
+    this.templateService.post(template).toPromise().then(() => {
       this.templateService.list().subscribe(templates => {
         this.templates = templates
       })
@@ -105,9 +98,9 @@ export class TemplateComponent {
     }
   }
 
-  public deleteSpider(spider: Spider): void {
-    spider.deleted = true
-    this.templateService.update(spider.id, spider).toPromise().then(() => {
+  public deleteTemplate(template: Template): void {
+    template.deleted = true
+    this.templateService.update(template.id, template).toPromise().then(() => {
       this.templateService.list().subscribe(templates => {
         this.templates = templates
       })
@@ -120,14 +113,10 @@ export class TemplateComponent {
     })
   }
 
-  public editSpider(spider: Spider): void {
-    this.updatedSpider = spider
-    this.description = this.fb.control(spider.description)
-    this.url = this.fb.control(spider.url)
-    this.name = this.fb.control(spider.name)
+  public editTemplate(template: Template): void {
+    this.updatedTemplate = template
+    this.name = this.fb.control(template.name)
     this.form = this.fb.group({
-      description: this.description,
-      url: this.url,
       name: this.name,
     })
     this.displayModal = true
