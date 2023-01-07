@@ -23,10 +23,11 @@ export class InspectorComponent implements OnInit {
   public displayModal = false
   public url!: FormControl
   public form!: FormGroup
-  public header = 'Spider form'
+  public header = 'Inspector form'
   public name!: FormControl
   public errorMessage = ''
   public templates = []
+  public readonly columnCount = 8
 
   public constructor(
     private readonly fb: FormBuilder,

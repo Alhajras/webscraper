@@ -24,6 +24,7 @@ export class SpiderComponent {
   public name!: FormControl
   public errorMessage = ''
   public templates = []
+  public readonly columnCount = 8
 
   public constructor(
     private readonly fb: FormBuilder,

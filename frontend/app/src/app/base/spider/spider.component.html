@@ -76,6 +76,16 @@
       </td>
     </tr>
   </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td
+        attr.colspan="{{ columnCount }}"
+        *ngIf="spiders.length === 0"
+      >
+        No spiders assigned.
+      </td>
+    </tr>
+  </ng-template>
 </p-table>
 
 <p-dialog
