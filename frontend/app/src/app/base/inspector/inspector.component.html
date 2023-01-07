@@ -4,7 +4,7 @@
   pRipple
   class="p-button-outlined"
   label="Create a inspector"
-  (click)="displayModal = true"
+  (click)="createInspector()"
 ></button>
 
 <p-table [value]="inspectors" [tableStyle]="{'min-width': '60rem'}">
@@ -23,13 +23,13 @@
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-spider>
+  <ng-template pTemplate="body" let-inspector>
     <tr>
-      <td>{{spider.name}}</td>
-      <td>{{spider.selector}}</td>
+      <td>{{inspector.name}}</td>
+      <td>{{inspector.selector}}</td>
       <td>
         <p>
-          <app-time-ago [time]="spider.created_at"></app-time-ago>
+          <app-time-ago [time]="inspector.created_at"></app-time-ago>
         </p>
       </td>
       <td>
@@ -43,7 +43,7 @@
             pButton
             pRipple
             label="Edit"
-            (click)="editSpider(spider)"
+            (click)="editInspector(inspector)"
           ></button>
           <button
             class="
@@ -54,7 +54,7 @@
             pButton
             pRipple
             label="Delete"
-            (click)="deleteSpider(spider)"
+            (click)="deleteInspector(inspector)"
           ></button>
         </div>
       </td>
@@ -86,7 +86,7 @@
         <p-message
           *ngIf="errorMessage"
           severity="error"
-          text="The spider could not be created:"
+          text="The inspector could not be created:"
           class="p-mr-2"
         ></p-message>
         <div>
@@ -107,7 +107,7 @@
           <app-input-field
             [isRequired]="true"
             labelId="version-label-id"
-            labelText="Url"
+            labelText="Selector"
             helpText=""
           >
 
@@ -115,22 +115,8 @@
               id="end-time-id"
               type="text"
               pInputText
-              [formControl]="url"
+              [formControl]="selector"
             />
-          </app-input-field>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Description"
-            helpText=""
-          >
-            <textarea
-              [rows]="10"
-              [cols]="100"
-              pInputTextarea
-              [formControl]="description"
-              ngDefaultControl
-            ></textarea>
           </app-input-field>
         </div>
       </form>
@@ -148,7 +134,7 @@
       (click)="submit()"
       class="p-mr-2"
     >
-      <span>{{ updatedSpider !== null ? 'Update' : 'Create'}}</span>
+      <span>{{ updatedInspector !== null ? 'Update' : 'Create'}}</span>
     </button>
     <button
       [disabled]="currentlySubmitting"

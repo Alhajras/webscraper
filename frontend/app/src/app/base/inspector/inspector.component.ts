@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Template} from "src/app/models/template.model";
-import {Spider} from "src/app/models/spider.model";
 import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -16,12 +15,12 @@ export class InspectorComponent implements OnInit {
   @Input()
   public template!: Template
   public inspectors: Inspector[] = []
-  public updatedSpider: Inspector | null = null
+  public updatedInspector: Inspector | null = null
   public breadcrumbs: MenuItem[] = []
   public description!: FormControl
   public currentlySubmitting = false
   public displayModal = false
-  public url!: FormControl
+  public selector!: FormControl
   public form!: FormGroup
   public header = 'Inspector form'
   public name!: FormControl
@@ -49,19 +48,19 @@ export class InspectorComponent implements OnInit {
     }
 
     this.currentlySubmitting = true
-    const spider = {
-      description: this.description.value,
+    const inspector = {
       name: this.name.value,
-      url: this.url.value,
+      selector: this.selector.value,
+      template: this.template.id,
     }
-    if (this.updatedSpider !== null) {
-      this.inspectorService.update(this.updatedSpider.id, spider).toPromise().then(() => {
-        this.inspectorService.list().subscribe(inspectors => {
+    if (this.updatedInspector !== null) {
+      this.inspectorService.update(this.updatedInspector.id, inspector).toPromise().then(() => {
+        this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
           this.inspectors = inspectors
         })
         this.closeModal()
         this.currentlySubmitting = false
-        this.updatedSpider = null
+        this.updatedInspector = null
       }).catch((err: HttpErrorResponse) => {
         this.errorMessage = err.error
         this.currentlySubmitting = false
@@ -69,9 +68,9 @@ export class InspectorComponent implements OnInit {
       })
       return;
     }
-    this.inspectorService.post(spider).toPromise().then(() => {
-      this.inspectorService.list().subscribe(spiders => {
-        this.inspectors = spiders
+    this.inspectorService.post(inspector).toPromise().then(() => {
+      this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
+        this.inspectors = inspectors
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -82,11 +81,11 @@ export class InspectorComponent implements OnInit {
     })
   }
 
-  public deleteSpider(spider: Spider): void {
-    spider.deleted = true
-    this.inspectorService.update(spider.id, spider).toPromise().then(() => {
-      this.inspectorService.list().subscribe(spiders => {
-        this.inspectors = spiders
+  public deleteInspector(inspector: Inspector): void {
+    inspector.deleted = true
+    this.inspectorService.update(inspector.id, inspector).toPromise().then(() => {
+      this.inspectorService.list().subscribe(inspectors => {
+        this.inspectors = inspectors
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -97,12 +96,12 @@ export class InspectorComponent implements OnInit {
     })
   }
 
-  public editSpider(inspector: Inspector): void {
-    this.updatedSpider = inspector
+  public editInspector(inspector: Inspector): void {
+    this.updatedInspector = inspector
     this.name = this.fb.control(inspector.name)
+    this.selector = this.fb.control(inspector.selector)
     this.form = this.fb.group({
-      description: this.description,
-      url: this.url,
+      selector: this.selector,
       name: this.name,
     })
     this.displayModal = true
@@ -112,12 +111,22 @@ export class InspectorComponent implements OnInit {
     this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
       this.inspectors = inspectors
     })
+    this.initForm()
+  }
+
+  public createInspector() {
+    this.initForm()
+    this.updatedInspector = null
+    this.displayModal = true
+  }
+
+  private initForm() {
     this.description = this.fb.control('')
-    this.url = this.fb.control('')
+    this.selector = this.fb.control('')
     this.name = this.fb.control('')
     this.form = this.fb.group({
       description: this.description,
-      url: this.url,
+      url: this.selector,
       name: this.name,
     })
   }
