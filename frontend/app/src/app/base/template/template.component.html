@@ -1,1 +1,134 @@
-<p>template works!</p>
+<button
+  id="open-dialog"
+  pButton
+  pRipple
+  class="p-button-outlined"
+  label="Create a spider"
+  (click)="displayModal = true"
+></button>
+
+<p-treeTable [value]="spiders">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Type</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr>
+            <td>
+                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                {{rowData.name}}
+            </td>
+            <td>{{rowData.url}}</td>
+            <td>{{rowData.url}}</td>
+        </tr>
+    </ng-template>
+</p-treeTable>
+
+<p-dialog
+  [(visible)]="displayModal"
+  [header]="header"
+  [modal]="true"
+  (onHide)="closeModal()"
+  [maximizable]="true"
+  styleClass="f2-import-dialog"
+>
+  <div *ngIf="displayModal">
+    <p-card>
+      <form class="p-fluid" action="" [formGroup]="form" (ngSubmit)="submit()">
+        <p-message
+          *ngIf="errorMessage"
+          severity="error"
+          text="The spider could not be created:"
+          class="p-mr-2"
+        ></p-message>
+        <div>
+          <app-input-field
+            [isRequired]="true"
+            labelId="version-label-id"
+            labelText="Template"
+            helpText=""
+          >
+            <p-dropdown
+              id="version-id"
+              [formControl]="template"
+              placeholder="Select a template"
+              [options]="templates"
+              optionLabel="key"
+              [filter]="true"
+            ></p-dropdown>
+          </app-input-field>
+          <app-input-field
+            [isRequired]="true"
+            labelId="version-label-id"
+            labelText="Name"
+            helpText=""
+          >
+
+            <input
+              id="start-time-id"
+              type="text"
+              pInputText
+              [formControl]="name"
+            />
+          </app-input-field>
+          <app-input-field
+            [isRequired]="true"
+            labelId="version-label-id"
+            labelText="Url"
+            helpText=""
+          >
+
+            <input
+              id="end-time-id"
+              type="text"
+              pInputText
+              [formControl]="url"
+            />
+          </app-input-field>
+          <app-input-field
+            [isRequired]="true"
+            labelId="version-label-id"
+            labelText="Description"
+            helpText=""
+          >
+            <textarea
+              [rows]="10"
+              [cols]="100"
+              pInputTextarea
+              [formControl]="description"
+              ngDefaultControl
+            ></textarea>
+          </app-input-field>
+        </div>
+      </form>
+    </p-card>
+  </div>
+  <ng-template pTemplate="footer">
+    <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
+    <!--      <f2-loading msg="Submitting ..."></f2-loading>-->
+    <!--    </span>-->
+    <button
+      id="run-btn"
+      type="button"
+      pButton
+      pRipple
+      (click)="submit()"
+      class="p-mr-2"
+    >
+      <span>{{ updatedSpider !== null ? 'Update' : 'Create'}}</span>
+    </button>
+    <button
+      [disabled]="currentlySubmitting"
+      id="cancel-btn"
+      class="p-button-secondary"
+      type="button"
+      pButton
+      pRipple
+      label="Cancel"
+      (click)="closeModal()"
+    ></button>
+  </ng-template>
+</p-dialog>

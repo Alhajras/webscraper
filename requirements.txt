@@ -5,3 +5,4 @@ black==22.12.0
 djangorestframework
 markdown
 django-filter
+django-extensions

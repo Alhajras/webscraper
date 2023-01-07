@@ -20,11 +20,14 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {RippleModule} from "primeng/ripple";
 import {TableModule} from "primeng/table";
 import {TimeagoPipe} from "src/app/shared/pipes/timeago.pipe";
+import {TemplateComponent} from "src/app/base/template/template.component";
+import {TreeTableModule} from "primeng/treetable";
 @NgModule({
   declarations: [
     AppComponent,
     BaseComponent,
     SpiderComponent,
+    TemplateComponent,
     InputFieldComponent,
     TimeAgoComponent,
     TimeagoPipe
@@ -44,7 +47,8 @@ import {TimeagoPipe} from "src/app/shared/pipes/timeago.pipe";
     InputTextareaModule,
     InputTextModule,
     ButtonModule,
-    RippleModule
+    RippleModule,
+    TreeTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

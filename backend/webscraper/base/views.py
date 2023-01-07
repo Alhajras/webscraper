@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets, mixins
-from .models import Spider
-from .serializers import SpiderSerializer, UserSerializer
+from .models import Spider, Template, Inspector
+from .serializers import SpiderSerializer, UserSerializer, TemplateSerializer, InspectorSerializer
 
 
 class EverythingButDestroyViewSet(
@@ -17,6 +17,15 @@ class EverythingButDestroyViewSet(
 class SpiderViewSet(EverythingButDestroyViewSet):
     queryset = Spider.objects.filter(deleted=False)
     serializer_class = SpiderSerializer
+
+class TemplateViewSet(EverythingButDestroyViewSet):
+    queryset = Template.objects.filter(deleted=False)
+    serializer_class = TemplateSerializer
+
+
+class InspectorViewSet(EverythingButDestroyViewSet):
+    queryset = Inspector.objects.filter(deleted=False)
+    serializer_class = InspectorSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):

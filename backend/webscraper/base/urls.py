@@ -5,6 +5,8 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r"spiders", views.SpiderViewSet, "spiders")
+router.register(r"templates", views.TemplateViewSet, "templates")
+router.register(r"inspectors", views.InspectorViewSet, "inspectors")
 
 urlpatterns = [
     path("", include(router.urls)),
