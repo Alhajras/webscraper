@@ -18,10 +18,10 @@ class SpiderSerializer(serializers.ModelSerializer):
 class TemplateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Template
-        fields = ["__all__"]
+        fields = "__all__"
 
 
 class InspectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inspector
-        fields = ["__all__"]
+        fields = "__all__"

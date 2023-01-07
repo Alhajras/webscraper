@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Spider} from "src/app/models/spider.model";
 import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {SpiderService} from "src/app/services/spider.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Template} from "src/app/models/template.model";
+import {TemplateService} from "src/app/services/template.service";
 
 export interface TreeNode {
-    data?: any;
-    children?: TreeNode[];
-    leaf?: boolean;
-    expanded?: boolean;
+  data?: any;
+  children?: TreeNode[];
+  leaf?: boolean;
+  expanded?: boolean;
 }
 
 @Component({
@@ -18,7 +19,7 @@ export interface TreeNode {
   styleUrls: ['./template.component.scss']
 })
 export class TemplateComponent {
- public  templates: TreeNode[] = []
+  public templates: TreeNode[] = []
   public updatedSpider: Spider | null = null
   public breadcrumbs: MenuItem[] = []
   public description!: FormControl
@@ -33,10 +34,10 @@ export class TemplateComponent {
 
   public constructor(
     private readonly fb: FormBuilder,
-    private readonly spiderService: SpiderService,
+    private readonly templateService: TemplateService,
   ) {
-    spiderService.list().subscribe(spiders => {
-      this.templates = spiders
+    templateService.list().subscribe(templates => {
+      this.templates = templates.map(t => this.createTemplateNode(t))
     })
     this.description = this.fb.control('')
     this.url = this.fb.control('')
@@ -66,9 +67,9 @@ export class TemplateComponent {
       url: this.url.value,
     }
     if (this.updatedSpider !== null) {
-      this.spiderService.update(this.updatedSpider.id, spider).toPromise().then(() => {
-        this.spiderService.list().subscribe(spiders => {
-          this.templates = spiders
+      this.templateService.update(this.updatedSpider.id, spider).toPromise().then(() => {
+        this.templateService.list().subscribe(templates => {
+          this.templates = templates.map(t => this.createTemplateNode( t))
         })
         this.closeModal()
         this.currentlySubmitting = false
@@ -80,9 +81,9 @@ export class TemplateComponent {
       })
       return;
     }
-    this.spiderService.post(spider).toPromise().then(() => {
-      this.spiderService.list().subscribe(spiders => {
-        this.spiders = spiders
+    this.templateService.post(spider).toPromise().then(() => {
+      this.templateService.list().subscribe(templates => {
+        this.templates = templates.map(t => this.createTemplateNode(t))
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -93,21 +94,18 @@ export class TemplateComponent {
     })
   }
 
-    private createTemplateNode (key: string, data: Template, expanded = false): TreeNode {
+  private createTemplateNode(data: Template, expanded = false): TreeNode {
     return {
-      label: data.name,
-      key,
       data,
-      selectable: false,
       expanded,
     }
   }
 
   public deleteSpider(spider: Spider): void {
     spider.deleted = true
-    this.spiderService.update(spider.id, spider).toPromise().then(() => {
-      this.spiderService.list().subscribe(spiders => {
-        this.spiders = spiders
+    this.templateService.update(spider.id, spider).toPromise().then(() => {
+      this.templateService.list().subscribe(templates => {
+        this.templates = templates.map(t => this.createTemplateNode(t))
       })
       this.closeModal()
       this.currentlySubmitting = false
