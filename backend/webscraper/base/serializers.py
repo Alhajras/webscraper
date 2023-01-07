@@ -15,13 +15,18 @@ class SpiderSerializer(serializers.ModelSerializer):
         fields = ["id", "name", "url", "description", "created_at", "completed_at", "status", "deleted"]
 
 
-class TemplateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Template
-        fields = "__all__"
-
-
 class InspectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inspector
         fields = "__all__"
+
+
+class TemplateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Template
+        fields = "__all__"
+    inspectors = InspectorSerializer(many=True, read_only=True)
+
+
+
+
