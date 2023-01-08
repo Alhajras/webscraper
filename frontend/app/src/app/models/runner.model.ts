@@ -1,10 +1,9 @@
-export interface Spider {
+export interface Runner {
   id: number,
-  name: string,
-  url: string,
   description: string,
   created_at: string,
   completed_at: string,
   deleted: boolean,
-  template: number,
+  spider: number,
+  status: string,
 }

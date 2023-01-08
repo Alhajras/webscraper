@@ -23,6 +23,7 @@ import {TimeagoPipe} from "src/app/shared/pipes/timeago.pipe";
 import {TemplateComponent} from "src/app/base/template/template.component";
 import {TreeTableModule} from "primeng/treetable";
 import { InspectorComponent } from './base/inspector/inspector.component';
+import { RunnerComponent } from './base/runner/runner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { InspectorComponent } from './base/inspector/inspector.component';
     InputFieldComponent,
     TimeAgoComponent,
     TimeagoPipe,
-    InspectorComponent
+    InspectorComponent,
+    RunnerComponent
   ],
   imports: [
     BrowserModule,

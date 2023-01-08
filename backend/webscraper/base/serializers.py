@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Spider, Template, Inspector
+from .models import Spider, Template, Inspector, Runner
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -19,7 +19,6 @@ class SpiderSerializer(serializers.ModelSerializer):
             "description",
             "created_at",
             "completed_at",
-            "status",
             "deleted",
             "template",
         ]
@@ -28,6 +27,12 @@ class SpiderSerializer(serializers.ModelSerializer):
 class InspectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inspector
+        fields = "__all__"
+
+
+class RunnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Runner
         fields = "__all__"
 
 

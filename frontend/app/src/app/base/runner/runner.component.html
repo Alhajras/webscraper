@@ -3,21 +3,21 @@
   pButton
   pRipple
   class="p-button-outlined"
-  label="Create a spider"
+  label="Create a runner"
   (click)="displayModal = true"
 ></button>
 
-<p-table [value]="spiders" [tableStyle]="{'min-width': '60rem'}">
+<p-table [value]="runners" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="name">Name
-        <p-sortIcon field="name"></p-sortIcon>
+      <th pSortableColumn="id">ID
+        <p-sortIcon field="id"></p-sortIcon>
       </th>
-      <th pSortableColumn="url">Url
-        <p-sortIcon field="url"></p-sortIcon>
+      <th pSortableColumn="status">Status
+        <p-sortIcon field="status"></p-sortIcon>
       </th>
-      <th pSortableColumn="template">Template
-        <p-sortIcon field="template"></p-sortIcon>
+      <th pSortableColumn="spider">Spider
+        <p-sortIcon field="spider"></p-sortIcon>
       </th>
       <th pSortableColumn="created_at">Created at
         <p-sortIcon field="created_at"></p-sortIcon>
@@ -34,9 +34,9 @@
   </ng-template>
   <ng-template pTemplate="body" let-spider>
     <tr>
-      <td>{{spider.name}}</td>
-      <td><a [href]="spider.url">{{spider.url}}</a></td>
-      <td>{{spider.template}}</td>
+      <td>{{spider.id}}</td>
+      <td>{{spider.status}}</td>
+      <td>{{spider.spider}}</td>
       <td>
         <p>
           <app-time-ago [time]="spider.created_at"></app-time-ago>
@@ -80,7 +80,7 @@
     <tr>
       <td
         attr.colspan="{{ columnCount }}"
-        *ngIf="spiders.length === 0"
+        *ngIf="runners.length === 0"
       >
         No spiders assigned.
       </td>
@@ -179,7 +179,7 @@
       (click)="submit()"
       class="p-mr-2"
     >
-      <span>{{ updatedSpider !== null ? 'Update' : 'Create'}}</span>
+      <span>{{ updatedRunner !== null ? 'Update' : 'Create'}}</span>
     </button>
     <button
       [disabled]="currentlySubmitting"
@@ -193,3 +193,4 @@
     ></button>
   </ng-template>
 </p-dialog>
+
