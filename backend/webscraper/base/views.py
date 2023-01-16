@@ -71,12 +71,16 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         links: dict[str, Link] = {}
         q = []
         all_products = []
-        base_url = "https://www.zara.com/de/en/flowing-dress-with-knot-p00264471.html?v1=202101970&v2=2186078"
+        base_url = "https://www.zara.com/de/en/"
+        start_url = "https://www.zara.com/de/en/search"
         base_urlparse = urlparse(base_url)
 
         def find_links(link: Link, cookies_button: str):
             # Define Browser Options
             chrome_options = Options()
+            user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2'
+            chrome_options.add_argument(f'user-agent={user_agent}')
+            chrome_options.add_argument("--window-size=2560,1440")
             chrome_options.add_argument("--headless")  # Hides the browser window
             # Reference the local Chromedriver instance
             chrome_path = r"/usr/local/bin/chromedriver"
@@ -94,6 +98,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             )
             driver.find_element(By.CSS_SELECTOR, cookies_button).click()
             # This should be configured
+            driver.refresh()
             driver.refresh()
             sleep(5)
             try:
@@ -141,7 +146,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 self.test.fail(
                     failure_msg if isinstance(failure_msg, str) else failure_msg()
                 )
-        q.append(base_url)
+        q.append(start_url)
 
         while len(q) != 0:
             print(all_products)
@@ -149,7 +154,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 url = q.pop(0)
                 find_links(Link(url), cookies_button="#onetrust-accept-btn-handler")
             except Exception as e:
-                print("I am done")
+                print(f"I am done {q}")
 
         print(all_products)
 
