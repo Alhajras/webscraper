@@ -73,6 +73,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         all_products = []
         base_url = "https://www.zara.com/de/en/flowing-dress-with-knot-p00264471.html?v1=202101970&v2=2186078"
         base_urlparse = urlparse(base_url)
+
         def find_links(link: Link, cookies_button: str):
             # Define Browser Options
             chrome_options = Options()
@@ -104,10 +105,12 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 print(e)
 
             for href in driver.find_elements(By.CSS_SELECTOR, "a"):
-                a = href.get_attribute("href")
+                # We skip the fragments as they do not add any product, that why we split by #
+                a = href.get_attribute("href").split("#").pop()
+                # Some sites have None values and 'link != a' to avoid looping
                 if a is not None and base_url in a:
                     found_link = Link(url=a, visited=False)
-                    if a not in links:
+                    if link.url != a and a not in links:
                         links[a] = found_link
                         q.append(a)
             links[link.url].visited = True
