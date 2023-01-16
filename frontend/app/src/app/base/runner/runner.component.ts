@@ -60,6 +60,9 @@ export class RunnerComponent {
     this.displayModal = false
   }
 
+  public start(): void{
+    this.runnerService.start(this.updatedRunner ?? {}).toPromise().then()
+  }
   public submit(): void {
     if (!this.form.valid) {
       // We should normally never get here since the submit button should be disabled.
@@ -74,7 +77,6 @@ export class RunnerComponent {
       url: this.url.value,
       template: this.template.value.template.id,
     }
-    console.log(spider)
     if (this.updatedRunner !== null) {
       this.runnerService.update(this.updatedRunner.id, spider).toPromise().then(() => {
         this.runnerService.list().subscribe(spiders => {

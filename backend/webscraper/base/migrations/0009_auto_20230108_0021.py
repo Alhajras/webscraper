@@ -7,27 +7,53 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('base', '0008_rename_inspetor_inspector'),
+        ("base", "0008_rename_inspetor_inspector"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='spider',
-            name='status',
+            model_name="spider",
+            name="status",
         ),
         migrations.CreateModel(
-            name='Runner',
+            name="Runner",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.TextField(blank=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('completed_at', models.DateTimeField(blank=True, null=True)),
-                ('deleted', models.BooleanField(default=False)),
-                ('status', models.CharField(choices=[('new', 'New'), ('running', 'Running'), ('completed', 'Completed'), ('exit', 'Exit'), ('paused', 'Paused')], default='new', max_length=10)),
-                ('spider', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='base.spider')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("description", models.TextField(blank=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("completed_at", models.DateTimeField(blank=True, null=True)),
+                ("deleted", models.BooleanField(default=False)),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("new", "New"),
+                            ("running", "Running"),
+                            ("completed", "Completed"),
+                            ("exit", "Exit"),
+                            ("paused", "Paused"),
+                        ],
+                        default="new",
+                        max_length=10,
+                    ),
+                ),
+                (
+                    "spider",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT, to="base.spider"
+                    ),
+                ),
             ],
             options={
-                'ordering': ('created_at',),
+                "ordering": ("created_at",),
             },
         ),
     ]

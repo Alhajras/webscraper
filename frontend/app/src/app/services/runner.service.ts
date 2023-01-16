@@ -22,6 +22,10 @@ export class RunnerService {
     return this.client.post<Runner>(`${this.endpointPath}`, runner)
   }
 
+  public start(runner: Partial<Runner>): Observable<Runner> {
+    return this.client.post<Runner>(`${this.endpointPath}start/`, runner)
+  }
+
   public update(id: number, runner: Partial<Runner>): Observable<Runner> {
     return this.client.put<Runner>(`${this.endpointPath}${id}/`, runner)
   }

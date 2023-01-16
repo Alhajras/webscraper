@@ -6,3 +6,4 @@ djangorestframework
 markdown
 django-filter
 django-extensions
+selenium==4.7.2
