@@ -77,7 +77,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         def find_links(link: Link, cookies_button: str):
             # Define Browser Options
             chrome_options = Options()
-            # chrome_options.add_argument("--headless")  # Hides the browser window
+            chrome_options.add_argument("--headless")  # Hides the browser window
             # Reference the local Chromedriver instance
             chrome_path = r"/usr/local/bin/chromedriver"
             driver = webdriver.Chrome(
