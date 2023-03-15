@@ -117,7 +117,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
             for href in driver.find_elements(By.CSS_SELECTOR, "a"):
                 # We skip the fragments as they do not add any product, that why we split by #
-                a = href.get_attribute("href").split('#').pop()git
+                a = href.get_attribute("href").split('#').pop()
                 # Some sites have None values and 'link != a' to avoid looping
                 if a is not None and base_url in a:
                     found_link = Link(url=a, visited=False)
