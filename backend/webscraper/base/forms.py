@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from . import models
 
 
-class SpiderForm(ModelForm):
+class CrawlerForm(ModelForm):
     class Meta:
-        model = models.Spider
+        model = models.Crawler
         fields = ["name", "url", "description"]

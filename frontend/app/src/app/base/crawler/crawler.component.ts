@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {SpiderService} from "src/app/services/spider.service";
+import {CrawlerService} from "src/app/services/crawler.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {Spider} from "src/app/models/spider.model";
+import {Crawler} from "src/app/models/crawler.model";
 import {Template} from "src/app/models/template.model";
 import {TemplateService} from "src/app/services/template.service";
 
@@ -13,13 +13,13 @@ export interface TemplateDropDown {
 }
 
 @Component({
-  selector: 'app-spider',
-  templateUrl: './spider.component.html',
-  styleUrls: ['./spider.component.scss']
+  selector: 'app-crawler',
+  templateUrl: './crawler.component.html',
+  styleUrls: ['./crawler.component.scss']
 })
-export class SpiderComponent {
-  public spiders: Spider[] = []
-  public updatedSpider: Spider | null = null
+export class CrawlerComponent {
+  public crawlers: Crawler[] = []
+  public updatedCrawler: Crawler | null = null
   public breadcrumbs: MenuItem[] = []
   public description!: FormControl
   public template!: FormControl
@@ -28,18 +28,18 @@ export class SpiderComponent {
   public displayModal = false
   public url!: FormControl
   public form!: FormGroup
-  public header = 'Spider form'
+  public header = 'crawler form'
   public name!: FormControl
   public errorMessage = ''
   public readonly columnCount = 8
 
   public constructor(
     private readonly fb: FormBuilder,
-    private readonly spiderService: SpiderService,
+    private readonly crawlerService: CrawlerService,
     private readonly templateService: TemplateService,
   ) {
-    spiderService.list().subscribe(spiders => {
-      this.spiders = spiders
+    crawlerService.list().subscribe(crawlers => {
+      this.crawlers = crawlers
     })
 
     this.templateService.list().subscribe(templates => {
@@ -71,21 +71,21 @@ export class SpiderComponent {
     }
 
     this.currentlySubmitting = true
-    const spider = {
+    const crawler = {
       description: this.description.value,
       name: this.name.value,
       url: this.url.value,
       template: this.template.value.template.id,
     }
-    console.log(spider)
-    if (this.updatedSpider !== null) {
-      this.spiderService.update(this.updatedSpider.id, spider).toPromise().then(() => {
-        this.spiderService.list().subscribe(spiders => {
-          this.spiders = spiders
+    console.log(crawler)
+    if (this.updatedCrawler !== null) {
+      this.crawlerService.update(this.updatedCrawler.id, crawler).toPromise().then(() => {
+        this.crawlerService.list().subscribe(crawlers => {
+          this.crawlers = crawlers
         })
         this.closeModal()
         this.currentlySubmitting = false
-        this.updatedSpider = null
+        this.updatedCrawler = null
       }).catch((err: HttpErrorResponse) => {
         this.errorMessage = err.error
         this.currentlySubmitting = false
@@ -93,9 +93,9 @@ export class SpiderComponent {
       })
       return;
     }
-    this.spiderService.post(spider).toPromise().then(() => {
-      this.spiderService.list().subscribe(spiders => {
-        this.spiders = spiders
+    this.crawlerService.post(crawler).toPromise().then(() => {
+      this.crawlerService.list().subscribe(crawlers => {
+        this.crawlers = crawlers
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -106,11 +106,11 @@ export class SpiderComponent {
     })
   }
 
-  public deleteSpider(spider: Spider): void {
-    spider.deleted = true
-    this.spiderService.update(spider.id, spider).toPromise().then(() => {
-      this.spiderService.list().subscribe(spiders => {
-        this.spiders = spiders
+  public deleteCrawler(crawler: Crawler): void {
+    crawler.deleted = true
+    this.crawlerService.update(crawler.id, crawler).toPromise().then(() => {
+      this.crawlerService.list().subscribe(crawlers => {
+        this.crawlers = crawlers
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -121,12 +121,12 @@ export class SpiderComponent {
     })
   }
 
-  public editSpider(spider: Spider): void {
-    this.updatedSpider = spider
-    this.description = this.fb.control(spider.description)
-    this.url = this.fb.control(spider.url)
-    this.name = this.fb.control(spider.name)
-    this.template = this.fb.control(spider.template)
+  public editCrawler(crawler: Crawler): void {
+    this.updatedCrawler = crawler
+    this.description = this.fb.control(crawler.description)
+    this.url = this.fb.control(crawler.url)
+    this.name = this.fb.control(crawler.name)
+    this.template = this.fb.control(crawler.template)
     this.form = this.fb.group({
       description: this.description,
       url: this.url,

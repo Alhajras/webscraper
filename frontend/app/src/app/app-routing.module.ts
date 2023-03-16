@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {TemplateComponent} from "src/app/base/template/template.component";
-import {SpiderComponent} from "src/app/base/spider/spider.component";
+import {CrawlerComponent} from "src/app/base/crawler/crawler.component";
 import {RunnerComponent} from "src/app/base/runner/runner.component";
 
 const routes: Routes = [
@@ -11,9 +11,9 @@ const routes: Routes = [
     loadChildren: () => import('./base/template/template.module').then(m => m.TemplateModule)
   },
   {
-    path: 'spiders',
-    component: SpiderComponent,
-    loadChildren: () => import('./base/spider/spider.module').then(m => m.SpiderModule)
+    path: 'crawlers',
+    component: CrawlerComponent,
+    loadChildren: () => import('./base/crawler/crawler.module').then(m => m.CrawlerModule)
   },
   {
     path: 'runners',

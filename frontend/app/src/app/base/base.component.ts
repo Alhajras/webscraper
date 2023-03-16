@@ -9,7 +9,7 @@ import {MenuItem} from "primeng/api";
 export class BaseComponent {
   public items: MenuItem[] = [
     {label: 'Runners', url: 'runners'},
-    {label: 'Spiders', url: 'spiders'},
+    {label: 'crawlers', url: 'crawlers'},
     {label: 'Templates', url: 'templates'}
   ]
 }

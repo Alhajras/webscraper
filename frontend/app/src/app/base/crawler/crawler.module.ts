@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SpiderRoutingModule } from 'src/app/base/spider/spider-routing.module';
+import { CrawlerRoutingModule } from 'src/app/base/crawler/crawler-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    SpiderRoutingModule
+    CrawlerRoutingModule
   ]
 })
-export class SpiderModule { }
+export class CrawlerModule { }

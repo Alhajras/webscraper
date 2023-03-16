@@ -1,11 +1,9 @@
 import {Component} from '@angular/core';
-import {Spider} from "src/app/models/spider.model";
 import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {SpiderService} from "src/app/services/spider.service";
 import {TemplateService} from "src/app/services/template.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {TemplateDropDown} from "src/app/base/spider/spider.component";
+import {TemplateDropDown} from "src/app/base/crawler/crawler.component";
 import {Runner} from "src/app/models/runner.model";
 import {RunnerService} from "src/app/services/runner.service";
 
@@ -71,16 +69,16 @@ export class RunnerComponent {
     }
 
     this.currentlySubmitting = true
-    const spider = {
+    const runner = {
       description: this.description.value,
       name: this.name.value,
       url: this.url.value,
       template: this.template.value.template.id,
     }
     if (this.updatedRunner !== null) {
-      this.runnerService.update(this.updatedRunner.id, spider).toPromise().then(() => {
-        this.runnerService.list().subscribe(spiders => {
-          this.runners = spiders
+      this.runnerService.update(this.updatedRunner.id, runner).toPromise().then(() => {
+        this.runnerService.list().subscribe(runners => {
+          this.runners = runners
         })
         this.closeModal()
         this.currentlySubmitting = false
@@ -92,9 +90,9 @@ export class RunnerComponent {
       })
       return;
     }
-    this.runnerService.post(spider).toPromise().then(() => {
-      this.runnerService.list().subscribe(spiders => {
-        this.runners = spiders
+    this.runnerService.post(runner).toPromise().then(() => {
+      this.runnerService.list().subscribe(runners => {
+        this.runners = runners
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -105,11 +103,11 @@ export class RunnerComponent {
     })
   }
 
-  public deleteSpider(spider: Spider): void {
-    spider.deleted = true
-    this.runnerService.update(spider.id, spider).toPromise().then(() => {
-      this.runnerService.list().subscribe(spiders => {
-        this.runners = spiders
+  public deleteRunner(runner: Runner): void {
+    runner.deleted = true
+    this.runnerService.update(runner.id, runner).toPromise().then(() => {
+      this.runnerService.list().subscribe(runners => {
+        this.runners = runners
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -121,7 +119,7 @@ export class RunnerComponent {
   }
 
 
-  public editSpider(runner: Runner): void {
+  public editRunner(runner: Runner): void {
     this.updatedRunner = runner
     this.description = this.fb.control(runner.description)
     this.form = this.fb.group({

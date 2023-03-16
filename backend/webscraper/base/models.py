@@ -36,7 +36,7 @@ class Inspector(models.Model):
         return self.name
 
 
-class Spider(models.Model):
+class Crawler(models.Model):
     class Meta:
         ordering = ("created_at",)
 
@@ -62,7 +62,7 @@ class Runner(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(blank=True, null=True)
     deleted = models.BooleanField(default=False)
-    spider = models.ForeignKey(Spider, on_delete=models.PROTECT)
+    crawler = models.ForeignKey(Crawler, on_delete=models.PROTECT)
     status = models.CharField(
         max_length=10, choices=RunnerStatus.choices, default=RunnerStatus.NEW
     )

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Spider, Template, Inspector, Runner
+from .models import Crawler, Template, Inspector, Runner
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -9,9 +9,9 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["url", "username", "email", "is_staff"]
 
 
-class SpiderSerializer(serializers.ModelSerializer):
+class CrawlerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Spider
+        model = Crawler
         fields = [
             "id",
             "name",

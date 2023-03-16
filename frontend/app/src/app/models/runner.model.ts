@@ -4,6 +4,6 @@ export interface Runner {
   created_at: string,
   completed_at: string,
   deleted: boolean,
-  spider: number,
+  crawler: number,
   status: string,
 }

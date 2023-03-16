@@ -3,11 +3,11 @@
   pButton
   pRipple
   class="p-button-outlined"
-  label="Create a spider"
+  label="Create a crawler"
   (click)="displayModal = true"
 ></button>
 
-<p-table [value]="spiders" [tableStyle]="{'min-width': '60rem'}">
+<p-table [value]="crawlers" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="header">
     <tr>
       <th pSortableColumn="name">Name
@@ -32,22 +32,22 @@
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-spider>
+  <ng-template pTemplate="body" let-crawler>
     <tr>
-      <td>{{spider.name}}</td>
-      <td><a [href]="spider.url">{{spider.url}}</a></td>
-      <td>{{spider.template}}</td>
+      <td>{{crawler.name}}</td>
+      <td><a [href]="crawler.url">{{crawler.url}}</a></td>
+      <td>{{crawler.template}}</td>
       <td>
         <p>
-          <app-time-ago [time]="spider.created_at"></app-time-ago>
+          <app-time-ago [time]="crawler.created_at"></app-time-ago>
         </p>
       </td>
       <td>
         <p>
-          <app-time-ago [time]="spider.completed_at"></app-time-ago>
+          <app-time-ago [time]="crawler.completed_at"></app-time-ago>
         </p>
       </td>
-      <td>{{spider.description}}</td>
+      <td>{{crawler.description}}</td>
       <td>
         <div>
           <button
@@ -59,7 +59,7 @@
             pButton
             pRipple
             label="Edit"
-            (click)="editSpider(spider)"
+            (click)="editCrawler(crawler)"
           ></button>
           <button
             class="
@@ -70,7 +70,7 @@
             pButton
             pRipple
             label="Delete"
-            (click)="deleteSpider(spider)"
+            (click)="deleteCrawler(crawler)"
           ></button>
         </div>
       </td>
@@ -80,9 +80,9 @@
     <tr>
       <td
         attr.colspan="{{ columnCount }}"
-        *ngIf="spiders.length === 0"
+        *ngIf="crawlers.length === 0"
       >
-        No spiders assigned.
+        No crawlers assigned.
       </td>
     </tr>
   </ng-template>
@@ -102,7 +102,7 @@
         <p-message
           *ngIf="errorMessage"
           severity="error"
-          text="The spider could not be created:"
+          text="The crawler could not be created:"
           class="p-mr-2"
         ></p-message>
         <div>
@@ -179,7 +179,7 @@
       (click)="submit()"
       class="p-mr-2"
     >
-      <span>{{ updatedSpider !== null ? 'Update' : 'Create'}}</span>
+      <span>{{ updatedCrawler !== null ? 'Update' : 'Create'}}</span>
     </button>
     <button
       [disabled]="currentlySubmitting"

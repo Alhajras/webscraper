@@ -1,4 +1,4 @@
-export interface Spider {
+export interface Crawler {
   id: number,
   name: string,
   url: string,

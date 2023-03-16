@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpiderComponent } from 'src/app/base/spider/spider.component';
+import { CrawlerComponent } from 'src/app/base/crawler/crawler.component';
 
-describe('SpiderComponent', () => {
-  let component: SpiderComponent;
-  let fixture: ComponentFixture<SpiderComponent>;
+describe('RunnerComponent', () => {
+  let component: CrawlerComponent;
+  let fixture: ComponentFixture<CrawlerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpiderComponent ]
+      declarations: [ CrawlerComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SpiderComponent);
+    fixture = TestBed.createComponent(CrawlerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

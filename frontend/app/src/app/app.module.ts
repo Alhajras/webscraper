@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule } from '@angular/platform-browser';
 import { InputFieldComponent } from './shared/input-field/input-field.component';
 import { NgModule } from '@angular/core';
-import { SpiderComponent } from 'src/app/base/spider/spider.component';
+import { CrawlerComponent } from 'src/app/base/crawler/crawler.component';
 import { TimeAgoComponent } from './shared/time-ago/time-ago.component';
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
@@ -28,7 +28,7 @@ import { RunnerComponent } from './base/runner/runner.component';
   declarations: [
     AppComponent,
     BaseComponent,
-    SpiderComponent,
+    CrawlerComponent,
     TemplateComponent,
     InputFieldComponent,
     TimeAgoComponent,

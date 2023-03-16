@@ -17,9 +17,9 @@ from selenium.webdriver.chrome.options import Options
 from urllib.parse import urlparse
 
 from .filters import InspectorFilter
-from .models import Spider, Template, Inspector, Runner
+from .models import Crawler, Template, Inspector, Runner
 from .serializers import (
-    SpiderSerializer,
+    CrawlerSerializer,
     UserSerializer,
     TemplateSerializer,
     InspectorSerializer,
@@ -37,9 +37,9 @@ class EverythingButDestroyViewSet(
     pass
 
 
-class SpiderViewSet(EverythingButDestroyViewSet):
-    queryset = Spider.objects.filter(deleted=False)
-    serializer_class = SpiderSerializer
+class CrawlerViewSet(EverythingButDestroyViewSet):
+    queryset = Crawler.objects.filter(deleted=False)
+    serializer_class = CrawlerSerializer
 
 
 class TemplateViewSet(EverythingButDestroyViewSet):

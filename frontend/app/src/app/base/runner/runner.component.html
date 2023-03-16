@@ -16,8 +16,8 @@
       <th pSortableColumn="status">Status
         <p-sortIcon field="status"></p-sortIcon>
       </th>
-      <th pSortableColumn="spider">Spider
-        <p-sortIcon field="spider"></p-sortIcon>
+      <th pSortableColumn="crawler">Crawler
+        <p-sortIcon field="crawler"></p-sortIcon>
       </th>
       <th pSortableColumn="created_at">Created at
         <p-sortIcon field="created_at"></p-sortIcon>
@@ -32,22 +32,22 @@
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-spider>
+  <ng-template pTemplate="body" let-runner>
     <tr>
-      <td>{{spider.id}}</td>
-      <td>{{spider.status}}</td>
-      <td>{{spider.spider}}</td>
+      <td>{{runner.id}}</td>
+      <td>{{runner.status}}</td>
+      <td>{{runner.crawler}}</td>
       <td>
         <p>
-          <app-time-ago [time]="spider.created_at"></app-time-ago>
+          <app-time-ago [time]="runner.created_at"></app-time-ago>
         </p>
       </td>
       <td>
         <p>
-          <app-time-ago [time]="spider.completed_at"></app-time-ago>
+          <app-time-ago [time]="runner.completed_at"></app-time-ago>
         </p>
       </td>
-      <td>{{spider.description}}</td>
+      <td>{{runner.description}}</td>
       <td>
         <div>
           <button
@@ -59,7 +59,7 @@
             pButton
             pRipple
             label="Edit"
-            (click)="editSpider(spider)"
+            (click)="editRunner(runner)"
           ></button>
           <button
             class="
@@ -70,7 +70,7 @@
             pButton
             pRipple
             label="Delete"
-            (click)="deleteSpider(spider)"
+            (click)="deleteRunner(runner)"
           ></button>
         </div>
       </td>
@@ -82,7 +82,7 @@
         attr.colspan="{{ columnCount }}"
         *ngIf="runners.length === 0"
       >
-        No spiders assigned.
+        No crawlers assigned.
       </td>
     </tr>
   </ng-template>
@@ -102,7 +102,7 @@
         <p-message
           *ngIf="errorMessage"
           severity="error"
-          text="The spider could not be created:"
+          text="The crawler could not be created:"
           class="p-mr-2"
         ></p-message>
         <div>

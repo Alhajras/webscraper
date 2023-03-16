@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SpiderService } from './spider.service';
+import { CrawlerService } from 'src/app/services/crawler.service';
 
-describe('SpiderService', () => {
-  let service: SpiderService;
+describe('CrawlerService', () => {
+  let service: CrawlerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SpiderService);
+    service = TestBed.inject(CrawlerService);
   });
 
   it('should be created', () => {

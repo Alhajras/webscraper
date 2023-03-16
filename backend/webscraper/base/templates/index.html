@@ -18,7 +18,7 @@
                 General
             </p>
             <ul class="menu-list">
-                <li><a>Spiders</a></li>
+                <li><a>Crawler</a></li>
                 <li><a>Templates</a></li>
                 <li><a>Runners</a></li>
             </ul>
@@ -28,7 +28,7 @@
         <section class="section">
             <div class="container">
             <span class="is-size-5">
-               Spiders
+               Crawlers
             </span>
                 <br>
 
@@ -45,14 +45,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for spider in spiders %}
+                    {% for crawler in crawlers %}
                     <tr>
-                        <td>{{spider.id}}</td>
-                        <td>{{spider.name}}</td>
-                        <td>{{spider.url}}</td>
-                        <td>{{spider.status}}</td>
-                        <td>{{spider.created_at}}</td>
-                        <td>{{spider.completed_at}}</td>
+                        <td>{{crawler.id}}</td>
+                        <td>{{crawler.name}}</td>
+                        <td>{{crawler.url}}</td>
+                        <td>{{crawler.status}}</td>
+                        <td>{{crawler.created_at}}</td>
+                        <td>{{crawler.completed_at}}</td>
                         <td>
                             <p class="buttons">
 
@@ -86,10 +86,10 @@
 <div id="modal-js-example" class="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
-        <form action="spider" method="POST">
+        <form action="crawler" method="POST">
             {% csrf_token %}
             <header class="modal-card-head">
-                <p class="modal-card-title">Edit Spider</p>
+                <p class="modal-card-title">Edit Crawler</p>
                 <button class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body">
