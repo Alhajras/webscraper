@@ -1,4 +1,5 @@
 from django.db import models
+from solo.models import SingletonModel
 
 
 class RunnerStatus(models.TextChoices):
@@ -68,3 +69,16 @@ class Runner(models.Model):
 
     def __str__(self) -> str:
         return str(self.pk)
+
+
+class ConfigurationModel(SingletonModel):
+
+    max_num_crawlers = models.PositiveSmallIntegerField(default=2)
+    max_num_machines = models.PositiveSmallIntegerField(default=2)
+    min_sleep_time = models.FloatField(default=0.25)
+
+    def __str__(self):
+        return "Site Configuration"
+
+    class Meta:
+        verbose_name = "Site Configuration"
