@@ -13,8 +13,8 @@
       <th pSortableColumn="name">Name
         <p-sortIcon field="name"></p-sortIcon>
       </th>
-      <th pSortableColumn="url">Url
-        <p-sortIcon field="url"></p-sortIcon>
+      <th pSortableColumn="seed_url">Seed Url
+        <p-sortIcon field="seed_url"></p-sortIcon>
       </th>
       <th pSortableColumn="template">Template
         <p-sortIcon field="template"></p-sortIcon>
@@ -35,7 +35,7 @@
   <ng-template pTemplate="body" let-crawler>
     <tr>
       <td>{{crawler.name}}</td>
-      <td><a [href]="crawler.url">{{crawler.url}}</a></td>
+      <td><a [href]="crawler.seed_url">{{crawler.seed_url}}</a></td>
       <td>{{crawler.template}}</td>
       <td>
         <p>
@@ -108,7 +108,6 @@
         <div>
           <app-input-field
             [isRequired]="true"
-            labelId="version-label-id"
             labelText="Template"
             helpText=""
           >
@@ -123,7 +122,6 @@
           </app-input-field>
           <app-input-field
             [isRequired]="true"
-            labelId="version-label-id"
             labelText="Name"
             helpText=""
           >
@@ -137,8 +135,7 @@
           </app-input-field>
           <app-input-field
             [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Url"
+            labelText="Seed Url"
             helpText=""
           >
 
@@ -146,7 +143,7 @@
               id="end-time-id"
               type="text"
               pInputText
-              [formControl]="url"
+              [formControl]="seedUrl"
             />
           </app-input-field>
           <app-input-field

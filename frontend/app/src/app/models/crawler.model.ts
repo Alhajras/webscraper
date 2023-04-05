@@ -1,7 +1,7 @@
 export interface Crawler {
   id: number,
   name: string,
-  url: string,
+  seed_url: string,
   description: string,
   created_at: string,
   completed_at: string,

@@ -15,7 +15,7 @@ class CrawlerSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
-            "url",
+            "seed_url",
             "description",
             "created_at",
             "completed_at",

@@ -26,7 +26,7 @@ export class CrawlerComponent {
   public templatesList: TemplateDropDown[] = []
   public currentlySubmitting = false
   public displayModal = false
-  public url!: FormControl
+  public seedUrl!: FormControl
   public form!: FormGroup
   public header = 'crawler form'
   public name!: FormControl
@@ -50,11 +50,11 @@ export class CrawlerComponent {
     })
 
     this.description = this.fb.control('')
-    this.url = this.fb.control('')
+    this.seedUrl = this.fb.control('')
     this.name = this.fb.control('')
     this.form = this.fb.group({
       description: this.description,
-      url: this.url,
+      url: this.seedUrl,
       name: this.name,
     })
   }
@@ -74,7 +74,7 @@ export class CrawlerComponent {
     const crawler = {
       description: this.description.value,
       name: this.name.value,
-      url: this.url.value,
+      url: this.seedUrl.value,
       template: this.template.value.template.id,
     }
     console.log(crawler)
@@ -124,12 +124,12 @@ export class CrawlerComponent {
   public editCrawler(crawler: Crawler): void {
     this.updatedCrawler = crawler
     this.description = this.fb.control(crawler.description)
-    this.url = this.fb.control(crawler.url)
+    this.seedUrl = this.fb.control(crawler.seed_url)
     this.name = this.fb.control(crawler.name)
     this.template = this.fb.control(crawler.template)
     this.form = this.fb.group({
       description: this.description,
-      url: this.url,
+      url: this.seedUrl,
       name: this.name,
       template: this.template,
     })

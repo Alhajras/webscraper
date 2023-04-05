@@ -41,7 +41,7 @@ class Crawler(models.Model):
         ordering = ("created_at",)
 
     name = models.CharField(max_length=100)
-    url = models.TextField()
+    seed_url = models.TextField()
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(blank=True, null=True)

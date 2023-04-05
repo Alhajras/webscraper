@@ -6,4 +6,4 @@ from . import models
 class CrawlerForm(ModelForm):
     class Meta:
         model = models.Crawler
-        fields = ["name", "url", "description"]
+        fields = ["name", "seed_url", "description"]
