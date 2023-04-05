@@ -49,6 +49,13 @@ class Crawler(models.Model):
     template = models.OneToOneField(
         Template, on_delete=models.PROTECT, related_name="templates", null=True
     )
+    threads = models.PositiveSmallIntegerField(default=2)
+    retry = models.PositiveSmallIntegerField(default=2)
+    sleep = models.FloatField(default=0.5)
+    timeout = models.FloatField(default=10)
+    max_pages = models.PositiveIntegerField(default=20)
+    max_depth = models.PositiveSmallIntegerField(default=5)
+    robot_file_url = models.TextField(default='')
 
     def __str__(self) -> str:
         return self.name

@@ -7,4 +7,11 @@ export interface Crawler {
   completed_at: string,
   deleted: boolean,
   template: number,
+  threads: number,
+  retry: number,
+  sleep: number,
+  timeout: number
+  max_pages: number,
+  max_depth:number,
+  robot_file_url:string
 }

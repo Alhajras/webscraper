@@ -21,6 +21,14 @@ class CrawlerSerializer(serializers.ModelSerializer):
             "completed_at",
             "deleted",
             "template",
+            "threads",
+            "retry",
+            "sleep",
+            "timeout",
+            "max_pages",
+            "max_depth",
+            "robot_file_url"
+
         ]
 
 

@@ -125,7 +125,6 @@
             labelText="Name"
             helpText=""
           >
-
             <input
               id="start-time-id"
               type="text"
@@ -138,14 +137,106 @@
             labelText="Seed Url"
             helpText=""
           >
-
             <input
               id="end-time-id"
               type="text"
               pInputText
               [formControl]="seedUrl"
             />
+
           </app-input-field>
+
+          <app-input-field
+            [isRequired]="true"
+            labelText="Threads"
+            helpText=""
+          >
+            <input
+              type="number"
+              id="threads-id"
+              pInputText
+              [formControl]="threads"
+            />
+          </app-input-field>
+
+          <app-input-field
+            [isRequired]="true"
+            labelText="Retry"
+            helpText=""
+          >
+            <input
+              type="number"
+              id="retry-id"
+              pInputText
+              [formControl]="retry"
+            />
+          </app-input-field>
+
+          <app-input-field
+            [isRequired]="true"
+            labelText="Sleep"
+            helpText=""
+          >
+            <input
+              id="sleep-id"
+              type="number"
+              pInputText
+              [formControl]="sleep"
+            />
+          </app-input-field>
+
+          <app-input-field
+            [isRequired]="true"
+            labelText="Timeout"
+            helpText=""
+          >
+            <input
+              id="timeout-id"
+              type="number"
+              pInputText
+              [formControl]="timeout"
+            />
+          </app-input-field>
+
+          <app-input-field
+            [isRequired]="true"
+            labelText="Max Pages"
+            helpText=""
+          >
+            <input
+              id="max-pages-id"
+              type="number"
+              pInputText
+              [formControl]="maxPages"
+            />
+          </app-input-field>
+
+          <app-input-field
+            [isRequired]="true"
+            labelText="Max Depth"
+            helpText=""
+          >
+            <input
+              id="max-depth-id"
+              type="number"
+              pInputText
+              [formControl]="maxDepth"
+            />
+          </app-input-field>
+
+          <app-input-field
+            [isRequired]="true"
+            labelText="Robot File Url"
+            helpText=""
+          >
+            <input
+              id="robot-file-url-id"
+              type="text"
+              pInputText
+              [formControl]="robotFileUrl"
+            />
+          </app-input-field>
+
           <app-input-field
             [isRequired]="true"
             labelId="version-label-id"

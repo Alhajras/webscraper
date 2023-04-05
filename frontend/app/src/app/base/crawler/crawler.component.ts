@@ -20,44 +20,25 @@ export interface TemplateDropDown {
 export class CrawlerComponent {
   public crawlers: Crawler[] = []
   public updatedCrawler: Crawler | null = null
-  public breadcrumbs: MenuItem[] = []
   public description!: FormControl
   public template!: FormControl
+  public seedUrl!: FormControl
+  public name!: FormControl
+  public threads!: FormControl
+  public retry!: FormControl
+  public sleep!: FormControl
+  public timeout!: FormControl
+  public maxPages!: FormControl
+  public maxDepth!: FormControl
+  public robotFileUrl!: FormControl
+
+  public form!: FormGroup
   public templatesList: TemplateDropDown[] = []
   public currentlySubmitting = false
   public displayModal = false
-  public seedUrl!: FormControl
-  public form!: FormGroup
   public header = 'crawler form'
-  public name!: FormControl
   public errorMessage = ''
   public readonly columnCount = 8
-
-  public constructor(
-    private readonly fb: FormBuilder,
-    private readonly crawlerService: CrawlerService,
-    private readonly templateService: TemplateService,
-  ) {
-    crawlerService.list().subscribe(crawlers => {
-      this.crawlers = crawlers
-    })
-
-    this.templateService.list().subscribe(templates => {
-      this.templatesList = templates.map(t => ({
-            key: t.name,
-            template: t,
-          }))
-    })
-
-    this.description = this.fb.control('')
-    this.seedUrl = this.fb.control('')
-    this.name = this.fb.control('')
-    this.form = this.fb.group({
-      description: this.description,
-      url: this.seedUrl,
-      name: this.name,
-    })
-  }
 
   public closeModal(): void {
     this.displayModal = false
@@ -74,10 +55,16 @@ export class CrawlerComponent {
     const crawler = {
       description: this.description.value,
       name: this.name.value,
-      url: this.seedUrl.value,
+      seed_url: this.seedUrl.value,
       template: this.template.value.template.id,
+      threads: this.threads.value,
+      retry: this.retry.value,
+      sleep: this.sleep.value,
+      timeout: this.timeout.value,
+      max_pages: this.maxPages.value,
+      max_depth: this.maxDepth.value,
+      robot_file_url: this.robotFileUrl.value
     }
-    console.log(crawler)
     if (this.updatedCrawler !== null) {
       this.crawlerService.update(this.updatedCrawler.id, crawler).toPromise().then(() => {
         this.crawlerService.list().subscribe(crawlers => {
@@ -121,17 +108,74 @@ export class CrawlerComponent {
     })
   }
 
+  public constructor(
+    private readonly fb: FormBuilder,
+    private readonly crawlerService: CrawlerService,
+    private readonly templateService: TemplateService,
+  ) {
+    crawlerService.list().subscribe(crawlers => {
+      this.crawlers = crawlers
+    })
+
+    this.templateService.list().subscribe(templates => {
+      this.templatesList = templates.map(t => ({
+        key: t.name,
+        template: t,
+      }))
+    })
+
+    this.template = this.fb.control('')
+    this.description = this.fb.control('')
+    this.seedUrl = this.fb.control('')
+    this.name = this.fb.control('')
+    this.threads= this.fb.control('')
+    this.retry= this.fb.control('')
+    this.sleep= this.fb.control('')
+    this.timeout= this.fb.control('')
+    this.maxPages= this.fb.control('')
+    this.maxDepth= this.fb.control('')
+    this.robotFileUrl= this.fb.control('')
+
+    this.form = this.fb.group({
+      description: this.description,
+      url: this.seedUrl,
+      name: this.name,
+      threads: this.threads,
+      retry: this.retry,
+      sleep: this.sleep,
+      timeout: this.timeout,
+      max_pages: this.maxPages,
+      max_depth: this.maxDepth,
+      robot_file_url: this.robotFileUrl
+    })
+  }
+
   public editCrawler(crawler: Crawler): void {
     this.updatedCrawler = crawler
     this.description = this.fb.control(crawler.description)
     this.seedUrl = this.fb.control(crawler.seed_url)
     this.name = this.fb.control(crawler.name)
     this.template = this.fb.control(crawler.template)
+    this.threads = this.fb.control(crawler.threads)
+    this.retry = this.fb.control(crawler.retry)
+    this.sleep = this.fb.control(crawler.sleep)
+    this.timeout = this.fb.control(crawler.timeout)
+    this.maxPages = this.fb.control(crawler.max_pages)
+    this.maxDepth = this.fb.control(crawler.max_depth)
+    this.robotFileUrl = this.fb.control(crawler.robot_file_url)
+
     this.form = this.fb.group({
       description: this.description,
-      url: this.seedUrl,
+      seed_url: this.seedUrl,
       name: this.name,
       template: this.template,
+      threads: this.threads,
+      retry: this.retry,
+      sleep: this.sleep,
+      timeout: this.timeout,
+      max_pages: this.maxPages,
+      max_depth: this.maxDepth,
+      robot_file_url: this.robotFileUrl
     })
     this.displayModal = true
   }
