@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  13 APR 2023 00:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  13 APR 2023 01:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1215,10 +1215,10 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 32753 strings out of 480129
- 664851 string characters out of 5893409
- 1121044 words of memory out of 5000000
- 50074 multiletter control sequences out of 15000+600000
+ 32761 strings out of 480129
+ 664919 string characters out of 5893409
+ 1122045 words of memory out of 5000000
+ 50078 multiletter control sequences out of 15000+600000
  490209 words of font info for 87 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,9n,106p,10753b,807s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1232,10 +1232,10 @@ oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/oc
 texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.te
 xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texl
 ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
-Output written on thesis_main.pdf (31 pages, 769203 bytes).
+Output written on thesis_main.pdf (31 pages, 773203 bytes).
 PDF statistics:
- 523 PDF objects out of 1000 (max. 8388607)
- 215 compressed objects within 3 object streams
- 40 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 553 PDF objects out of 1000 (max. 8388607)
+ 236 compressed objects within 3 object streams
+ 44 named destinations out of 1000 (max. 500000)
+ 146 words of extra memory for PDF output out of 10000 (max. 10000000)
 
