@@ -1,0 +1,314 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+3d~test models%
+}{%
+3d~test models%
+}{%
+{\protect \APACyear {2022}}%
+}]{%
+igea}
+\APACinsertmetastar {%
+igea}%
+\begin{APACrefauthors}%
+3d~test models, C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{}{}.
+\newblock
+\APACrefbtitle {Igea.} {Igea.}
+\newblock
+\begin{APACrefURL}
+  \url{https://github.com/alecjacobson/common-3d-test-models/blob/master/data/igea.png}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Brian~Curless%
+}{%
+Brian~Curless%
+}{%
+{\protect \APACyear {1996}}%
+}]{%
+buddha}
+\APACinsertmetastar {%
+buddha}%
+\begin{APACrefauthors}%
+Brian~Curless, M\BPBI L.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1996}{}{}.
+\newblock
+\APACrefbtitle {Happy Buddha.} {Happy buddha.}
+\newblock
+\begin{APACrefURL}
+  \url{https://graphics.stanford.edu/software/scanview/models/happybuddha.html}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Ericson%
+}{%
+Ericson%
+}{%
+{\protect \APACyear {2004}}%
+}]{%
+Ericson2004}
+\APACinsertmetastar {%
+Ericson2004}%
+\begin{APACrefauthors}%
+Ericson, C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2004}.
+\newblock
+\APACrefbtitle {Real-Time Collision Detection} {Real-time collision detection}.
+\newblock
+\APACaddressPublisher{}{Morgan Kaufmann}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Herminio%
+}{%
+Herminio%
+}{%
+{\protect \APACyear {2019}}%
+}]{%
+scifi}
+\APACinsertmetastar {%
+scifi}%
+\begin{APACrefauthors}%
+Herminio.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{}{}.
+\newblock
+\APACrefbtitle {Sci-Fi Tropical City 3D Model.} {Sci-fi tropical city 3d
+  model.}
+\newblock
+\begin{APACrefURL}
+  \url{https://free3d.com/3d-model/sci-fi-tropical-city-25746.html}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Jacobson%
+}{%
+Jacobson%
+}{%
+{\protect \APACyear {2021}}%
+}]{%
+Jacobson2021}
+\APACinsertmetastar {%
+Jacobson2021}%
+\begin{APACrefauthors}%
+Jacobson, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{}{}.
+\newblock
+\APACrefbtitle {Common 3d test models.} {Common 3d test models.}
+\newblock
+\begin{APACrefURL} \url{https://github.com/alecjacobson/common-3d-test-models}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Karras%
+}{%
+Karras%
+}{%
+{\protect \APACyear {2012}}%
+}]{%
+Karras2012}
+\APACinsertmetastar {%
+Karras2012}%
+\begin{APACrefauthors}%
+Karras, T.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+\APACrefbtitle {Thinking Parallel, Part III: Tree Construction on the GPU.}
+  {Thinking parallel, part iii: Tree construction on the gpu.}
+\newblock
+\begin{APACrefURL}
+  \url{https://developer.nvidia.com/blog/thinking-parallel-part-iii-tree-construction-gpu}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Kim%
+}{%
+Kim%
+}{%
+{\protect \APACyear {2020}}%
+}]{%
+trees}
+\APACinsertmetastar {%
+trees}%
+\begin{APACrefauthors}%
+Kim.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+\APACrefbtitle {Trees 9 3D Model.} {Trees 9 3d model.}
+\newblock
+\begin{APACrefURL} \url{https://free3d.com/3d-model/trees-9-53338.html}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Kimathi%
+}{%
+Kimathi%
+}{%
+{\protect \APACyear {2020}}%
+}]{%
+Kimathi2020}
+\APACinsertmetastar {%
+Kimathi2020}%
+\begin{APACrefauthors}%
+Kimathi, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{June}{}.
+\newblock
+\APACrefbtitle {What Is Ray Tracing Technology and How It Works in GPUs.} {What
+  is ray tracing technology and how it works in gpus.}
+\newblock
+\begin{APACrefURL} \url{https://www.dignited.com/62084/how-ray-tracing-works}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Pharr%
+, Jakob%
+\BCBL {}\ \BBA {} Humphreys%
+}{%
+Pharr%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+}]{%
+Pharr2016}
+\APACinsertmetastar {%
+Pharr2016}%
+\begin{APACrefauthors}%
+Pharr, M.%
+, Jakob, W.%
+\BCBL {}\ \BBA {} Humphreys, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2016}.
+\newblock
+\APACrefbtitle {Physically based rendering: From theory to implementation}
+  {Physically based rendering: From theory to implementation}.
+\newblock
+\APACaddressPublisher{}{Morgan Kaufmann}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Shipkov%
+}{%
+Shipkov%
+}{%
+{\protect \APACyear {2021}}%
+}]{%
+Burke2018}
+\APACinsertmetastar {%
+Burke2018}%
+\begin{APACrefauthors}%
+Shipkov, P.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{May}{}.
+\newblock
+\APACrefbtitle {Marbles RTX Playable Sample Now Available in NVIDIA Omniverse.}
+  {Marbles rtx playable sample now available in nvidia omniverse.}
+\newblock
+\begin{APACrefURL}
+  \url{https://blogs.nvidia.com/blog/2021/05/27/omniverse-marbles-rtx-playable-sample}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Stanford%
+}{%
+Stanford%
+}{%
+{\protect \APACyear {1994}}%
+}]{%
+stanfordbunny}
+\APACinsertmetastar {%
+stanfordbunny}%
+\begin{APACrefauthors}%
+Stanford.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1994}{}{}.
+\newblock
+\APACrefbtitle {Stanford Bunny.} {Stanford bunny.}
+\newblock
+\begin{APACrefURL} \url{http://graphics.stanford.edu/data/3Dscanrep/}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Stanford%
+}{%
+Stanford%
+}{%
+{\protect \APACyear {1996}}%
+}]{%
+stanfordxyzdragon}
+\APACinsertmetastar {%
+stanfordxyzdragon}%
+\begin{APACrefauthors}%
+Stanford.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1996}{}{}.
+\newblock
+\APACrefbtitle {Stanford XYZ Dragon.} {Stanford xyz dragon.}
+\newblock
+\begin{APACrefURL} \url{http://graphics.stanford.edu/data/3Dscanrep/}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Wikipedia%
+}{%
+Wikipedia%
+}{%
+{\protect \APACyear {2022}}%
+}]{%
+wikipedia2022}
+\APACinsertmetastar {%
+wikipedia2022}%
+\begin{APACrefauthors}%
+Wikipedia.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{}{}.
+\newblock
+\APACrefbtitle {Z-order curve.} {Z-order curve.}
+\newblock
+\begin{APACrefURL} \url{https://en.wikipedia.org/wiki/Z-order_curve}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

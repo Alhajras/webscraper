@@ -1,0 +1,29 @@
+\contentsline {section}{\numberline {1}Introduction to Ray tracing}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Overview}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Motivation of using acceleration data structures}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Bounding Volume Hierarchies (BVH)}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Concept}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Implemntation}{7}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Construction}{7}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Visual Illustration}{9}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Traversal}{10}{subsubsection.2.2.3}%
+\contentsline {section}{\numberline {3}Linear Bounding Volume Hierarchies (LBVH)}{12}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Concept}{12}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Morton Code as a Splitting Criteria}{12}{subsubsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.2}Implemntation}{14}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Construction}{14}{subsubsection.3.2.1}%
+\contentsline {section}{\numberline {4}K Dimensional Tree (Kd-Tree)}{15}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Concept}{15}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Compact tree representation}{15}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Surface Area Heuristic (SAH)}{16}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Implemntation}{18}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Construction}{18}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Traversal}{20}{subsubsection.4.2.2}%
+\contentsline {section}{\numberline {5}Performance Analysis}{22}{section.5}%
+\contentsline {subsection}{\numberline {5.1}How tweaking the data structure parameters affect performance}{22}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Investigating different data structures}{25}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Investigating much more complex scenes}{27}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Trees}{28}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Sci-Fi Tropical City}{28}{subsubsection.5.3.2}%
+\contentsline {section}{\numberline {6}Conclusion}{29}{section.6}%
+\contentsline {section}{References}{30}{section.6}%
