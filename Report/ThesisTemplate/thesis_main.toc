@@ -10,5 +10,5 @@
 \contentsline {chapter}{\numberline {6}Experimental Evaluation}{11}{chapter.6}%
 \contentsline {chapter}{\numberline {7}Summary of Results}{13}{chapter.7}%
 \contentsline {chapter}{\numberline {8}Conclusions and Future Work}{15}{chapter.8}%
-\contentsline {chapter}{Bibliography}{17}{section*.7}%
+\contentsline {chapter}{Bibliography}{17}{section*.9}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

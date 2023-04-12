@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  12 APR 2023 22:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  12 APR 2023 23:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -946,6 +946,9 @@ Package: lipsum 2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
 \l__lipsum_b_int=\count339
 
 (/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
+File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
+)
 Package hyperref Info: Option `pdfnewwindow' set `true' on input line 123.
 Package hyperref Info: Option `plainpages' set `false' on input line 123.
 \c@todos=\count340
@@ -991,37 +994,37 @@ Package: romannum 2009/09/03 v1.0b roman numerals
 (/usr/share/texlive/texmf-dist/tex/latex/stdclsdv/stdclsdv.sty
 Package: stdclsdv 2009/09/04 v1.1a Sectional divisions
 )))
-No file thesis_main.aux.
+(./thesis_main.aux)
 \openout1 = `thesis_main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-Package scrbase Info: activating english \contentsname on input line 59.
-Package scrbase Info: activating english \listfigurename on input line 59.
-Package scrbase Info: activating english \listtablename on input line 59.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+Package scrbase Info: activating english \contentsname on input line 60.
+Package scrbase Info: activating english \listfigurename on input line 60.
+Package scrbase Info: activating english \listtablename on input line 60.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
-(/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -1046,7 +1049,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 59.
+Package hyperref Info: Link coloring OFF on input line 60.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -1059,9 +1062,11 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count358
 )
-LaTeX Info: Redefining \ref on input line 59.
-LaTeX Info: Redefining \pageref on input line 59.
-LaTeX Info: Redefining \nameref on input line 59.
+LaTeX Info: Redefining \ref on input line 60.
+LaTeX Info: Redefining \pageref on input line 60.
+LaTeX Info: Redefining \nameref on input line 60.
+
+(./thesis_main.out) (./thesis_main.out)
 \@outlinefile=\write4
 \openout4 = `thesis_main.out'.
 
@@ -1072,7 +1077,7 @@ Class scrbook Info: loading recommended package `bookmark'.
 (scrbook)           `bookmarkpackage=false' before \begin{document} and
 (scrbook)           you can avoid this message adding:
 (scrbook)             \usepackage{bookmark}
-(scrbook)           before \begin{document} on input line 59.
+(scrbook)           before \begin{document} on input line 60.
 
 (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
@@ -1087,8 +1092,8 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 59.
-Package hyperref Info: Option `pageanchor' set `false' on input line 64.
+or `english'. on input line 60.
+Package hyperref Info: Option `pageanchor' set `false' on input line 65.
  (./chapters/0_0-titlepage_en.tex
 LaTeX Font Info:    Trying to load font information for U+msa on input line 26.
 
@@ -1101,12 +1106,23 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 26.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+<images/freiburg.png, id=7, 2007.5pt x 2346.7675pt>
+File: images/freiburg.png Graphic file (type png)
+<use images/freiburg.png>
+Package pdftex.def Info: images/freiburg.png  used on input line 33.
+(pdftex.def)             Requested size: 85.35826pt x 99.76315pt.
+ [1
 
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) [2] (./chapters/0_1-decla
-ration.tex
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/freiburg.png>])
+File: images/freiburg.png Graphic file (type png)
+<use images/freiburg.png>
+Package pdftex.def Info: images/freiburg.png  used on input line 71.
+(pdftex.def)             Requested size: 85.35826pt x 99.76315pt.
+ [2]
+(./chapters/0_1-declaration.tex
 LaTeX Font Info:    Trying to load font information for T1+cmss on input line 5
 .
 
@@ -1128,14 +1144,14 @@ File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ]) [5] [6
 
 
-]
+] (./thesis_main.toc)
 \tf@toc=\write5
 \openout5 = `thesis_main.toc'.
 
  [7] [8
 
 
-]
+] (./thesis_main.lof)
 \tf@lof=\write6
 \openout6 = `thesis_main.lof'.
 
@@ -1143,10 +1159,11 @@ File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 
 
 ]
+(./thesis_main.lot)
 \tf@lot=\write7
 \openout7 = `thesis_main.lot'.
 
-Package hyperref Info: Option `pageanchor' set `true' on input line 81.
+Package hyperref Info: Option `pageanchor' set `true' on input line 86.
  [11] [12
 
 
@@ -1170,10 +1187,7 @@ chapter 3.
 
 ]
 chapter 4.
-(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
-File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
-))
-(./chapters/5-datasets.tex [7] [8
+) (./chapters/5-datasets.tex [7] [8
 
 
 ]
@@ -1197,38 +1211,30 @@ chapter 8.
 
 
 ] [17] (./thesis_main.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `thesis_main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `thesis_main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+Package rerunfilecheck Info: File `thesis_main.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 32721 strings out of 480129
- 664280 string characters out of 5893409
- 1109939 words of memory out of 5000000
- 50060 multiletter control sequences out of 15000+600000
+ 32750 strings out of 480129
+ 664813 string characters out of 5893409
+ 1121046 words of memory out of 5000000
+ 50072 multiletter control sequences out of 15000+600000
  489868 words of font info for 86 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,9n,106p,10753b,801s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk>
- </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> <
-/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </h
-ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </hom
-e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/
-oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc
-/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.
-texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
-Output written on thesis_main.pdf (31 pages, 84809 bytes).
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> <
+/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </h
+ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </hom
+e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/
+oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc
+/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.
+texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.te
+xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
+Output written on thesis_main.pdf (31 pages, 765786 bytes).
 PDF statistics:
- 444 PDF objects out of 1000 (max. 8388607)
- 192 compressed objects within 2 object streams
- 38 named destinations out of 1000 (max. 500000)
- 109 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 512 PDF objects out of 1000 (max. 8388607)
+ 211 compressed objects within 3 object streams
+ 40 named destinations out of 1000 (max. 500000)
+ 114 words of extra memory for PDF output out of 10000 (max. 10000000)
 
