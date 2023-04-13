@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  13 APR 2023 01:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  13 APR 2023 23:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1116,12 +1116,8 @@ Package pdftex.def Info: images/freiburg.png  used on input line 33.
 
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/freiburg.png>])
-File: images/freiburg.png Graphic file (type png)
-<use images/freiburg.png>
-Package pdftex.def Info: images/freiburg.png  used on input line 71.
-(pdftex.def)             Requested size: 85.35826pt x 99.76315pt.
- [2]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/freiburg.png>]) [
+2]
 (./chapters/0_1-declaration.tex
 LaTeX Font Info:    Trying to load font information for T1+cmss on input line 5
 .
@@ -1163,7 +1159,7 @@ File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 \tf@lot=\write7
 \openout7 = `thesis_main.lot'.
 
-Package hyperref Info: Option `pageanchor' set `true' on input line 86.
+Package hyperref Info: Option `pageanchor' set `true' on input line 82.
  [11] [12
 
 
@@ -1215,27 +1211,30 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 32761 strings out of 480129
- 664919 string characters out of 5893409
- 1122045 words of memory out of 5000000
- 50078 multiletter control sequences out of 15000+600000
+ 32759 strings out of 480129
+ 664896 string characters out of 5893409
+ 1122046 words of memory out of 5000000
+ 50077 multiletter control sequences out of 15000+600000
  490209 words of font info for 87 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,9n,106p,10753b,807s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk>
- </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> <
-/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </h
-ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </hom
-e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/
-oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/oc
-/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.
-texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.te
-xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texl
-ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
-Output written on thesis_main.pdf (31 pages, 773203 bytes).
+pdfTeX warning (dest): name{section*.9} has been referenced but does not exis
+t, replaced by a fixed one
+
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> <
+/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </h
+ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </hom
+e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/
+oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/oc
+/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/oc/.
+texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.te
+xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texl
+ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texliv
+e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
+Output written on thesis_main.pdf (31 pages, 772589 bytes).
 PDF statistics:
- 553 PDF objects out of 1000 (max. 8388607)
- 236 compressed objects within 3 object streams
- 44 named destinations out of 1000 (max. 500000)
- 146 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 547 PDF objects out of 1000 (max. 8388607)
+ 231 compressed objects within 3 object streams
+ 43 named destinations out of 1000 (max. 500000)
+ 138 words of extra memory for PDF output out of 10000 (max. 10000000)
 
