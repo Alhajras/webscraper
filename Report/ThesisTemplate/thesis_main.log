@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  13 APR 2023 23:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  13 APR 2023 23:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1165,6 +1165,28 @@ Package hyperref Info: Option `pageanchor' set `true' on input line 82.
 
 ] (./chapters/1-introduction.tex
 chapter 1.
+! Undefined control sequence.
+<argument> \citeauthoryear 
+                           {Kimathi}{Kimathi}{{\APACyear {2020}}}
+l.4  \protect\cite{Kimathi2020}
+                               
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...ryear {Kimathi}{Kimathi}{{\APACyear 
+                                                  {2020}}}
+l.4  \protect\cite{Kimathi2020}
+                               
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 ) (./chapters/2-background.tex [1
 
 
@@ -1203,24 +1225,153 @@ chapter 7.
 
 ]
 chapter 8.
-) [15] [16
+(./thesis_main.bbl [15] [16
 
 
-] [17] (./thesis_main.aux)
+]
+! Undefined control sequence.
+<argument> \protect \citeauthoryear 
+                                    {Kimathi}{Kimathi}{{\protect \APACyear {...
+l.10 Kimathi2020}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...mathi}{Kimathi}{{\protect \APACyear 
+                                                  {2020}}}
+l.10 Kimathi2020}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.11 \APACinsertmetastar
+                         {%
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Environment APACrefauthors undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.13 \begin{APACrefauthors}
+                           %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{thebibliography} on input line 1 ended by \end{APACrefaut
+hors}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \end{APACrefauthors}
+                         %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.18 \APACrefYearMonthDay
+                         {2020}{June}{}.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.20 \APACrefbtitle
+                    {What Is Ray Tracing Technology and How It Works in GPUs...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Environment APACrefURL undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.23 \begin{APACrefURL}
+                        \url{https://www.dignited.com/62084/how-ray-tracing-...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 2
+3.
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+
+! LaTeX Error: \begin{thebibliography} on input line 1 ended by \end{APACrefURL
+}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.24   \end{APACrefURL}
+                       
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.25 \PrintBackRefs
+                   {\CurrentBib}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.25 \PrintBackRefs{\CurrentBib
+                               }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+)) [17] [18
+
+
+] [19] (./thesis_main.aux)
 Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 32759 strings out of 480129
- 664896 string characters out of 5893409
+ 32791 strings out of 480129
+ 665679 string characters out of 5893409
  1122046 words of memory out of 5000000
- 50077 multiletter control sequences out of 15000+600000
- 490209 words of font info for 87 fonts, out of 8000000 for 9000
+ 50099 multiletter control sequences out of 15000+600000
+ 490523 words of font info for 88 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,9n,106p,10753b,807s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{section*.9} has been referenced but does not exis
-t, replaced by a fixed one
-
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk>
  </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> <
 /home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </h
 ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </hom
@@ -1231,10 +1382,10 @@ texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.te
 xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texl
 ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texliv
 e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
-Output written on thesis_main.pdf (31 pages, 772589 bytes).
+Output written on thesis_main.pdf (33 pages, 782543 bytes).
 PDF statistics:
- 547 PDF objects out of 1000 (max. 8388607)
- 231 compressed objects within 3 object streams
- 43 named destinations out of 1000 (max. 500000)
+ 593 PDF objects out of 1000 (max. 8388607)
+ 244 compressed objects within 3 object streams
+ 46 named destinations out of 1000 (max. 500000)
  138 words of extra memory for PDF output out of 10000 (max. 10000000)
 
