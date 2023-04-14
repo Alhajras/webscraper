@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  15 APR 2023 01:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  15 APR 2023 01:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1169,11 +1169,20 @@ chapter 1.
 
 
 ]
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+
+ []
+
+
 Underfull \vbox (badness 4084) has occurred while \output is active []
 
  [2]
+Underfull \hbox (badness 10000) in paragraph at lines 23--24
+
+ []
+
 ! You can't use `macro parameter character #' in horizontal mode.
-l.26 ...statistics/871513/worldwide-data-created/#
+l.34 ...statistics/871513/worldwide-data-created/#
                                                   :~:text=The%20total%20amou...
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -1181,17 +1190,17 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 
-Overfull \hbox (56.87108pt too wide) in paragraph at lines 22--27
+Overfull \hbox (56.87108pt too wide) in paragraph at lines 30--35
 \T1/cmr/m/n/10.95 Pub-lished by Petroc Tay-lor , Sep 8, 2022 https://www.statis
 ta.com/statistics/871513/worldwide-
  []
 
-) (./chapters/2-background.tex [3] [4
-
-
-]
+) (./chapters/2-background.tex [3] [4]
 chapter 2.
-) (./chapters/3-relatedwork.tex [5] [6
+) (./chapters/3-relatedwork.tex [5
+
+
+] [6
 
 
 ]
@@ -1378,7 +1387,7 @@ texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.te
 xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texl
 ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texliv
 e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
-Output written on thesis_main.pdf (35 pages, 790192 bytes).
+Output written on thesis_main.pdf (35 pages, 790643 bytes).
 PDF statistics:
  617 PDF objects out of 1000 (max. 8388607)
  255 compressed objects within 3 object streams
