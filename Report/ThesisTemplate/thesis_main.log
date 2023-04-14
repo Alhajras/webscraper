@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  14 APR 2023 01:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.4.12)  15 APR 2023 01:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1169,8 +1169,11 @@ chapter 1.
 
 
 ]
+Underfull \vbox (badness 4084) has occurred while \output is active []
+
+ [2]
 ! You can't use `macro parameter character #' in horizontal mode.
-l.16 ...statistics/871513/worldwide-data-created/#
+l.26 ...statistics/871513/worldwide-data-created/#
                                                   :~:text=The%20total%20amou...
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -1178,47 +1181,47 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 
-Overfull \hbox (56.87108pt too wide) in paragraph at lines 12--17
+Overfull \hbox (56.87108pt too wide) in paragraph at lines 22--27
 \T1/cmr/m/n/10.95 Pub-lished by Petroc Tay-lor , Sep 8, 2022 https://www.statis
 ta.com/statistics/871513/worldwide-
  []
 
-) (./chapters/2-background.tex [2]
+) (./chapters/2-background.tex [3] [4
+
+
+]
 chapter 2.
-) (./chapters/3-relatedwork.tex [3
-
-
-] [4
+) (./chapters/3-relatedwork.tex [5] [6
 
 
 ]
 chapter 3.
-) (./chapters/4-approach.tex [5] [6
+) (./chapters/4-approach.tex [7] [8
 
 
 ]
 chapter 4.
-) (./chapters/5-datasets.tex [7] [8
+) (./chapters/5-datasets.tex [9] [10
 
 
 ]
 chapter 5.
-) (./chapters/6-experiments.tex [9] [10
+) (./chapters/6-experiments.tex [11] [12
 
 
 ]
 chapter 6.
-) (./chapters/7-summary.tex [11] [12
+) (./chapters/7-summary.tex [13] [14
 
 
 ]
 chapter 7.
-) (./chapters/8-conclusions.tex [13] [14
+) (./chapters/8-conclusions.tex [15] [16
 
 
 ]
 chapter 8.
-(./thesis_main.bbl [15] [16
+(./thesis_main.bbl [17] [18
 
 
 ]
@@ -1349,18 +1352,18 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [17] [18
+)) [19] [20
 
 
-] [19] (./thesis_main.aux)
+] [21] (./thesis_main.aux)
 Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 32791 strings out of 480129
- 665679 string characters out of 5893409
+ 32795 strings out of 480129
+ 665710 string characters out of 5893409
  1122045 words of memory out of 5000000
- 50099 multiletter control sequences out of 15000+600000
+ 50100 multiletter control sequences out of 15000+600000
  490523 words of font info for 88 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,9n,106p,10753b,807s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1375,10 +1378,10 @@ texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.te
 xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texl
 ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texliv
 e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
-Output written on thesis_main.pdf (33 pages, 786913 bytes).
+Output written on thesis_main.pdf (35 pages, 790192 bytes).
 PDF statistics:
- 601 PDF objects out of 1000 (max. 8388607)
- 243 compressed objects within 3 object streams
- 46 named destinations out of 1000 (max. 500000)
- 138 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 617 PDF objects out of 1000 (max. 8388607)
+ 255 compressed objects within 3 object streams
+ 49 named destinations out of 1000 (max. 500000)
+ 146 words of extra memory for PDF output out of 10000 (max. 10000000)
 
