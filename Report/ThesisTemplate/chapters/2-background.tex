@@ -1,5 +1,55 @@
 \chapter{Background}\
 \label{chap:background}
+\section{History}
 \numberwithin{equation}{chapter}
 
-Explain the math and notation.
+The World Wide Web is an unlimited space to share provide and share information. Those information can have different format and cover different doamins. The use case of the web is only limtied by the developers imagination. This is benifital as the Web keept evolving rapidaly form Web 1.0 to Web 2.0 to Web 3.0. Web 1.0 used static pages to serve information, those information were moslty news, blogs and personal langing pages. Some refre to the Web 1.0 as "the read-only web". Although Web 1.0 was massive however most content were created was by deverlopers or at least users who knew basics of the HTML and CSS, moreover by that time content were only static they did not depen on fancy JavaScript libraries and frameworks like Angular and React, this made it limited to some use cases only. Fast forward, pages become more dynamic after using sessions, databases and clint rendering schemas. Those changes made the Web focused not only reading and gathering information by gave the power to more audiounce who did not know any programming or coding to participate and interact with the Web via browsers. Social media, e-commerce and trading stocks platforms was one of the reasons made the internet buble inflate, Use cases where unlimited as useres could create and deploy their own websites by using simple tools as Content Manament System CMS. This made Web 2.0 known as "the participative social web".
+
+
+\section{Web Search Engine}
+Web Search Engine is a software that collect information from the web and index them effecianly to obtimipze the searching process by the user. Users enter their queries to ask for information, the engine carries out the queries and lookup the pre built orginized index and return a relevant results. The returned result is presented by Search Enngine Results Pages as known as SERPs. The result then ranked based on predefined cretieria. 
+
+Web search engines use web crawler or spider to collect and harvest the intenret jumping from one page to another. Each page can contain several links, the crawler task is to find the links and to visit them and harvest them also. Followed by crawlers, indexing is the next process where information are orginized and optimized for search. 
+\begin{figure}[h]	
+     \centering
+         \includegraphics[width=10cm]{images/engine_components.png}
+\end{figure}
+
+\section{Cralwer}
+Web crawler or spidedr is a software which gather pages information from the web, to prived the neccasary datat to the indexer to build a searhc engine. The essintial role of crawlers is to effecitnalt and reliably collect as much infromation from the web. 
+
+\section{Cralwer Specifications}
+Crawlers can have a wide vireity of features and specifications, however some are necessary to include and others are vital to have a reliable useable one. 
+
+\begin{itemize}
+  \item Robustness: Web crawler can be fragile and easy to break, this is due to the nature of the dynamic contnets on the web and the internet connection. Web crawlers must identify those edge cases and obsticals and tackle them.  
+  \item Politeness: The implmentation of the crawler can be unintentially mellisous and dangerous if not designed correclty. A Deniel of service DoS and a Distributed Denial of service DDoS attacks can occure due to a bad crawler implmentation. Hence crawlers must respect websites policies and avoid breaking up web services and load the servers.
+
+\item Distributed: To make the crawler efficint and 
+
+The crawler should have the ability to execute in a distributed
+fashion across multiple machines.
+\end{itemize}
+
+
+\\
+
+
+
+Scalable: The crawler architecture should permit scaling up the crawl rate
+by adding extra machines and bandwidth.
+Performance and efficiency: The crawl system should make efficient use of
+various system resources including processor, storage and network bandwidth.
+Quality: Given that a significant fraction of all web pages are of poor utility for serving user query needs, the crawler should be biased towards
+fetching “useful” pages first.
+Freshness: In many applications, the crawler should operate in continuous
+mode: it should obtain fresh copies of previously fetched pages. A search
+engine crawler, for instance, can thus ensure that the search engine’s index
+contains a fairly current representation of each indexed web page. For
+such continuous crawling, a crawler should be able to crawl a page with
+a frequency that approximates the rate of change of that page.
+Extensible: Crawlers should be designed to be extensible in many ways –
+to cope with new data formats, new fetch protocols, and so on. This demands that the crawler architecture be modular.
+
+\section{Indexing}
+2.4 Web crawling issues page 27 book Effective Web Crawling by Carlos Castillo
