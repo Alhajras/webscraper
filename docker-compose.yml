@@ -5,18 +5,25 @@ services:
     ports:
       - "8000:8000"
     networks:
-      - default-network
+      test_network3:
+        # This is static so it can be reached if the dev server is running
+        ipv4_address: 173.16.38.5
 
   angular:
     build: ./frontend/app
     ports:
       - "4200:4200"
     networks:
-      - default-network
+      test_network3:
+        # This is static so it can be reached if the dev server is running
+        ipv4_address: 173.16.38.7
     links:
       - django # link this service to the api service
 
 
 networks:
-  default-network:
-    driver: bridge
+  test_network3:
+    ipam:
+      config:
+        - subnet: 173.16.38.0/18
+

@@ -1,15 +1,12 @@
 {
   "/api/": {
-    "target": "http://django:8000",
+    "target": "http://173.16.38.5:8000",
     "secure": false,
     "changeOrigin": true,
-    "disableHostCheck": true,
-    "pathRewrite": {
-      "^/api": ""
-    }
+    "disableHostCheck": true
   },
   "/static/": {
-    "target": "http://django:8000",
+    "target": "http://173.16.38.5:8000",
     "secure": false,
     "changeOrigin": true,
     "disableHostCheck": true
