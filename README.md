@@ -1,4 +1,7 @@
 # webscraper
+## Create a network for both angular and django to communicate
+`docker network create webcrawler-network`
+
 ## Building and running django in docker
 - From the root project run the following command
 `docker build -t crawler-django backend/webscraper/`.

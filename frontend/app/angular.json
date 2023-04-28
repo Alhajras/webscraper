@@ -74,10 +74,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production"
+              "browserTarget": "app:build:production",
+              "proxyConfig": "proxy.config.json"
             },
             "development": {
-              "browserTarget": "app:build:development"
+              "browserTarget": "app:build:development",
+              "proxyConfig": "proxy.config.json"
             }
           },
           "defaultConfiguration": "development"

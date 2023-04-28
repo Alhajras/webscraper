@@ -10,7 +10,7 @@ RUN rm -r node_modules
 
 RUN npm install
 
-
+#Default angular port
 EXPOSE 4200
 
 CMD ["npm", "start"]

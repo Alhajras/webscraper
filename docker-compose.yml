@@ -1,0 +1,22 @@
+version: "3.4"
+services:
+  django:
+    build: ./backend/webscraper
+    ports:
+      - "8000:8000"
+    networks:
+      - default-network
+
+  angular:
+    build: ./frontend/app
+    ports:
+      - "4200:4200"
+    networks:
+      - default-network
+    links:
+      - django # link this service to the api service
+
+
+networks:
+  default-network:
+    driver: bridge

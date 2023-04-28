@@ -1,22 +1,17 @@
 {
   "/api/": {
-    "target": "http://localhost:8000",
+    "target": "http://django:8000",
     "secure": false,
-    "changeOrigin": true
-  },
-  "/f2-ws/": {
-    "target": "http://localhost:8000",
-    "secure": false,
-    "ws": true
+    "changeOrigin": true,
+    "disableHostCheck": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
   },
   "/static/": {
-    "target": "http://localhost:8000",
+    "target": "http://django:8000",
     "secure": false,
-    "changeOrigin": true
-  },
-  "/get-image/": {
-    "target": "http://localhost:8000",
-    "secure": false,
-    "changeOrigin": true
+    "changeOrigin": true,
+    "disableHostCheck": true
   }
 }
