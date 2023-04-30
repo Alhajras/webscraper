@@ -82,7 +82,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         excluded_urls = [""]
         # Stopping options
         max_pages = 200
-        max_visited_links = 24
+        max_visited_links = 130
         visited_list_counter = 0
         max_rec_level = 1
         base_urlparse = urlparse(base_url)
