@@ -114,7 +114,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             # )
             # driver.find_element(By.CSS_SELECTOR, cookies_button).click()
             # This should be configured
-            driver.refresh()
             scoped_elements = []
             try:
                 # This is to click on the cookies button
