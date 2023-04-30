@@ -56,9 +56,10 @@ class InspectorViewSet(EverythingButDestroyViewSet):
 
 
 class Link:
-    def __init__(self, url: urlparse, visited: bool = False):
+    def __init__(self, url: urlparse, visited=False, level=0):
         self.url = url
         self.visited = visited
+        self.level = level
 
 
 class RunnerViewSet(EverythingButDestroyViewSet):
@@ -71,60 +72,85 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         links: dict[str, Link] = {}
         q = []
         all_products = []
-        base_url = "https://www.zara.com/de/en/"
-        start_url = "https://www.zara.com/de/en/waxed-effect-parka-p02969309.html?v1=178821511&v2=2105310"
+        # This is the base URL that the crawler should only crawl from
+        base_url = "https://www.flaconi.de"
+        # start_url = "https://www.flaconi.de/damen-duftsets/"
+        start_url = "https://www.flaconi.de/damen-duftsets/"
+        scope_divs = ["//*[contains(@class, 'e-tastic__flaconi-product-list')]", '//*[@id="app"]/div/main/div/div/div[3]/div']
+
+        # Urls that may crawler navigate by mistake
+        excluded_urls = [""]
+        # Stopping options
+        max_pages = 200
+        max_visited_links = 24
+        visited_list_counter = 0
+        max_rec_level = 1
         base_urlparse = urlparse(base_url)
 
-        def find_links(link: Link, cookies_button: str):
-            # Define Browser Options
-            chrome_options = Options()
-            user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2'
-            chrome_options.add_argument(f'user-agent={user_agent}')
-            chrome_options.add_argument("--window-size=2560,1440")
-            chrome_options.add_argument("--headless")  # Hides the browser window
-            # Reference the local Chromedriver instance
-            chrome_path = r"/usr/local/bin/chromedriver"
-            driver = webdriver.Chrome(
-                executable_path=chrome_path, options=chrome_options
-            )
+        # Define Browser Options
+        chrome_options = Options()
+        user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2'
+        chrome_options.add_argument(f'user-agent={user_agent}')
+        chrome_options.add_argument("--window-size=2560,1440")
+        chrome_options.add_argument("--headless")  # Hides the browser window
+        # Reference the local Chromedriver instance
+        chrome_path = r"/usr/local/bin/chromedriver"
+        driver = webdriver.Chrome(
+            executable_path=chrome_path, options=chrome_options
+        )
+
+        def find_links(link: Link, cookies_button: str = ''):
+            # We stop recursion when we reach tha mx level of digging into pages
+            if link.level > max_rec_level:
+                pass
             # Run the Webdriver, save page an quit browser
             driver.get(link.url)
-            wait_until(
-                driver,
-                expected_conditions.presence_of_element_located(
-                    (By.CSS_SELECTOR, cookies_button)
-                ),
-                "Cookies button was never found.",
-            )
-            driver.find_element(By.CSS_SELECTOR, cookies_button).click()
+            # wait_until(
+            #     driver,
+            #     expected_conditions.presence_of_element_located(
+            #         (By.CSS_SELECTOR, cookies_button)
+            #     ),
+            #     "Cookies button was never found.",
+            # )
+            # driver.find_element(By.CSS_SELECTOR, cookies_button).click()
             # This should be configured
             driver.refresh()
+            scoped_elements = []
             try:
-                wait_until(
-                    driver,
-                    expected_conditions.presence_of_element_located(
-                        (By.CSS_SELECTOR, ".product-detail-info__header-name")
-                    ),
-                    "Cookies button was never found.",
-                    timeout=3,
-                )
-                title = driver.find_element(
-                    By.CSS_SELECTOR, ".product-detail-info__header-name"
-                )
-                all_products.append(title.text)
+                # This is to click on the cookies button
+                # wait_until(
+                #     driver,
+                #     expected_conditions.presence_of_element_located(
+                #         (By.CSS_SELECTOR, ".product-detail-info__header-name")
+                #     ),
+                #     "Cookies button was never found.",
+                #     timeout=3,
+                # )
+                # import pdb
+                # pdb.set_trace()
+                for scope_div in scope_divs:
+                    try:
+                        scoped_elements.append(driver.find_element(By.XPATH, scope_div))
+                    except Exception as e:
+                        pass
+                for scoped_element in scoped_elements:
+                    title = scoped_element.find_element(By.XPATH, "//*[contains(@class, 'BrandName')]")
+                    all_products.append(title.text)
             except Exception as e:
                 print(e)
 
-            for href in driver.find_elements(By.CSS_SELECTOR, "a"):
-                # We skip the fragments as they do not add any product, that why we split by #
-                a = href.get_attribute("href").split('#').pop()
-                # Some sites have None values and 'link != a' to avoid looping
-                if a is not None and base_url in a:
-                    found_link = Link(url=a, visited=False)
-                    if link.url != a and a not in links:
-                        links[a] = found_link
-                        q.append(a)
-            driver.quit()
+            for scoped_element in scoped_elements:
+                # We add one level
+                current_rec_level = link.level + 1
+                for href in scoped_element.find_elements(By.CSS_SELECTOR, "a"):
+                    # We skip the fragments as they do not add any product, that why we split by #
+                    a = href.get_attribute("href").split('#').pop()
+                    # Some sites have None values and 'link != a' to avoid looping
+                    if a is not None and base_url in a:
+                        found_link = Link(url=a, visited=False, level=current_rec_level)
+                        if link.url != a and a not in links:
+                            links[a] = found_link
+                            q.append(a)
             return
 
         def wait_until(
@@ -149,12 +175,13 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 wait.until(condition)
             except TimeoutException:
                 print("This page does not contain the selector given.")
-        q.append(start_url)
 
-        while len(q) != 0:
+        q.append(start_url)
+        while len(q) != 0 and len(all_products) < max_pages and visited_list_counter < max_visited_links:
             try:
                 url = q.pop(0)
-                find_links(Link(url), cookies_button="#onetrust-accept-btn-handler")
+                visited_list_counter += 1
+                find_links(Link(url))
                 print(url)
                 print(all_products)
 
@@ -162,7 +189,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 print(f"I am done {q}")
 
         print(all_products)
-
+        driver.quit()
         return Response(status=200)
 
 
