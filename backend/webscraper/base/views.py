@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 from time import sleep
 from typing import Callable, Union, Any
 
@@ -79,11 +80,10 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         scope_divs = ["//*[contains(@class, 'e-tastic__flaconi-product-list')]", '//*[@id="app"]/div/main/div/div/div[3]/div']
 
         # Urls that may crawler navigate by mistake
-        excluded_urls = [""]
+        excluded_urls = ["https://www.flaconi.de/parfum/", "https://www.flaconi.de/damenparfum/", "https://www.flaconi.de/damenduefte/","https://www.flaconi.de/damen-duschpflege/","https://www.flaconi.de/damen-parfum-koerperprodukte/","https://www.flaconi.de/damen-deodorant/","https://www.flaconi.de/haarparfum/","https://www.flaconi.de/herrenparfum/","https://www.flaconi.de/unisex-parfum/","https://www.flaconi.de/nischenduefte/","https://www.flaconi.de/haarparfum/","https://www.flaconi.de/herrenparfum/","https://www.flaconi.de/unisex-parfum/","https://www.flaconi.de/nischenduefte/"]
         # Stopping options
-        max_pages = 200
-        max_visited_links = 130
-        visited_list_counter = 0
+        max_pages = 10
+        max_visited_links = 30
         max_rec_level = 1
         base_urlparse = urlparse(base_url)
 
@@ -99,10 +99,16 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             executable_path=chrome_path, options=chrome_options
         )
 
-        def find_links(link: Link, cookies_button: str = ''):
+        def find_links():
+            if len(q) == 0:
+                return
+            link: Link = q.pop()
+            if len(all_products) >= max_pages:
+                return
+            print(link.url)
             # We stop recursion when we reach tha mx level of digging into pages
             if link.level > max_rec_level:
-                pass
+                return
             # Run the Webdriver, save page an quit browser
             driver.get(link.url)
             # wait_until(
@@ -146,11 +152,12 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     a = href.get_attribute("href").split('#').pop()
                     # Some sites have None values and 'link != a' to avoid looping
                     if a is not None and base_url in a:
-                        found_link = Link(url=a, visited=False, level=current_rec_level)
-                        if link.url != a and a not in links:
-                            links[a] = found_link
-                            q.append(a)
-            return
+                        if a not in excluded_urls:
+                            found_link = Link(url=a, visited=False, level=current_rec_level)
+                            if link.url != a and a not in links and len(links) < max_visited_links:
+                                links[a] = found_link
+                                q.append(Link(a))
+            return find_links()
 
         def wait_until(
             driver,
@@ -175,19 +182,39 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             except TimeoutException:
                 print("This page does not contain the selector given.")
 
-        q.append(start_url)
-        while len(q) != 0 and len(all_products) < max_pages and visited_list_counter < max_visited_links:
-            try:
-                url = q.pop(0)
-                visited_list_counter += 1
-                find_links(Link(url))
-                print(url)
-                print(all_products)
+        q.append(Link(start_url))
+        import time
 
-            except Exception as e:
-                print(f"I am done {q}")
+        start = time.time()
+        def excute(links):
+            with ThreadPoolExecutor(max_workers=4) as executor:
+                results = executor.map(find_links, links)
+            pass
+
+        find_links()
+        # batch_size = 4
+        # batches = []
+        # while len(q) != 0:
+        #     for i in range(0, len(q), batch_size):
+        #         batch = q[i:i + batch_size]
+        #         batches.append(batch)
+        #
+        #     print("sdfsdf")
+        #     try:
+        #         with ThreadPoolExecutor(max_workers=4) as executor:
+        #             results = executor.map(excute, batches)
+        #
+        #         # url = q.pop(0)
+        #
+        #         # print(url)
+        #         # print(all_products)
+        #
+        #     except Exception as e:
+        #         print(f"I am done {q}")
 
         print(all_products)
+        end = time.time()
+        print(end - start)
         driver.quit()
         return Response(status=200)
 
