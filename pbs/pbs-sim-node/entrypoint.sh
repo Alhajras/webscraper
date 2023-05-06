@@ -9,4 +9,11 @@ sudo /etc/init.d/pbs start
 echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
 echo 'PermitEmptyPasswords no' >> /etc/ssh/sshd_config
 echo 'PubkeyAuthentication yes' >> /etc/ssh/sshd_config
+
+# Activate the virtual environment
+source /home/mpiuser/webscraper-main/backend/webscraper/venv/bin/activate
+# Change to your Django project directory
+cd /home/mpiuser/webscraper-main/backend/webscraper
+# Run the Django server
+./manage.py runserver 0.0.0.0:8000 &
 exec "$@"
