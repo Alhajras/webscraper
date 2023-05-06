@@ -3,9 +3,15 @@ import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {TemplateService} from "src/app/services/template.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {TemplateDropDown} from "src/app/base/crawler/crawler.component";
 import {Runner} from "src/app/models/runner.model";
 import {RunnerService} from "src/app/services/runner.service";
+import {Crawler} from "src/app/models/crawler.model";
+import {CrawlerService} from "src/app/services/crawler.service";
+
+export interface CrawlerDropDown {
+  key: string
+  crawler: Crawler
+}
 
 @Component({
   selector: 'app-runner',
@@ -15,42 +21,40 @@ import {RunnerService} from "src/app/services/runner.service";
 export class RunnerComponent {
   public runners: Runner[] = []
   public updatedRunner: Runner | null = null
-  public breadcrumbs: MenuItem[] = []
-  public description!: FormControl
-  public template!: FormControl
-  public templatesList: TemplateDropDown[] = []
+  public descriptionForm!: FormControl
+  public crawlerForm!: FormControl
+  public name!: FormControl
+  public crawlersList: CrawlerDropDown[] = []
   public currentlySubmitting = false
   public displayModal = false
-  public url!: FormControl
   public form!: FormGroup
   public header = 'Runner form'
-  public name!: FormControl
   public errorMessage = ''
   public readonly columnCount = 8
 
   public constructor(
     private readonly fb: FormBuilder,
     private readonly runnerService: RunnerService,
-    private readonly templateService: TemplateService,
+    private readonly crawlerService: CrawlerService,
   ) {
     runnerService.list().subscribe(runners => {
       this.runners = runners
     })
 
-    this.templateService.list().subscribe(templates => {
-      this.templatesList = templates.map(t => ({
-        key: t.name,
-        template: t,
+    this.crawlerService.list().subscribe(crawlers => {
+      this.crawlersList = crawlers.map(c => ({
+        key: c.name,
+        crawler: c,
       }))
     })
 
-    this.description = this.fb.control('')
-    this.url = this.fb.control('')
+    this.descriptionForm = this.fb.control('')
+    this.crawlerForm = this.fb.control('')
     this.name = this.fb.control('')
     this.form = this.fb.group({
-      description: this.description,
-      url: this.url,
+      description: this.descriptionForm,
       name: this.name,
+      crawler: this.crawlerForm,
     })
   }
 
@@ -58,9 +62,15 @@ export class RunnerComponent {
     this.displayModal = false
   }
 
-  public start(): void{
-    this.runnerService.start(this.updatedRunner ?? {}).toPromise().then()
+  public start(): void {
+    const runner = {
+      description: this.descriptionForm.value,
+      name: this.name.value,
+      crawler: this.crawlerForm.value.crawler.id,
+    }
+    this.runnerService.start(runner).toPromise().then()
   }
+
   public submit(): void {
     if (!this.form.valid) {
       // We should normally never get here since the submit button should be disabled.
@@ -70,11 +80,19 @@ export class RunnerComponent {
 
     this.currentlySubmitting = true
     const runner = {
-      description: this.description.value,
+      description: this.descriptionForm.value,
       name: this.name.value,
-      url: this.url.value,
-      template: this.template.value.template.id,
+      crawler: this.crawlerForm.value.id,
     }
+
+    if (this.updatedRunner !== null) {
+      this.updateRunner(runner)
+      return;
+    }
+    this.createRunner(runner)
+  }
+
+  private updateRunner(runner: Partial<Runner>) {
     if (this.updatedRunner !== null) {
       this.runnerService.update(this.updatedRunner.id, runner).toPromise().then(() => {
         this.runnerService.list().subscribe(runners => {
@@ -90,19 +108,7 @@ export class RunnerComponent {
       })
       return;
     }
-    this.runnerService.post(runner).toPromise().then(() => {
-      this.runnerService.list().subscribe(runners => {
-        this.runners = runners
-      })
-      this.closeModal()
-      this.currentlySubmitting = false
-    }).catch((err: HttpErrorResponse) => {
-      this.errorMessage = err.error
-      this.currentlySubmitting = false
-      console.log(err)
-    })
   }
-
   public deleteRunner(runner: Runner): void {
     runner.deleted = true
     this.runnerService.update(runner.id, runner).toPromise().then(() => {
@@ -121,10 +127,24 @@ export class RunnerComponent {
 
   public editRunner(runner: Runner): void {
     this.updatedRunner = runner
-    this.description = this.fb.control(runner.description)
+    this.descriptionForm = this.fb.control(runner.description)
     this.form = this.fb.group({
-      description: this.description,
+      description: this.descriptionForm,
     })
     this.displayModal = true
+  }
+
+  private createRunner(runner: Partial<Runner>) {
+        this.runnerService.post(runner).toPromise().then(() => {
+      this.runnerService.list().subscribe(runners => {
+        this.runners = runners
+      })
+      this.closeModal()
+      this.currentlySubmitting = false
+    }).catch((err: HttpErrorResponse) => {
+      this.errorMessage = err.error
+      this.currentlySubmitting = false
+      console.log(err)
+    })
   }
 }

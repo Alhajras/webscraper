@@ -18,7 +18,7 @@ from selenium.webdriver.chrome.options import Options
 from urllib.parse import urlparse
 
 from .filters import InspectorFilter
-from .models import Crawler, Template, Inspector, Runner
+from .models import Crawler, Template, Inspector, Runner, InspectorValue
 from .serializers import (
     CrawlerSerializer,
     UserSerializer,
@@ -70,6 +70,13 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
+        runner_serializer = RunnerSerializer(data=request.data)
+        # TODO: If data are invalid we should throw an error here
+        if not runner_serializer.is_valid():
+            pass
+        print(runner_serializer.data)
+
+        crawler = Crawler.objects.get(pk=runner_serializer.data["crawler"])
         links: dict[str, Link] = {}
         q = []
         all_products = []
@@ -82,9 +89,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         # Urls that may crawler navigate by mistake
         excluded_urls = ["https://www.flaconi.de/parfum/", "https://www.flaconi.de/damenparfum/", "https://www.flaconi.de/damenduefte/","https://www.flaconi.de/damen-duschpflege/","https://www.flaconi.de/damen-parfum-koerperprodukte/","https://www.flaconi.de/damen-deodorant/","https://www.flaconi.de/haarparfum/","https://www.flaconi.de/herrenparfum/","https://www.flaconi.de/unisex-parfum/","https://www.flaconi.de/nischenduefte/","https://www.flaconi.de/haarparfum/","https://www.flaconi.de/herrenparfum/","https://www.flaconi.de/unisex-parfum/","https://www.flaconi.de/nischenduefte/"]
         # Stopping options
-        max_pages = 10
-        max_visited_links = 30
-        max_rec_level = 1
+        max_pages = crawler.max_pages
+        max_visited_links = 100
+        max_rec_level = crawler.max_depth
         base_urlparse = urlparse(base_url)
 
         # Define Browser Options
@@ -110,29 +117,11 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             if link.level > max_rec_level:
                 return
             # Run the Webdriver, save page an quit browser
+            # TODO: I should use `retry` here
             driver.get(link.url)
-            # wait_until(
-            #     driver,
-            #     expected_conditions.presence_of_element_located(
-            #         (By.CSS_SELECTOR, cookies_button)
-            #     ),
-            #     "Cookies button was never found.",
-            # )
-            # driver.find_element(By.CSS_SELECTOR, cookies_button).click()
             # This should be configured
             scoped_elements = []
             try:
-                # This is to click on the cookies button
-                # wait_until(
-                #     driver,
-                #     expected_conditions.presence_of_element_located(
-                #         (By.CSS_SELECTOR, ".product-detail-info__header-name")
-                #     ),
-                #     "Cookies button was never found.",
-                #     timeout=3,
-                # )
-                # import pdb
-                # pdb.set_trace()
                 for scope_div in scope_divs:
                     try:
                         scoped_elements.append(driver.find_element(By.XPATH, scope_div))
@@ -157,15 +146,16 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                             if link.url != a and a not in links and len(links) < max_visited_links:
                                 links[a] = found_link
                                 q.append(Link(a))
+            # TODO: Use `sleep` here
             return find_links()
 
         def wait_until(
-            driver,
-            condition: Callable[[WebDriver], bool],
-            failure_msg: Union[str, Callable[[], str]],
-            timeout: int = 10,
-            *,
-            ignored_exceptions: Any | None = None,
+                driver,
+                condition: Callable[[WebDriver], bool],
+                failure_msg: Union[str, Callable[[], str]],
+                timeout: int = 10,
+                *,
+                ignored_exceptions: Any | None = None,
         ) -> None:
             """
             Do nothing until some condition is met
@@ -211,7 +201,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         #
         #     except Exception as e:
         #         print(f"I am done {q}")
-
+        inspector = Inspector.objects.all().latest('-id')
+        for product in all_products:
+            InspectorValue.objects.update_or_create(value=product, inspector=inspector)
         print(all_products)
         end = time.time()
         print(end - start)

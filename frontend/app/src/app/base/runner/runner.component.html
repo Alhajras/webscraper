@@ -109,14 +109,14 @@
           <app-input-field
             [isRequired]="true"
             labelId="version-label-id"
-            labelText="Template"
+            labelText="Crawler"
             helpText=""
           >
             <p-dropdown
               id="version-id"
-              [formControl]="template"
-              placeholder="Select a template"
-              [options]="templatesList"
+              [formControl]="crawlerForm"
+              placeholder="Select a crawler"
+              [options]="crawlersList"
               optionLabel="key"
               [filter]="true"
             ></p-dropdown>
@@ -138,20 +138,6 @@
           <app-input-field
             [isRequired]="true"
             labelId="version-label-id"
-            labelText="Url"
-            helpText=""
-          >
-
-            <input
-              id="end-time-id"
-              type="text"
-              pInputText
-              [formControl]="url"
-            />
-          </app-input-field>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
             labelText="Description"
             helpText=""
           >
@@ -159,7 +145,7 @@
               [rows]="10"
               [cols]="100"
               pInputTextarea
-              [formControl]="description"
+              [formControl]="descriptionForm"
               ngDefaultControl
             ></textarea>
           </app-input-field>

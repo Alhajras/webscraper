@@ -36,6 +36,17 @@ class Inspector(models.Model):
         return self.name
 
 
+class InspectorValue(models.Model):
+
+    class Meta:
+        unique_together = ('value', 'inspector')
+
+    value = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    deleted = models.BooleanField(default=False)
+    inspector = models.ForeignKey(Inspector, on_delete=models.PROTECT)
+
+
 class Crawler(models.Model):
     class Meta:
         ordering = ("created_at",)

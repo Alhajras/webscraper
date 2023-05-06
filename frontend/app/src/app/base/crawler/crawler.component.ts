@@ -1,11 +1,10 @@
 import {Component} from '@angular/core';
-import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {CrawlerService} from "src/app/services/crawler.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Crawler} from "src/app/models/crawler.model";
 import {Template} from "src/app/models/template.model";
 import {TemplateService} from "src/app/services/template.service";
+import {CrawlerService} from "src/app/services/crawler.service";
 
 export interface TemplateDropDown {
   key: string
