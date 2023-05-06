@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:8000"
     networks:
-      test_network3:
+      webcrawler_network:
         # This is static so it can be reached if the dev server is running
         ipv4_address: 173.16.38.5
 
@@ -14,16 +14,63 @@ services:
     ports:
       - "4200:4200"
     networks:
-      test_network3:
+      webcrawler_network:
         # This is static so it can be reached if the dev server is running
         ipv4_address: 173.16.38.7
     links:
       - django # link this service to the api service
 
+  pbs-base-image:
+    image: pbs-base-image
+    build:
+      context: pbs
+
+  pbs-head-node:
+    image: pbs-head-node
+    depends_on:
+      - pbs-base-image
+    tty: true
+    build:
+      context: pbs/pbs-head-node
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - "/dev/fuse:/dev/fuse"
+    privileged: true
+    security_opt:
+      - apparmor:unconfined
+    hostname: pbs-head-node
+    networks:
+      webcrawler_network:
+        aliases:
+          - pbs-head-node
+        # This is static so it can be reached if the dev server is running
+        ipv4_address: 173.16.38.8
+
+  pbs-sim-node:
+    image: pbs-sim-node
+    depends_on:
+      - pbs-head-node
+    tty: true
+    build:
+      context: pbs/pbs-sim-node
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - "/dev/fuse:/dev/fuse"
+    privileged: true
+    security_opt:
+      - apparmor:unconfined
+    hostname: pbs-sim-node
+    networks:
+      webcrawler_network:
+        aliases:
+          - pbs-sim-node
+          # This is static so it can be reached if the dev server is running
+        ipv4_address: 173.16.38.9
 
 networks:
-  test_network3:
+  webcrawler_network:
     ipam:
       config:
         - subnet: 173.16.38.0/18
-
