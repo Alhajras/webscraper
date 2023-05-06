@@ -136,7 +136,7 @@
             />
           </app-input-field>
           <app-input-field
-            [isRequired]="true"
+            [isRequired]="false"
             labelId="version-label-id"
             labelText="Description"
             helpText=""
@@ -158,6 +158,7 @@
     <!--      <f2-loading msg="Submitting ..."></f2-loading>-->
     <!--    </span>-->
     <button
+      [disabled]="!form.valid"
       id="run-btn"
       type="button"
       pButton

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Runner} from "src/app/models/runner.model";
 import {RunnerService} from "src/app/services/runner.service";
@@ -19,9 +19,9 @@ export interface CrawlerDropDown {
 export class RunnerComponent {
   public runners: Runner[] = []
   public updatedRunner: Runner | null = null
-  public descriptionForm!: FormControl
-  public crawlerForm!: FormControl
-  public name!: FormControl
+  public descriptionForm: FormControl = this.fb.control('')
+  public crawlerForm: FormControl = this.fb.control('',[Validators.required])
+  public name: FormControl = this.fb.control('',[Validators.required])
   public crawlersList: CrawlerDropDown[] = []
   public currentlySubmitting = false
   public displayModal = false
@@ -46,9 +46,6 @@ export class RunnerComponent {
       }))
     })
 
-    this.descriptionForm = this.fb.control('')
-    this.crawlerForm = this.fb.control('')
-    this.name = this.fb.control('')
     this.form = this.fb.group({
       description: this.descriptionForm,
       name: this.name,
