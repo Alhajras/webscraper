@@ -27,8 +27,7 @@ class CrawlerSerializer(serializers.ModelSerializer):
             "timeout",
             "max_pages",
             "max_depth",
-            "robot_file_url"
-
+            "robot_file_url",
         ]
 
 

@@ -37,9 +37,8 @@ class Inspector(models.Model):
 
 
 class InspectorValue(models.Model):
-
     class Meta:
-        unique_together = ('value', 'inspector')
+        unique_together = ("value", "inspector")
 
     value = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -66,7 +65,7 @@ class Crawler(models.Model):
     timeout = models.FloatField(default=10)
     max_pages = models.PositiveIntegerField(default=20)
     max_depth = models.PositiveSmallIntegerField(default=5)
-    robot_file_url = models.TextField(default='')
+    robot_file_url = models.TextField(default="")
 
     def __str__(self) -> str:
         return self.name

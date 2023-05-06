@@ -1,5 +1,4 @@
 from concurrent.futures import ThreadPoolExecutor
-from time import sleep
 from typing import Callable, Union, Any
 
 from django.contrib.auth.models import User
@@ -11,7 +10,6 @@ from rest_framework.response import Response
 from selenium.common import TimeoutException
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -84,10 +82,28 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         base_url = "https://www.flaconi.de"
         # start_url = "https://www.flaconi.de/damen-duftsets/"
         start_url = "https://www.flaconi.de/damen-duftsets/"
-        scope_divs = ["//*[contains(@class, 'e-tastic__flaconi-product-list')]", '//*[@id="app"]/div/main/div/div/div[3]/div']
+        scope_divs = [
+            "//*[contains(@class, 'e-tastic__flaconi-product-list')]",
+            '//*[@id="app"]/div/main/div/div/div[3]/div',
+        ]
 
         # Urls that may crawler navigate by mistake
-        excluded_urls = ["https://www.flaconi.de/parfum/", "https://www.flaconi.de/damenparfum/", "https://www.flaconi.de/damenduefte/","https://www.flaconi.de/damen-duschpflege/","https://www.flaconi.de/damen-parfum-koerperprodukte/","https://www.flaconi.de/damen-deodorant/","https://www.flaconi.de/haarparfum/","https://www.flaconi.de/herrenparfum/","https://www.flaconi.de/unisex-parfum/","https://www.flaconi.de/nischenduefte/","https://www.flaconi.de/haarparfum/","https://www.flaconi.de/herrenparfum/","https://www.flaconi.de/unisex-parfum/","https://www.flaconi.de/nischenduefte/"]
+        excluded_urls = [
+            "https://www.flaconi.de/parfum/",
+            "https://www.flaconi.de/damenparfum/",
+            "https://www.flaconi.de/damenduefte/",
+            "https://www.flaconi.de/damen-duschpflege/",
+            "https://www.flaconi.de/damen-parfum-koerperprodukte/",
+            "https://www.flaconi.de/damen-deodorant/",
+            "https://www.flaconi.de/haarparfum/",
+            "https://www.flaconi.de/herrenparfum/",
+            "https://www.flaconi.de/unisex-parfum/",
+            "https://www.flaconi.de/nischenduefte/",
+            "https://www.flaconi.de/haarparfum/",
+            "https://www.flaconi.de/herrenparfum/",
+            "https://www.flaconi.de/unisex-parfum/",
+            "https://www.flaconi.de/nischenduefte/",
+        ]
         # Stopping options
         max_pages = crawler.max_pages
         max_visited_links = 100
@@ -96,15 +112,14 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         # Define Browser Options
         chrome_options = Options()
-        user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2'
-        chrome_options.add_argument(f'user-agent={user_agent}')
+        user_agent = "Mozilla/5.0 (Windows NT 6.1)" \
+                     " AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2"
+        chrome_options.add_argument(f"user-agent={user_agent}")
         chrome_options.add_argument("--window-size=2560,1440")
         chrome_options.add_argument("--headless")  # Hides the browser window
         # Reference the local Chromedriver instance
         chrome_path = r"/usr/local/bin/chromedriver"
-        driver = webdriver.Chrome(
-            executable_path=chrome_path, options=chrome_options
-        )
+        driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
 
         def find_links():
             if len(q) == 0:
@@ -125,10 +140,12 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 for scope_div in scope_divs:
                     try:
                         scoped_elements.append(driver.find_element(By.XPATH, scope_div))
-                    except Exception as e:
+                    except Exception:
                         pass
                 for scoped_element in scoped_elements:
-                    title = scoped_element.find_element(By.XPATH, "//*[contains(@class, 'BrandName')]")
+                    title = scoped_element.find_element(
+                        By.XPATH, "//*[contains(@class, 'BrandName')]"
+                    )
                     all_products.append(title.text)
             except Exception as e:
                 print(e)
@@ -138,24 +155,30 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 current_rec_level = link.level + 1
                 for href in scoped_element.find_elements(By.CSS_SELECTOR, "a"):
                     # We skip the fragments as they do not add any product, that why we split by #
-                    a = href.get_attribute("href").split('#').pop()
+                    a = href.get_attribute("href").split("#").pop()
                     # Some sites have None values and 'link != a' to avoid looping
                     if a is not None and base_url in a:
                         if a not in excluded_urls:
-                            found_link = Link(url=a, visited=False, level=current_rec_level)
-                            if link.url != a and a not in links and len(links) < max_visited_links:
+                            found_link = Link(
+                                url=a, visited=False, level=current_rec_level
+                            )
+                            if (
+                                link.url != a
+                                and a not in links
+                                and len(links) < max_visited_links
+                            ):
                                 links[a] = found_link
                                 q.append(Link(a))
             # TODO: Use `sleep` here
             return find_links()
 
         def wait_until(
-                driver,
-                condition: Callable[[WebDriver], bool],
-                failure_msg: Union[str, Callable[[], str]],
-                timeout: int = 10,
-                *,
-                ignored_exceptions: Any | None = None,
+            driver,
+            condition: Callable[[WebDriver], bool],
+            failure_msg: Union[str, Callable[[], str]],
+            timeout: int = 10,
+            *,
+            ignored_exceptions: Any | None = None,
         ) -> None:
             """
             Do nothing until some condition is met
@@ -176,6 +199,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         import time
 
         start = time.time()
+
         def excute(links):
             with ThreadPoolExecutor(max_workers=4) as executor:
                 results = executor.map(find_links, links)
@@ -201,7 +225,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         #
         #     except Exception as e:
         #         print(f"I am done {q}")
-        inspector = Inspector.objects.all().latest('-id')
+        inspector = Inspector.objects.all().latest("-id")
         for product in all_products:
             InspectorValue.objects.update_or_create(value=product, inspector=inspector)
         print(all_products)
