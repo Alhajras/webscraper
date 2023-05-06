@@ -50,4 +50,3 @@ If you do not have docker compose you can install it from here [Docker compose](
     ```
     docker run -p 4200:4200 crawler-angular
     ```
-

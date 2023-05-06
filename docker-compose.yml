@@ -49,11 +49,20 @@ services:
 
   pbs-sim-node:
     image: pbs-sim-node
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
     depends_on:
       - pbs-head-node
     tty: true
     build:
       context: pbs/pbs-sim-node
+    shm_size: '2gb'
     cap_add:
       - SYS_ADMIN
     devices:

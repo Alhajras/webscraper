@@ -34,6 +34,10 @@ WORKDIR backend/webscraper/
 RUN python3 -m venv venv
 RUN /bin/bash -c "source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
 
+# Install chromedriver
+RUN sudo apt update
+RUN sudo apt install -y chromium-chromedriver xvfb
+
 WORKDIR /home/${user}
 ADD entrypoint.sh /home/${user}/entrypoint.sh
 RUN chmod 777 /home/${user}/entrypoint.sh
