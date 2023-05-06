@@ -115,6 +115,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         user_agent = "Mozilla/5.0 (Windows NT 6.1)" \
                      " AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2"
         chrome_options.add_argument(f"user-agent={user_agent}")
+        chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument("--window-size=2560,1440")
         chrome_options.add_argument("--headless")  # Hides the browser window
         # Reference the local Chromedriver instance
