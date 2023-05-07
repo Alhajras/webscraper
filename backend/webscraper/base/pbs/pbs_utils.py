@@ -87,8 +87,6 @@ class PBSTestsUtils:
         To communicate with the PBS cluster we need to generate ssh key if it does not exist.
         :return:
         """
-        import pdb
-        pdb.set_trace()
         # If there is no ssh key we create one
         Path(".ssh").mkdir(parents=True, exist_ok=True)
         key = paramiko.RSAKey.generate(4096)

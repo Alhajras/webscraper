@@ -68,7 +68,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
     serializer_class = RunnerSerializer
     filter_backends = [DjangoFilterBackend]
 
-    @action(detail=False, url_path="start", methods=["post"])
+    @action(detail=False, url_path="submit", methods=["post"])
     def submit(self, request: Request) -> Response:
         runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
