@@ -17,6 +17,7 @@ from urllib.parse import urlparse
 
 from .filters import InspectorFilter
 from .models import Crawler, Template, Inspector, Runner, InspectorValue
+from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
     CrawlerSerializer,
     UserSerializer,
@@ -67,13 +68,31 @@ class RunnerViewSet(EverythingButDestroyViewSet):
     filter_backends = [DjangoFilterBackend]
 
     @action(detail=False, url_path="start", methods=["post"])
+    def submit(self, request: Request) -> Response:
+        runner_serializer = RunnerSerializer(data=request.data)
+        # TODO: If data are invalid we should throw an error here
+        if not runner_serializer.is_valid():
+            pass
+        # IP address are taken from the docker/.env file
+        pbs_head_node = "173.16.38.8"
+        pbs_sim_node = "173.16.38.9"
+        pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_node=pbs_sim_node)
+        pbs.set_up_pbs()
+
+    @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
+        pbs_head_node = "173.16.38.8"
+        pbs_sim_node = "173.16.38.9"
+        pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_node=pbs_sim_node)
+        pbs.set_up_pbs()
         runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():
             pass
         print(runner_serializer.data)
-
+        import pdb
+        pdb.set_trace()
+        pbs.run_job(runner_serializer.data)
         crawler = Crawler.objects.get(pk=runner_serializer.data["crawler"])
         links: dict[str, Link] = {}
         q = []
