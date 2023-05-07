@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from typing import Callable, Union, Any
+import threading
 
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
@@ -78,6 +79,19 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         pbs_sim_node = "173.16.38.9"
         pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_node=pbs_sim_node)
         pbs.set_up_pbs()
+        runner_serializer = RunnerSerializer(data=request.data)
+        # TODO: If data are invalid we should throw an error here
+        if not runner_serializer.is_valid():
+            pass
+
+        def run_job_async():
+            pbs.run_job(runner_serializer.data)
+
+        thr = threading.Thread(target=run_job_async, args=(), kwargs={})
+        thr.start()
+        thr.is_alive()
+        return Response(status=200)
+
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
@@ -90,9 +104,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         if not runner_serializer.is_valid():
             pass
         print(runner_serializer.data)
-        import pdb
-        pdb.set_trace()
-        pbs.run_job(runner_serializer.data)
         crawler = Crawler.objects.get(pk=runner_serializer.data["crawler"])
         links: dict[str, Link] = {}
         q = []
@@ -105,7 +116,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             "//*[contains(@class, 'e-tastic__flaconi-product-list')]",
             '//*[@id="app"]/div/main/div/div/div[3]/div',
         ]
-
         # Urls that may crawler navigate by mistake
         excluded_urls = [
             "https://www.flaconi.de/parfum/",
@@ -128,7 +138,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         max_visited_links = 100
         max_rec_level = crawler.max_depth
         base_urlparse = urlparse(base_url)
-
         # Define Browser Options
         chrome_options = Options()
         user_agent = "Mozilla/5.0 (Windows NT 6.1)" \
@@ -140,7 +149,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         # Reference the local Chromedriver instance
         chrome_path = r"/usr/local/bin/chromedriver"
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
-
         def find_links():
             if len(q) == 0:
                 return
@@ -169,7 +177,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     all_products.append(title.text)
             except Exception as e:
                 print(e)
-
             for scoped_element in scoped_elements:
                 # We add one level
                 current_rec_level = link.level + 1
@@ -191,7 +198,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                 q.append(Link(a))
             # TODO: Use `sleep` here
             return find_links()
-
         def wait_until(
             driver,
             condition: Callable[[WebDriver], bool],
@@ -214,17 +220,13 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 wait.until(condition)
             except TimeoutException:
                 print("This page does not contain the selector given.")
-
         q.append(Link(start_url))
         import time
-
         start = time.time()
-
         def excute(links):
             with ThreadPoolExecutor(max_workers=4) as executor:
                 results = executor.map(find_links, links)
             pass
-
         find_links()
         # batch_size = 4
         # batches = []

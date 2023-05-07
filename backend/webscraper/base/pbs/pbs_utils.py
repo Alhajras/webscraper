@@ -36,8 +36,10 @@ class PBSTestsUtils:
         #!/bin/bash
         curl -X POST -u admin:admin pbs-sim-node:8000/api/runners/start/ -H 'Content-Type: application/json' -d '{"description": "description_placeholder","crawler": crawler_placeholder}'
         '''
+        # TODO: use shlex to make me safe
         script = script.replace('description_placeholder', str(runner_serializer["description"]))
         # script = script.replace('name_placeholder', runner_serializer["name"])
+        # TODO: use shlex to make me safe
         script = script.replace('crawler_placeholder', str(runner_serializer["crawler"]))
         return script
 
@@ -97,7 +99,7 @@ class PBSTestsUtils:
 
     def run_job(self, runner_serializer) -> None:
         job_script = self.pbs_script(runner_serializer)
-        qsub_command = f"qsub {job_script}"
+        qsub_command = f"qsub {job_script} &"
         self.remote_job_runner(self.pbs_head_node, qsub_command)
 
     def set_up_pbs(self) -> None:
