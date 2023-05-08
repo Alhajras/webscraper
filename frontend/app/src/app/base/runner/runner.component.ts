@@ -121,7 +121,17 @@ export class RunnerComponent {
     })
   }
 
-
+  public stopRunner(runner: Runner): void {
+    runner.deleted = true
+    this.runnerService.stop(runner.id, runner).toPromise().then(() => {
+      this.closeModal()
+      this.currentlySubmitting = false
+    }).catch((err: HttpErrorResponse) => {
+      this.errorMessage = err.error
+      this.currentlySubmitting = false
+      console.log(err)
+    })
+  }
   public editRunner(runner: Runner): void {
     this.updatedRunner = runner
     this.descriptionForm = this.fb.control(runner.description)

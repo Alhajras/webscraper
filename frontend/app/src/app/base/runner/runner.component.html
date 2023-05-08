@@ -50,6 +50,17 @@
       <td>{{runner.description}}</td>
       <td>
         <div>
+                    <button
+            class="
+        p-ml-1 p-button-outlined p-button-sm
+        no-icon
+      "
+            type="button"
+            pButton
+            pRipple
+            label="Stop"
+            (click)="stopRunner(runner)"
+          ></button>
           <button
             class="
         p-ml-1 p-button-outlined p-button-sm

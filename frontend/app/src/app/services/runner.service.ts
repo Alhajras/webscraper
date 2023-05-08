@@ -30,6 +30,11 @@ export class RunnerService {
     return this.client.put<Runner>(`${this.endpointPath}${id}/`, runner)
   }
 
+    public stop(id: number, runner: Partial<Runner>): Observable<Runner> {
+    return this.client.post<Runner>(`${this.endpointPath}${id}/stop/`, runner)
+  }
+
+
   public list(additionalParams = {}): Observable<Runner[]> {
     const params = new HttpParams({fromObject: additionalParams})
     return this.client.getList<Runner>(this.endpointPath, params)

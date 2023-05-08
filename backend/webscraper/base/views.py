@@ -15,7 +15,7 @@ from selenium.webdriver.chrome.options import Options
 from urllib.parse import urlparse
 
 from .filters import InspectorFilter
-from .models import Crawler, Template, Inspector, Runner, InspectorValue
+from .models import Crawler, Template, Inspector, Runner, InspectorValue, RunnerStatus
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
     CrawlerSerializer,
@@ -78,11 +78,22 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_node=pbs_sim_node)
         pbs.set_up_pbs()
         runner_serializer = RunnerSerializer(data=request.data)
+        if runner_serializer.is_valid():
+            runner_serializer.save()
+
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():
             pass
 
         pbs.run_job(runner_serializer.data)
+
+        return Response(status=200)
+
+    @action(detail=True, url_path="stop", methods=["post"])
+    def stop(self, request: Request, pk: int) -> Response:
+        runner = Runner.objects.get(pk=pk)
+        runner.status = str(RunnerStatus.EXIT)
+        runner.save()
         return Response(status=200)
 
     @action(detail=False, url_path="start", methods=["post"])
@@ -141,6 +152,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
 
         def find_links():
+            runner = Runner.objects.get(crawler=runner_serializer.data["crawler"]).latest("pk")
+            if runner.status == str(RunnerStatus.EXIT):
+                return
             if len(q) == 0:
                 return
             link: Link = q.pop()
