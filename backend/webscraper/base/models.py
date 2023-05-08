@@ -45,6 +45,9 @@ class InspectorValue(models.Model):
     deleted = models.BooleanField(default=False)
     inspector = models.ForeignKey(Inspector, on_delete=models.PROTECT)
 
+    def __str__(self) -> str:
+        return self.value
+
 
 class Crawler(models.Model):
     class Meta:

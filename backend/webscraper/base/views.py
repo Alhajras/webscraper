@@ -1,4 +1,3 @@
-from concurrent.futures import ThreadPoolExecutor
 from typing import Callable, Union, Any
 import threading
 
@@ -226,34 +225,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         q.append(Link(start_url))
         import time
-
         start = time.time()
-
-        def excute(links):
-            with ThreadPoolExecutor(max_workers=4) as executor:
-                results = executor.map(find_links, links)
-            pass
-
         find_links()
-        # batch_size = 4
-        # batches = []
-        # while len(q) != 0:
-        #     for i in range(0, len(q), batch_size):
-        #         batch = q[i:i + batch_size]
-        #         batches.append(batch)
-        #
-        #     print("sdfsdf")
-        #     try:
-        #         with ThreadPoolExecutor(max_workers=4) as executor:
-        #             results = executor.map(excute, batches)
-        #
-        #         # url = q.pop(0)
-        #
-        #         # print(url)
-        #         # print(all_products)
-        #
-        #     except Exception as e:
-        #         print(f"I am done {q}")
         inspector = Inspector.objects.all().latest("-id")
         for product in all_products:
             InspectorValue.objects.update_or_create(value=product, inspector=inspector)

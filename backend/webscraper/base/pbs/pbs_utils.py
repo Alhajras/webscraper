@@ -45,7 +45,8 @@ class PBSTestsUtils:
     def pbs_script(self, runner_serializer) -> str:
         script = """
         #!/bin/bash
-        curl -X POST -u admin:admin pbs-sim-node:8000/api/runners/start/ -H 'Content-Type: application/json' -d '{"description": "description_placeholder","crawler": crawler_placeholder}'
+        curl -X POST -u admin:admin pbs-sim-node:8000/api/runners/start/ -H 'Content-Type: application/json'
+         -d '{"description": "description_placeholder","crawler": crawler_placeholder}'
         """
         # TODO: use shlex to make me safe
         script = script.replace(
