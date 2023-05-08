@@ -59,6 +59,7 @@ services:
           memory: 2G
     depends_on:
       - pbs-head-node
+      - db
     tty: true
     build:
       context: pbs/pbs-sim-node
@@ -74,7 +75,7 @@ services:
     networks:
       webcrawler_network:
         aliases:
-          - pbs-sim-node
+          - db
           # This is static so it can be reached if the dev server is running
         ipv4_address: 173.16.38.9
 
@@ -88,6 +89,13 @@ services:
       - ./data/db:/var/lib/postgresql/data
     ports:
       - '5432:5432'
+    networks:
+      webcrawler_network:
+        aliases:
+          - pbs-sim-node
+          # This is static so it can be reached if the dev server is running
+        ipv4_address: 173.16.38.10
+
 
 networks:
   webcrawler_network:

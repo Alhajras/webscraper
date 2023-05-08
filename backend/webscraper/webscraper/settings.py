@@ -104,7 +104,7 @@ DATABASES = {
         "NAME": "webcrawler-db",
         "USER": "admin",
         "PASSWORD": "admin",
-        "HOST": "localhost",
+        "HOST": "173.16.38.10",
         "PORT": "5432",
     }
 }
