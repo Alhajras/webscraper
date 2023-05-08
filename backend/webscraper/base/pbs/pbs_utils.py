@@ -25,6 +25,7 @@ class PBSTestsUtils:
     def remote_job_runner(
         self, hostname: str, command: str, username: str = "mpiuser"
     ) -> str:
+        print(command)
         """
         This is used to submit commands to the PBS cluster
         """
@@ -39,25 +40,11 @@ class PBSTestsUtils:
             )
             stdin, stdout, stderr = client.exec_command(command)
             output = "".join(stdout)
+            err = "".join(stderr)
+            print(err)
+
             client.close()
             return output.strip()
-
-    def pbs_script(self, runner_serializer) -> str:
-        script = """
-        #!/bin/bash
-        curl -X POST -u admin:admin pbs-sim-node:8000/api/runners/start/ -H 'Content-Type: application/json'
-         -d '{"description": "description_placeholder","crawler": crawler_placeholder}'
-        """
-        # TODO: use shlex to make me safe
-        script = script.replace(
-            "description_placeholder", str(runner_serializer["description"])
-        )
-        # script = script.replace('name_placeholder', runner_serializer["name"])
-        # TODO: use shlex to make me safe
-        script = script.replace(
-            "crawler_placeholder", str(runner_serializer["crawler"])
-        )
-        return script
 
     def remove_jobs(self) -> None:
         """
@@ -107,6 +94,9 @@ class PBSTestsUtils:
         To communicate with the PBS cluster we need to generate ssh key if it does not exist.
         :return:
         """
+        import os
+        if os.path.isdir('.ssh'):
+            pass
         # If there is no ssh key we create one
         Path(".ssh").mkdir(parents=True, exist_ok=True)
         key = paramiko.RSAKey.generate(4096)
@@ -116,8 +106,12 @@ class PBSTestsUtils:
             f.write(f"{key.get_name()} {key.get_base64()}")
 
     def run_job(self, runner_serializer) -> None:
-        job_script = self.pbs_script(runner_serializer)
-        qsub_command = f"qsub {job_script} &"
+        crawler_id = str(runner_serializer["crawler"])
+        qsub_command = f"cp start_script.sh {crawler_id}.start_script.sh"
+        self.remote_job_runner(self.pbs_head_node, qsub_command)
+        qsub_command = f"sed -i 's/crawler_placeholder/{crawler_id}/g' {crawler_id}.start_script.sh"
+        self.remote_job_runner(self.pbs_head_node, qsub_command)
+        qsub_command = f"qsub  {crawler_id}.start_script.sh"
         self.remote_job_runner(self.pbs_head_node, qsub_command)
 
     def set_up_pbs(self) -> None:

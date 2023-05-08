@@ -13,7 +13,9 @@ RUN ssh-keygen -q -t rsa -N '' <<< ""$'\n'"y" 2>&1 >/dev/null
 RUN cat /home/${user}/.ssh/id_rsa.pub >> /home/${user}/.ssh/authorized_keys
 
 ADD entrypoint.sh /home/${user}/entrypoint.sh
+ADD start_script.sh /home/${user}/start_script.sh
 RUN chmod 777 /home/${user}/entrypoint.sh
+RUN chmod 777 /home/${user}/start_script.sh
 RUN chmod 777 /etc/ssh/sshd_config
 RUN chmod 777 /etc/pbs.conf
 WORKDIR /home/${user}

@@ -1,5 +1,4 @@
 from typing import Callable, Union, Any
-import threading
 
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
@@ -83,20 +82,11 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         if not runner_serializer.is_valid():
             pass
 
-        def run_job_async():
-            pbs.run_job(runner_serializer.data)
-
-        thr = threading.Thread(target=run_job_async, args=(), kwargs={})
-        thr.start()
-        thr.is_alive()
+        pbs.run_job(runner_serializer.data)
         return Response(status=200)
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
-        pbs_head_node = "173.16.38.8"
-        pbs_sim_node = "173.16.38.9"
-        pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_node=pbs_sim_node)
-        pbs.set_up_pbs()
         runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():
@@ -147,7 +137,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         chrome_options.add_argument("--window-size=2560,1440")
         chrome_options.add_argument("--headless")  # Hides the browser window
         # Reference the local Chromedriver instance
-        chrome_path = r"/usr/local/bin/chromedriver"
+        chrome_path = r"/usr/bin/chromedriver"
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
 
         def find_links():
