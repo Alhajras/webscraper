@@ -63,7 +63,7 @@ export class RunnerComponent {
       name: this.name.value,
       crawler: this.crawlerForm.value.crawler.id,
     }
-    this.runnerService.start(runner).toPromise().then(_=>{
+    this.runnerService.start(runner).toPromise().then(()=>{
       this.displayModal = false
     })
   }
