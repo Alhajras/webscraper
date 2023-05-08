@@ -2,13 +2,18 @@ import shlex
 import paramiko
 from pathlib import Path
 
+
 class PBSTestsUtils:
     """
     This class provides utilities and helpers to be used inside PBS e2e test.
     """
 
     def __init__(
-        self, pbs_head_node: str, pbs_sim_node: str, pbs_username: str = "mpiuser", pbs_password: str = "mpiuser"
+        self,
+        pbs_head_node: str,
+        pbs_sim_node: str,
+        pbs_username: str = "mpiuser",
+        pbs_password: str = "mpiuser",
     ) -> None:
         self.pbs_head_node = pbs_head_node
         self.pbs_sim_node = pbs_sim_node
@@ -17,14 +22,20 @@ class PBSTestsUtils:
         # This is used, so we do not have to reconfigure the PBS in each test if it is already configured by any test.
         self.is_configured = False
 
-    def remote_job_runner(self, hostname: str, command: str, username: str = "mpiuser") -> str:
+    def remote_job_runner(
+        self, hostname: str, command: str, username: str = "mpiuser"
+    ) -> str:
         """
         This is used to submit commands to the PBS cluster
         """
         with paramiko.SSHClient() as client:
             client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             client.connect(
-                hostname=hostname, username=username, password=username, allow_agent=False, look_for_keys=False
+                hostname=hostname,
+                username=username,
+                password=username,
+                allow_agent=False,
+                look_for_keys=False,
             )
             stdin, stdout, stderr = client.exec_command(command)
             output = "".join(stdout)
@@ -32,29 +43,37 @@ class PBSTestsUtils:
             return output.strip()
 
     def pbs_script(self, runner_serializer) -> str:
-        script = '''
+        script = """
         #!/bin/bash
         curl -X POST -u admin:admin pbs-sim-node:8000/api/runners/start/ -H 'Content-Type: application/json' -d '{"description": "description_placeholder","crawler": crawler_placeholder}'
-        '''
+        """
         # TODO: use shlex to make me safe
-        script = script.replace('description_placeholder', str(runner_serializer["description"]))
+        script = script.replace(
+            "description_placeholder", str(runner_serializer["description"])
+        )
         # script = script.replace('name_placeholder', runner_serializer["name"])
         # TODO: use shlex to make me safe
-        script = script.replace('crawler_placeholder', str(runner_serializer["crawler"]))
+        script = script.replace(
+            "crawler_placeholder", str(runner_serializer["crawler"])
+        )
         return script
 
     def remove_jobs(self) -> None:
         """
         This method is used as cleaning up the simulations/jobs in the head node.
         """
-        create_tmp_directory = f"qselect -u {shlex.quote(self.pbs_username)} | xargs qdel"
+        create_tmp_directory = (
+            f"qselect -u {shlex.quote(self.pbs_username)} | xargs qdel"
+        )
         self.remote_job_runner(self.pbs_head_node, create_tmp_directory)
 
     def register_sim_node(self) -> None:
         """
         Register the simulation node to the head node
         """
-        register_command = f"sudo /opt/pbs/bin/qmgr -c 'create node {shlex.quote(self.pbs_sim_node)}'"
+        register_command = (
+            f"sudo /opt/pbs/bin/qmgr -c 'create node {shlex.quote(self.pbs_sim_node)}'"
+        )
         self.remote_job_runner(self.pbs_head_node, register_command)
 
     def add_pub_key_to_nodes(self) -> None:
@@ -114,4 +133,3 @@ class PBSTestsUtils:
         self.add_both_nodes_ip_address()
         self.register_sim_node()
         self.is_configured = True
-

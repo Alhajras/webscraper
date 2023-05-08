@@ -92,7 +92,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         thr.is_alive()
         return Response(status=200)
 
-
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
         pbs_head_node = "173.16.38.8"
@@ -140,15 +139,18 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         base_urlparse = urlparse(base_url)
         # Define Browser Options
         chrome_options = Options()
-        user_agent = "Mozilla/5.0 (Windows NT 6.1)" \
-                     " AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2"
+        user_agent = (
+            "Mozilla/5.0 (Windows NT 6.1)"
+            " AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2"
+        )
         chrome_options.add_argument(f"user-agent={user_agent}")
-        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--window-size=2560,1440")
         chrome_options.add_argument("--headless")  # Hides the browser window
         # Reference the local Chromedriver instance
         chrome_path = r"/usr/local/bin/chromedriver"
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
+
         def find_links():
             if len(q) == 0:
                 return
@@ -198,6 +200,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                 q.append(Link(a))
             # TODO: Use `sleep` here
             return find_links()
+
         def wait_until(
             driver,
             condition: Callable[[WebDriver], bool],
@@ -220,13 +223,17 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 wait.until(condition)
             except TimeoutException:
                 print("This page does not contain the selector given.")
+
         q.append(Link(start_url))
         import time
+
         start = time.time()
+
         def excute(links):
             with ThreadPoolExecutor(max_workers=4) as executor:
                 results = executor.map(find_links, links)
             pass
+
         find_links()
         # batch_size = 4
         # batches = []
