@@ -152,6 +152,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
 
         def find_links():
+            # TODO: This should return one result only! Use crawler ID, fix it.
             runner = Runner.objects.get(crawler=runner_serializer.data["crawler"]).latest("pk")
             if runner.status == str(RunnerStatus.EXIT):
                 return
