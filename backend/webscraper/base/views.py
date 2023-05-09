@@ -96,6 +96,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
+        runner_serializer = RunnerSerializer(data=request.data)
+        crawler = Crawler.objects.get(pk=runner_serializer.data["crawler"])
+
         def create_logger() -> logging:
             """
             Creates a logger for the runner to log the history  of the crawler runner.
@@ -120,12 +123,10 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             return logger
 
         logger = create_logger()
-        runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():
             pass
         print(runner_serializer.data)
-        crawler = Crawler.objects.get(pk=runner_serializer.data["crawler"])
         links: dict[str, Link] = {}
         q = []
         all_products = []
