@@ -1,4 +1,5 @@
-from typing import Callable, Union, Any
+import logging
+import logging.handlers
 
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
@@ -6,10 +7,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
-from selenium.common import TimeoutException
-from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from urllib.parse import urlparse
@@ -98,6 +96,30 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
+        def create_logger() -> logging:
+            """
+            Creates a logger for the runner to log the history  of the crawler runner.
+            :return:
+            """
+            # TODO: This should return one result only! Use crawler ID, fix it.
+            runner = Runner.objects.get(crawler=runner_serializer.data["crawler"]).latest("pk")
+            filename = f"{runner.id}.runner.log"
+            logger = logging.getLogger()
+            logger.setLevel(logging.INFO)
+            formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+
+            handler = logging.handlers.RotatingFileHandler(filename, mode='w', backupCount=5)
+            handler.setLevel(logging.INFO)
+            handler.setFormatter(formatter)
+            logger.addHandler(handler)
+
+            ch = logging.StreamHandler()
+            ch.setLevel(logging.INFO)
+            ch.setFormatter(formatter)
+            logger.addHandler(ch)
+            return logger
+
+        logger = create_logger()
         runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():
@@ -111,10 +133,12 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         base_url = "https://www.flaconi.de"
         # start_url = "https://www.flaconi.de/damen-duftsets/"
         start_url = "https://www.flaconi.de/damen-duftsets/"
+        # TODO: Put this in the GUI
         scope_divs = [
             "//*[contains(@class, 'e-tastic__flaconi-product-list')]",
             '//*[@id="app"]/div/main/div/div/div[3]/div',
         ]
+        # TODO: Put this in the GUI
         # Urls that may crawler navigate by mistake
         excluded_urls = [
             "https://www.flaconi.de/parfum/",
@@ -151,6 +175,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         chrome_path = r"/usr/bin/chromedriver"
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
 
+
         def find_links():
             # TODO: This should return one result only! Use crawler ID, fix it.
             runner = Runner.objects.get(crawler=runner_serializer.data["crawler"]).latest("pk")
@@ -162,6 +187,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             if len(all_products) >= max_pages:
                 return
             print(link.url)
+            logger.info(link.url)
             # We stop recursion when we reach tha mx level of digging into pages
             if link.level > max_rec_level:
                 return
@@ -205,29 +231,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             # TODO: Use `sleep` here
             return find_links()
 
-        def wait_until(
-            driver,
-            condition: Callable[[WebDriver], bool],
-            failure_msg: Union[str, Callable[[], str]],
-            timeout: int = 10,
-            *,
-            ignored_exceptions: Any | None = None,
-        ) -> None:
-            """
-            Do nothing until some condition is met
-            :param condition: See :ref:`expected conditions <selenium:waits>`
-            :param failure_msg: The test failure message to use if the condition is never met
-               (or a callable that generates one)
-            :param timeout: How long to wait before giving up, in seconds
-            :param ignored_exceptions: Allows to ignore certain exceptions while polling.
-            :return:
-            """
-            wait = WebDriverWait(driver, timeout, ignored_exceptions=ignored_exceptions)
-            try:
-                wait.until(condition)
-            except TimeoutException:
-                print("This page does not contain the selector given.")
-
         q.append(Link(start_url))
         import time
         start = time.time()
@@ -239,6 +242,11 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         end = time.time()
         print(end - start)
         driver.quit()
+        runner = Runner.objects.get(crawler=runner_serializer.data["crawler"]).latest("pk")
+        runner.status = RunnerStatus.COMPLETED
+        runner.save()
+        logger.info(f"Runner #{runner.id} is completed...")
+        logger.info(f"Runner #{runner.id} is completed. Time consumed {end - start}")
         return Response(status=200)
 
 
