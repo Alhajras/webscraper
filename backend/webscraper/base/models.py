@@ -62,9 +62,6 @@ class Crawler(models.Model):
 
 
 class Runner(models.Model):
-    class Meta:
-        ordering = ("created_at",)
-
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(blank=True, null=True)

@@ -1,5 +1,6 @@
 import logging
 import logging.handlers
+from django.utils import timezone
 
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
@@ -60,7 +61,7 @@ class Link:
 
 
 class RunnerViewSet(EverythingButDestroyViewSet):
-    queryset = Runner.objects.filter(deleted=False)
+    queryset = Runner.objects.filter(deleted=False).order_by('-id')
     serializer_class = RunnerSerializer
     filter_backends = [DjangoFilterBackend]
 
@@ -109,9 +110,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             :return:
             """
             # TODO: This should return one result only! Use crawler ID, fix it.
-            import pdb
-
-            pdb.set_trace()
             runner = Runner.objects.filter(
                 crawler=runner_serializer.data["crawler"]
             ).last()
@@ -169,7 +167,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         # Stopping options
         max_pages = crawler.max_pages
         # TODO: Please change this to be read from the request body
-        max_visited_links = 5
+        max_visited_links = 100
         max_rec_level = crawler.max_depth
         base_urlparse = urlparse(base_url)
         # Define Browser Options
@@ -259,6 +257,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         print(end - start)
         driver.quit()
         runner.status = RunnerStatus.COMPLETED
+        runner.completed_at = timezone.now()
         runner.save()
         logger.info(f"Runner #{runner.id} is completed...")
         logger.info(f"Runner #{runner.id} is completed. Time consumed {end - start}")
