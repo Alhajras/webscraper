@@ -144,9 +144,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             "//*[contains(@class, 'e-tastic__flaconi-product-list')]",
             '//*[@id="app"]/div/main/div/div/div[3]/div',
         ]
-        # TODO: Put this in the GUI
+        # TODO: Use a better splitter
         # Urls that may crawler navigate by mistake
-        excluded_urls = crawler.excluded_urls
+        excluded_urls = crawler.excluded_urls.split("\";\"")
         # Stopping options
         max_pages = crawler.max_pages
         # TODO: Please change this to be read from the request body
