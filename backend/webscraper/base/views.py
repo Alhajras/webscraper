@@ -216,7 +216,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     # TODO: Should not use latest and only return one
                     inspector = Inspector.objects.all().latest("-id")
                     InspectorValue.objects.update_or_create(
-                        value=title, inspector=inspector, runner=runner
+                        value=title.text, inspector=inspector, runner=runner
                     )
             except Exception as e:
                 print(e)
