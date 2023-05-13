@@ -50,7 +50,8 @@
       <td>{{runner.description}}</td>
       <td>
         <div>
-                    <button
+          <button
+            [disabled]="runner.status === 'exit'"
             class="
         p-ml-1 p-button-outlined p-button-sm
         no-icon
