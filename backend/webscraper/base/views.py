@@ -111,7 +111,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             Creates a logger for the runner to log the history  of the crawler runner.
             :return:
             """
-            # TODO: This should return one result only! Use crawler ID, fix it.
             runner = Runner.objects.get(id=runner_id)
             filename = f"{runner.id}.runner.log"
             logger = logging.getLogger()
@@ -136,7 +135,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         logger = create_logger()
         links: dict[str, Link] = {}
         q = []
-        all_products = []
         # This is the base URL that the crawler should only crawl from
         base_url = "https://www.flaconi.de"
         # start_url = "https://www.flaconi.de/damen-duftsets/"
@@ -167,7 +165,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         # Stopping options
         max_pages = crawler.max_pages
         # TODO: Please change this to be read from the request body
-        max_visited_links = 5
+        max_visited_links = 100
         max_rec_level = crawler.max_depth
         base_urlparse = urlparse(base_url)
         # Define Browser Options
@@ -193,7 +191,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             if len(q) == 0:
                 return
             link: Link = q.pop()
-            if len(all_products) >= max_pages:
+            if runner.collected_documents >= max_pages:
                 return
             print(link.url)
             logger.info(link.url)
@@ -215,7 +213,11 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     title = scoped_element.find_element(
                         By.XPATH, "//*[contains(@class, 'BrandName')]"
                     )
-                    all_products.append(title.text)
+                    # TODO: Should not use latest and only return one
+                    inspector = Inspector.objects.all().latest("-id")
+                    InspectorValue.objects.update_or_create(
+                        value=title, inspector=inspector, runner=runner
+                    )
             except Exception as e:
                 print(e)
             for scoped_element in scoped_elements:
@@ -242,17 +244,13 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         runner = Runner.objects.get(id=runner_id)
         runner.status = RunnerStatus.RUNNING
+        runner.created_at = timezone.now()
         runner.save()
 
         q.append(Link(start_url))
         start = time.time()
         find_links()
-        inspector = Inspector.objects.all().latest("-id")
-        for product in all_products:
-            InspectorValue.objects.update_or_create(
-                value=product, inspector=inspector, runner=runner
-            )
-        print(all_products)
+        print(runner.collected_documents)
         end = time.time()
         print(end - start)
         driver.quit()

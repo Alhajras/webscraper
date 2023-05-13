@@ -24,6 +24,8 @@ import {TemplateComponent} from "src/app/base/template/template.component";
 import {TreeTableModule} from "primeng/treetable";
 import { InspectorComponent } from './base/inspector/inspector.component';
 import { RunnerComponent } from './base/runner/runner.component';
+import {StepsModule} from "primeng/steps";
+import {TimelineModule} from "primeng/timeline";
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +54,9 @@ import { RunnerComponent } from './base/runner/runner.component';
     InputTextModule,
     ButtonModule,
     RippleModule,
-    TreeTableModule
+    TreeTableModule,
+    StepsModule,
+    TimelineModule
   ],
   providers: [],
   bootstrap: [AppComponent]
