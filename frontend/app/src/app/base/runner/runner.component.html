@@ -19,11 +19,8 @@
       <th pSortableColumn="crawler">Crawler
         <p-sortIcon field="crawler"></p-sortIcon>
       </th>
-      <th pSortableColumn="created_at">Created at
+      <th pSortableColumn="created_at">Progress
         <p-sortIcon field="created_at"></p-sortIcon>
-      </th>
-      <th pSortableColumn="completed_at">Completed at
-        <p-sortIcon field="completed_at"></p-sortIcon>
       </th>
       <th pSortableColumn="description">Description
         <p-sortIcon field="description"></p-sortIcon>
@@ -39,12 +36,10 @@
       <td>{{runner.crawler}}</td>
       <td>
         <p>
-          <app-time-ago [time]="runner.created_at"></app-time-ago>
+          Created at: <app-time-ago [time]="runner.created_at"></app-time-ago>
         </p>
-      </td>
-      <td>
         <p>
-          <app-time-ago [time]="runner.completed_at"></app-time-ago>
+          Completed at: <app-time-ago [time]="runner.completed_at"></app-time-ago>
         </p>
       </td>
       <td>{{runner.description}}</td>
