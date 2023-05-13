@@ -26,6 +26,7 @@ import { InspectorComponent } from './base/inspector/inspector.component';
 import { RunnerComponent } from './base/runner/runner.component';
 import {StepsModule} from "primeng/steps";
 import {TimelineModule} from "primeng/timeline";
+import {ChipsModule} from "primeng/chips";
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,8 @@ import {TimelineModule} from "primeng/timeline";
     RippleModule,
     TreeTableModule,
     StepsModule,
-    TimelineModule
+    TimelineModule,
+    ChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

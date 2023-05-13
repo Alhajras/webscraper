@@ -28,6 +28,7 @@ class CrawlerSerializer(serializers.ModelSerializer):
             "max_pages",
             "max_depth",
             "robot_file_url",
+            "excluded_urls",
         ]
 
 

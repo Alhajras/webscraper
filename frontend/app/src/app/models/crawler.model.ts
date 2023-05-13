@@ -14,4 +14,5 @@ export interface Crawler {
   max_pages: number,
   max_depth:number,
   robot_file_url:string
+  excluded_urls:string
 }

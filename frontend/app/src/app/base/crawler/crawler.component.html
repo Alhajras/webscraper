@@ -108,6 +108,18 @@
         <div>
           <app-input-field
             [isRequired]="true"
+            labelText="Name"
+            helpText=""
+          >
+            <input
+              id="start-time-id"
+              type="text"
+              pInputText
+              [formControl]="name"
+            />
+          </app-input-field>
+          <app-input-field
+            [isRequired]="true"
             labelText="Template"
             helpText=""
           >
@@ -119,18 +131,6 @@
               optionLabel="key"
               [filter]="true"
             ></p-dropdown>
-          </app-input-field>
-          <app-input-field
-            [isRequired]="true"
-            labelText="Name"
-            helpText=""
-          >
-            <input
-              id="start-time-id"
-              type="text"
-              pInputText
-              [formControl]="name"
-            />
           </app-input-field>
           <app-input-field
             [isRequired]="true"
@@ -147,17 +147,25 @@
           </app-input-field>
 
           <app-input-field
-            [isRequired]="true"
-            labelText="Threads"
+            [isRequired]="false"
+            labelId="exclude-urls-id"
+            labelText="Exclude urls"
             helpText=""
           >
-            <input
-              type="number"
-              id="threads-id"
-              pInputText
-              [formControl]="threads"
-            />
+            <p-chips [formControl]="excludedUrls"></p-chips>
           </app-input-field>
+          <!--          <app-input-field-->
+          <!--            [isRequired]="true"-->
+          <!--            labelText="Threads"-->
+          <!--            helpText=""-->
+          <!--          >-->
+          <!--            <input-->
+          <!--              type="number"-->
+          <!--              id="threads-id"-->
+          <!--              pInputText-->
+          <!--              [formControl]="threads"-->
+          <!--            />-->
+          <!--          </app-input-field>-->
 
           <app-input-field
             [isRequired]="true"
@@ -212,7 +220,7 @@
           </app-input-field>
 
           <app-input-field
-            [isRequired]="true"
+            [isRequired]="false"
             labelText="Max Depth"
             helpText=""
           >
@@ -225,7 +233,7 @@
           </app-input-field>
 
           <app-input-field
-            [isRequired]="true"
+            [isRequired]="false"
             labelText="Robot File Url"
             helpText=""
           >
@@ -238,7 +246,7 @@
           </app-input-field>
 
           <app-input-field
-            [isRequired]="true"
+            [isRequired]="false"
             labelId="version-label-id"
             labelText="Description"
             helpText=""

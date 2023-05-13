@@ -138,7 +138,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         # This is the base URL that the crawler should only crawl from
         base_url = "https://www.flaconi.de"
         # start_url = "https://www.flaconi.de/damen-duftsets/"
-        start_url = "https://www.flaconi.de/damen-duftsets/"
+        start_url = crawler.seed_url
         # TODO: Put this in the GUI
         scope_divs = [
             "//*[contains(@class, 'e-tastic__flaconi-product-list')]",
@@ -146,22 +146,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         ]
         # TODO: Put this in the GUI
         # Urls that may crawler navigate by mistake
-        excluded_urls = [
-            "https://www.flaconi.de/parfum/",
-            "https://www.flaconi.de/damenparfum/",
-            "https://www.flaconi.de/damenduefte/",
-            "https://www.flaconi.de/damen-duschpflege/",
-            "https://www.flaconi.de/damen-parfum-koerperprodukte/",
-            "https://www.flaconi.de/damen-deodorant/",
-            "https://www.flaconi.de/haarparfum/",
-            "https://www.flaconi.de/herrenparfum/",
-            "https://www.flaconi.de/unisex-parfum/",
-            "https://www.flaconi.de/nischenduefte/",
-            "https://www.flaconi.de/haarparfum/",
-            "https://www.flaconi.de/herrenparfum/",
-            "https://www.flaconi.de/unisex-parfum/",
-            "https://www.flaconi.de/nischenduefte/",
-        ]
+        excluded_urls = crawler.excluded_urls
         # Stopping options
         max_pages = crawler.max_pages
         # TODO: Please change this to be read from the request body
