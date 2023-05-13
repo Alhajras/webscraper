@@ -81,7 +81,7 @@ class Runner(models.Model):
 
 class InspectorValue(models.Model):
     class Meta:
-        unique_together = ("value", "inspector")
+        unique_together = ("value", "inspector", "runner")
 
     value = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

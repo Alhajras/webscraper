@@ -98,6 +98,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
+        runner_id = request.data['id']
         runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():
@@ -111,9 +112,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             :return:
             """
             # TODO: This should return one result only! Use crawler ID, fix it.
-            runner = Runner.objects.filter(
-                crawler=runner_serializer.data["crawler"]
-            ).last()
+            runner = Runner.objects.get(id=runner_id)
             filename = f"{runner.id}.runner.log"
             logger = logging.getLogger()
             logger.setLevel(logging.INFO)
@@ -168,7 +167,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         # Stopping options
         max_pages = crawler.max_pages
         # TODO: Please change this to be read from the request body
-        max_visited_links = 100
+        max_visited_links = 5
         max_rec_level = crawler.max_depth
         base_urlparse = urlparse(base_url)
         # Define Browser Options
@@ -187,9 +186,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         def find_links():
             # TODO: This should return one result only! Use crawler ID, fix it.
-            runner = Runner.objects.filter(
-                crawler=runner_serializer.data["crawler"]
-            ).last()
+            runner = Runner.objects.get(id=runner_id)
+
             if runner.status == str(RunnerStatus.EXIT):
                 return
             if len(q) == 0:
@@ -242,7 +240,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             # TODO: Use `sleep` here
             return find_links()
 
-        runner = Runner.objects.filter(crawler=runner_serializer.data["crawler"]).last()
+        runner = Runner.objects.get(id=runner_id)
         runner.status = RunnerStatus.RUNNING
         runner.save()
 
