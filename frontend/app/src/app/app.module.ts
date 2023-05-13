@@ -27,6 +27,7 @@ import { RunnerComponent } from './base/runner/runner.component';
 import {StepsModule} from "primeng/steps";
 import {TimelineModule} from "primeng/timeline";
 import {ChipsModule} from "primeng/chips";
+import {OverlayPanelModule} from "primeng/overlaypanel";
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +59,8 @@ import {ChipsModule} from "primeng/chips";
     TreeTableModule,
     StepsModule,
     TimelineModule,
-    ChipsModule
+    ChipsModule,
+    OverlayPanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]
