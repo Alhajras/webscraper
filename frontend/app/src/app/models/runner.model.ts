@@ -1,9 +1,10 @@
 export interface Runner {
-  id: number,
-  description: string,
-  created_at: string,
+  collected_documents: number
   completed_at: string,
-  deleted: boolean,
   crawler: number,
+  created_at: string,
+  deleted: boolean,
+  description: string,
+  id: number,
   status: string,
 }

@@ -61,7 +61,7 @@ class Link:
 
 
 class RunnerViewSet(EverythingButDestroyViewSet):
-    queryset = Runner.objects.filter(deleted=False).order_by('-id')
+    queryset = Runner.objects.filter(deleted=False).order_by("-id")
     serializer_class = RunnerSerializer
     filter_backends = [DjangoFilterBackend]
 
