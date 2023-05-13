@@ -1,6 +1,7 @@
 import logging
 import logging.handlers
 from django.utils import timezone
+import time
 
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
@@ -241,13 +242,14 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             # TODO: Use `sleep` here
             return find_links()
 
-        q.append(Link(start_url))
-        import time
+        runner = Runner.objects.filter(crawler=runner_serializer.data["crawler"]).last()
+        runner.status = RunnerStatus.RUNNING
+        runner.save()
 
+        q.append(Link(start_url))
         start = time.time()
         find_links()
         inspector = Inspector.objects.all().latest("-id")
-        runner = Runner.objects.filter(crawler=runner_serializer.data["crawler"]).last()
         for product in all_products:
             InspectorValue.objects.update_or_create(
                 value=product, inspector=inspector, runner=runner

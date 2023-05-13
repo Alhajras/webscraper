@@ -3,11 +3,11 @@ from solo.models import SingletonModel
 
 
 class RunnerStatus(models.TextChoices):
-    NEW = "new"
-    RUNNING = "running"
-    COMPLETED = "completed"
-    EXIT = "exit"
-    PAUSED = "paused"
+    NEW = "New"
+    RUNNING = "Running"
+    COMPLETED = "Completed"
+    EXIT = "Exit"
+    PAUSED = "Paused"
 
 
 class Template(models.Model):
