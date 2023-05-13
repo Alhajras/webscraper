@@ -110,14 +110,21 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             """
             # TODO: This should return one result only! Use crawler ID, fix it.
             import pdb
+
             pdb.set_trace()
-            runner = Runner.objects.filter(crawler=runner_serializer.data["crawler"]).last()
+            runner = Runner.objects.filter(
+                crawler=runner_serializer.data["crawler"]
+            ).last()
             filename = f"{runner.id}.runner.log"
             logger = logging.getLogger()
             logger.setLevel(logging.INFO)
-            formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+            formatter = logging.Formatter(
+                "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+            )
 
-            handler = logging.handlers.RotatingFileHandler(filename, mode='w', backupCount=5)
+            handler = logging.handlers.RotatingFileHandler(
+                filename, mode="w", backupCount=5
+            )
             handler.setLevel(logging.INFO)
             handler.setFormatter(formatter)
             logger.addHandler(handler)
@@ -179,10 +186,11 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         chrome_path = r"/usr/bin/chromedriver"
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
 
-
         def find_links():
             # TODO: This should return one result only! Use crawler ID, fix it.
-            runner = Runner.objects.filter(crawler=runner_serializer.data["crawler"]).last()
+            runner = Runner.objects.filter(
+                crawler=runner_serializer.data["crawler"]
+            ).last()
             if runner.status == str(RunnerStatus.EXIT):
                 return
             if len(q) == 0:
@@ -226,9 +234,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                 url=a, visited=False, level=current_rec_level
                             )
                             if (
-                                    link.url != a
-                                    and a not in links
-                                    and len(links) < max_visited_links
+                                link.url != a
+                                and a not in links
+                                and len(links) < max_visited_links
                             ):
                                 links[a] = found_link
                                 q.append(Link(a))
@@ -237,12 +245,15 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         q.append(Link(start_url))
         import time
+
         start = time.time()
         find_links()
         inspector = Inspector.objects.all().latest("-id")
         runner = Runner.objects.filter(crawler=runner_serializer.data["crawler"]).last()
         for product in all_products:
-            InspectorValue.objects.update_or_create(value=product, inspector=inspector, runner=runner)
+            InspectorValue.objects.update_or_create(
+                value=product, inspector=inspector, runner=runner
+            )
         print(all_products)
         end = time.time()
         print(end - start)

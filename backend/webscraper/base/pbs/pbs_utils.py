@@ -95,7 +95,8 @@ class PBSTestsUtils:
         :return:
         """
         import os
-        if os.path.isdir('.ssh'):
+
+        if os.path.isdir(".ssh"):
             pass
         # If there is no ssh key we create one
         Path(".ssh").mkdir(parents=True, exist_ok=True)
