@@ -40,7 +40,8 @@ class InspectorSerializer(serializers.ModelSerializer):
 class RunnerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Runner
-        fields = "__all__"
+        fields = ['description', 'created_at', 'completed_at', 'deleted', 'crawler', 'status',
+                  'collected_documents']
 
 
 class TemplateSerializer(serializers.ModelSerializer):

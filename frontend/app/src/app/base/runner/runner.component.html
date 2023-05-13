@@ -36,17 +36,23 @@
       <td>{{runner.crawler}}</td>
       <td>
         <p>
-          Created at: <app-time-ago [time]="runner.created_at"></app-time-ago>
+          Created at:
+          <app-time-ago [time]="runner.created_at"></app-time-ago>
         </p>
         <p>
-          Completed at: <app-time-ago [time]="runner.completed_at"></app-time-ago>
+          Completed at:
+          <app-time-ago [time]="runner.completed_at"></app-time-ago>
         </p>
+        <p>
+          Collected documents: {{runner.collected_documents}}
+        </p>
+
       </td>
       <td>{{runner.description}}</td>
       <td>
         <div>
           <button
-            [disabled]="runner.status === 'exit'"
+            [disabled]="runner.status === 'exit' || runner.status === 'completed' "
             class="
         p-ml-1 p-button-outlined p-button-sm
         no-icon

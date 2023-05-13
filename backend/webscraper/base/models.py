@@ -36,19 +36,6 @@ class Inspector(models.Model):
         return self.name
 
 
-class InspectorValue(models.Model):
-    class Meta:
-        unique_together = ("value", "inspector")
-
-    value = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    deleted = models.BooleanField(default=False)
-    inspector = models.ForeignKey(Inspector, on_delete=models.PROTECT)
-
-    def __str__(self) -> str:
-        return self.value
-
-
 class Crawler(models.Model):
     class Meta:
         ordering = ("created_at",)
@@ -89,6 +76,24 @@ class Runner(models.Model):
 
     def __str__(self) -> str:
         return str(self.pk)
+
+    @property
+    def collected_documents(self) -> int:
+        return InspectorValue.objects.filter(runner=self).count()
+
+
+class InspectorValue(models.Model):
+    class Meta:
+        unique_together = ("value", "inspector")
+
+    value = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    deleted = models.BooleanField(default=False)
+    inspector = models.ForeignKey(Inspector, on_delete=models.PROTECT)
+    runner = models.ForeignKey(Runner, on_delete=models.PROTECT, default=1)
+
+    def __str__(self) -> str:
+        return self.value
 
 
 class ConfigurationModel(SingletonModel):

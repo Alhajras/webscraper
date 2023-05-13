@@ -109,7 +109,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             :return:
             """
             # TODO: This should return one result only! Use crawler ID, fix it.
-            runner = Runner.objects.get(crawler=runner_serializer.data["crawler"]).latest("pk")
+            import pdb
+            pdb.set_trace()
+            runner = Runner.objects.filter(crawler=runner_serializer.data["crawler"]).last()
             filename = f"{runner.id}.runner.log"
             logger = logging.getLogger()
             logger.setLevel(logging.INFO)
@@ -159,7 +161,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         ]
         # Stopping options
         max_pages = crawler.max_pages
-        max_visited_links = 100
+        # TODO: Please change this to be read from the request body
+        max_visited_links = 5
         max_rec_level = crawler.max_depth
         base_urlparse = urlparse(base_url)
         # Define Browser Options
@@ -179,7 +182,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         def find_links():
             # TODO: This should return one result only! Use crawler ID, fix it.
-            runner = Runner.objects.get(crawler=runner_serializer.data["crawler"]).latest("pk")
+            runner = Runner.objects.filter(crawler=runner_serializer.data["crawler"]).last()
             if runner.status == str(RunnerStatus.EXIT):
                 return
             if len(q) == 0:
@@ -237,13 +240,13 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         start = time.time()
         find_links()
         inspector = Inspector.objects.all().latest("-id")
+        runner = Runner.objects.filter(crawler=runner_serializer.data["crawler"]).last()
         for product in all_products:
-            InspectorValue.objects.update_or_create(value=product, inspector=inspector)
+            InspectorValue.objects.update_or_create(value=product, inspector=inspector, runner=runner)
         print(all_products)
         end = time.time()
         print(end - start)
         driver.quit()
-        runner = Runner.objects.get(crawler=runner_serializer.data["crawler"]).latest("pk")
         runner.status = RunnerStatus.COMPLETED
         runner.save()
         logger.info(f"Runner #{runner.id} is completed...")
