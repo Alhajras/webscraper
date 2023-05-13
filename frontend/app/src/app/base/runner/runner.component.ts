@@ -20,8 +20,8 @@ export class RunnerComponent {
   public runners: Runner[] = []
   public updatedRunner: Runner | null = null
   public descriptionForm: FormControl = this.fb.control('')
-  public crawlerForm: FormControl = this.fb.control('',[Validators.required])
-  public name: FormControl = this.fb.control('',[Validators.required])
+  public crawlerForm: FormControl = this.fb.control('', [Validators.required])
+  public name: FormControl = this.fb.control('', [Validators.required])
   public crawlersList: CrawlerDropDown[] = []
   public currentlySubmitting = false
   public displayModal = false
@@ -29,13 +29,22 @@ export class RunnerComponent {
   public header = 'Runner form'
   public errorMessage = ''
   public readonly columnCount = 8
+  private readonly pullingTimeSec = 10000
 
   public constructor(
     private readonly fb: FormBuilder,
     private readonly runnerService: RunnerService,
     private readonly crawlerService: CrawlerService,
   ) {
-    runnerService.list().subscribe(runners => {
+    this.init()
+    setInterval(() => {
+      this.init()
+    }, this.pullingTimeSec);
+  }
+
+  private init(): void {
+
+    this.runnerService.list().subscribe(runners => {
       this.runners = runners
     })
 
@@ -63,7 +72,7 @@ export class RunnerComponent {
       name: this.name.value,
       crawler: this.crawlerForm.value.crawler.id,
     }
-    this.runnerService.start(runner).toPromise().then(()=>{
+    this.runnerService.start(runner).toPromise().then(() => {
       this.displayModal = false
     })
   }
@@ -106,6 +115,7 @@ export class RunnerComponent {
       return;
     }
   }
+
   public deleteRunner(runner: Runner): void {
     runner.deleted = true
     this.runnerService.update(runner.id, runner).toPromise().then(() => {
@@ -132,6 +142,7 @@ export class RunnerComponent {
       console.log(err)
     })
   }
+
   public editRunner(runner: Runner): void {
     this.updatedRunner = runner
     this.descriptionForm = this.fb.control(runner.description)
@@ -142,7 +153,7 @@ export class RunnerComponent {
   }
 
   private createRunner(runner: Partial<Runner>) {
-        this.runnerService.post(runner).toPromise().then(() => {
+    this.runnerService.post(runner).toPromise().then(() => {
       this.runnerService.list().subscribe(runners => {
         this.runners = runners
       })
