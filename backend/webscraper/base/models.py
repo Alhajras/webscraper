@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count
 from solo.models import SingletonModel
 
 
@@ -86,7 +87,7 @@ class Runner(models.Model):
 
     @property
     def collected_documents(self) -> int:
-        return InspectorValue.objects.filter(runner=self).count()
+        return InspectorValue.objects.filter(runner=self).values('url').annotate(dcount=Count('url')).count()
 
 
 class InspectorValue(models.Model):
