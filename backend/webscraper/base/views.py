@@ -15,6 +15,7 @@ from selenium.webdriver.chrome.options import Options
 from urllib.parse import urlparse
 
 from .filters import InspectorFilter
+from .indexing.inverted_index import InvertedIndex
 from .models import Crawler, Template, Inspector, Runner, InspectorValue, RunnerStatus
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
@@ -98,7 +99,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
+        kakaka = InvertedIndex()
         runner_id = request.data['id']
+        kakaka.create_from_runner(runner_id, [1])
         runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():
