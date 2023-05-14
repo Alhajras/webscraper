@@ -39,7 +39,9 @@ class InvertedIndex:
                 if len(word) != 0:
                     if not word in self.inverted_lists:
                         self.inverted_lists[word] = []
-                    self.inverted_lists[word].append(document.id)
+                    inverted_list_len = len(self.inverted_lists[word])
+                    if inverted_list_len == 0 or self.inverted_lists[word][-1] != document.id:
+                        self.inverted_lists[word].append(document.id)
         print(self.inverted_lists)
 
 
