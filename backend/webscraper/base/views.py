@@ -202,6 +202,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                             By.XPATH, inspector.selector
                         )
                         InspectorValue.objects.update_or_create(
+                            url=link.url,
+                            attribute=inspector_element.get_attribute(inspector.attribute),
                             value=inspector_element.text, inspector=inspector, runner=runner
                         )
             except Exception as e:

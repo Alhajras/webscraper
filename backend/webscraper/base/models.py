@@ -10,6 +10,14 @@ class RunnerStatus(models.TextChoices):
     PAUSED = "Paused"
 
 
+class InspectorAttributes(models.TextChoices):
+    HREF = "href"
+    NAME = "name"
+    SRC = "src"
+    TITLE = "title"
+    VALUE = "value"
+
+
 class Template(models.Model):
     class Meta:
         ordering = ("created_at",)
@@ -27,7 +35,8 @@ class Inspector(models.Model):
         ordering = ("created_at",)
 
     name = models.CharField(max_length=100)
-    selector = models.CharField(max_length=100)
+    selector = models.TextField()
+    attribute = models.CharField(max_length=25, choices=InspectorAttributes.choices, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
     template = models.ForeignKey(Template, on_delete=models.PROTECT)
@@ -82,16 +91,19 @@ class Runner(models.Model):
 
 class InspectorValue(models.Model):
     class Meta:
-        unique_together = ("value", "inspector", "runner")
+        # TODO: This makes it slower I have to check this by using URLS.
+        unique_together = ("inspector", "runner", "url")
 
-    value = models.TextField()
+    value = models.TextField(blank=True)
+    url = models.URLField(default='')
+    attribute = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
     inspector = models.ForeignKey(Inspector, on_delete=models.PROTECT)
     runner = models.ForeignKey(Runner, on_delete=models.PROTECT, default=1)
 
     def __str__(self) -> str:
-        return self.value
+        return f"Runner: {self.runner}, Inspector: ({self.inspector.name}),  value: {self.value}, attribute: {self.attribute}"
 
 
 class ConfigurationModel(SingletonModel):
