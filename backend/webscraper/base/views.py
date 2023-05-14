@@ -195,14 +195,15 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     except Exception:
                         pass
                 for scoped_element in scoped_elements:
-                    title = scoped_element.find_element(
-                        By.XPATH, "//*[contains(@class, 'BrandName')]"
-                    )
-                    # TODO: Should not use latest and only return one
-                    inspector = Inspector.objects.all().latest("-id")
-                    InspectorValue.objects.update_or_create(
-                        value=title.text, inspector=inspector, runner=runner
-                    )
+                    # We start looking up for the elements we would like to collect inside the page/document
+                    inspectors_list = Inspector.objects.filter(template=crawler.template)
+                    for inspector in inspectors_list:
+                        inspector_element = scoped_element.find_element(
+                            By.XPATH, inspector.selector
+                        )
+                        InspectorValue.objects.update_or_create(
+                            value=inspector_element.text, inspector=inspector, runner=runner
+                        )
             except Exception as e:
                 print(e)
             for scoped_element in scoped_elements:
