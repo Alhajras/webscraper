@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Inspector} from "src/app/models/inspector.model";
-import {InspectorService} from "src/app/services/inspector.service";
 import {Indexer} from "src/app/models/indexer.model";
+import {IndexerService} from "src/app/services/indexer.service";
 
 @Component({
   selector: 'app-indexer',
@@ -13,23 +12,20 @@ import {Indexer} from "src/app/models/indexer.model";
 })
 export class IndexerComponent implements OnInit {
   public indexers: Indexer[] = []
-  public updatedInspector: Inspector | null = null
-  public breadcrumbs: MenuItem[] = []
+  public updatedIndexer: Inspector | null = null
   public description!: FormControl
   public currentlySubmitting = false
   public displayModal = false
-  public selector!: FormControl
   public form!: FormGroup
-  public header = 'Inspector form'
+  public header = 'Indexer form'
   public name!: FormControl
   public errorMessage = ''
-  public templates = []
   public readonly columnCount = 8
   public loading = false
 
   public constructor(
     private readonly fb: FormBuilder,
-    private readonly inspectorService: InspectorService,
+    private readonly indexerService: IndexerService,
   ) {
 
   }
@@ -46,12 +42,11 @@ export class IndexerComponent implements OnInit {
     }
 
     this.currentlySubmitting = true
-    const inspector = {
+    const indexer = {
       name: this.name.value,
-      selector: this.selector.value,
-      // template: this.template.id,
+      description: this.description.value
     }
-    if (this.updatedInspector !== null) {
+    if (this.updatedIndexer !== null) {
       // this.inspectorService.update(this.updatedInspector.id, inspector).toPromise().then(() => {
       //   this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
       //     this.inspectors = inspectors
@@ -81,51 +76,51 @@ export class IndexerComponent implements OnInit {
 
   public deleteInspector(inspector: Inspector): void {
     inspector.deleted = true
-    this.inspectorService.update(inspector.id, inspector).toPromise().then(() => {
-      this.inspectorService.list().subscribe(inspectors => {
-        // this.inspectors = inspectors
-      })
-      this.closeModal()
-      this.currentlySubmitting = false
-    }).catch((err: HttpErrorResponse) => {
-      this.errorMessage = err.error
-      this.currentlySubmitting = false
-      console.log(err)
-    })
+    // this.inspectorService.update(inspector.id, inspector).toPromise().then(() => {
+    //   this.inspectorService.list().subscribe(inspectors => {
+    //     // this.inspectors = inspectors
+    //   })
+    //   this.closeModal()
+    //   this.currentlySubmitting = false
+    // }).catch((err: HttpErrorResponse) => {
+    //   this.errorMessage = err.error
+    //   this.currentlySubmitting = false
+    //   console.log(err)
+    // })
   }
 
   public editInspector(inspector: Inspector): void {
-    this.updatedInspector = inspector
-    this.name = this.fb.control(inspector.name)
-    this.selector = this.fb.control(inspector.selector)
-    this.form = this.fb.group({
-      selector: this.selector,
-      name: this.name,
-    })
-    this.displayModal = true
+    // this.updatedIndexer = inspector
+    // this.name = this.fb.control(inspector.name)
+    // this.selector = this.fb.control(inspector.selector)
+    // this.form = this.fb.group({
+    //   selector: this.selector,
+    //   name: this.name,
+    // })
+    // this.displayModal = true
   }
 
   public ngOnInit(): void {
-    // this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
-    //   this.inspectors = inspectors
-    // })
+    this.indexerService.list().subscribe(indexers => {
+      this.indexers = indexers
+    })
     this.initForm()
   }
 
   public createIndexer() {
     this.initForm()
-    this.updatedInspector = null
+    this.updatedIndexer = null
     this.displayModal = true
   }
 
   private initForm() {
-    this.description = this.fb.control('')
-    this.selector = this.fb.control('')
-    this.name = this.fb.control('')
-    this.form = this.fb.group({
-      description: this.description,
-      url: this.selector,
-      name: this.name,
-    })
+    // this.description = this.fb.control('')
+    // this.selector = this.fb.control('')
+    // this.name = this.fb.control('')
+    // this.form = this.fb.group({
+    //   description: this.description,
+    //   url: this.selector,
+    //   name: this.name,
+    // })
   }
 }

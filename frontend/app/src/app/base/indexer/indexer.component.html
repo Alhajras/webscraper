@@ -122,12 +122,12 @@
             helpText=""
           >
 
-            <input
-              id="end-time-id"
-              type="text"
-              pInputText
-              [formControl]="selector"
-            />
+<!--            <input-->
+<!--              id="end-time-id"-->
+<!--              type="text"-->
+<!--              pInputText-->
+<!--              [formControl]="selector"-->
+<!--            />-->
           </app-input-field>
         </div>
       </form>
@@ -145,7 +145,7 @@
       (click)="submit()"
       class="p-mr-2"
     >
-      <span>{{ updatedInspector !== null ? 'Update' : 'Create'}}</span>
+      <span>{{ updatedIndexer !== null ? 'Update' : 'Create'}}</span>
     </button>
     <button
       [disabled]="currentlySubmitting"
