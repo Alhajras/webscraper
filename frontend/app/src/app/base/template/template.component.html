@@ -1,7 +1,9 @@
-<p-table [value]="templates"
-         [autoLayout]="true"
-         dataKey="name"
-         [expandedRowKeys]="expandedRows"
+<p-table
+  [loading]="loading"
+  [value]="templates"
+  [autoLayout]="true"
+  dataKey="name"
+  [expandedRowKeys]="expandedRows"
 >
   <ng-template pTemplate="caption">
     <div class="p-grid">

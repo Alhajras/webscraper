@@ -34,13 +34,16 @@ export class TemplateComponent {
   public rightIcon = 'pi pi-chevron-right'
   public expandedRows: { [s: string]: boolean } = {}
   public readonly columnCount = 8
+  public loading = false
 
   public constructor(
     private readonly fb: FormBuilder,
     private readonly templateService: TemplateService,
   ) {
+    this.loading = true
     templateService.list().subscribe(templates => {
       this.templates = templates
+      this.loading = false
     })
     this.name = this.fb.control('')
     this.form = this.fb.group({

@@ -30,12 +30,14 @@ export class RunnerComponent {
   public errorMessage = ''
   public readonly columnCount = 8
   private readonly pullingTimeSec = 10000
+  public loading = false
 
   public constructor(
     private readonly fb: FormBuilder,
     private readonly runnerService: RunnerService,
     private readonly crawlerService: CrawlerService,
   ) {
+    this.loading = true
     this.init()
     setInterval(() => {
       this.init()
@@ -46,6 +48,7 @@ export class RunnerComponent {
 
     this.runnerService.list().subscribe(runners => {
       this.runners = runners
+      this.loading = false
     })
 
     this.crawlerService.list().subscribe(crawlers => {

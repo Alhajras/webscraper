@@ -25,6 +25,7 @@ export class IndexerComponent implements OnInit {
   public errorMessage = ''
   public templates = []
   public readonly columnCount = 8
+  public loading = false
 
   public constructor(
     private readonly fb: FormBuilder,

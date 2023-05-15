@@ -39,6 +39,7 @@ export class CrawlerComponent {
   public header = 'crawler form'
   public errorMessage = ''
   public readonly columnCount = 8
+  public loading = false
 
   public closeModal(): void {
     this.displayModal = false
@@ -115,8 +116,10 @@ export class CrawlerComponent {
     private readonly crawlerService: CrawlerService,
     private readonly templateService: TemplateService,
   ) {
+    this.loading = true
     crawlerService.list().subscribe(crawlers => {
       this.crawlers = crawlers
+      this.loading = false
     })
 
     this.templateService.list().subscribe(templates => {
