@@ -8,6 +8,7 @@ router.register(r"crawlers", views.CrawlerViewSet, "spiders")
 router.register(r"templates", views.TemplateViewSet, "templates")
 router.register(r"inspectors", views.InspectorViewSet, "inspectors")
 router.register(r"runners", views.RunnerViewSet, "runners")
+router.register(r"indexers", views.IndexerViewSet, "indexers")
 
 urlpatterns = [
     path("", include(router.urls)),

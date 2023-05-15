@@ -10,6 +10,10 @@ class RunnerStatus(models.TextChoices):
     EXIT = "Exit"
     PAUSED = "Paused"
 
+class IndexerStatus(models.TextChoices):
+    RUNNING = "Running"
+    COMPLETED = "Completed"
+    EXIT = "Exit"
 
 class InspectorAttributes(models.TextChoices):
     HREF = "href"
@@ -31,6 +35,20 @@ class Template(models.Model):
         return self.name
 
 
+class Indexer(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    completed_at = models.DateTimeField(blank=True, null=True)
+    deleted = models.BooleanField(default=False)
+    name = models.CharField(max_length=50, unique=True)
+    description = models.TextField(blank=True),
+    status = models.CharField(
+        max_length=10, choices=IndexerStatus.choices, default=IndexerStatus.RUNNING
+    )
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class Inspector(models.Model):
     class Meta:
         ordering = ("created_at",)
@@ -41,6 +59,7 @@ class Inspector(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
     template = models.ForeignKey(Template, on_delete=models.PROTECT)
+    indexer = models.ForeignKey(Indexer, on_delete=models.PROTECT, null=True)
 
     def __str__(self) -> str:
         return self.name

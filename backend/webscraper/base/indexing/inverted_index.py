@@ -4,7 +4,7 @@ https://ad-wiki.informatik.uni-freiburg.de/teaching/InformationRetrievalWS2223
 """
 import re
 
-from ..models import InspectorValue
+from ..models import InspectorValue, Inspector
 
 
 class InvertedIndex:
@@ -18,18 +18,19 @@ class InvertedIndex:
         """
         self.inverted_lists = {}
 
-    def create_from_runner(self, runner_id: int, included_inspectors_ids: list[int]):
+    def create_index(self, indexer_id):
         """
         Generate an inverted index from the given runner.
-        :param runner_id: The id of the Runner instance that crawled the documents to be indexed.
-        :param included_inspectors_ids: The list which contains the ids of the
-        inspectors to be included in the indexing process.
+        :param indexer_id: The id of the INdewxer instance that crawled the documents to be indexed.
         :return:
         """
+        # The list which contains the ids of the
+        #         inspectors to be included in the indexing process.
+        included_inspectors_ids = Inspector.objects.filter(indexer=indexer_id).values_list('id', flat=True)
         import pdb
         pdb.set_trace()
         # For first stage we want to index by the document title as testing only
-        documents = InspectorValue.objects.filter(runner=runner_id).filter(inspector__in=included_inspectors_ids)
+        documents = InspectorValue.objects.filter(inspector__in=included_inspectors_ids)
         for document in documents:
             # TODO: I think the regular expression for tokenization should be configured by the GUI
             for word in re.split("[^A-Za-z]+", document.value):

@@ -1,12 +1,18 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Crawler, Template, Inspector, Runner
+from .models import Crawler, Template, Inspector, Runner, Indexer
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["url", "username", "email", "is_staff"]
+
+
+class IndexerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Indexer
+        fields = "__all__"
 
 
 class CrawlerSerializer(serializers.ModelSerializer):

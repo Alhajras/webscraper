@@ -16,14 +16,14 @@ from urllib.parse import urlparse
 
 from .filters import InspectorFilter
 from .indexing.inverted_index import InvertedIndex
-from .models import Crawler, Template, Inspector, Runner, InspectorValue, RunnerStatus
+from .models import Crawler, Template, Inspector, Runner, InspectorValue, RunnerStatus, Indexer
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
     CrawlerSerializer,
     UserSerializer,
     TemplateSerializer,
     InspectorSerializer,
-    RunnerSerializer,
+    RunnerSerializer, IndexerSerializer,
 )
 
 
@@ -45,6 +45,34 @@ class CrawlerViewSet(EverythingButDestroyViewSet):
 class TemplateViewSet(EverythingButDestroyViewSet):
     queryset = Template.objects.filter(deleted=False)
     serializer_class = TemplateSerializer
+
+
+class IndexerViewSet(EverythingButDestroyViewSet):
+    queryset = Indexer.objects.filter(deleted=False).order_by("-id")
+    serializer_class = IndexerSerializer
+
+    def create(self, *args, **kwargs) -> Response:
+        """
+        Create an index but without running it.
+        """
+
+        return super().create(*args, **kwargs)
+
+    @action(detail=True, url_path="toggle-inspector", methods=["post"])
+    def add_remove_inspector(self, *args, **kwargs) -> Response:
+        """
+        Add/Remove inspector to/from the indexer.
+        """
+
+        return super().create(*args, **kwargs)
+
+    # @action(detail=False, url_path="start", methods=["post"])
+    # def start(self, request: Request) -> Response:
+    #     indexer_id = request.data['id']
+    #     inverted_index = InvertedIndex()
+    #     inverted_index.create_index(runner_id, [1])
+    #     runner_serializer = RunnerSerializer(data=request.data)
+    #     return Response(status=200)
 
 
 class InspectorViewSet(EverythingButDestroyViewSet):
@@ -101,7 +129,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
     def start(self, request: Request) -> Response:
         kakaka = InvertedIndex()
         runner_id = request.data['id']
-        kakaka.create_from_runner(runner_id, [1])
+        kakaka.create_index(runner_id, [1])
         runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():

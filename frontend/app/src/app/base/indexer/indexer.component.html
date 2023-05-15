@@ -1,0 +1,150 @@
+<button
+  id="open-dialog"
+  pButton
+  pRipple
+  class="p-button-outlined"
+  label="Create a inspector"
+  (click)="createInspector()"
+></button>
+
+<p-table [value]="inspectors" [tableStyle]="{'min-width': '60rem'}">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="name">Name
+        <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="selector">Selector
+        <p-sortIcon field="selector"></p-sortIcon>
+      </th>
+      <th pSortableColumn="created_at">Created at
+        <p-sortIcon field="created_at"></p-sortIcon>
+      </th>
+      <th>Actions
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-inspector>
+    <tr>
+      <td>{{inspector.name}}</td>
+      <td>{{inspector.selector}}</td>
+      <td>
+        <p>
+          <app-time-ago [time]="inspector.created_at"></app-time-ago>
+        </p>
+      </td>
+      <td>
+        <div>
+          <button
+            class="
+        p-ml-1 p-button-outlined p-button-sm
+        no-icon
+      "
+            type="button"
+            pButton
+            pRipple
+            label="Edit"
+            (click)="editInspector(inspector)"
+          ></button>
+          <button
+            class="
+        p-ml-1 p-button-danger p-button-outlined p-button-sm
+        no-icon
+      "
+            type="button"
+            pButton
+            pRipple
+            label="Delete"
+            (click)="deleteInspector(inspector)"
+          ></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+    <ng-template pTemplate="emptymessage">
+    <tr>
+      <td
+        attr.colspan="{{ columnCount }}"
+        *ngIf="inspectors.length === 0"
+      >
+        No inspectors assigned.
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [(visible)]="displayModal"
+  [header]="header"
+  [modal]="true"
+  (onHide)="closeModal()"
+  [maximizable]="true"
+  styleClass="f2-import-dialog"
+>
+  <div *ngIf="displayModal">
+    <p-card>
+      <form class="p-fluid" action="" [formGroup]="form" (ngSubmit)="submit()">
+        <p-message
+          *ngIf="errorMessage"
+          severity="error"
+          text="The inspector could not be created:"
+          class="p-mr-2"
+        ></p-message>
+        <div>
+          <app-input-field
+            [isRequired]="true"
+            labelId="version-label-id"
+            labelText="Name"
+            helpText=""
+          >
+
+            <input
+              id="start-time-id"
+              type="text"
+              pInputText
+              [formControl]="name"
+            />
+          </app-input-field>
+          <app-input-field
+            [isRequired]="true"
+            labelId="version-label-id"
+            labelText="Selector"
+            helpText=""
+          >
+
+            <input
+              id="end-time-id"
+              type="text"
+              pInputText
+              [formControl]="selector"
+            />
+          </app-input-field>
+        </div>
+      </form>
+    </p-card>
+  </div>
+  <ng-template pTemplate="footer">
+    <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
+    <!--      <f2-loading msg="Submitting ..."></f2-loading>-->
+    <!--    </span>-->
+    <button
+      id="run-btn"
+      type="button"
+      pButton
+      pRipple
+      (click)="submit()"
+      class="p-mr-2"
+    >
+      <span>{{ updatedInspector !== null ? 'Update' : 'Create'}}</span>
+    </button>
+    <button
+      [disabled]="currentlySubmitting"
+      id="cancel-btn"
+      class="p-button-secondary"
+      type="button"
+      pButton
+      pRipple
+      label="Cancel"
+      (click)="closeModal()"
+    ></button>
+  </ng-template>
+</p-dialog>
