@@ -1,13 +1,22 @@
-<button
-  id="open-dialog"
-  pButton
-  pRipple
-  class="p-button-outlined"
-  label="Create a inspector"
-  (click)="createIndexer()"
-></button>
-
 <p-table [value]="indexers" [tableStyle]="{'min-width': '60rem'}">
+  <ng-template pTemplate="caption">
+    <div class="p-grid">
+      <div class="p-col">
+        Indexers
+      </div>
+      <div class="p-col-2">
+        <button
+          id="open-dialog"
+          pButton
+          pRipple
+          class="p-button-outlined"
+          label="Create an indexer"
+          (click)="createIndexer()"
+        ></button>
+
+      </div>
+    </div>
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
       <th pSortableColumn="name">Name
@@ -60,7 +69,7 @@
       </td>
     </tr>
   </ng-template>
-    <ng-template pTemplate="emptymessage">
+  <ng-template pTemplate="emptymessage">
     <tr>
       <td
         attr.colspan="{{ columnCount }}"

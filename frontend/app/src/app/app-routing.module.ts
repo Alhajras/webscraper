@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {TemplateComponent} from "src/app/base/template/template.component";
 import {CrawlerComponent} from "src/app/base/crawler/crawler.component";
 import {RunnerComponent} from "src/app/base/runner/runner.component";
+import {IndexerComponent} from "src/app/base/indexer/indexer.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: 'runners',
     component: RunnerComponent,
     loadChildren: () => import('./base/runner/runner.module').then(m => m.RunnerModule)
+  },
+    {
+    path: 'indexers',
+    component: IndexerComponent,
+    loadChildren: () => import('./base/indexer/indexer.module').then(m => m.IndexerModule)
   },
 ];
 

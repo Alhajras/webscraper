@@ -1,13 +1,22 @@
-<button
-  id="open-dialog"
-  pButton
-  pRipple
-  class="p-button-outlined"
-  label="Create a crawler"
-  (click)="displayModal = true"
-></button>
-
 <p-table [value]="crawlers" [tableStyle]="{'min-width': '60rem'}">
+  <ng-template pTemplate="caption">
+    <div class="p-grid">
+      <div class="p-col">
+        Crawlers
+      </div>
+      <div class="p-col-2">
+        <button
+          id="open-dialog"
+          pButton
+          pRipple
+          class="p-button-outlined"
+          label="Create a crawler"
+          (click)="displayModal = true"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+
   <ng-template pTemplate="header">
     <tr>
       <th pSortableColumn="name">Name

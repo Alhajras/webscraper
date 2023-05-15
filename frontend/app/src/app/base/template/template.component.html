@@ -1,17 +1,26 @@
-<button
-  id="open-dialog"
-  pButton
-  pRipple
-  class="p-button-outlined"
-  label="Create a template"
-  (click)="displayModal = true"
-></button>
-
 <p-table [value]="templates"
          [autoLayout]="true"
          dataKey="name"
          [expandedRowKeys]="expandedRows"
 >
+  <ng-template pTemplate="caption">
+    <div class="p-grid">
+      <div class="p-col">
+        Templates
+      </div>
+      <div class="p-col-2">
+        <button
+          id="open-dialog"
+          pButton
+          pRipple
+          class="p-button-outlined"
+          label="Create a template"
+          (click)="displayModal = true"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+
   <ng-template pTemplate="header">
     <tr>
       <th></th>
