@@ -153,7 +153,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         # Stopping options
         max_pages = crawler.max_pages
         # TODO: Please change this to be read from the request body
-        max_visited_links = 100
+        max_visited_links = crawler.max_pages
         max_rec_level = crawler.max_depth
         base_urlparse = urlparse(base_url)
         # Define Browser Options
@@ -214,24 +214,27 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             for scoped_element in scoped_elements:
                 # We add one level
                 current_rec_level = link.level + 1
-                for href in scoped_element.find_elements(By.CSS_SELECTOR, "a"):
+                for a in scoped_element.find_elements(By.CSS_SELECTOR, "a"):
                     # We skip the fragments as they do not add any product, that why we split by #
-                    a = href.get_attribute("href").split("#").pop()
+                    if a.get_attribute("href") is None:
+                        continue
+                    href = a.get_attribute("href").split("#").pop()
+                    print(href)
                     # Some sites have None values and 'link != a' to avoid looping
-                    if a is not None and base_url in a:
-                        if a not in excluded_urls:
+                    if href is not None and base_url in href:
+                        if href not in excluded_urls:
                             found_link = Link(
-                                url=a, visited=False, level=current_rec_level
+                                url=href, visited=False, level=current_rec_level
                             )
                             if (
-                                link.url != a
-                                and a not in links
+                                link.url != href
+                                and href not in links
                                 and len(links) < max_visited_links
                             ):
-                                links[a] = found_link
-                                q.append(Link(a))
+                                links[href] = found_link
+                                q.append(Link(href))
             # TODO: Use `sleep` here
-            return find_links()
+            return
 
         runner = Runner.objects.get(id=runner_id)
         runner.status = RunnerStatus.RUNNING
@@ -240,7 +243,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         q.append(Link(start_url))
         start = time.time()
-        find_links()
+        while len(q) != 0:
+            find_links()
         print(runner.collected_documents)
         end = time.time()
         print(end - start)

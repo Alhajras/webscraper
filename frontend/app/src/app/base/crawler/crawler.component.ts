@@ -64,7 +64,7 @@ export class CrawlerComponent {
       max_pages: this.maxPages.value,
       max_depth: this.maxDepth.value,
       robot_file_url: this.robotFileUrl.value,
-      excluded_urls: this.excludedUrls.value.join('";"')
+      excluded_urls: this.excludedUrls.value ?? this.excludedUrls.value.join('";"')
     }
     if (this.updatedCrawler !== null) {
       console.log(this.excludedUrls.value)
