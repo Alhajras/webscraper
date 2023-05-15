@@ -3,8 +3,8 @@ export interface Indexer {
   completed_at: string,
   id: number,
   deleted: boolean,
-  index_api: number
-  inspectors_to_be_indexed: number,
+  name: number
+  inspectors_to_be_indexed: number[],
   description: string,
   status: string,
 }

@@ -24,10 +24,12 @@ import {TemplateComponent} from "src/app/base/template/template.component";
 import {TreeTableModule} from "primeng/treetable";
 import { InspectorComponent } from './base/inspector/inspector.component';
 import { RunnerComponent } from './base/runner/runner.component';
+import { IndexerComponent } from './base/indexer/indexer.component';
 import {StepsModule} from "primeng/steps";
 import {TimelineModule} from "primeng/timeline";
 import {ChipsModule} from "primeng/chips";
 import {OverlayPanelModule} from "primeng/overlaypanel";
+import {MenubarModule} from "primeng/menubar";
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,8 @@ import {OverlayPanelModule} from "primeng/overlaypanel";
     TimeAgoComponent,
     TimeagoPipe,
     InspectorComponent,
-    RunnerComponent
+    RunnerComponent,
+    IndexerComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ import {OverlayPanelModule} from "primeng/overlaypanel";
     StepsModule,
     TimelineModule,
     ChipsModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    MenubarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

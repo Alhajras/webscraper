@@ -48,6 +48,10 @@ class Indexer(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    @property
+    def inspectors_to_be_indexed(self):
+        return Inspector.objects.filter(indexer=self).values_list('id', flat=True)
+
 
 class Inspector(models.Model):
     class Meta:

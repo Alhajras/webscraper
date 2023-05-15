@@ -4,10 +4,10 @@
   pRipple
   class="p-button-outlined"
   label="Create a inspector"
-  (click)="createInspector()"
+  (click)="createIndexer()"
 ></button>
 
-<p-table [value]="inspectors" [tableStyle]="{'min-width': '60rem'}">
+<p-table [value]="indexers" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="header">
     <tr>
       <th pSortableColumn="name">Name
@@ -64,9 +64,9 @@
     <tr>
       <td
         attr.colspan="{{ columnCount }}"
-        *ngIf="inspectors.length === 0"
+        *ngIf="indexers.length === 0"
       >
-        No inspectors assigned.
+        No indexers assigned.
       </td>
     </tr>
   </ng-template>

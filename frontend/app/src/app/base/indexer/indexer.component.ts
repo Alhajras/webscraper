@@ -1,15 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Template} from "src/app/models/template.model";
+import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Inspector} from "src/app/models/inspector.model";
 import {InspectorService} from "src/app/services/inspector.service";
+import {Indexer} from "src/app/models/indexer.model";
 
 @Component({
-  selector: 'app-inspector',
-  templateUrl: './inspector.component.html',
-  styleUrls: ['./inspector.component.scss']
+  selector: 'app-indexer',
+  templateUrl: './indexer.component.html',
+  styleUrls: ['./indexer.component.scss']
 })
 export class IndexerComponent implements OnInit {
   public indexers: Indexer[] = []
@@ -48,41 +48,41 @@ export class IndexerComponent implements OnInit {
     const inspector = {
       name: this.name.value,
       selector: this.selector.value,
-      template: this.template.id,
+      // template: this.template.id,
     }
     if (this.updatedInspector !== null) {
-      this.inspectorService.update(this.updatedInspector.id, inspector).toPromise().then(() => {
-        this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
-          this.inspectors = inspectors
-        })
-        this.closeModal()
-        this.currentlySubmitting = false
-        this.updatedInspector = null
-      }).catch((err: HttpErrorResponse) => {
-        this.errorMessage = err.error
-        this.currentlySubmitting = false
-        console.log(err)
-      })
+      // this.inspectorService.update(this.updatedInspector.id, inspector).toPromise().then(() => {
+      //   this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
+      //     this.inspectors = inspectors
+      //   })
+      //   this.closeModal()
+      //   this.currentlySubmitting = false
+      //   this.updatedInspector = null
+      // }).catch((err: HttpErrorResponse) => {
+      //   this.errorMessage = err.error
+      //   this.currentlySubmitting = false
+      //   console.log(err)
+      // })
       return;
     }
-    this.inspectorService.post(inspector).toPromise().then(() => {
-      this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
-        this.inspectors = inspectors
-      })
-      this.closeModal()
-      this.currentlySubmitting = false
-    }).catch((err: HttpErrorResponse) => {
-      this.errorMessage = err.error
-      this.currentlySubmitting = false
-      console.log(err)
-    })
+    // this.inspectorService.post(inspector).toPromise().then(() => {
+    //   this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
+    //     this.inspectors = inspectors
+    //   })
+    //   this.closeModal()
+    //   this.currentlySubmitting = false
+    // }).catch((err: HttpErrorResponse) => {
+    //   this.errorMessage = err.error
+    //   this.currentlySubmitting = false
+    //   console.log(err)
+    // })
   }
 
   public deleteInspector(inspector: Inspector): void {
     inspector.deleted = true
     this.inspectorService.update(inspector.id, inspector).toPromise().then(() => {
       this.inspectorService.list().subscribe(inspectors => {
-        this.inspectors = inspectors
+        // this.inspectors = inspectors
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -105,13 +105,13 @@ export class IndexerComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
-      this.inspectors = inspectors
-    })
+    // this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
+    //   this.inspectors = inspectors
+    // })
     this.initForm()
   }
 
-  public createInspector() {
+  public createIndexer() {
     this.initForm()
     this.updatedInspector = null
     this.displayModal = true

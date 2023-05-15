@@ -10,6 +10,7 @@ export class BaseComponent {
   public items: MenuItem[] = [
     {label: 'Runners', url: 'runners'},
     {label: 'Crawlers', url: 'crawlers'},
-    {label: 'Templates', url: 'templates'}
+    {label: 'Templates', url: 'templates'},
+    {label: 'Indexers', url: 'indexers'}
   ]
 }
