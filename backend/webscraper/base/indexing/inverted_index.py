@@ -4,6 +4,8 @@ https://ad-wiki.informatik.uni-freiburg.de/teaching/InformationRetrievalWS2223
 """
 import re
 
+from django.core.cache import cache
+
 from ..models import InspectorValue, Inspector
 
 
@@ -26,6 +28,12 @@ class InvertedIndex:
         """
         # The list which contains the ids of the
         #         inspectors to be included in the indexing process.
+        cache_key = f'indexer:{indexer_id}'
+        hit = cache.get(cache_key)
+        if hit is not None:
+            print("Cached")
+            return hit
+
         included_inspectors_ids = Inspector.objects.filter(indexer=indexer_id).values_list('id', flat=True)
         import pdb
         pdb.set_trace()
@@ -44,5 +52,7 @@ class InvertedIndex:
                     if inverted_list_len == 0 or self.inverted_lists[word][-1] != document.id:
                         self.inverted_lists[word].append(document.id)
         print(self.inverted_lists)
+        cache.set(cache_key, self.inverted_lists)
+
 
 
