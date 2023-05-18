@@ -30,6 +30,7 @@ import {TimelineModule} from "primeng/timeline";
 import {ChipsModule} from "primeng/chips";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {MenubarModule} from "primeng/menubar";
+import {MultiSelectModule} from "primeng/multiselect";
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,29 +44,30 @@ import {MenubarModule} from "primeng/menubar";
     RunnerComponent,
     IndexerComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MenuModule,
-    BrowserAnimationsModule,
-    TableModule,
-    HttpClientModule,
-    DialogModule,
-    CardModule,
-    DropdownModule,
-    MessageModule,
-    ReactiveFormsModule,
-    InputTextareaModule,
-    InputTextModule,
-    ButtonModule,
-    RippleModule,
-    TreeTableModule,
-    StepsModule,
-    TimelineModule,
-    ChipsModule,
-    OverlayPanelModule,
-    MenubarModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MenuModule,
+        BrowserAnimationsModule,
+        TableModule,
+        HttpClientModule,
+        DialogModule,
+        CardModule,
+        DropdownModule,
+        MessageModule,
+        ReactiveFormsModule,
+        InputTextareaModule,
+        InputTextModule,
+        ButtonModule,
+        RippleModule,
+        TreeTableModule,
+        StepsModule,
+        TimelineModule,
+        ChipsModule,
+        OverlayPanelModule,
+        MenubarModule,
+        MultiSelectModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

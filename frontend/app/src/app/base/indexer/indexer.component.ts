@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Inspector} from "src/app/models/inspector.model";
 import {Indexer} from "src/app/models/indexer.model";
 import {IndexerService} from "src/app/services/indexer.service";
+import {InspectorService} from "src/app/services/inspector.service";
 
 @Component({
   selector: 'app-indexer',
@@ -19,6 +20,8 @@ export class IndexerComponent implements OnInit {
   public form!: FormGroup
   public header = 'Indexer form'
   public name!: FormControl
+  public selectedInspectors!: FormControl
+  public selectorsIdsOptions: { name: string, id: number }[] = []
   public errorMessage = ''
   public readonly columnCount = 8
   public loading = false
@@ -26,6 +29,7 @@ export class IndexerComponent implements OnInit {
   public constructor(
     private readonly fb: FormBuilder,
     private readonly indexerService: IndexerService,
+    private readonly inspectorService: InspectorService,
   ) {
 
   }
@@ -114,13 +118,21 @@ export class IndexerComponent implements OnInit {
   }
 
   private initForm() {
-    // this.description = this.fb.control('')
-    // this.selector = this.fb.control('')
-    // this.name = this.fb.control('')
-    // this.form = this.fb.group({
-    //   description: this.description,
-    //   url: this.selector,
-    //   name: this.name,
-    // })
+    this.inspectorService.list().subscribe(inspectors => {
+      this.selectorsIdsOptions = inspectors.map(inspector => {
+        return {
+          name: inspector.name,
+          id: inspector.id
+        }
+      })
+    })
+      // this.description = this.fb.control('')
+      // this.selector = this.fb.control('')
+      // this.name = this.fb.control('')
+      // this.form = this.fb.group({
+      //   description: this.description,
+      //   url: this.selector,
+      //   name: this.name,
+      // })
+    }
   }
-}

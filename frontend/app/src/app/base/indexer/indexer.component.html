@@ -89,7 +89,7 @@
   [modal]="true"
   (onHide)="closeModal()"
   [maximizable]="true"
-  styleClass="f2-import-dialog"
+  styleClass="f2-indexer-dialog"
 >
   <div *ngIf="displayModal">
     <p-card>
@@ -117,17 +117,14 @@
           </app-input-field>
           <app-input-field
             [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Selector"
+            labelId="inspectors-id"
+            labelText="Inspectors"
             helpText=""
           >
-
-<!--            <input-->
-<!--              id="end-time-id"-->
-<!--              type="text"-->
-<!--              pInputText-->
-<!--              [formControl]="selector"-->
-<!--            />-->
+            <form [formGroup]="form">
+              <p-multiSelect [options]="selectorsIdsOptions" formControlName="selectedInspectors"
+                             optionLabel="name"></p-multiSelect>
+            </form>
           </app-input-field>
         </div>
       </form>
