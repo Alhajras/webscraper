@@ -71,7 +71,18 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         indexer.status = IndexerStatus.COMPLETED
         indexer.completed_at = timezone.now()
         indexer.save()
+        result = inverted_index.process_query("the".split(" "), indexer_id)
+        print(result)
         return Response(status=200)
+
+    # @action(detail=True, url_path="search", methods=["get"])
+    # def search(self, request: Request, pk: int) -> Response:
+    #     query = request.data['q']
+    #     inverted_index = InvertedIndex()
+    #     result = inverted_index.process_query(query.split(" "), pk)
+    #     print(result)
+    #     return Response(status=200)
+
 
 
 class InspectorViewSet(EverythingButDestroyViewSet):

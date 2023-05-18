@@ -35,4 +35,5 @@ export class IndexerService {
         return this.client.post<Indexer>(`${this.endpointPath}/start/`, indexer)
 
   }
+
 }

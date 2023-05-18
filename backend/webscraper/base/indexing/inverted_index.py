@@ -54,5 +54,73 @@ class InvertedIndex:
         print(self.inverted_lists)
         cache.set(cache_key, self.inverted_lists)
 
+    def intersect(self, list1, list2):
+        """
+        Computes the intersection of the two given inverted lists in linear
+        time (linear in the total number of elements in the two lists).
 
+        >>> ii = InvertedIndex()
+        >>> ii.intersect([1, 5, 7], [2, 4])
+        []
+        >>> ii.intersect([1, 2, 5, 7], [1, 3, 5, 6, 7, 9])
+        [1, 5, 7]
+        """
+        i = 0  # The pointer in the first list.
+        j = 0  # The pointer int the second list.
+        result = []
 
+        while i < len(list1) and j < len(list2):
+            if list1[i] == list2[j]:
+                result.append(list1[i])
+                i += 1
+                j += 1
+            elif list1[i] < list2[j]:
+                i += 1
+            else:
+                j += 1
+
+        return result
+
+    def process_query(self, keywords, indexer_id):
+        """
+        Processes the given keyword query as follows: Fetches the inverted list
+        for each of the keywords in the given query and computes the
+        intersection of all inverted lists (which is empty, if there is a
+        keyword in the query which has no inverted list in the index).
+
+        >>> ii = InvertedIndex()
+        >>> ii.build_from_file("example.tsv")
+        >>> ii.process_query([])
+        []
+        >>> ii.process_query(["doc"])
+        [1, 2, 3]
+        >>> ii.process_query(["doc", "movie"])
+        [1, 3]
+        >>> ii.process_query(["doc", "movie", "comedy"])
+        []
+        """
+        if not keywords:
+            return []
+
+        cache_key = f'indexer:{indexer_id}'
+        self.inverted_lists = cache.get(cache_key)
+
+        # Fetch the inverted lists for each of the given keywords.
+        lists = []
+        for keyword in keywords:
+            if keyword in self.inverted_lists:
+                lists.append(self.inverted_lists[keyword])
+            else:
+                # We can abort, because the intersection is empty
+                # (there is no inverted list for the word).
+                return []
+
+        # Compute the intersection of all inverted lists.
+        if len(lists) == 0:
+            return []
+
+        intersected = lists[0]
+        for i in range(1, len(lists)):
+            intersected = self.intersect(intersected, lists[i])
+
+        return intersected
