@@ -11,6 +11,7 @@ class RunnerStatus(models.TextChoices):
     PAUSED = "Paused"
 
 class IndexerStatus(models.TextChoices):
+    NEW = "New"
     RUNNING = "Running"
     COMPLETED = "Completed"
     EXIT = "Exit"
@@ -42,7 +43,7 @@ class Indexer(models.Model):
     name = models.CharField(max_length=50, unique=True)
     description = models.TextField(blank=True),
     status = models.CharField(
-        max_length=10, choices=IndexerStatus.choices, default=IndexerStatus.RUNNING
+        max_length=10, choices=IndexerStatus.choices, default=IndexerStatus.NEW
     )
 
     def __str__(self) -> str:

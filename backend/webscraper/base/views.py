@@ -16,7 +16,7 @@ from urllib.parse import urlparse
 
 from .filters import InspectorFilter
 from .indexing.inverted_index import InvertedIndex
-from .models import Crawler, Template, Inspector, Runner, InspectorValue, RunnerStatus, Indexer
+from .models import Crawler, Template, Inspector, Runner, InspectorValue, RunnerStatus, Indexer, IndexerStatus
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
     CrawlerSerializer,
@@ -51,28 +51,27 @@ class IndexerViewSet(EverythingButDestroyViewSet):
     queryset = Indexer.objects.filter(deleted=False).order_by("-id")
     serializer_class = IndexerSerializer
 
-    def create(self, *args, **kwargs) -> Response:
+    def create(self, request: Request, *args, **kwargs) -> Response:
         """
         Create an index but without running it.
         """
+        indexer = super().create(request, *args, **kwargs)
+        inspectors_ids = [selector['id'] for selector in request.data['selected_inspectors']]
+        Inspector.objects.filter(id__in=inspectors_ids).update(indexer=indexer.data['id'])
+        return indexer
 
-        return super().create(*args, **kwargs)
-
-    @action(detail=True, url_path="toggle-inspector", methods=["post"])
-    def add_remove_inspector(self, *args, **kwargs) -> Response:
-        """
-        Add/Remove inspector to/from the indexer.
-        """
-
-        return super().create(*args, **kwargs)
-
-    # @action(detail=False, url_path="start", methods=["post"])
-    # def start(self, request: Request) -> Response:
-    #     indexer_id = request.data['id']
-    #     inverted_index = InvertedIndex()
-    #     inverted_index.create_index(runner_id, [1])
-    #     runner_serializer = RunnerSerializer(data=request.data)
-    #     return Response(status=200)
+    @action(detail=False, url_path="start", methods=["post"])
+    def start(self, request: Request) -> Response:
+        indexer_id = request.data['id']
+        Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.RUNNING)
+        inverted_index = InvertedIndex()
+        inverted_index.create_index(indexer_id)
+        runner_serializer = RunnerSerializer(data=request.data)
+        indexer = Indexer.objects.get(id=indexer_id)
+        indexer.status = IndexerStatus.COMPLETED
+        indexer.completed_at = timezone.now()
+        indexer.save()
+        return Response(status=200)
 
 
 class InspectorViewSet(EverythingButDestroyViewSet):

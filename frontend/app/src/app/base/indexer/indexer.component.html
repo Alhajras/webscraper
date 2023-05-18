@@ -24,27 +24,46 @@
       <th pSortableColumn="name">Name
         <p-sortIcon field="name"></p-sortIcon>
       </th>
+      <th pSortableColumn="status">Status
+        <p-sortIcon field="status"></p-sortIcon>
+      </th>
       <th pSortableColumn="selector">Selector
         <p-sortIcon field="selector"></p-sortIcon>
       </th>
-      <th pSortableColumn="created_at">Created at
+      <th pSortableColumn="created_at">Progress
         <p-sortIcon field="created_at"></p-sortIcon>
       </th>
       <th>Actions
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-inspector>
+  <ng-template pTemplate="body" let-indexer>
     <tr>
-      <td>{{inspector.name}}</td>
-      <td>{{inspector.selector}}</td>
+      <td>{{indexer.name}}</td>
+      <td>{{indexer.status}}</td>
+      <td>{{indexer.selector}}</td>
       <td>
         <p>
-          <app-time-ago [time]="inspector.created_at"></app-time-ago>
+          Created: <app-time-ago [time]="indexer.created_at"></app-time-ago>
+        </p>
+        <p>
+          Completed: <app-time-ago [time]="indexer.completed_at"></app-time-ago>
         </p>
       </td>
       <td>
         <div>
+          <button
+            [disabled]="indexer.status === 'Running'"
+            class="
+        p-ml-1 p-button-outlined p-button-sm
+        no-icon
+      "
+            type="button"
+            pButton
+            pRipple
+            label="Start indexing"
+            (click)="startIndexing(indexer)"
+          ></button>
           <button
             class="
         p-ml-1 p-button-outlined p-button-sm
@@ -54,7 +73,7 @@
             pButton
             pRipple
             label="Edit"
-            (click)="editInspector(inspector)"
+            (click)="editInspector(indexer)"
           ></button>
           <button
             class="
@@ -65,7 +84,7 @@
             pButton
             pRipple
             label="Delete"
-            (click)="deleteInspector(inspector)"
+            (click)="deleteInspector(indexer)"
           ></button>
         </div>
       </td>

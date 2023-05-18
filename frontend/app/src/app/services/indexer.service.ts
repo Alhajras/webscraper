@@ -30,4 +30,9 @@ export class IndexerService {
     const params = new HttpParams({fromObject: additionalParams})
     return this.client.getList<Indexer>(this.endpointPath, params)
   }
+
+  public startIndexing(id: number, indexer: Partial<Indexer>) {
+        return this.client.post<Indexer>(`${this.endpointPath}/start/`, indexer)
+
+  }
 }

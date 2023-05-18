@@ -48,7 +48,7 @@ export class IndexerComponent implements OnInit {
     this.currentlySubmitting = true
     const indexer = {
       name: this.name.value,
-      description: this.description.value
+      selected_inspectors: this.selectedInspectors.value
     }
     if (this.updatedIndexer !== null) {
       // this.inspectorService.update(this.updatedInspector.id, inspector).toPromise().then(() => {
@@ -65,17 +65,14 @@ export class IndexerComponent implements OnInit {
       // })
       return;
     }
-    // this.inspectorService.post(inspector).toPromise().then(() => {
-    //   this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
-    //     this.inspectors = inspectors
-    //   })
-    //   this.closeModal()
-    //   this.currentlySubmitting = false
-    // }).catch((err: HttpErrorResponse) => {
-    //   this.errorMessage = err.error
-    //   this.currentlySubmitting = false
-    //   console.log(err)
-    // })
+    this.indexerService.post(indexer).toPromise().then(() => {
+      this.closeModal()
+      this.currentlySubmitting = false
+    }).catch((err: HttpErrorResponse) => {
+      this.errorMessage = err.error
+      this.currentlySubmitting = false
+      console.log(err)
+    })
   }
 
   public deleteInspector(inspector: Inspector): void {
@@ -127,12 +124,17 @@ export class IndexerComponent implements OnInit {
       })
     })
       // this.description = this.fb.control('')
-      // this.selector = this.fb.control('')
-      // this.name = this.fb.control('')
-      // this.form = this.fb.group({
-      //   description: this.description,
-      //   url: this.selector,
-      //   name: this.name,
-      // })
+      this.selectedInspectors = this.fb.control('')
+      this.name = this.fb.control('')
+      this.form = this.fb.group({
+        selectedInspectors: this.selectedInspectors,
+        name: this.name,
+      })
     }
+
+  public  startIndexing(indexer: Indexer) {
+    this.indexerService.startIndexing(indexer.id, indexer).subscribe(i=>{
+
+    })
   }
+}
