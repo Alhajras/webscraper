@@ -66,11 +66,14 @@ export class SearchComponent {
   }
 
   public searchProducts() {
+    this.loading = true
+    this.products = []
     // TODO this is bad and must be dynamic
     this.indexerService.search(8, this.searchText).subscribe(values => {
       values.forEach(p => {
         this.products = [...this.products, this.createProduct(p)]
       })
+      this.loading = false
     })
   }
 }

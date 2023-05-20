@@ -77,7 +77,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=True, url_path="search", methods=["POST"])
     def search(self, request: Request, pk: int) -> Response:
-        query = request.data['q']
+        query = request.data['q'].lower().strip()
         inverted_index = InvertedIndex()
         result = inverted_index.process_query(query.split(" "), pk)
         results = InspectorValue.objects.filter(id__in=result).values_list('url', flat=True)
