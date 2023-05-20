@@ -36,6 +36,10 @@ class Template(models.Model):
         return self.name
 
 
+class Product(models.Model):
+    data = models.JSONField()
+
+
 class Indexer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(blank=True, null=True)

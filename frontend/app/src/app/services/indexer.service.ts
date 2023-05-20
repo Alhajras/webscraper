@@ -3,6 +3,7 @@ import {ApiService} from "src/app/services/api.service";
 import {Observable} from "rxjs";
 import {HttpParams} from "@angular/common/http";
 import {Indexer} from "src/app/models/indexer.model";
+import {InspectorValue} from "src/app/models/inspector-value.model";
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +33,11 @@ export class IndexerService {
   }
 
   public startIndexing(id: number, indexer: Partial<Indexer>) {
-        return this.client.post<Indexer>(`${this.endpointPath}/start/`, indexer)
+    return this.client.post<Indexer>(`${this.endpointPath}/start/`, indexer)
 
   }
 
+  public search(indexer_id: number, q: string) {
+    return this.client.post<any[]>(`${this.endpointPath}${indexer_id}/search/`, {q: q})
+  }
 }

@@ -35,8 +35,6 @@ class InvertedIndex:
             return hit
 
         included_inspectors_ids = Inspector.objects.filter(indexer=indexer_id).values_list('id', flat=True)
-        import pdb
-        pdb.set_trace()
         # For first stage we want to index by the document title as testing only
         documents = InspectorValue.objects.filter(inspector__in=included_inspectors_ids)
         for document in documents:
@@ -46,7 +44,7 @@ class InvertedIndex:
                 word = word.lower()
                 # Skip empty spaces
                 if len(word) != 0:
-                    if not word in self.inverted_lists:
+                    if word not in self.inverted_lists:
                         self.inverted_lists[word] = []
                     inverted_list_len = len(self.inverted_lists[word])
                     if inverted_list_len == 0 or self.inverted_lists[word][-1] != document.id:
@@ -104,7 +102,9 @@ class InvertedIndex:
 
         cache_key = f'indexer:{indexer_id}'
         self.inverted_lists = cache.get(cache_key)
-
+        if self.inverted_lists is None:
+            print(f"There is no indexer found with an ID {indexer_id}! Please create an indexer first and then try to run queries.")
+            return []
         # Fetch the inverted lists for each of the given keywords.
         lists = []
         for keyword in keywords:

@@ -1,10 +1,8 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {HttpErrorResponse} from "@angular/common/http";
-import {Crawler} from "src/app/models/crawler.model";
+import {FormControl, FormGroup} from "@angular/forms";
 import {Template} from "src/app/models/template.model";
-import {TemplateService} from "src/app/services/template.service";
-import {CrawlerService} from "src/app/services/crawler.service";
+import {IndexerService} from "src/app/services/indexer.service";
+import {InspectorValue} from "src/app/models/inspector-value.model";
 
 export interface TemplateDropDown {
   key: string
@@ -12,54 +10,67 @@ export interface TemplateDropDown {
 }
 
 export interface Product {
-    id?: string;
-    code?: string;
-    name?: string;
-    description?: string;
-    price?: number;
-    quantity?: number;
-    inventoryStatus?: string;
-    category?: string;
-    image?: string;
-    rating?: number;
+  id?: string;
+  code?: string;
+  name?: string;
+  description?: string;
+  price?: string;
+  quantity?: number;
+  inventoryStatus?: string;
+  category?: string;
+  image?: string;
+  rating?: number;
 }
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
-
   public form!: FormGroup
-  public templatesList: TemplateDropDown[] = []
   public currentlySubmitting = false
   public displayModal = false
   public header = 'crawler form'
   public errorMessage = ''
   public readonly columnCount = 8
   public loading = false
-  public products:Product[]=[]
+  public products: any[] = []
+  public searchText = ''
 
   public closeModal(): void {
     this.displayModal = false
   }
 
   public constructor(
-    private readonly fb: FormBuilder,
-    private readonly crawlerService: CrawlerService,
-    private readonly templateService: TemplateService,
+    private readonly indexerService: IndexerService,
   ) {
-this.products = [{
-    id: '1000',
-    code: 'f230fh0g3',
-    name: 'Bamboo Watch',
-    description: 'Product Description',
-    image: 'bamboo-watch.jpg',
-    price: 65,
-    category: 'Accessories',
-    quantity: 24,
-    inventoryStatus: 'INSTOCK',
-    rating: 5
-},]
+  }
+
+  private createProduct(items: InspectorValue[]): Partial<Product> {
+    console.log(items)
+    let product: Product = {}
+    items.forEach((item: InspectorValue) => {
+      switch (item.inspector) {
+        case 1:
+          product.name = item.value
+          break;
+        case 2:
+          product.price = item.value
+          break;
+        default:
+          product.image = item.attribute
+      }
+    })
+    return product
+  }
+
+  public searchProducts() {
+    // TODO this is bad and must be dynamic
+    this.indexerService.search(8, this.searchText).subscribe(values => {
+      values.forEach(p => {
+        this.products = [...this.products, this.createProduct(p)]
+      })
+    })
   }
 }

@@ -1,5 +1,7 @@
 import logging
 import logging.handlers
+
+from django.core.serializers import serialize
 from django.utils import timezone
 import time
 
@@ -23,7 +25,7 @@ from .serializers import (
     UserSerializer,
     TemplateSerializer,
     InspectorSerializer,
-    RunnerSerializer, IndexerSerializer,
+    RunnerSerializer, IndexerSerializer, InspectorValueSerializer,
 )
 
 
@@ -73,14 +75,16 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         indexer.save()
         return Response(status=200)
 
-    @action(detail=True, url_path="search", methods=["get"])
+    @action(detail=True, url_path="search", methods=["POST"])
     def search(self, request: Request, pk: int) -> Response:
         query = request.data['q']
         inverted_index = InvertedIndex()
         result = inverted_index.process_query(query.split(" "), pk)
-        print(result)
-        return Response(status=200)
-
+        results = InspectorValue.objects.filter(id__in=result).values_list('url', flat=True)
+        products = []
+        for p in results:
+            products.append(InspectorValue.objects.filter(url=p).values('value', 'url', 'inspector', 'attribute'))
+        return Response(data=products)
 
 
 class InspectorViewSet(EverythingButDestroyViewSet):

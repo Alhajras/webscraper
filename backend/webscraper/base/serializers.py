@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Crawler, Template, Inspector, Runner, Indexer
+from .models import Crawler, Template, Inspector, Runner, Indexer, InspectorValue
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -41,6 +41,12 @@ class CrawlerSerializer(serializers.ModelSerializer):
 class InspectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inspector
+        fields = "__all__"
+
+
+class InspectorValueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InspectorValue
         fields = "__all__"
 
 
