@@ -18,8 +18,11 @@
           <div
             class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
             <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-              <div class="text-2xl font-bold text-900">{{ product.name }}</div>
-              <div class="flex align-items-center gap-3">
+              <div class="text-2xl font-bold text-900">
+                <app-marked-text [text]="product.name" [searchString]="searchText">
+                </app-marked-text>
+              </div>
+                <div class="flex align-items-center gap-3">
                                 <span class="flex align-items-center gap-2">
                                     <i class="pi pi-tag"></i>
                                     <span class="font-semibold">{{ product.category }}</span>

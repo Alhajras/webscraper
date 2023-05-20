@@ -1,12 +1,12 @@
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { BaseComponent } from './base/base.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { BrowserModule } from '@angular/platform-browser';
-import { InputFieldComponent } from './shared/input-field/input-field.component';
-import { NgModule } from '@angular/core';
-import { CrawlerComponent } from 'src/app/base/crawler/crawler.component';
-import { TimeAgoComponent } from './shared/time-ago/time-ago.component';
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {BaseComponent} from './base/base.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {BrowserModule} from '@angular/platform-browser';
+import {InputFieldComponent} from './shared/input-field/input-field.component';
+import {NgModule} from '@angular/core';
+import {CrawlerComponent} from 'src/app/base/crawler/crawler.component';
+import {TimeAgoComponent} from './shared/time-ago/time-ago.component';
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
 import {DialogModule} from "primeng/dialog";
@@ -22,9 +22,9 @@ import {TableModule} from "primeng/table";
 import {TimeagoPipe} from "src/app/shared/pipes/timeago.pipe";
 import {TemplateComponent} from "src/app/base/template/template.component";
 import {TreeTableModule} from "primeng/treetable";
-import { InspectorComponent } from './base/inspector/inspector.component';
-import { RunnerComponent } from './base/runner/runner.component';
-import { IndexerComponent } from './base/indexer/indexer.component';
+import {InspectorComponent} from './base/inspector/inspector.component';
+import {RunnerComponent} from './base/runner/runner.component';
+import {IndexerComponent} from './base/indexer/indexer.component';
 import {StepsModule} from "primeng/steps";
 import {TimelineModule} from "primeng/timeline";
 import {ChipsModule} from "primeng/chips";
@@ -35,6 +35,8 @@ import {SearchComponent} from "src/app/base/search/search.component";
 import {DataViewModule} from "primeng/dataview";
 import {RatingModule} from "primeng/rating";
 import {TagModule} from "primeng/tag";
+import {MarkedTextComponent} from "src/app/shared/marked-text/marked-text.component";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,8 @@ import {TagModule} from "primeng/tag";
     InspectorComponent,
     RunnerComponent,
     IndexerComponent,
-    SearchComponent
+    SearchComponent,
+    MarkedTextComponent
   ],
   imports: [
     BrowserModule,
@@ -80,4 +83,5 @@ import {TagModule} from "primeng/tag";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
