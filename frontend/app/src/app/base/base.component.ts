@@ -11,6 +11,7 @@ export class BaseComponent {
     {label: 'Runners', url: 'runners'},
     {label: 'Crawlers', url: 'crawlers'},
     {label: 'Templates', url: 'templates'},
-    {label: 'Indexers', url: 'indexers'}
+    {label: 'Indexers', url: 'indexers'},
+    {label: 'Search', url: 'search'}
   ]
 }

@@ -31,6 +31,10 @@ import {ChipsModule} from "primeng/chips";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {MenubarModule} from "primeng/menubar";
 import {MultiSelectModule} from "primeng/multiselect";
+import {SearchComponent} from "src/app/base/search/search.component";
+import {DataViewModule} from "primeng/dataview";
+import {RatingModule} from "primeng/rating";
+import {TagModule} from "primeng/tag";
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,32 +46,36 @@ import {MultiSelectModule} from "primeng/multiselect";
     TimeagoPipe,
     InspectorComponent,
     RunnerComponent,
-    IndexerComponent
+    IndexerComponent,
+    SearchComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MenuModule,
-        BrowserAnimationsModule,
-        TableModule,
-        HttpClientModule,
-        DialogModule,
-        CardModule,
-        DropdownModule,
-        MessageModule,
-        ReactiveFormsModule,
-        InputTextareaModule,
-        InputTextModule,
-        ButtonModule,
-        RippleModule,
-        TreeTableModule,
-        StepsModule,
-        TimelineModule,
-        ChipsModule,
-        OverlayPanelModule,
-        MenubarModule,
-        MultiSelectModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MenuModule,
+    BrowserAnimationsModule,
+    TableModule,
+    HttpClientModule,
+    DialogModule,
+    CardModule,
+    DropdownModule,
+    MessageModule,
+    ReactiveFormsModule,
+    InputTextareaModule,
+    InputTextModule,
+    ButtonModule,
+    RippleModule,
+    TreeTableModule,
+    StepsModule,
+    TimelineModule,
+    ChipsModule,
+    OverlayPanelModule,
+    MenubarModule,
+    MultiSelectModule,
+    DataViewModule,
+    RatingModule,
+    TagModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
