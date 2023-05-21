@@ -16,7 +16,6 @@ export class InspectorComponent implements OnInit {
   public template!: Template
   public inspectors: Inspector[] = []
   public updatedInspector: Inspector | null = null
-  public breadcrumbs: MenuItem[] = []
   public description!: FormControl
   public currentlySubmitting = false
   public displayModal = false
@@ -51,7 +50,7 @@ export class InspectorComponent implements OnInit {
     const inspector = {
       name: this.name.value,
       selector: this.selector.value,
-      attribute: this.attribute.value,
+      attribute: this.attribute.value === '' ? null : this.attribute.value,
       template: this.template.id,
     }
     if (this.updatedInspector !== null) {
@@ -117,13 +116,13 @@ export class InspectorComponent implements OnInit {
     this.initForm()
   }
 
-  public createInspector() {
+  public createInspector():void {
     this.initForm()
     this.updatedInspector = null
     this.displayModal = true
   }
 
-  private initForm() {
+  private initForm():void {
     this.description = this.fb.control('')
     this.selector = this.fb.control('')
     this.attribute = this.fb.control('')
