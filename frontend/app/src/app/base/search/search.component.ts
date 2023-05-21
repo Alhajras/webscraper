@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Template} from "src/app/models/template.model";
 import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorValue} from "src/app/models/inspector-value.model";
+import {Indexer} from "src/app/models/indexer.model";
 
 export interface TemplateDropDown {
   key: string
@@ -36,6 +37,8 @@ export class SearchComponent {
   public loading = false
   public products: any[] = []
   public searchText = ''
+  public cached_indexers = []
+  public selectedIndexerForm!: Indexer
 
   public closeModal(): void {
     this.displayModal = false
@@ -44,10 +47,12 @@ export class SearchComponent {
   public constructor(
     private readonly indexerService: IndexerService,
   ) {
+    this.indexerService.indexedIndexers().subscribe(cached_indexers => {
+      this.cached_indexers = cached_indexers
+    })
   }
 
   private createProduct(items: InspectorValue[]): Partial<Product> {
-    console.log(items)
     let product: Product = {}
     items.forEach((item: InspectorValue) => {
       switch (item.inspector) {
@@ -68,7 +73,7 @@ export class SearchComponent {
     this.loading = true
     this.products = []
     // TODO this is bad and must be dynamic
-    this.indexerService.search(8, this.searchText).subscribe(values => {
+    this.indexerService.search(this.selectedIndexerForm.id, this.searchText).subscribe(values => {
       values.forEach(p => {
         this.products = [...this.products, this.createProduct(p)]
       })

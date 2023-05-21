@@ -6,7 +6,7 @@ import re
 
 from django.core.cache import cache
 
-from ..models import InspectorValue, Inspector
+from ..models import InspectorValue, Inspector, Indexer
 
 
 class InvertedIndex:
@@ -50,6 +50,15 @@ class InvertedIndex:
                     if inverted_list_len == 0 or self.inverted_lists[word][-1] != document.id:
                         self.inverted_lists[word].append(document.id)
         cache.set(cache_key, self.inverted_lists)
+
+    def cached_indexers_keys(self):
+        indexers = Indexer.objects.filter(deleted=False)
+        cached_indexers = []
+        for indexer in indexers:
+            cache_key = f'indexer:{indexer.id}'
+            if cache.get(cache_key) is not None:
+                cached_indexers.append(indexer)
+        return cached_indexers
 
     def intersect(self, list1, list2):
         """

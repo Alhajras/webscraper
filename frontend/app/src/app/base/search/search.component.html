@@ -1,9 +1,23 @@
-<div class="p-inputgroup">
-  <input
-    (keydown.enter)="searchProducts()"
-    [(ngModel)]="searchText"
-    type="text" pInputText placeholder="Search..."/>
-  <button type="button" pButton icon="pi pi-search" styleClass="p-button-warn"></button>
+<div class="flex">
+  <div class="p-inputgroup">
+    <input
+      [disabled]="selectedIndexerForm === undefined"
+      (keydown.enter)="searchProducts()"
+      [(ngModel)]="searchText"
+      type="text" pInputText placeholder="Search..."/>
+    <button
+      [disabled]="selectedIndexerForm === undefined"
+      (click)="searchProducts()"
+      type="button" pButton icon="pi pi-search" styleClass="p-button-warn"></button>
+  </div>
+  <p-dropdown
+    id="indexer-id"
+    [(ngModel)]="selectedIndexerForm"
+    placeholder="Select an indexer"
+    [options]="cached_indexers"
+    optionLabel="name"
+    [filter]="true"
+  ></p-dropdown>
 </div>
 <div class="card">
   <p-dataView
@@ -22,7 +36,7 @@
                 <app-marked-text [text]="product.name" [searchString]="searchText">
                 </app-marked-text>
               </div>
-                <div class="flex align-items-center gap-3">
+              <div class="flex align-items-center gap-3">
                                 <span class="flex align-items-center gap-2">
                                     <i class="pi pi-tag"></i>
                                     <span class="font-semibold">{{ product.category }}</span>

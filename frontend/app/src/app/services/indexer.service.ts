@@ -40,4 +40,8 @@ export class IndexerService {
   public search(indexer_id: number, q: string) {
     return this.client.post<any[]>(`${this.endpointPath}${indexer_id}/search/`, {q: q})
   }
+
+    public indexedIndexers(): Observable<any> {
+    return this.client.get<any>(`${this.endpointPath}available-indexers/`)
+  }
 }

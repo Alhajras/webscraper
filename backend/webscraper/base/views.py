@@ -62,6 +62,12 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         Inspector.objects.filter(id__in=inspectors_ids).update(indexer=indexer.data['id'])
         return indexer
 
+    @action(detail=False, url_path="available-indexers", methods=["GET"])
+    def available_indexers(self, request: Request) -> Response:
+        inverted_index = InvertedIndex()
+        serialized_indexers = [IndexerSerializer(indexer).data for indexer in inverted_index.cached_indexers_keys()]
+        return Response(status=200, data=serialized_indexers)
+
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
         indexer_id = request.data['id']
