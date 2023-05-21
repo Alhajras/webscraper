@@ -1,10 +1,10 @@
 <p-table [loading]="loading" [value]="runners" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="caption">
-    <div class="p-grid">
-      <div class="p-col">
+    <div class="grid">
+      <div class="col">
         Runners
       </div>
-      <div class="p-col-2">
+      <div class="col-2">
         <button
           icon="pi pi-plus"
           id="open-dialog"
@@ -79,7 +79,7 @@
         <div>
           <button
             [disabled]="runner.status === 'Exit' || runner.status === 'Completed' "
-            class="p-ml-1 p-button-outlined p-button-sm no-icon"
+            class="ml-1 p-button-outlined p-button-sm no-icon"
             type="button"
             pButton
             pRipple
@@ -88,7 +88,7 @@
           ></button>
           <button
             class="
-        p-ml-1 p-button-outlined p-button-sm
+        ml-1 p-button-outlined p-button-sm
         no-icon
       "
             type="button"
@@ -99,7 +99,7 @@
           ></button>
           <button
             class="
-        p-ml-1 p-button-danger p-button-outlined p-button-sm
+        ml-1 p-button-danger p-button-outlined p-button-sm
         no-icon
       "
             type="button"
