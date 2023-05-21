@@ -1,5 +1,5 @@
-<div class="flex">
-  <div class="p-inputgroup">
+<div class="flex justify-content-center flex-wrap p-4 gap-4">
+  <div class="inputgroup">
     <input
       [disabled]="selectedIndexerForm === undefined"
       (keydown.enter)="searchProducts()"
@@ -9,8 +9,8 @@
       [disabled]="selectedIndexerForm === undefined"
       (click)="searchProducts()"
       type="button" pButton icon="pi pi-search" styleClass="p-button-warn"></button>
-  </div>
   <p-dropdown
+    class="ml-2"
     [disabled]="cached_indexers.length === 0"
     id="indexer-id"
     [(ngModel)]="selectedIndexerForm"
@@ -19,6 +19,8 @@
     optionLabel="name"
     [filter]="true"
   ></p-dropdown>
+      </div>
+
 </div>
 <div class="card">
   <p-dataView
