@@ -12,6 +12,7 @@ export interface Crawler {
   timeout: number
   max_pages: number,
   max_depth:number,
-  robot_file_url:string
-  excluded_urls:string
+  robot_file_url:string,
+  excluded_urls:string,
+  scope_divs:string
 }

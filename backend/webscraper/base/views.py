@@ -180,14 +180,14 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         base_url = "https://www.flaconi.de"
         # start_url = "https://www.flaconi.de/damen-duftsets/"
         start_url = crawler.seed_url
-        # TODO: Put this in the GUI
-        scope_divs = [
-            "//*[contains(@class, 'e-tastic__flaconi-product-list')]",
-            '//*[@id="app"]/div/main/div/div/div[3]/div',
-        ]
+        # scope_divs = [
+        #     "//*[contains(@class, 'e-tastic__flaconi-product-list')]",
+        #     '//*[@id="app"]/div/main/div/div/div[3]/div',
+        # ]
         # TODO: Use a better splitter
         # Urls that may crawler navigate by mistake
         excluded_urls = crawler.excluded_urls.split("\";\"")
+        scope_divs = crawler.scope_divs.split("\";\"")
         # Stopping options
         max_pages = crawler.max_pages
         # TODO: Please change this to be read from the request body

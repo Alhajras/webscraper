@@ -94,6 +94,7 @@ class Crawler(models.Model):
     max_depth = models.PositiveSmallIntegerField(default=5)
     robot_file_url = models.TextField(default="")
     excluded_urls = models.TextField(blank=True)
+    scope_divs = models.TextField(blank=True)
 
     def __str__(self) -> str:
         return self.name
