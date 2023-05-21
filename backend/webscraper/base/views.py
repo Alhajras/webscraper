@@ -139,9 +139,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
-        kakaka = InvertedIndex()
         runner_id = request.data['id']
-        kakaka.create_index(runner_id, [1])
         runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():

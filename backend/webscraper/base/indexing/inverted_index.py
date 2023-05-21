@@ -49,7 +49,6 @@ class InvertedIndex:
                     inverted_list_len = len(self.inverted_lists[word])
                     if inverted_list_len == 0 or self.inverted_lists[word][-1] != document.id:
                         self.inverted_lists[word].append(document.id)
-        print(self.inverted_lists)
         cache.set(cache_key, self.inverted_lists)
 
     def intersect(self, list1, list2):
