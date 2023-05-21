@@ -213,7 +213,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             link: Link = q.pop()
             if runner.collected_documents >= max_pages:
                 return
-            print(link.url)
             logger.info(link.url)
             # We stop recursion when we reach tha mx level of digging into pages
             if link.level > max_rec_level:
@@ -254,7 +253,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     if a.get_attribute("href") is None:
                         continue
                     href = a.get_attribute("href").split("#").pop()
-                    print(href)
                     # Some sites have None values and 'link != a' to avoid looping
                     if href is not None and base_url == urlparse(href).hostname:
                         if href not in excluded_urls:
