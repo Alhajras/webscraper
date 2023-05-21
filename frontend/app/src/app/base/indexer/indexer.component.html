@@ -2,11 +2,11 @@
   [loading]="loading"
   [value]="indexers" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="caption">
-    <div class="p-grid">
-      <div class="p-col">
+    <div class="grid">
+      <div class="col">
         Indexers
       </div>
-      <div class="p-col-2">
+      <div class="col-2">
         <button
           icon="pi pi-plus"
           id="open-dialog"
@@ -56,7 +56,7 @@
           <button
             [disabled]="indexer.status === 'Running'"
             class="
-        p-ml-1 p-button-outlined p-button-sm
+        ml-1 p-button-outlined p-button-sm
         no-icon
       "
             type="button"
@@ -67,7 +67,7 @@
           ></button>
           <button
             class="
-        p-ml-1 p-button-outlined p-button-sm
+        ml-1 p-button-outlined p-button-sm
         no-icon
       "
             type="button"
@@ -78,7 +78,7 @@
           ></button>
           <button
             class="
-        p-ml-1 p-button-danger p-button-outlined p-button-sm
+        ml-1 p-button-danger p-button-outlined p-button-sm
         no-icon
       "
             type="button"
