@@ -8,10 +8,10 @@ import {MenuItem} from "primeng/api";
 })
 export class BaseComponent {
   public items: MenuItem[] = [
-    {label: 'Runners', url: 'runners'},
-    {label: 'Crawlers', url: 'crawlers'},
-    {label: 'Templates', url: 'templates'},
-    {label: 'Indexers', url: 'indexers'},
-    {label: 'Search', url: 'search'}
+    {label: 'Runners', url: 'runners', icon: 'pi pi-send' },
+    {label: 'Crawlers', url: 'crawlers', icon: 'pi pi-cloud-download'},
+    {label: 'Templates', url: 'templates', icon: 'pi pi-book'},
+    {label: 'Indexers', url: 'indexers', icon: 'pi pi-sitemap'},
+    {label: 'Search', url: 'search', icon: 'pi pi-search'}
   ]
 }
