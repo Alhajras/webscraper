@@ -186,7 +186,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         scope_divs = crawler.scope_divs.split("\";\"")
         # Stopping options
         max_pages = crawler.max_pages
-        # TODO: Please change this to be read from the request body
         max_visited_links = crawler.max_pages
         max_rec_level = crawler.max_depth
         base_urlparse = urlparse(base_url)
@@ -269,7 +268,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                             ):
                                 links[href] = found_link
                                 q.append(Link(href))
-            # TODO: Use `sleep` here
             return
 
         runner = Runner.objects.get(id=runner_id)
@@ -281,6 +279,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         start = time.time()
         while len(q) != 0:
             find_links()
+            time.sleep(crawler.sleep)
+
         print(runner.collected_documents)
         end = time.time()
         print(end - start)
