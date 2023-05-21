@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Crawler} from "src/app/models/crawler.model";
 import {Template} from "src/app/models/template.model";
@@ -129,10 +129,10 @@ export class CrawlerComponent {
       }))
     })
 
-    this.template = this.fb.control('')
+    this.template = this.fb.control('', [Validators.required])
     this.description = this.fb.control('')
-    this.seedUrl = this.fb.control('')
-    this.name = this.fb.control('')
+    this.seedUrl = this.fb.control('' , [Validators.required])
+    this.name = this.fb.control('', [Validators.required])
     this.threads= this.fb.control('')
     this.retry= this.fb.control('')
     this.sleep= this.fb.control('')

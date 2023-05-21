@@ -43,7 +43,7 @@
           [pRowToggler]="template"
           class="
             p-button-text p-button-rounded p-button-plain
-            f2-scene-expander-button
+            scene-expander-button
           "
           [icon]="expanded ? downIcon : rightIcon"
         ></button>
@@ -81,7 +81,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-template>
-    <tr class="f2-scene-overview-row">
+    <tr class="scene-overview-row">
       <td attr.colspan="{{ columnCount }}">
         <app-inspector [template]="template"></app-inspector>
       </td>
@@ -136,7 +136,7 @@
   </div>
   <ng-template pTemplate="footer">
     <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
-    <!--      <f2-loading msg="Submitting ..."></f2-loading>-->
+    <!--      <loading msg="Submitting ..."></loading>-->
     <!--    </span>-->
     <button
       id="run-btn"

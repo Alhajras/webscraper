@@ -36,6 +36,7 @@ import {DataViewModule} from "primeng/dataview";
 import {RatingModule} from "primeng/rating";
 import {TagModule} from "primeng/tag";
 import {MarkedTextComponent} from "src/app/shared/marked-text/marked-text.component";
+import {InputFieldErrorComponent} from "src/app/shared/input-field-error/input-field-error.component";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {MarkedTextComponent} from "src/app/shared/marked-text/marked-text.compon
     RunnerComponent,
     IndexerComponent,
     SearchComponent,
-    MarkedTextComponent
+    MarkedTextComponent,
+    InputFieldErrorComponent
   ],
   imports: [
     BrowserModule,

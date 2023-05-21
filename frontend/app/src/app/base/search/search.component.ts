@@ -31,7 +31,6 @@ export class SearchComponent {
   public form!: FormGroup
   public currentlySubmitting = false
   public displayModal = false
-  public header = 'crawler form'
   public errorMessage = ''
   public readonly columnCount = 8
   public loading = false

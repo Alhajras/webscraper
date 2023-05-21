@@ -109,7 +109,7 @@
   [modal]="true"
   (onHide)="closeModal()"
   [maximizable]="true"
-  styleClass="f2-indexer-dialog"
+  styleClass="indexer-dialog"
 >
   <div *ngIf="displayModal">
     <p-card>
@@ -152,7 +152,7 @@
   </div>
   <ng-template pTemplate="footer">
     <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
-    <!--      <f2-loading msg="Submitting ..."></f2-loading>-->
+    <!--      <loading msg="Submitting ..."></loading>-->
     <!--    </span>-->
     <button
       id="run-btn"

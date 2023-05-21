@@ -6,5 +6,11 @@
     ></label
   >
   <ng-content></ng-content>
+    <app-input-field-error
+    *ngFor="let error of errorDetails | keyvalue"
+    [validator]="error.key"
+    [errorDetails]="error.value"
+    [fieldFormControl]="formControl"
+  ></app-input-field-error>
   <div *ngIf="helpText" class="secondary-text">{{ helpText }}</div>
 </div>

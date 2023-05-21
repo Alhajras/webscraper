@@ -130,7 +130,7 @@
           <app-input-field
             [isRequired]="true"
             labelText="Template"
-            helpText=""
+            helpText="The template that should the crawler use to identify HTML elements to be crawled and saved."
           >
             <p-dropdown
               id="version-id"
@@ -143,8 +143,8 @@
           </app-input-field>
           <app-input-field
             [isRequired]="true"
-            labelText="Seed Url"
-            helpText=""
+            labelText="Seed URL"
+            helpText="Starting point on which the crawler will start crawling."
           >
             <input
               id="end-time-id"
@@ -274,7 +274,7 @@
   </div>
   <ng-template pTemplate="footer">
     <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
-    <!--      <f2-loading msg="Submitting ..."></f2-loading>-->
+    <!--      <loading msg="Submitting ..."></loading>-->
     <!--    </span>-->
     <button
       id="run-btn"
