@@ -177,13 +177,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         links: dict[str, Link] = {}
         q = []
         # This is the base URL that the crawler should only crawl from
-        base_url = "https://www.flaconi.de"
+        base_url = urlparse(crawler.seed_url).hostname
         # start_url = "https://www.flaconi.de/damen-duftsets/"
         start_url = crawler.seed_url
-        # scope_divs = [
-        #     "//*[contains(@class, 'e-tastic__flaconi-product-list')]",
-        #     '//*[@id="app"]/div/main/div/div/div[3]/div',
-        # ]
         # TODO: Use a better splitter
         # Urls that may crawler navigate by mistake
         excluded_urls = crawler.excluded_urls.split("\";\"")
@@ -209,7 +205,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
 
         def find_links():
-            # TODO: This should return one result only! Use crawler ID, fix it.
             runner = Runner.objects.get(id=runner_id)
 
             if runner.status == str(RunnerStatus.EXIT):
@@ -242,9 +237,12 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                         inspector_element = scoped_element.find_element(
                             By.XPATH, inspector.selector
                         )
+                        attribute = None
+                        if inspector.attribute is not None:
+                            attribute = inspector_element.get_attribute(inspector.attribute)
                         InspectorValue.objects.update_or_create(
                             url=link.url,
-                            attribute=inspector_element.get_attribute(inspector.attribute),
+                            attribute=attribute,
                             value=inspector_element.text, inspector=inspector, runner=runner
                         )
             except Exception as e:
@@ -259,7 +257,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     href = a.get_attribute("href").split("#").pop()
                     print(href)
                     # Some sites have None values and 'link != a' to avoid looping
-                    if href is not None and base_url in href:
+                    if href is not None and base_url == urlparse(href).hostname:
                         if href not in excluded_urls:
                             found_link = Link(
                                 url=href, visited=False, level=current_rec_level
