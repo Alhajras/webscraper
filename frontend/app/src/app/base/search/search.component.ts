@@ -52,7 +52,7 @@ export class SearchComponent {
     })
   }
 
-  private createProduct(items: InspectorValue[]): Partial<Product> {
+  private createFlaconiProduct(items: InspectorValue[]): Partial<Product> {
     let product: Product = {}
     items.forEach((item: InspectorValue) => {
       switch (item.inspector) {
@@ -69,13 +69,35 @@ export class SearchComponent {
     return product
   }
 
+  private createDouglasiProduct(items: InspectorValue[]): Partial<Product> {
+    let product: Product = {}
+    items.forEach((item: InspectorValue) => {
+      switch (item.inspector) {
+        case 4:
+          product.name = item.value
+          break;
+        case 5:
+          product.price = item.value
+          break;
+        case 6:
+          product.image = item.attribute
+          break;
+        default:
+          break;
+      }
+    })
+    return product
+  }
+
   public searchProducts() {
     this.loading = true
     this.products = []
     // TODO this is bad and must be dynamic
     this.indexerService.search(this.selectedIndexerForm.id, this.searchText).subscribe(values => {
+      console.log(values)
       values.forEach(p => {
-        this.products = [...this.products, this.createProduct(p)]
+
+        this.products = [...this.products, this.selectedIndexerForm.name === "Flaconi" ? this.createFlaconiProduct(p) : this.createDouglasiProduct(p)]
       })
       this.loading = false
     })

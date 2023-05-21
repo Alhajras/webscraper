@@ -37,6 +37,13 @@ import {RatingModule} from "primeng/rating";
 import {TagModule} from "primeng/tag";
 import {MarkedTextComponent} from "src/app/shared/marked-text/marked-text.component";
 import {InputFieldErrorComponent} from "src/app/shared/input-field-error/input-field-error.component";
+import {SearchModule} from "src/app/base/search/search.module";
+import {
+  FlaconiResultTemplateComponent
+} from "src/app/base/search/flaconi-result-template/flaconi-result-template.component";
+import {
+  DouglasResultTemplateComponent
+} from "src/app/base/search/douglas-result-template/douglas-result-template.component";
 
 @NgModule({
   declarations: [
@@ -52,36 +59,39 @@ import {InputFieldErrorComponent} from "src/app/shared/input-field-error/input-f
     IndexerComponent,
     SearchComponent,
     MarkedTextComponent,
-    InputFieldErrorComponent
+    InputFieldErrorComponent,
+    FlaconiResultTemplateComponent,
+    DouglasResultTemplateComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MenuModule,
-    BrowserAnimationsModule,
-    TableModule,
-    HttpClientModule,
-    DialogModule,
-    CardModule,
-    DropdownModule,
-    MessageModule,
-    ReactiveFormsModule,
-    InputTextareaModule,
-    InputTextModule,
-    ButtonModule,
-    RippleModule,
-    TreeTableModule,
-    StepsModule,
-    TimelineModule,
-    ChipsModule,
-    OverlayPanelModule,
-    MenubarModule,
-    MultiSelectModule,
-    DataViewModule,
-    RatingModule,
-    TagModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MenuModule,
+        BrowserAnimationsModule,
+        TableModule,
+        HttpClientModule,
+        DialogModule,
+        CardModule,
+        DropdownModule,
+        MessageModule,
+        ReactiveFormsModule,
+        InputTextareaModule,
+        InputTextModule,
+        ButtonModule,
+        RippleModule,
+        TreeTableModule,
+        StepsModule,
+        TimelineModule,
+        ChipsModule,
+        OverlayPanelModule,
+        MenubarModule,
+        MultiSelectModule,
+        DataViewModule,
+        RatingModule,
+        TagModule,
+        FormsModule,
+        SearchModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
