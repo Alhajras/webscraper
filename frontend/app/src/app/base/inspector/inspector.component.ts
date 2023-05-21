@@ -21,6 +21,7 @@ export class InspectorComponent implements OnInit {
   public currentlySubmitting = false
   public displayModal = false
   public selector!: FormControl
+  public attribute!: FormControl
   public form!: FormGroup
   public header = 'Inspector form'
   public name!: FormControl
@@ -50,6 +51,7 @@ export class InspectorComponent implements OnInit {
     const inspector = {
       name: this.name.value,
       selector: this.selector.value,
+      attribute: this.attribute.value,
       template: this.template.id,
     }
     if (this.updatedInspector !== null) {
@@ -99,8 +101,10 @@ export class InspectorComponent implements OnInit {
     this.updatedInspector = inspector
     this.name = this.fb.control(inspector.name)
     this.selector = this.fb.control(inspector.selector)
+    this.attribute = this.fb.control(inspector.attribute)
     this.form = this.fb.group({
       selector: this.selector,
+      attribute: this.attribute,
       name: this.name,
     })
     this.displayModal = true
@@ -122,10 +126,12 @@ export class InspectorComponent implements OnInit {
   private initForm() {
     this.description = this.fb.control('')
     this.selector = this.fb.control('')
+    this.attribute = this.fb.control('')
     this.name = this.fb.control('')
     this.form = this.fb.group({
       description: this.description,
       url: this.selector,
+      attribute: this.attribute,
       name: this.name,
     })
   }

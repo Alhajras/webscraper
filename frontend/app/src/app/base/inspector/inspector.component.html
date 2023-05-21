@@ -127,6 +127,20 @@
               [formControl]="selector"
             />
           </app-input-field>
+          <app-input-field
+            [isRequired]="false"
+            labelId="attribute-id"
+            labelText="Attribute"
+            helpText="HTML element attribute like, src, name and href."
+          >
+
+            <input
+              id="attribute-id"
+              type="text"
+              pInputText
+              [formControl]="attribute"
+            />
+          </app-input-field>
         </div>
       </form>
     </p-card>
