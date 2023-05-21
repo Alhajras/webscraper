@@ -92,7 +92,7 @@ class Crawler(models.Model):
     timeout = models.FloatField(default=10)
     max_pages = models.PositiveIntegerField(default=20)
     max_depth = models.PositiveSmallIntegerField(default=5)
-    robot_file_url = models.TextField(default="")
+    robot_file_url = models.TextField(default="", blank=True)
     excluded_urls = models.TextField(blank=True)
     scope_divs = models.TextField(blank=True)
 

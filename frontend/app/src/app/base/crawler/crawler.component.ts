@@ -66,8 +66,8 @@ export class CrawlerComponent {
       max_pages: this.maxPages.value,
       max_depth: this.maxDepth.value,
       robot_file_url: this.robotFileUrl.value,
-      excluded_urls: this.excludedUrls.value ?? this.excludedUrls.value.join('";"'),
-      scope_divs: this.scopeDivs.value ?? this.scopeDivs.value.join('";"')
+      excluded_urls:  this.excludedUrls.value.join('";"'),
+      scope_divs:  this.scopeDivs.value.join('";"')
     }
     if (this.updatedCrawler !== null) {
       this.crawlerService.update(this.updatedCrawler.id, crawler).toPromise().then(() => {
@@ -136,14 +136,14 @@ export class CrawlerComponent {
     this.description = this.fb.control('')
     this.seedUrl = this.fb.control('' , [Validators.required, Validators.pattern(urlReg)])
     this.name = this.fb.control('', [Validators.required])
-    this.threads= this.fb.control('')
+    this.threads= this.fb.control(1)
     this.retry= this.fb.control(0)
     this.sleep= this.fb.control(0)
-    this.timeout= this.fb.control('')
+    this.timeout= this.fb.control(60)
     this.maxPages= this.fb.control('')
     this.maxDepth= this.fb.control(2)
     this.robotFileUrl= this.fb.control('', Validators.pattern(urlReg))
-    this.excludedUrls= this.fb.control('' , Validators.pattern(urlReg))
+    this.excludedUrls= this.fb.control('')
     this.scopeDivs= this.fb.control('')
 
     this.form = this.fb.group({
@@ -175,8 +175,8 @@ export class CrawlerComponent {
     this.maxPages = this.fb.control(crawler.max_pages)
     this.maxDepth = this.fb.control(crawler.max_depth)
     this.robotFileUrl = this.fb.control(crawler.robot_file_url)
-    this.excludedUrls = this.fb.control(crawler.excluded_urls.split("\";\""))
-    this.scopeDivs = this.fb.control(crawler.scope_divs.split("\";\""))
+    this.excludedUrls = this.fb.control(crawler.excluded_urls === '' ? '' : crawler.excluded_urls.split("\";\""))
+    this.scopeDivs = this.fb.control(crawler.scope_divs === '' ? '' : crawler.scope_divs.split("\";\""))
 
     this.form = this.fb.group({
       description: this.description,
