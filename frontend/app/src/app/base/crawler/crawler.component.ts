@@ -38,7 +38,7 @@ export class CrawlerComponent {
   public displayModal = false
   public header = 'Crawler form'
   public errorMessage = ''
-  public readonly columnCount = 8
+  public readonly columnCount = 6
   public loading = false
 
   public closeModal(): void {
@@ -129,18 +129,20 @@ export class CrawlerComponent {
       }))
     })
 
+    const urlReg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+
     this.template = this.fb.control('', [Validators.required])
     this.description = this.fb.control('')
-    this.seedUrl = this.fb.control('' , [Validators.required])
+    this.seedUrl = this.fb.control('' , [Validators.required, Validators.pattern(urlReg)])
     this.name = this.fb.control('', [Validators.required])
     this.threads= this.fb.control('')
     this.retry= this.fb.control(0)
     this.sleep= this.fb.control(0)
     this.timeout= this.fb.control('')
     this.maxPages= this.fb.control('')
-    this.maxDepth= this.fb.control('')
-    this.robotFileUrl= this.fb.control('')
-    this.excludedUrls= this.fb.control('')
+    this.maxDepth= this.fb.control(2)
+    this.robotFileUrl= this.fb.control('', Validators.pattern(urlReg))
+    this.excludedUrls= this.fb.control('' , Validators.pattern(urlReg))
 
     this.form = this.fb.group({
       description: this.description,
