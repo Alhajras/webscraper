@@ -82,7 +82,6 @@ class Crawler(models.Model):
     seed_url = models.TextField()
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    completed_at = models.DateTimeField(blank=True, null=True)
     deleted = models.BooleanField(default=False)
     template = models.OneToOneField(
         Template, on_delete=models.PROTECT, related_name="templates", null=True

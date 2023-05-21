@@ -36,7 +36,7 @@ export class CrawlerComponent {
   public templatesList: TemplateDropDown[] = []
   public currentlySubmitting = false
   public displayModal = false
-  public header = 'crawler form'
+  public header = 'Crawler form'
   public errorMessage = ''
   public readonly columnCount = 8
   public loading = false
@@ -134,8 +134,8 @@ export class CrawlerComponent {
     this.seedUrl = this.fb.control('' , [Validators.required])
     this.name = this.fb.control('', [Validators.required])
     this.threads= this.fb.control('')
-    this.retry= this.fb.control('')
-    this.sleep= this.fb.control('')
+    this.retry= this.fb.control(0)
+    this.sleep= this.fb.control(0)
     this.timeout= this.fb.control('')
     this.maxPages= this.fb.control('')
     this.maxDepth= this.fb.control('')

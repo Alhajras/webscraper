@@ -24,7 +24,6 @@ class CrawlerSerializer(serializers.ModelSerializer):
             "seed_url",
             "description",
             "created_at",
-            "completed_at",
             "deleted",
             "template",
             "threads",
