@@ -20,7 +20,6 @@ export interface TreeNode {
 export class TemplateComponent {
   public templates: Template[] = []
   public updatedTemplate: Template | null = null
-  public breadcrumbs: MenuItem[] = []
   public description!: FormControl
   public template!: FormControl
   public currentlySubmitting = false

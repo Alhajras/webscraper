@@ -114,7 +114,7 @@ describe('InputFieldErrorComponent', () => {
     expect(el.nativeElement.textContent).toContain('xxx')
 
     formControl.markAsDirty()
-    formControl.setValue('www.preondock.com')
+    formControl.setValue('www.crawling.com')
     fixture.detectChanges()
     expect(formControl.hasError('required')).toBeFalse()
     expect(el.query(By.css('.p-error'))).toBeNull()
