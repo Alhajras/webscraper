@@ -5,6 +5,7 @@ import {Runner} from "src/app/models/runner.model";
 import {RunnerService} from "src/app/services/runner.service";
 import {Crawler} from "src/app/models/crawler.model";
 import {CrawlerService} from "src/app/services/crawler.service";
+import {PrimeIcons} from 'primeng/api';
 
 export interface CrawlerDropDown {
   key: string
@@ -31,6 +32,12 @@ export class RunnerComponent {
   public readonly columnCount = 8
   private readonly pullingTimeSec = 10000
   public loading = false
+  public events = [
+    {status: 'New'},
+    {status: 'Running'},
+    {status: 'Exit'},
+    {status: 'Completed'},
+  ];
 
   public constructor(
     private readonly fb: FormBuilder,
