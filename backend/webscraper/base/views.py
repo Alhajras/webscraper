@@ -193,7 +193,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         excluded_urls = crawler.excluded_urls.split("\";\"")
         robot_disallow_links = [re.escape(bad_link) for bad_link in extract_disallow_lines_from_url(crawler.robot_file_url)]
         # Make a regex that matches if any of our regexes match.
-        disallow_link_patterns = "(" + ")|(".join(robot_disallow_links) + ")"
+        disallow_link_patterns = ''
+        if len(robot_disallow_links) != 0:
+            disallow_link_patterns = "(" + ")|(".join(robot_disallow_links) + ")"
 
         scope_divs = crawler.scope_divs.split("\";\"")
         # Stopping options
@@ -261,29 +263,29 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 # We add one level
                 current_rec_level = link.level + 1
                 for a in scoped_element.find_elements(By.CSS_SELECTOR, "a"):
-                    # We skip the fragments as they do not add any product, that why we split by #
                     if a.get_attribute("href") is None:
                         continue
+                    # We skip the fragments as they do not add any product, that why we split by #
                     href = a.get_attribute("href").split("#").pop()
-                    # Some sites have None values and 'link != a' to avoid looping
-                    import pdb
-                    pdb.set_trace()
-                    if re.match(disallow_link_patterns, href):
-                        print("-----------------------------------------------")
-                        print(href)
-                        print("-----------------------------------------------")
-                    if href is not None and base_url == urlparse(href).hostname:
-                        if href not in excluded_urls and not re.match(disallow_link_patterns, href):
-                            found_link = Link(
-                                url=href, visited=False, level=current_rec_level
-                            )
-                            if (
-                                link.url != href
-                                and href not in links
-                                and len(links) < max_visited_links
-                            ):
-                                links[href] = found_link
-                                q.append(Link(href))
+                    # Respect the Robots.txt file protocol
+                    if disallow_link_patterns != '' and re.match(disallow_link_patterns, href):
+                        continue
+                    # Skip unwanted links
+                    if href in excluded_urls:
+                        continue
+                    # Links from outside the main host are skipped
+                    if base_url != urlparse(href).hostname:
+                        continue
+                    found_link = Link(
+                        url=href, visited=False, level=current_rec_level
+                    )
+                    if (
+                        link.url != href
+                        and href not in links
+                        and len(links) < max_visited_links
+                    ):
+                        links[href] = found_link
+                        q.append(Link(href))
             return
 
         runner = Runner.objects.get(id=runner_id)
