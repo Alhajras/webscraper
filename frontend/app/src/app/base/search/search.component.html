@@ -1,42 +1,44 @@
-<div class="flex justify-content-center flex-wrap p-4 gap-4">
-  <div class="inputgroup">
-    <input
-      [disabled]="selectedIndexerForm === undefined"
-      (keydown.enter)="searchProducts()"
-      [(ngModel)]="searchText"
-      type="text" pInputText placeholder="Search..."/>
-    <button
-      [disabled]="selectedIndexerForm === undefined"
-      (click)="searchProducts()"
-      type="button" pButton icon="pi pi-search" styleClass="p-button-warn"></button>
-  <p-dropdown
-    class="ml-2"
-    [disabled]="cached_indexers.length === 0"
-    id="indexer-id"
-    [(ngModel)]="selectedIndexerForm"
-    placeholder="Select an indexer"
-    [options]="cached_indexers"
-    optionLabel="name"
-    [filter]="true"
-  ></p-dropdown>
-      </div>
+<div class="mt-4 ml-6 mr-6">
+  <div class="flex justify-content-center flex-wrap p-4 gap-4">
+    <div class="inputgroup">
+      <input
+        [disabled]="selectedIndexerForm === undefined"
+        (keydown.enter)="searchProducts()"
+        [(ngModel)]="searchText"
+        type="text" pInputText placeholder="Search..."/>
+      <button
+        [disabled]="selectedIndexerForm === undefined"
+        (click)="searchProducts()"
+        type="button" pButton icon="pi pi-search" styleClass="p-button-warn"></button>
+      <p-dropdown
+        class="ml-2"
+        [disabled]="cached_indexers.length === 0"
+        id="indexer-id"
+        [(ngModel)]="selectedIndexerForm"
+        placeholder="Select an indexer"
+        [options]="cached_indexers"
+        optionLabel="name"
+        [filter]="true"
+      ></p-dropdown>
+    </div>
 
-</div>
-<div class="card">
-  <p-dataView
-    [loading]="loading"
-    emptyMessage="There are no products found!"
-    #dv [value]="products">
-    <ng-template let-product pTemplate="listItem">
-      <div class="col-12">
-        <container-element [ngSwitch]="selectedIndexerForm.name">
-          <app-flaconi-result-template *ngSwitchCase="'Flaconi'" [product]="product"
-                                       [searchText]="searchText"></app-flaconi-result-template>
-          <app-douglas-result-template *ngSwitchCase="'Douglas'" [product]="product"
-                                       [searchText]="searchText"></app-douglas-result-template>
-        </container-element>
+  </div>
+  <div class="card">
+    <p-dataView
+      [loading]="loading"
+      emptyMessage="There are no products found!"
+      #dv [value]="products">
+      <ng-template let-product pTemplate="listItem">
+        <div class="col-12">
+          <container-element [ngSwitch]="selectedIndexerForm.name">
+            <app-flaconi-result-template *ngSwitchCase="'Flaconi'" [product]="product"
+                                         [searchText]="searchText"></app-flaconi-result-template>
+            <app-douglas-result-template *ngSwitchCase="'Douglas'" [product]="product"
+                                         [searchText]="searchText"></app-douglas-result-template>
+          </container-element>
 
-      </div>
-    </ng-template>
-  </p-dataView>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </div>
 </div>
