@@ -1,5 +1,6 @@
 import logging
 import logging.handlers
+import re
 
 from django.core.serializers import serialize
 from django.utils import timezone
@@ -27,6 +28,7 @@ from .serializers import (
     InspectorSerializer,
     RunnerSerializer, IndexerSerializer, InspectorValueSerializer,
 )
+from .utils import extract_disallow_lines_from_url
 
 
 class EverythingButDestroyViewSet(
@@ -189,6 +191,10 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         # TODO: Use a better splitter
         # Urls that may crawler navigate by mistake
         excluded_urls = crawler.excluded_urls.split("\";\"")
+        robot_disallow_links = [re.escape(bad_link) for bad_link in extract_disallow_lines_from_url(crawler.robot_file_url)]
+        # Make a regex that matches if any of our regexes match.
+        disallow_link_patterns = "(" + ")|(".join(robot_disallow_links) + ")"
+
         scope_divs = crawler.scope_divs.split("\";\"")
         # Stopping options
         max_pages = crawler.max_pages
@@ -260,8 +266,14 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                         continue
                     href = a.get_attribute("href").split("#").pop()
                     # Some sites have None values and 'link != a' to avoid looping
+                    import pdb
+                    pdb.set_trace()
+                    if re.match(disallow_link_patterns, href):
+                        print("-----------------------------------------------")
+                        print(href)
+                        print("-----------------------------------------------")
                     if href is not None and base_url == urlparse(href).hostname:
-                        if href not in excluded_urls:
+                        if href not in excluded_urls and not re.match(disallow_link_patterns, href):
                             found_link = Link(
                                 url=href, visited=False, level=current_rec_level
                             )

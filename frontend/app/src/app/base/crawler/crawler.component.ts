@@ -66,8 +66,8 @@ export class CrawlerComponent {
       max_pages: this.maxPages.value,
       max_depth: this.maxDepth.value,
       robot_file_url: this.robotFileUrl.value,
-      excluded_urls:  this.excludedUrls.value.join('";"'),
-      scope_divs:  this.scopeDivs.value.join('";"')
+      excluded_urls: this.excludedUrls.value.length === 0 ? '' : this.excludedUrls.value.join('";"'),
+      scope_divs: this.scopeDivs.value.length === 0 ? '' : this.scopeDivs.value.join('";"')
     }
     if (this.updatedCrawler !== null) {
       this.crawlerService.update(this.updatedCrawler.id, crawler).toPromise().then(() => {
