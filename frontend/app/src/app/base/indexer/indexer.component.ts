@@ -123,18 +123,20 @@ export class IndexerComponent implements OnInit {
         }
       })
     })
-      // this.description = this.fb.control('')
-      this.selectedInspectors = this.fb.control('')
-      this.name = this.fb.control('')
-      this.form = this.fb.group({
-        selectedInspectors: this.selectedInspectors,
-        name: this.name,
-      })
-    }
+    // this.description = this.fb.control('')
+    this.selectedInspectors = this.fb.control('')
+    this.name = this.fb.control('')
+    this.form = this.fb.group({
+      selectedInspectors: this.selectedInspectors,
+      name: this.name,
+    })
+  }
 
-  public  startIndexing(indexer: Indexer) {
-    this.indexerService.startIndexing(indexer.id, indexer).subscribe(i=>{
+  public startIndexing(indexer: Indexer) {
+    this.currentlySubmitting = true
 
+    this.indexerService.startIndexing(indexer.id, indexer).subscribe(i => {
+      this.currentlySubmitting = false
     })
   }
 }

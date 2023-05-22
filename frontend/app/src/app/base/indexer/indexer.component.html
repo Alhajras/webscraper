@@ -45,16 +45,18 @@
       <td>{{indexer.selector}}</td>
       <td>
         <p>
-          Created: <app-time-ago [time]="indexer.created_at"></app-time-ago>
+          Created:
+          <app-time-ago [time]="indexer.created_at"></app-time-ago>
         </p>
         <p>
-          Completed: <app-time-ago [time]="indexer.completed_at"></app-time-ago>
+          Completed:
+          <app-time-ago [time]="indexer.completed_at"></app-time-ago>
         </p>
       </td>
       <td>
         <div>
           <button
-            [disabled]="indexer.status === 'Running'"
+            [disabled]="indexer.status === 'Running' || currentlySubmitting"
             class="
         ml-1 p-button-outlined p-button-sm
         no-icon
@@ -66,6 +68,7 @@
             (click)="startIndexing(indexer)"
           ></button>
           <button
+            [disabled]="currentlySubmitting"
             class="
         ml-1 p-button-outlined p-button-sm
         no-icon
@@ -77,6 +80,7 @@
             (click)="editInspector(indexer)"
           ></button>
           <button
+            [disabled]="currentlySubmitting"
             class="
         ml-1 p-button-danger p-button-outlined p-button-sm
         no-icon
