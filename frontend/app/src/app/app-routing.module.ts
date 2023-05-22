@@ -5,6 +5,7 @@ import {CrawlerComponent} from "src/app/base/crawler/crawler.component";
 import {RunnerComponent} from "src/app/base/runner/runner.component";
 import {IndexerComponent} from "src/app/base/indexer/indexer.component";
 import {SearchComponent} from "src/app/base/search/search.component";
+import {DocumentationComponent} from "src/app/base/documentation/documentation.component";
 
 const routes: Routes = [
   {
@@ -32,7 +33,16 @@ const routes: Routes = [
     component: SearchComponent,
     loadChildren: () => import('./base/search/search.module').then(m => m.SearchModule)
   },
-
+  {
+    path: 'documentation',
+    component: DocumentationComponent,
+    loadChildren: () => import('./base/documentation/documentation.module').then(m => m.DocumentationModule)
+  },
+  {
+    path: '',
+    component: DocumentationComponent,
+    loadChildren: () => import('./base/documentation/documentation.module').then(m => m.DocumentationModule)
+  },
 ];
 
 @NgModule({

@@ -45,6 +45,8 @@ import {
   DouglasResultTemplateComponent
 } from "src/app/base/search/douglas-result-template/douglas-result-template.component";
 import { ShortLinkPipe } from './shared/pipes/short-link.pipe';
+import {AccordionModule} from "primeng/accordion";
+import { DocumentationComponent } from './base/documentation/documentation.component';
 
 @NgModule({
   declarations: [
@@ -63,37 +65,39 @@ import { ShortLinkPipe } from './shared/pipes/short-link.pipe';
     InputFieldErrorComponent,
     FlaconiResultTemplateComponent,
     DouglasResultTemplateComponent,
-    ShortLinkPipe
+    ShortLinkPipe,
+    DocumentationComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MenuModule,
-        BrowserAnimationsModule,
-        TableModule,
-        HttpClientModule,
-        DialogModule,
-        CardModule,
-        DropdownModule,
-        MessageModule,
-        ReactiveFormsModule,
-        InputTextareaModule,
-        InputTextModule,
-        ButtonModule,
-        RippleModule,
-        TreeTableModule,
-        StepsModule,
-        TimelineModule,
-        ChipsModule,
-        OverlayPanelModule,
-        MenubarModule,
-        MultiSelectModule,
-        DataViewModule,
-        RatingModule,
-        TagModule,
-        FormsModule,
-        SearchModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MenuModule,
+    BrowserAnimationsModule,
+    TableModule,
+    HttpClientModule,
+    DialogModule,
+    CardModule,
+    DropdownModule,
+    MessageModule,
+    ReactiveFormsModule,
+    InputTextareaModule,
+    InputTextModule,
+    ButtonModule,
+    RippleModule,
+    TreeTableModule,
+    StepsModule,
+    TimelineModule,
+    ChipsModule,
+    OverlayPanelModule,
+    MenubarModule,
+    MultiSelectModule,
+    DataViewModule,
+    RatingModule,
+    TagModule,
+    FormsModule,
+    SearchModule,
+    AccordionModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

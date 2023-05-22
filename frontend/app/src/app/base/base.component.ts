@@ -8,6 +8,7 @@ import {MenuItem} from "primeng/api";
 })
 export class BaseComponent {
   public items: MenuItem[] = [
+    {label: 'Documentation', url: 'documentation', icon: 'pi pi-info-circle' },
     {label: 'Runners', url: 'runners', icon: 'pi pi-send' },
     {label: 'Crawlers', url: 'crawlers', icon: 'pi pi-cloud-download'},
     {label: 'Templates', url: 'templates', icon: 'pi pi-book'},
