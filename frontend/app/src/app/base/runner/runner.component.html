@@ -62,7 +62,8 @@
       <td>
         <p-timeline [value]="events" layout="horizontal">
           <ng-template pTemplate="content" let-event>
-            <span [ngClass]="event.status.toLocaleLowerCase() === runner.status.toLocaleLowerCase() ? 'successful secondary-text' : 'secondary-text'" >
+            <span
+              [ngClass]="event.status.toLocaleLowerCase() === runner.status.toLocaleLowerCase() ? 'successful secondary-text' : 'secondary-text'">
               {{event.status}}</span>
           </ng-template>
         </p-timeline>
@@ -72,13 +73,15 @@
         <p>
           Created at:
           <app-time-ago [time]="runner.created_at"></app-time-ago>
-        </p>
-        <p>
-          Completed at:
+          / Completed at:
           <app-time-ago [time]="runner.completed_at"></app-time-ago>
+
         </p>
         <p>
+        </p>
+        <p *ngIf="runner.collected_documents !== 0">
           Collected documents: {{runner.collected_documents}}
+          Current URL: <a href="runner.current_crawled_url.url"> {{runner.current_crawled_url.url | shortLink}}</a>
         </p>
 
       </td>

@@ -62,6 +62,7 @@ class RunnerSerializer(serializers.ModelSerializer):
             "crawler",
             "status",
             "collected_documents",
+            "current_crawled_url",
         ]
 
 

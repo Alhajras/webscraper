@@ -117,6 +117,10 @@ class Runner(models.Model):
     def collected_documents(self) -> int:
         return InspectorValue.objects.filter(runner=self).values('url').annotate(dcount=Count('url')).count()
 
+    @property
+    def current_crawled_url(self) -> int:
+        return InspectorValue.objects.filter(runner=self).values('url').last()
+
 
 class InspectorValue(models.Model):
     class Meta:

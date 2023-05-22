@@ -29,7 +29,7 @@ export class RunnerComponent {
   public form!: FormGroup
   public header = 'Runner form'
   public errorMessage = ''
-  public readonly columnCount = 8
+  public readonly columnCount = 5
   private readonly pullingTimeSec = 10000
   public loading = false
   public events = [

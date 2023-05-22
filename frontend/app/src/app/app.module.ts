@@ -44,6 +44,7 @@ import {
 import {
   DouglasResultTemplateComponent
 } from "src/app/base/search/douglas-result-template/douglas-result-template.component";
+import { ShortLinkPipe } from './shared/pipes/short-link.pipe';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {
     MarkedTextComponent,
     InputFieldErrorComponent,
     FlaconiResultTemplateComponent,
-    DouglasResultTemplateComponent
+    DouglasResultTemplateComponent,
+    ShortLinkPipe
   ],
     imports: [
         BrowserModule,
