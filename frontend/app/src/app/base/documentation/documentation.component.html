@@ -5,20 +5,55 @@
         To run a crawler that collect documents from the targeted website, you must follow the next
         steps in the following order:
         <ol>
-          <li class="mb-1">Create a template from here: <a href="/templates">Templates</a> </li>
+          <li class="mb-1">Create a template from here: <a href="/templates">Templates</a></li>
           <li class="mb-1">Create a crawler from here: <a href="/crawlers">Crawlers</a></li>
           <li>Run the crawler from here: <a href="/runners">Runners</a></li>
         </ol>
       </div>
     </p-accordionTab>
-        <p-accordionTab header="How to index?">
-      <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
-        enim
-        ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-        ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-      </p>
+    <p-accordionTab header="How to create a template?">
+      <div>
+        Template represent the blue print or the sheet that will be collected from the internet, this varies from one
+        use case to another.
+        One example can be used is to collect the title and price of a product.
+        <ol>
+          <li class="mb-1">Click on the button 'Create a template' to create a fresh template. Enter the name of the
+            template and click on 'Create'.
+          </li>
+          <li class="mb-1">Create inspectors, inspectors are the elements on which we would like to inspect in our
+            example we should like to create two inspectors 'Title' and 'Price'.
+            <ul>
+              <li class="mb-1  mt-1">Expand the template by clicking on the '>' icon.</li>
+              <li class="mb-1">Click on the 'Create an inspector' button to create a new inspector.Enter the name as
+                'Title', the Selector XPath example: '//*[contains(@class, 'title')]' and the Attribute as the src for
+                the images. Do the same for the 'Price'.
+              </li>
+            </ul>
+          </li>
+        </ol>
+
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="How to create a crawler?">
+      <div>
+        Before creating a crawler you have to create a <a href="/templates">template</a> first.
+        <ol>
+          <li class="mb-1">Click on the button 'Create a crawler' to create a fresh crawler. Enter the required fields
+            and click on 'Create'. All fields contain help-text describes their function.
+          </li>
+          <li class="mb-1">Create inspectors, inspectors are the elements on which we would like to inspect in our
+            example we should like to create two inspectors 'Title' and 'Price'.
+            <ul>
+              <li class="mb-1  mt-1">Expand the template by clicking on the '>' icon.</li>
+              <li class="mb-1">Click on the 'Create an inspector' button to create a new inspector.Enter the name as
+                'Title', the Selector XPath example: '//*[contains(@class, 'title')]' and the Attribute as the src for
+                the images. Do the same for the 'Price'.
+              </li>
+            </ul>
+          </li>
+        </ol>
+
+      </div>
     </p-accordionTab>
 
     <p-accordionTab header="How to index?">
