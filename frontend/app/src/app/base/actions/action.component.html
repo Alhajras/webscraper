@@ -14,7 +14,7 @@
               pRipple
               class="p-button-outlined"
               label="Add action"
-              (click)="createInspector()"
+              (click)="createAction()"
             ></button>
           </div>
         </div>
@@ -48,7 +48,7 @@
                 pButton
                 pRipple
                 label="Edit"
-                (click)="editInspector(inspector)"
+                (click)="editAction(inspector)"
               ></button>
               <button
                 class="ml-1 p-button-danger p-button-outlined p-button-sm no-icon"
@@ -56,7 +56,7 @@
                 pButton
                 pRipple
                 label="Delete"
-                (click)="deleteInspector(inspector)"
+                (click)="deleteAction(inspector)"
               ></button>
             </div>
           </td>
@@ -88,7 +88,7 @@
               pRipple
               class="p-button-outlined"
               label="Add action"
-              (click)="createInspector()"
+              (click)="createAction()"
             ></button>
           </div>
         </div>
@@ -122,7 +122,7 @@
                 pButton
                 pRipple
                 label="Edit"
-                (click)="editInspector(inspector)"
+                (click)="editAction(inspector)"
               ></button>
               <button
                 class="ml-1 p-button-danger p-button-outlined p-button-sm no-icon"
@@ -130,7 +130,7 @@
                 pButton
                 pRipple
                 label="Delete"
-                (click)="deleteInspector(inspector)"
+                (click)="deleteAction(inspector)"
               ></button>
             </div>
           </td>
@@ -183,29 +183,29 @@
           <app-input-field
             [isRequired]="true"
             labelId="version-label-id"
-            labelText="Selector"
-            helpText="XPath expression for the selected element, example: //*[contains(@class, 'product-title')]"
+            labelText="Type"
+            helpText=""
           >
-
-            <input
-              id="end-time-id"
-              type="text"
-              pInputText
-              [formControl]="selector"
-            />
+            <p-dropdown
+              id="version-id"
+              [formControl]="type"
+              placeholder="Select a type"
+              [options]="typesList"
+              optionLabel="key"
+              [filter]="true"
+            ></p-dropdown>
           </app-input-field>
           <app-input-field
-            [isRequired]="false"
-            labelId="attribute-id"
-            labelText="Attribute"
-            helpText="HTML element attribute like, src, name and href."
+            [isRequired]="true"
+            labelId="version-label-id"
+            labelText="Order"
+            helpText="The order of the action in which it will be executed."
           >
-
             <input
-              id="attribute-id"
-              type="text"
+              id="end-time-id"
+              type="number"
               pInputText
-              [formControl]="attribute"
+              [formControl]="order"
             />
           </app-input-field>
         </div>
@@ -221,7 +221,7 @@
       (click)="submit()"
       class="p-mr-2"
     >
-      <span>{{ updatedInspector !== null ? 'Update' : 'Create'}}</span>
+      <span>{{ updatedAction !== null ? 'Update' : 'Create'}}</span>
     </button>
     <button
       [disabled]="currentlySubmitting"

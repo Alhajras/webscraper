@@ -2,10 +2,14 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Template} from "src/app/models/template.model";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
-import {Inspector} from "src/app/models/inspector.model";
-import {InspectorService} from "src/app/services/inspector.service";
 import {Action, ActionChain} from "src/app/models/action.model";
 import {ActionService} from "src/app/services/action.service";
+
+
+export interface TypeDropDown {
+  key: string
+  value: string
+}
 
 @Component({
   selector: 'app-action',
@@ -20,14 +24,18 @@ export class ActionComponent implements OnInit {
   public afterActionChain!: ActionChain
   public afterActions: Action[] = []
   // public actions: Action[] = []
-  public updatedInspector: Inspector | null = null
-  public description!: FormControl
+  public updatedAction: Action | null = null
+  public type!: FormControl
+  public typesList: TypeDropDown[] = [{key: 'click', value: 'click'}, {key: 'scroll', value: 'scroll'}, {
+    key: 'wait',
+    value: 'wait'
+  }]
   public currentlySubmitting = false
   public displayModal = false
-  public selector!: FormControl
+  public order!: FormControl
   public attribute!: FormControl
   public form!: FormGroup
-  public header = 'Inspector form'
+  public header = 'Action form'
   public name!: FormControl
   public errorMessage = ''
   public templates = []
@@ -52,20 +60,20 @@ export class ActionComponent implements OnInit {
     }
 
     this.currentlySubmitting = true
-    const inspector = {
+    const action = {
       name: this.name.value,
-      selector: this.selector.value,
+      selector: this.order.value,
       attribute: this.attribute.value === '' ? null : this.attribute.value,
       template: this.template.id,
     }
-    if (this.updatedInspector !== null) {
-      this.actionService.update(this.updatedInspector.id, inspector).toPromise().then(() => {
-        this.actionService.list({template: this.template.id}).subscribe(inspectors => {
-          // this.inspectors = inspectors
+    if (this.updatedAction !== null) {
+      this.actionService.update(this.updatedAction.id, action).toPromise().then(() => {
+        this.actionService.list({template: this.template.id}).subscribe(action => {
+          // this.action = action
         })
         this.closeModal()
         this.currentlySubmitting = false
-        this.updatedInspector = null
+        this.updatedAction = null
       }).catch((err: HttpErrorResponse) => {
         this.errorMessage = err.error
         this.currentlySubmitting = false
@@ -73,9 +81,9 @@ export class ActionComponent implements OnInit {
       })
       return;
     }
-    this.actionService.post(inspector).toPromise().then(() => {
-      this.actionService.list({template: this.template.id}).subscribe(inspectors => {
-        // this.inspectors = inspectors
+    this.actionService.post(action).toPromise().then(() => {
+      this.actionService.list({template: this.template.id}).subscribe(action => {
+        // this.action = action
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -86,11 +94,11 @@ export class ActionComponent implements OnInit {
     })
   }
 
-  public deleteInspector(inspector: Inspector): void {
-    inspector.deleted = true
-    this.actionService.update(inspector.id, inspector).toPromise().then(() => {
-      this.actionService.list().subscribe(inspectors => {
-        // this.inspectors = inspectors
+  public deleteAction(action: Action): void {
+    // action.deleted = true
+    this.actionService.update(action.id, action).toPromise().then(() => {
+      this.actionService.list().subscribe(actions => {
+        // this.actions = actions
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -101,14 +109,14 @@ export class ActionComponent implements OnInit {
     })
   }
 
-  public editInspector(inspector: Inspector): void {
-    this.updatedInspector = inspector
-    this.name = this.fb.control(inspector.name)
-    this.selector = this.fb.control(inspector.selector)
-    this.attribute = this.fb.control(inspector.attribute)
+  public editAction(action: Action): void {
+    this.updatedAction = action
+    this.name = this.fb.control(action.name)
+    this.order = this.fb.control(action.order)
+    this.type = this.fb.control({key:action.type, value:action.type })
     this.form = this.fb.group({
-      selector: this.selector,
-      attribute: this.attribute,
+      order: this.order,
+      type: this.type,
       name: this.name,
     })
     this.displayModal = true
@@ -121,24 +129,20 @@ export class ActionComponent implements OnInit {
     this.initForm()
   }
 
-  public createInspector():void {
+  public createAction(): void {
     this.initForm()
-    this.updatedInspector = null
+    this.updatedAction = null
     this.displayModal = true
   }
 
-  private initForm():void {
-    this.description = this.fb.control('')
-    this.selector = this.fb.control('')
-    this.attribute = this.fb.control('')
+  private initForm(): void {
+    this.order = this.fb.control('')
     this.name = this.fb.control('')
+    this.type = this.fb.control('')
     this.form = this.fb.group({
-      description: this.description,
-      url: this.selector,
-      attribute: this.attribute,
+      order: this.order,
+      type: this.type,
       name: this.name,
     })
   }
-
-  protected readonly onafterprint = onafterprint;
 }

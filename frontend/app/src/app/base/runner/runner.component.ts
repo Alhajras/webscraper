@@ -5,7 +5,6 @@ import {Runner} from "src/app/models/runner.model";
 import {RunnerService} from "src/app/services/runner.service";
 import {Crawler} from "src/app/models/crawler.model";
 import {CrawlerService} from "src/app/services/crawler.service";
-import {PrimeIcons} from 'primeng/api';
 
 export interface CrawlerDropDown {
   key: string

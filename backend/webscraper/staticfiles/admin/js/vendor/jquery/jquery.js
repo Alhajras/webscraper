@@ -7156,7 +7156,7 @@ Tween.prototype = {
 		this.easing = easing || jQuery.easing._default;
 		this.options = options;
 		this.name = this.now = this.cur();
-		this.selector = end;
+		this.order = end;
 		this.unit = unit || ( jQuery.cssNumber[ prop ] ? "" : "px" );
 	},
 	cur: function() {
