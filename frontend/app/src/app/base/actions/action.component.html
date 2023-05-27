@@ -39,6 +39,9 @@
         <tr>
           <td>{{inspector.name}}</td>
           <td>{{inspector.selector}}</td>
+          <td>{{inspector.type}}</td>
+          <td>{{inspector.order}}</td>
+
           <td>
             <div>
               <button
@@ -104,7 +107,6 @@
           <th pSortableColumn="order">Order
             <p-sortIcon field="order"></p-sortIcon>
           </th>
-
           <th>Actions
           </th>
         </tr>
@@ -112,7 +114,8 @@
       <ng-template pTemplate="body" let-inspector>
         <tr>
           <td>{{inspector.name}}</td>
-          <td>{{inspector.selector}}</td>
+          <td>{{inspector.type}}</td>
+          <td>{{inspector.order}}</td>
           <td>
             <div>
               <button
