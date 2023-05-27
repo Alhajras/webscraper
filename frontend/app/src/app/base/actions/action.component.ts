@@ -33,13 +33,16 @@ export class ActionComponent implements OnInit {
   public currentlySubmitting = false
   public displayModal = false
   public order!: FormControl
-  public attribute!: FormControl
   public form!: FormGroup
   public header = 'Action form'
   public name!: FormControl
   public errorMessage = ''
   public templates = []
-  public readonly columnCount = 8
+  public readonly columnCount = 4
+  public selector!: FormControl
+  public times!: FormControl
+  public direction!: FormControl
+  public time!: FormControl
 
   public constructor(
     private readonly fb: FormBuilder,
@@ -62,10 +65,10 @@ export class ActionComponent implements OnInit {
     this.currentlySubmitting = true
     const action = {
       name: this.name.value,
-      selector: this.order.value,
-      attribute: this.attribute.value === '' ? null : this.attribute.value,
-      template: this.template.id,
+      order: this.order.value,
+      type: this.type.value.value,
     }
+    this.addActionTypeAttributes(action)
     if (this.updatedAction !== null) {
       this.actionService.update(this.updatedAction.id, action).toPromise().then(() => {
         this.actionService.list({template: this.template.id}).subscribe(action => {
@@ -113,7 +116,7 @@ export class ActionComponent implements OnInit {
     this.updatedAction = action
     this.name = this.fb.control(action.name)
     this.order = this.fb.control(action.order)
-    this.type = this.fb.control({key:action.type, value:action.type })
+    this.type = this.fb.control({key: action.type, value: action.type})
     this.form = this.fb.group({
       order: this.order,
       type: this.type,
@@ -139,10 +142,38 @@ export class ActionComponent implements OnInit {
     this.order = this.fb.control('')
     this.name = this.fb.control('')
     this.type = this.fb.control('')
+    this.selector = this.fb.control('')
+    this.times = this.fb.control('')
+    this.direction = this.fb.control('')
+    this.time = this.fb.control('')
     this.form = this.fb.group({
       order: this.order,
       type: this.type,
       name: this.name,
+      selector: this.selector,
+      times: this.times,
+      direction: this.direction,
+      time: this.time
     })
+  }
+
+  private addActionTypeAttributes(action: any): any {
+    switch (action.type) {
+      case 'click':
+        action.selector = this.selector.value
+        action.resourcetype = 'ClickAction'
+        break;
+      case 'scroll':
+        action.times = this.times.value
+        action.direction = this.direction.value
+        action.resourcetype = 'ScrollAction'
+        break;
+      case 'wait':
+        action.time = this.time.value
+        action.resourcetype = 'WaitAction'
+        break;
+    }
+    action.action_chain = 2
+    return action
   }
 }
