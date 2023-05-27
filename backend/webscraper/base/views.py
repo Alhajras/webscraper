@@ -199,7 +199,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         scope_divs = crawler.scope_divs.split("\";\"")
         # Stopping options
-        max_pages = crawler.max_pages
+        max_collected_docs = crawler.max_collected_docs
         max_visited_links = crawler.max_pages
         max_rec_level = crawler.max_depth
         base_urlparse = urlparse(base_url)
@@ -207,12 +207,12 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         chrome_options = Options()
         user_agent = (
             "Mozilla/5.0 (Windows NT 6.1)"
-            " AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2"
+            " AppleWebKit/537.2 (KHTML, like Gecko) Chrome/110.0.5481.77 Safari/537.2"
         )
         chrome_options.add_argument(f"user-agent={user_agent}")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--window-size=2560,1440")
-        chrome_options.add_argument("--headless")  # Hides the browser window
+        # chrome_options.add_argument("--headless")  # Hides the browser window
         # Reference the local Chromedriver instance
         chrome_path = r"/usr/bin/chromedriver"
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
@@ -225,7 +225,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             if len(q) == 0:
                 return
             link: Link = q.pop()
-            if runner.collected_documents >= max_pages:
+            if runner.collected_documents >= max_collected_docs:
                 return
             logger.info(link.url)
             # We stop recursion when we reach tha mx level of digging into pages
@@ -246,17 +246,18 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     # We start looking up for the elements we would like to collect inside the page/document
                     inspectors_list = Inspector.objects.filter(template=crawler.template)
                     for inspector in inspectors_list:
-                        inspector_element = scoped_element.find_element(
+                        inspector_elements = scoped_element.find_elements(
                             By.XPATH, inspector.selector
                         )
-                        attribute = None
-                        if inspector.attribute is not None:
-                            attribute = inspector_element.get_attribute(inspector.attribute)
-                        InspectorValue.objects.update_or_create(
-                            url=link.url,
-                            attribute=attribute,
-                            value=inspector_element.text, inspector=inspector, runner=runner
-                        )
+                        for inspector_element in inspector_elements:
+                            attribute = None
+                            if inspector.attribute is not None:
+                                attribute = inspector_element.get_attribute(inspector.attribute)
+                            InspectorValue.objects.update_or_create(
+                                url=link.url,
+                                attribute=attribute,
+                                value=inspector_element.text, inspector=inspector, runner=runner
+                            )
             except Exception as e:
                 print(e)
             for scoped_element in scoped_elements:

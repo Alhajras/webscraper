@@ -90,6 +90,7 @@ class Crawler(models.Model):
     retry = models.PositiveSmallIntegerField(default=2)
     sleep = models.FloatField(default=0.5)
     timeout = models.FloatField(default=10)
+    max_collected_docs = models.PositiveIntegerField(default=20)
     max_pages = models.PositiveIntegerField(default=20)
     max_depth = models.PositiveSmallIntegerField(default=5)
     robot_file_url = models.TextField(default="", blank=True)

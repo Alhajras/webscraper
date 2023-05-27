@@ -82,7 +82,7 @@
         </p>
         <p *ngIf="runner.collected_documents !== 0">
           Collected documents: {{runner.collected_documents}}
-          Current URL: <a href="runner.current_crawled_url.url"> {{runner.current_crawled_url.url | shortLink}}</a>
+          Current URL: <a [href]="runner.current_crawled_url.url"> {{runner.current_crawled_url.url | shortLink}}</a>
         </p>
 
       </td>

@@ -35,6 +35,7 @@ class CrawlerSerializer(serializers.ModelSerializer):
             "robot_file_url",
             "excluded_urls",
             "scope_divs",
+            "max_collected_docs",
         ]
 
 
