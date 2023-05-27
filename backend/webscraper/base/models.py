@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import Count
+from polymorphic.models import PolymorphicModel
 from solo.models import SingletonModel
 
 
@@ -10,11 +11,13 @@ class RunnerStatus(models.TextChoices):
     EXIT = "Exit"
     PAUSED = "Paused"
 
+
 class IndexerStatus(models.TextChoices):
     NEW = "New"
     RUNNING = "Running"
     COMPLETED = "Completed"
     EXIT = "Exit"
+
 
 class InspectorAttributes(models.TextChoices):
     HREF = "href"
@@ -22,6 +25,22 @@ class InspectorAttributes(models.TextChoices):
     SRC = "src"
     TITLE = "title"
     VALUE = "value"
+
+
+class ActionTypes(models.TextChoices):
+    CLICK = "click"
+    WAIT = "wait"
+    SCROLL = "scroll"
+
+
+class ActionChainEvent(models.TextChoices):
+    BEFORE = "before"
+    AFTER = "after"
+
+
+class ScrollDirection(models.TextChoices):
+    UP = "up"
+    DOWN = "down"
 
 
 class Template(models.Model):
@@ -72,6 +91,44 @@ class Inspector(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class ActionChain(models.Model):
+    name = models.CharField(max_length=100, default="default-actions")
+    template = models.ForeignKey(Template, on_delete=models.PROTECT)
+    event = models.CharField(
+        max_length=10, choices=ActionChainEvent.choices, default=ActionChainEvent.BEFORE
+    )
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class Action(PolymorphicModel):
+    class Meta:
+        unique_together = ("action_chain", "order")
+
+    name = models.CharField(max_length=50)
+    type = models.CharField(
+        max_length=10, choices=ActionTypes.choices, default=ActionTypes.CLICK
+    )
+    action_chain = models.ForeignKey(ActionChain, on_delete=models.PROTECT)
+    order = models.PositiveIntegerField(default=1)
+
+
+class ScrollAction(Action):
+    times = models.PositiveIntegerField(default=1)
+    direction = models.CharField(
+        max_length=10, choices=ScrollDirection.choices, default=ScrollDirection.DOWN
+    )
+
+
+class ClickAction(Action):
+    selector = models.TextField()
+
+
+class WaitAction(Action):
+    time = models.FloatField(default=1)
 
 
 class Crawler(models.Model):
@@ -142,7 +199,6 @@ class InspectorValue(models.Model):
 
 
 class ConfigurationModel(SingletonModel):
-
     max_num_crawlers = models.PositiveSmallIntegerField(default=2)
     max_num_machines = models.PositiveSmallIntegerField(default=2)
     min_sleep_time = models.FloatField(default=0.25)

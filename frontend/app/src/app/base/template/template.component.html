@@ -1,158 +1,176 @@
 <div class="mt-4 ml-6 mr-6">
-<p-table
-  [loading]="loading"
-  [value]="templates"
-  [autoLayout]="true"
-  dataKey="name"
-  [expandedRowKeys]="expandedRows"
->
-  <ng-template pTemplate="caption">
-    <div class="grid">
-      <div class="col">
-        Templates
+  <p-table
+    [loading]="loading"
+    [value]="templates"
+    [autoLayout]="true"
+    dataKey="name"
+    [expandedRowKeys]="expandedRows"
+  >
+    <ng-template pTemplate="caption">
+      <div class="grid">
+        <div class="col">
+          Templates
+        </div>
+        <div class="col-2">
+          <button
+            icon="pi pi-plus"
+            id="open-dialog"
+            pButton
+            pRipple
+            class="p-button-outlined"
+            label="Create a template"
+            (click)="displayModal = true"
+          ></button>
+        </div>
       </div>
-      <div class="col-2">
-        <button
-          icon="pi pi-plus"
-          id="open-dialog"
-          pButton
-          pRipple
-          class="p-button-outlined"
-          label="Create a template"
-          (click)="displayModal = true"
-        ></button>
-      </div>
-    </div>
-  </ng-template>
+    </ng-template>
 
-  <ng-template pTemplate="header">
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Created at</th>
-      <th>Actions</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-template let-expanded="expanded">
-    <tr>
-      <td>
-        <button
-          id="expand-btn-{{ template.id }}"
-          type="button"
-          pButton
-          pRipple
-          [pRowToggler]="template"
-          class="
+    <ng-template pTemplate="header">
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Created at</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-template let-expanded="expanded">
+      <tr>
+        <td>
+          <button
+            id="expand-btn-{{ template.id }}"
+            type="button"
+            pButton
+            pRipple
+            [pRowToggler]="template"
+            class="
             p-button-text p-button-rounded p-button-plain
             scene-expander-button
           "
-          [icon]="expanded ? downIcon : rightIcon"
-        ></button>
-      </td>
-      <td>
-        {{template.name}}
-      </td>
-      <td>{{template.created_at | timeAgo}}</td>
-      <td>
-        <div>
-          <button
-            class="ml-1 p-button-outlined p-button-sm no-icon"
-            type="button"
-            pButton
-            pRipple
-            label="Edit"
-            (click)="editTemplate(template)"
+            [icon]="expanded ? downIcon : rightIcon"
           ></button>
-          <button
-            class="ml-1 p-button-danger p-button-outlined p-button-sm no-icon"
-            type="button"
-            pButton
-            pRipple
-            label="Delete"
-            (click)="deleteTemplate(template)"
-          ></button>
-        </div>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="rowexpansion" let-template>
-    <tr class="scene-overview-row">
-      <td attr.colspan="{{ columnCount }}">
-        <app-inspector [template]="template"></app-inspector>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="emptymessage">
-    <tr>
-      <td
-        attr.colspan="{{ columnCount }}"
-        *ngIf="templates.length === 0"
+        </td>
+        <td>
+          {{template.name}}
+        </td>
+        <td>{{template.created_at | timeAgo}}</td>
+        <td>
+          <div>
+            <button
+              class="ml-1 p-button-outlined p-button-sm no-icon"
+              type="button"
+              pButton
+              pRipple
+              label="Edit"
+              (click)="editTemplate(template)"
+            ></button>
+            <button
+              class="ml-1 p-button-danger p-button-outlined p-button-sm no-icon"
+              type="button"
+              pButton
+              pRipple
+              label="Delete"
+              (click)="deleteTemplate(template)"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-template>
+      <tr class="scene-overview-row">
+        <td attr.colspan="{{ columnCount }}">
+
+          <div class="card">
+            <p-tabView styleClass="tabview-custom">
+              <p-tabPanel>
+                <ng-template pTemplate="header">
+                  <i class="pi pi-eye"></i>
+                  <span>&nbsp;Inspectors</span>
+                </ng-template>
+                <app-inspector [template]="template"></app-inspector>
+              </p-tabPanel>
+              <p-tabPanel>
+                <ng-template pTemplate="header">
+                  <i class="pi pi-bolt"></i>
+                  <span>&nbsp;Actions</span>
+                </ng-template>
+                <app-action [template]="template"></app-action>
+              </p-tabPanel>
+            </p-tabView>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td
+          attr.colspan="{{ columnCount }}"
+          *ngIf="templates.length === 0"
+        >
+          No templates assigned.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog
+    [(visible)]="displayModal"
+    [header]="header"
+    [modal]="true"
+    (onHide)="closeModal()"
+    [maximizable]="true"
+  >
+    <div *ngIf="displayModal">
+      <p-card>
+        <form class="p-fluid" action="" [formGroup]="form" (ngSubmit)="submit()">
+          <p-message
+            *ngIf="errorMessage"
+            severity="error"
+            text="The template could not be created:"
+            class="p-mr-2"
+          ></p-message>
+          <div>
+            <app-input-field
+              [isRequired]="true"
+              labelId="version-label-id"
+              labelText="Name"
+              helpText=""
+            >
+
+              <input
+                id="start-time-id"
+                type="text"
+                pInputText
+                [formControl]="name"
+              />
+            </app-input-field>
+          </div>
+        </form>
+      </p-card>
+    </div>
+    <ng-template pTemplate="footer">
+      <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
+      <!--      <loading msg="Submitting ..."></loading>-->
+      <!--    </span>-->
+      <button
+        id="run-btn"
+        type="button"
+        pButton
+        pRipple
+        (click)="submit()"
+        class="p-mr-2"
       >
-        No templates assigned.
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
-
-<p-dialog
-  [(visible)]="displayModal"
-  [header]="header"
-  [modal]="true"
-  (onHide)="closeModal()"
-  [maximizable]="true"
->
-  <div *ngIf="displayModal">
-    <p-card>
-      <form class="p-fluid" action="" [formGroup]="form" (ngSubmit)="submit()">
-        <p-message
-          *ngIf="errorMessage"
-          severity="error"
-          text="The template could not be created:"
-          class="p-mr-2"
-        ></p-message>
-        <div>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Name"
-            helpText=""
-          >
-
-            <input
-              id="start-time-id"
-              type="text"
-              pInputText
-              [formControl]="name"
-            />
-          </app-input-field>
-        </div>
-      </form>
-    </p-card>
-  </div>
-  <ng-template pTemplate="footer">
-    <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
-    <!--      <loading msg="Submitting ..."></loading>-->
-    <!--    </span>-->
-    <button
-      id="run-btn"
-      type="button"
-      pButton
-      pRipple
-      (click)="submit()"
-      class="p-mr-2"
-    >
-      <span>{{ updatedTemplate !== null ? 'Update' : 'Create'}}</span>
-    </button>
-    <button
-      [disabled]="currentlySubmitting"
-      id="cancel-btn"
-      class="p-button-secondary"
-      type="button"
-      pButton
-      pRipple
-      label="Cancel"
-      (click)="closeModal()"
-    ></button>
-  </ng-template>
-</p-dialog>
+        <span>{{ updatedTemplate !== null ? 'Update' : 'Create'}}</span>
+      </button>
+      <button
+        [disabled]="currentlySubmitting"
+        id="cancel-btn"
+        class="p-button-secondary"
+        type="button"
+        pButton
+        pRipple
+        label="Cancel"
+        (click)="closeModal()"
+      ></button>
+    </ng-template>
+  </p-dialog>
 </div>

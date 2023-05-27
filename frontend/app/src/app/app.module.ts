@@ -25,6 +25,7 @@ import {TreeTableModule} from "primeng/treetable";
 import {InspectorComponent} from './base/inspector/inspector.component';
 import {RunnerComponent} from './base/runner/runner.component';
 import {IndexerComponent} from './base/indexer/indexer.component';
+import {ActionComponent} from './base/actions/action.component';
 import {StepsModule} from "primeng/steps";
 import {TimelineModule} from "primeng/timeline";
 import {ChipsModule} from "primeng/chips";
@@ -47,6 +48,7 @@ import {
 import { ShortLinkPipe } from './shared/pipes/short-link.pipe';
 import {AccordionModule} from "primeng/accordion";
 import { DocumentationComponent } from './base/documentation/documentation.component';
+import {TabViewModule} from "primeng/tabview";
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { DocumentationComponent } from './base/documentation/documentation.compo
     InspectorComponent,
     RunnerComponent,
     IndexerComponent,
+    ActionComponent,
     SearchComponent,
     MarkedTextComponent,
     InputFieldErrorComponent,
@@ -68,36 +71,37 @@ import { DocumentationComponent } from './base/documentation/documentation.compo
     ShortLinkPipe,
     DocumentationComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MenuModule,
-    BrowserAnimationsModule,
-    TableModule,
-    HttpClientModule,
-    DialogModule,
-    CardModule,
-    DropdownModule,
-    MessageModule,
-    ReactiveFormsModule,
-    InputTextareaModule,
-    InputTextModule,
-    ButtonModule,
-    RippleModule,
-    TreeTableModule,
-    StepsModule,
-    TimelineModule,
-    ChipsModule,
-    OverlayPanelModule,
-    MenubarModule,
-    MultiSelectModule,
-    DataViewModule,
-    RatingModule,
-    TagModule,
-    FormsModule,
-    SearchModule,
-    AccordionModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MenuModule,
+        BrowserAnimationsModule,
+        TableModule,
+        HttpClientModule,
+        DialogModule,
+        CardModule,
+        DropdownModule,
+        MessageModule,
+        ReactiveFormsModule,
+        InputTextareaModule,
+        InputTextModule,
+        ButtonModule,
+        RippleModule,
+        TreeTableModule,
+        StepsModule,
+        TimelineModule,
+        ChipsModule,
+        OverlayPanelModule,
+        MenubarModule,
+        MultiSelectModule,
+        DataViewModule,
+        RatingModule,
+        TagModule,
+        FormsModule,
+        SearchModule,
+        AccordionModule,
+        TabViewModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
