@@ -19,14 +19,14 @@ from urllib.parse import urlparse
 
 from .filters import InspectorFilter
 from .indexing.inverted_index import InvertedIndex
-from .models import Crawler, Template, Inspector, Runner, InspectorValue, RunnerStatus, Indexer, IndexerStatus
+from .models import Crawler, Template, Inspector, Runner, InspectorValue, RunnerStatus, Indexer, IndexerStatus, Action
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
     CrawlerSerializer,
     UserSerializer,
     TemplateSerializer,
     InspectorSerializer,
-    RunnerSerializer, IndexerSerializer, InspectorValueSerializer,
+    RunnerSerializer, IndexerSerializer, InspectorValueSerializer, ActionPolymorphicSerializer,
 )
 from .utils import extract_disallow_lines_from_url
 
@@ -315,3 +315,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class ActionViewSet(EverythingButDestroyViewSet):
+    queryset = Action.objects.all()
+    serializer_class = ActionPolymorphicSerializer

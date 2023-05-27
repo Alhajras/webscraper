@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Crawler, Template, Inspector, Runner, Indexer, InspectorValue
+from rest_polymorphic.serializers import PolymorphicSerializer
+
+from .models import Crawler, Template, Inspector, Runner, Indexer, InspectorValue, ClickAction, ScrollAction, WaitAction
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -74,3 +76,29 @@ class TemplateSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     inspectors = InspectorSerializer(many=True, read_only=True)
+
+
+class ClickActionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClickAction
+        fields = "__all__"
+
+
+class ScrollActionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ScrollAction
+        fields = "__all__"
+
+
+class WaitActionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WaitAction
+        fields = "__all__"
+
+
+class ActionPolymorphicSerializer(PolymorphicSerializer):
+    model_serializer_mapping = {
+        ScrollAction: ScrollActionSerializer,
+        WaitAction: WaitActionSerializer,
+        ClickAction: ClickActionSerializer,
+    }

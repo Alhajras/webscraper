@@ -115,6 +115,9 @@ class Action(PolymorphicModel):
     action_chain = models.ForeignKey(ActionChain, on_delete=models.PROTECT)
     order = models.PositiveIntegerField(default=1)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class ScrollAction(Action):
     times = models.PositiveIntegerField(default=1)

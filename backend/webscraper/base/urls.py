@@ -9,6 +9,7 @@ router.register(r"templates", views.TemplateViewSet, "templates")
 router.register(r"inspectors", views.InspectorViewSet, "inspectors")
 router.register(r"runners", views.RunnerViewSet, "runners")
 router.register(r"indexers", views.IndexerViewSet, "indexers")
+router.register(r"actions", views.ActionViewSet, "actions")
 
 urlpatterns = [
     path("", include(router.urls)),
