@@ -11,6 +11,7 @@ export interface Crawler {
   sleep: number,
   timeout: number
   max_pages: number,
+  max_collected_docs: number,
   max_depth:number,
   robot_file_url:string,
   excluded_urls:string,

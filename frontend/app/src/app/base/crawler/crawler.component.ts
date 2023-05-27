@@ -32,6 +32,7 @@ export class CrawlerComponent {
   public robotFileUrl!: FormControl
   public excludedUrls!: FormControl
   public scopeDivs!: FormControl
+  public maxCollectedDocs!: FormControl
 
   public form!: FormGroup
   public templatesList: TemplateDropDown[] = []
@@ -64,6 +65,7 @@ export class CrawlerComponent {
       sleep: this.sleep.value,
       timeout: this.timeout.value,
       max_pages: this.maxPages.value,
+      max_collected_docs: this.maxCollectedDocs.value,
       max_depth: this.maxDepth.value,
       robot_file_url: this.robotFileUrl.value,
       excluded_urls: this.excludedUrls.value.length === 0 ? '' : this.excludedUrls.value.join('";"'),
@@ -153,6 +155,7 @@ export class CrawlerComponent {
       sleep: this.sleep,
       timeout: this.timeout,
       max_pages: this.maxPages,
+      max_collected_docs: this.maxCollectedDocs,
       max_depth: this.maxDepth,
       robot_file_url: this.robotFileUrl,
       excluded_urls: this.excludedUrls,
@@ -171,6 +174,7 @@ export class CrawlerComponent {
     this.sleep = this.fb.control(crawler.sleep)
     this.timeout = this.fb.control(crawler.timeout)
     this.maxPages = this.fb.control(crawler.max_pages)
+    this.maxCollectedDocs = this.fb.control(crawler.max_collected_docs)
     this.maxDepth = this.fb.control(crawler.max_depth)
     this.robotFileUrl = this.fb.control(crawler.robot_file_url)
     this.excludedUrls = this.fb.control(crawler.excluded_urls === '' ? '' : crawler.excluded_urls.split("\";\""))
@@ -186,6 +190,7 @@ export class CrawlerComponent {
       sleep: this.sleep,
       timeout: this.timeout,
       max_pages: this.maxPages,
+      max_collected_docs: this.maxCollectedDocs,
       max_depth: this.maxDepth,
       robot_file_url: this.robotFileUrl,
       excluded_urls: this.excludedUrls,

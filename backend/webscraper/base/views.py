@@ -212,7 +212,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         chrome_options.add_argument(f"user-agent={user_agent}")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--window-size=2560,1440")
-        # chrome_options.add_argument("--headless")  # Hides the browser window
+        chrome_options.add_argument("--headless")  # Hides the browser window
         # Reference the local Chromedriver instance
         chrome_path = r"/usr/bin/chromedriver"
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)

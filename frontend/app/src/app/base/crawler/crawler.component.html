@@ -1,189 +1,179 @@
 <div class="mt-4 ml-6 mr-6">
-<p-table [loading]="loading" [value]="crawlers" [tableStyle]="{'min-width': '60rem'}">
-  <ng-template pTemplate="caption">
-    <div class="grid">
-      <div class="col">
-        Crawlers
-      </div>
-      <div class="col-2">
-        <button
-          icon="pi pi-plus"
-          id="open-dialog"
-          pButton
-          pRipple
-          class="p-button-outlined"
-          label="Create a crawler"
-          (click)="displayModal = true"
-        ></button>
-      </div>
-    </div>
-  </ng-template>
-
-  <ng-template pTemplate="header">
-    <tr>
-      <th pSortableColumn="name">Name
-        <p-sortIcon field="name"></p-sortIcon>
-      </th>
-      <th pSortableColumn="seed_url">Seed Url
-        <p-sortIcon field="seed_url"></p-sortIcon>
-      </th>
-      <th pSortableColumn="template">Template
-        <p-sortIcon field="template"></p-sortIcon>
-      </th>
-      <th pSortableColumn="created_at">Created at
-        <p-sortIcon field="created_at"></p-sortIcon>
-      </th>
-      <th pSortableColumn="description">Description
-        <p-sortIcon field="description"></p-sortIcon>
-      </th>
-      <th>Actions
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-crawler>
-    <tr>
-      <td>{{crawler.name}}</td>
-      <td><a [href]="crawler.seed_url">{{crawler.seed_url}}</a></td>
-      <td>{{crawler.template}}</td>
-      <td>
-        <p>
-          <app-time-ago [time]="crawler.created_at"></app-time-ago>
-        </p>
-      </td>
-      <td>{{crawler.description}}</td>
-      <td>
-        <div>
+  <p-table [loading]="loading" [value]="crawlers" [tableStyle]="{'min-width': '60rem'}">
+    <ng-template pTemplate="caption">
+      <div class="grid">
+        <div class="col">
+          Crawlers
+        </div>
+        <div class="col-2">
           <button
-            class="ml-1 p-button-outlined p-button-sm no-icon"
-            type="button"
+            icon="pi pi-plus"
+            id="open-dialog"
             pButton
             pRipple
-            label="Edit"
-            (click)="editCrawler(crawler)"
-          ></button>
-          <button
-            class="ml-1 p-button-danger p-button-outlined p-button-sm no-icon"
-            type="button"
-            pButton
-            pRipple
-            label="Delete"
-            (click)="deleteCrawler(crawler)"
+            class="p-button-outlined"
+            label="Create a crawler"
+            (click)="displayModal = true"
           ></button>
         </div>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="emptymessage">
-    <tr>
-      <td
-        attr.colspan="{{ columnCount }}"
-        *ngIf="crawlers.length === 0"
-      >
-        No crawlers assigned.
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+      </div>
+    </ng-template>
 
-<p-dialog
-  [(visible)]="displayModal"
-  [header]="header"
-  [modal]="true"
-  (onHide)="closeModal()"
-  [maximizable]="true"
->
-  <div *ngIf="displayModal">
-    <p-card>
-      <form class="p-fluid" action="" [formGroup]="form" (ngSubmit)="submit()">
-        <p-message
-          *ngIf="errorMessage"
-          severity="error"
-          text="The crawler could not be created:"
-          class="p-mr-2"
-        ></p-message>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">Name
+          <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="seed_url">Seed Url
+          <p-sortIcon field="seed_url"></p-sortIcon>
+        </th>
+        <th pSortableColumn="template">Template
+          <p-sortIcon field="template"></p-sortIcon>
+        </th>
+        <th pSortableColumn="created_at">Created at
+          <p-sortIcon field="created_at"></p-sortIcon>
+        </th>
+        <th pSortableColumn="description">Description
+          <p-sortIcon field="description"></p-sortIcon>
+        </th>
+        <th>Actions
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-crawler>
+      <tr>
+        <td>{{crawler.name}}</td>
+        <td><a [href]="crawler.seed_url">{{crawler.seed_url}}</a></td>
+        <td>{{crawler.template}}</td>
+        <td>
+          <p>
+            <app-time-ago [time]="crawler.created_at"></app-time-ago>
+          </p>
+        </td>
+        <td>{{crawler.description}}</td>
+        <td>
+          <div>
+            <button
+              class="ml-1 p-button-outlined p-button-sm no-icon"
+              type="button"
+              pButton
+              pRipple
+              label="Edit"
+              (click)="editCrawler(crawler)"
+            ></button>
+            <button
+              class="ml-1 p-button-danger p-button-outlined p-button-sm no-icon"
+              type="button"
+              pButton
+              pRipple
+              label="Delete"
+              (click)="deleteCrawler(crawler)"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td
+          attr.colspan="{{ columnCount }}"
+          *ngIf="crawlers.length === 0"
+        >
+          No crawlers assigned.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 
-        <div class="grid">
-          <div class="col-6">
-            <app-input-field
-              [isRequired]="true"
-              labelText="Name"
-              helpText=""
-            >
-              <input
-                id="start-time-id"
-                type="text"
-                pInputText
-                [formControl]="name"
-              />
-            </app-input-field>
-            <app-input-field
-              [isRequired]="true"
-              labelText="Template"
-              helpText="The template that should the crawler use to identify HTML elements to be crawled and saved."
-            >
-              <p-dropdown
-                id="version-id"
-                [formControl]="template"
-                placeholder="Select a template"
-                [options]="templatesList"
-                optionLabel="key"
-                [filter]="true"
-              ></p-dropdown>
-            </app-input-field>
-            <app-input-field
-              [isRequired]="true"
-              labelText="Seed URL"
-              helpText="Starting point on which the crawler will start crawling."
-            >
-              <input
-                id="end-time-id"
-                type="text"
-                pInputText
-                [formControl]="seedUrl"
-              />
+  <p-dialog
+    [(visible)]="displayModal"
+    [header]="header"
+    [modal]="true"
+    (onHide)="closeModal()"
+    [maximizable]="true"
+  >
+    <div *ngIf="displayModal">
+      <p-card>
+        <form class="p-fluid" action="" [formGroup]="form" (ngSubmit)="submit()">
+          <p-message
+            *ngIf="errorMessage"
+            severity="error"
+            text="The crawler could not be created:"
+            class="p-mr-2"
+          ></p-message>
 
-            </app-input-field>
+          <div class="grid">
+            <div class="col-6">
+              <app-input-field
+                [isRequired]="true"
+                labelText="Name"
+                helpText=""
+              >
+                <input
+                  id="start-time-id"
+                  type="text"
+                  pInputText
+                  [formControl]="name"
+                />
+              </app-input-field>
+              <app-input-field
+                [isRequired]="true"
+                labelText="Template"
+                helpText="The template that should the crawler use to identify HTML elements to be crawled and saved."
+              >
+                <p-dropdown
+                  id="version-id"
+                  [formControl]="template"
+                  placeholder="Select a template"
+                  [options]="templatesList"
+                  optionLabel="key"
+                  [filter]="true"
+                ></p-dropdown>
+              </app-input-field>
+              <app-input-field
+                [isRequired]="true"
+                labelText="Seed URL"
+                helpText="Starting point on which the crawler will start crawling."
+              >
+                <input
+                  id="end-time-id"
+                  type="text"
+                  pInputText
+                  [formControl]="seedUrl"
+                />
 
-            <app-input-field
-              [isRequired]="true"
-              labelText="Max pages"
-              helpText="The maximum number of pages should be visited."
-            >
-              <input
-                id="max-pages-id"
-                type="number"
-                pInputText
-                [formControl]="maxPages"
-              />
-            </app-input-field>
+              </app-input-field>
 
-            <app-input-field
-              [isRequired]="false"
-              labelId="exclude-urls-id"
-              labelText="Excluded URLs"
-              helpText="The URLs that the crawler should avoid and never visit."
-            >
-              <p-chips [formControl]="excludedUrls"></p-chips>
-            </app-input-field>
-            <app-input-field
-              [isRequired]="false"
-              labelText="Robots file URL"
-              helpText="The URL where the robots.txt URL can be found."
-            >
-              <input
-                id="robot-file-url-id"
-                type="text"
-                pInputText
-                [formControl]="robotFileUrl"
-              />
-            </app-input-field>
-
-            <app-input-field
-              [isRequired]="false"
-              labelId="version-label-id"
-              labelText="Description"
-              helpText=""
-            >
+              <app-input-field
+                [isRequired]="true"
+                labelText="Max pages"
+                helpText="The maximum number of pages should be visited."
+              >
+                <input
+                  id="max-pages-id"
+                  type="number"
+                  pInputText
+                  [formControl]="maxPages"
+                />
+              </app-input-field>
+              <app-input-field
+                [isRequired]="true"
+                labelText="Max collected docs"
+                helpText="The maximum number of collected documents."
+              >
+                <input
+                  id="max-docs-id"
+                  type="number"
+                  pInputText
+                  [formControl]="maxCollectedDocs"
+                />
+              </app-input-field>
+              <app-input-field
+                [isRequired]="false"
+                labelId="description-id"
+                labelText="Description"
+                helpText=""
+              >
             <textarea
               [rows]="10"
               [cols]="100"
@@ -191,104 +181,124 @@
               [formControl]="description"
               ngDefaultControl
             ></textarea>
-            </app-input-field>
+              </app-input-field>
+
+            </div>
+            <div class="col-6">
+              <app-input-field
+                [isRequired]="false"
+                labelId="exclude-urls-id"
+                labelText="Excluded URLs"
+                helpText="The URLs that the crawler should avoid and never visit."
+              >
+                <p-chips [formControl]="excludedUrls"></p-chips>
+              </app-input-field>
+              <app-input-field
+                [isRequired]="false"
+                labelText="Robots file URL"
+                helpText="The URL where the robots.txt URL can be found."
+              >
+                <input
+                  id="robot-file-url-id"
+                  type="text"
+                  pInputText
+                  [formControl]="robotFileUrl"
+                />
+              </app-input-field>
+              <app-input-field
+                [isRequired]="false"
+                labelId="scope-divs-id"
+                labelText="Scope divs"
+                helpText="The divs where the crawler should only focus on. Usually you do not want the crawler to collect links from the header and footer for example. Example: //*[contains(@class, 'product-overview')]"
+              >
+                <p-chips [formControl]="scopeDivs"></p-chips>
+              </app-input-field>
+              <app-input-field
+                [isRequired]="false"
+                labelText="Retry"
+                helpText="When the crawler fails to crawl from a page how many times should it retry again."
+              >
+                <input
+                  type="number"
+                  id="retry-id"
+                  pInputText
+                  [formControl]="retry"
+                />
+              </app-input-field>
+
+              <app-input-field
+                [isRequired]="false"
+                labelText="Sleep in ms"
+                helpText="How many millisecond should and crawler wait until the next request."
+              >
+                <input
+                  id="sleep-id"
+                  type="number"
+                  pInputText
+                  [formControl]="sleep"
+                />
+              </app-input-field>
+
+              <app-input-field
+                [isRequired]="false"
+                labelText="Timeout in minutes"
+                helpText="For how long should the crawler be crawling."
+              >
+                <input
+                  id="timeout-id"
+                  type="number"
+                  pInputText
+                  [formControl]="timeout"
+                />
+              </app-input-field>
+
+              <app-input-field
+                [isRequired]="false"
+                labelText="Max depth"
+                helpText="How deep should the crawler navigate through pages."
+              >
+                <input
+                  id="max-depth-id"
+                  type="number"
+                  pInputText
+                  [formControl]="maxDepth"
+                />
+              </app-input-field>
+
+
+            </div>
+          </div>
+
+          <div>
 
           </div>
-          <div class="col-6">
-            <app-input-field
-              [isRequired]="false"
-              labelId="scope-divs-id"
-              labelText="Scope divs"
-              helpText="The divs where the crawler should only focus on. Usually you do not want the crawler to collect links from the header and footer for example. Example: //*[contains(@class, 'product-overview')]"
-            >
-              <p-chips [formControl]="scopeDivs"></p-chips>
-            </app-input-field>
-            <app-input-field
-              [isRequired]="false"
-              labelText="Retry"
-              helpText="When the crawler fails to crawl from a page how many times should it retry again."
-            >
-              <input
-                type="number"
-                id="retry-id"
-                pInputText
-                [formControl]="retry"
-              />
-            </app-input-field>
-
-            <app-input-field
-              [isRequired]="false"
-              labelText="Sleep in ms"
-              helpText="How many millisecond should and crawler wait until the next request."
-            >
-              <input
-                id="sleep-id"
-                type="number"
-                pInputText
-                [formControl]="sleep"
-              />
-            </app-input-field>
-
-            <app-input-field
-              [isRequired]="false"
-              labelText="Timeout in minutes"
-              helpText="For how long should the crawler be crawling."
-            >
-              <input
-                id="timeout-id"
-                type="number"
-                pInputText
-                [formControl]="timeout"
-              />
-            </app-input-field>
-
-            <app-input-field
-              [isRequired]="false"
-              labelText="Max depth"
-              helpText="How deep should the crawler navigate through pages."
-            >
-              <input
-                id="max-depth-id"
-                type="number"
-                pInputText
-                [formControl]="maxDepth"
-              />
-            </app-input-field>
-
-
-          </div>
-        </div>
-
-        <div>
-
-        </div>
-      </form>
-    </p-card>
-  </div>
-  <ng-template pTemplate="footer">
-    <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
-    <!--      <loading msg="Submitting ..."></loading>-->
-    <!--    </span>-->
-    <button
-      id="run-btn"
-      type="button"
-      pButton
-      pRipple
-      (click)="submit()"
-      class="p-mr-2"
-    >
-      <span>{{ updatedCrawler !== null ? 'Update' : 'Create'}}</span>
-    </button>
-    <button
-      [disabled]="currentlySubmitting"
-      id="cancel-btn"
-      class="p-button-secondary"
-      type="button"
-      pButton
-      pRipple
-      label="Cancel"
-      (click)="closeModal()"
-    ></button>
-  </ng-template>
-</p-dialog>
+        </form>
+      </p-card>
+    </div>
+    <ng-template pTemplate="footer">
+      <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
+      <!--      <loading msg="Submitting ..."></loading>-->
+      <!--    </span>-->
+      <button
+        id="run-btn"
+        type="button"
+        pButton
+        pRipple
+        (click)="submit()"
+        class="p-mr-2"
+      >
+        <span>{{ updatedCrawler !== null ? 'Update' : 'Create'}}</span>
+      </button>
+      <button
+        [disabled]="currentlySubmitting"
+        id="cancel-btn"
+        class="p-button-secondary"
+        type="button"
+        pButton
+        pRipple
+        label="Cancel"
+        (click)="closeModal()"
+      ></button>
+    </ng-template>
+  </p-dialog>
 </div>
