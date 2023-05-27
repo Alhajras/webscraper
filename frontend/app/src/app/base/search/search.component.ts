@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormGroup} from "@angular/forms";
 import {Template} from "src/app/models/template.model";
 import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorValue} from "src/app/models/inspector-value.model";
@@ -53,7 +53,7 @@ export class SearchComponent {
   }
 
   private createFlaconiProduct(items: InspectorValue[]): Partial<Product> {
-    let product: Product = {}
+    const product: Product = {}
     items.forEach((item: InspectorValue) => {
       switch (item.inspector) {
         case 1:
@@ -70,7 +70,7 @@ export class SearchComponent {
   }
 
   private createDouglasiProduct(items: InspectorValue[]): Partial<Product> {
-    let product: Product = {}
+    const product: Product = {}
     items.forEach((item: InspectorValue) => {
       switch (item.inspector) {
         case 4:

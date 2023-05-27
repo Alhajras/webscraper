@@ -2,7 +2,17 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_polymorphic.serializers import PolymorphicSerializer
 
-from .models import Crawler, Template, Inspector, Runner, Indexer, InspectorValue, ClickAction, ScrollAction, WaitAction
+from .models import (
+    Crawler,
+    Template,
+    Inspector,
+    Runner,
+    Indexer,
+    InspectorValue,
+    ClickAction,
+    ScrollAction,
+    WaitAction,
+)
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -5,7 +5,7 @@ def extract_disallow_lines_from_url(url):
     """
     Used to extract the Disallow urls from the Robots.txt file
     """
-    if url == '' or url is None:
+    if url == "" or url is None:
         return []
     disallow_lines = []
     try:
@@ -13,8 +13,8 @@ def extract_disallow_lines_from_url(url):
         if response.status_code == 200:
             file_content = response.text
 
-            for line in file_content.split('\n'):
-                if 'Disallow' in line:
+            for line in file_content.split("\n"):
+                if "Disallow" in line:
                     disallow_lines.append(line.replace("Disallow:", "").strip())
 
         else:

@@ -28,13 +28,15 @@ class InvertedIndex:
         """
         # The list which contains the ids of the
         #         inspectors to be included in the indexing process.
-        cache_key = f'indexer:{indexer_id}'
+        cache_key = f"indexer:{indexer_id}"
         hit = cache.get(cache_key)
         if hit is not None:
             print("Cached")
             return hit
 
-        included_inspectors_ids = Inspector.objects.filter(indexer=indexer_id).values_list('id', flat=True)
+        included_inspectors_ids = Inspector.objects.filter(
+            indexer=indexer_id
+        ).values_list("id", flat=True)
         # For first stage we want to index by the document title as testing only
         documents = InspectorValue.objects.filter(inspector__in=included_inspectors_ids)
         for document in documents:
@@ -47,7 +49,10 @@ class InvertedIndex:
                     if word not in self.inverted_lists:
                         self.inverted_lists[word] = []
                     inverted_list_len = len(self.inverted_lists[word])
-                    if inverted_list_len == 0 or self.inverted_lists[word][-1] != document.id:
+                    if (
+                        inverted_list_len == 0
+                        or self.inverted_lists[word][-1] != document.id
+                    ):
                         self.inverted_lists[word].append(document.id)
         cache.set(cache_key, self.inverted_lists)
 
@@ -55,7 +60,7 @@ class InvertedIndex:
         indexers = Indexer.objects.filter(deleted=False)
         cached_indexers = []
         for indexer in indexers:
-            cache_key = f'indexer:{indexer.id}'
+            cache_key = f"indexer:{indexer.id}"
             if cache.get(cache_key) is not None:
                 cached_indexers.append(indexer)
         return cached_indexers
@@ -108,10 +113,13 @@ class InvertedIndex:
         if not keywords:
             return []
 
-        cache_key = f'indexer:{indexer_id}'
+        cache_key = f"indexer:{indexer_id}"
         self.inverted_lists = cache.get(cache_key)
         if self.inverted_lists is None:
-            print(f"There is no indexer found with an ID {indexer_id}! Please create an indexer first and then try to run queries.")
+            print(
+                f"There is no indexer found with an ID {indexer_id}!"
+                f" Please create an indexer first and then try to run queries."
+            )
             return []
         # Fetch the inverted lists for each of the given keywords.
         lists = []

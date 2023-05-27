@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Template} from "src/app/models/template.model";

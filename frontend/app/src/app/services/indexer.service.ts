@@ -3,7 +3,6 @@ import {ApiService} from "src/app/services/api.service";
 import {Observable} from "rxjs";
 import {HttpParams} from "@angular/common/http";
 import {Indexer} from "src/app/models/indexer.model";
-import {InspectorValue} from "src/app/models/inspector-value.model";
 
 @Injectable({
   providedIn: 'root'

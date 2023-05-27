@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Template} from "src/app/models/template.model";
-import {MenuItem} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Inspector} from "src/app/models/inspector.model";

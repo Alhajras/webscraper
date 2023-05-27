@@ -61,7 +61,7 @@ export class InputFieldErrorComponent implements AfterContentInit {
     }
     this.setError(false)
     this.fieldFormControl = control
-    this.errorSubscription = control.valueChanges.subscribe(_ => {
+    this.errorSubscription = control.valueChanges.subscribe(() => {
       const hasErrors = control.hasError(this.validator) && control.invalid && (control.dirty || control.touched)
       this.errorDetails = hasErrors ? control.errors?.[this.validator] : null
       this.renderErrorMessage()

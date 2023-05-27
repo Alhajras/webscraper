@@ -55,16 +55,12 @@ class Template(models.Model):
         return self.name
 
 
-class Product(models.Model):
-    data = models.JSONField()
-
-
 class Indexer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(blank=True, null=True)
     deleted = models.BooleanField(default=False)
     name = models.CharField(max_length=50, unique=True)
-    description = models.TextField(blank=True),
+    description = (models.TextField(blank=True),)
     status = models.CharField(
         max_length=10, choices=IndexerStatus.choices, default=IndexerStatus.NEW
     )
@@ -74,7 +70,7 @@ class Indexer(models.Model):
 
     @property
     def inspectors_to_be_indexed(self):
-        return Inspector.objects.filter(indexer=self).values_list('id', flat=True)
+        return Inspector.objects.filter(indexer=self).values_list("id", flat=True)
 
 
 class Inspector(models.Model):
@@ -83,7 +79,9 @@ class Inspector(models.Model):
 
     name = models.CharField(max_length=100)
     selector = models.TextField()
-    attribute = models.CharField(max_length=25, choices=InspectorAttributes.choices, null=True)
+    attribute = models.CharField(
+        max_length=25, choices=InspectorAttributes.choices, blank=True
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
     template = models.ForeignKey(Template, on_delete=models.PROTECT)
@@ -167,7 +165,7 @@ class Runner(models.Model):
     completed_at = models.DateTimeField(blank=True, null=True)
     deleted = models.BooleanField(default=False)
     crawler = models.ForeignKey(Crawler, on_delete=models.PROTECT)
-    name = models.CharField(max_length=50, default='New runner')
+    name = models.CharField(max_length=50, default="New runner")
     status = models.CharField(
         max_length=10, choices=RunnerStatus.choices, default=RunnerStatus.NEW
     )
@@ -177,11 +175,16 @@ class Runner(models.Model):
 
     @property
     def collected_documents(self) -> int:
-        return InspectorValue.objects.filter(runner=self).values('url').annotate(dcount=Count('url')).count()
+        return (
+            InspectorValue.objects.filter(runner=self)
+            .values("url")
+            .annotate(dcount=Count("url"))
+            .count()
+        )
 
     @property
     def current_crawled_url(self) -> int:
-        return InspectorValue.objects.filter(runner=self).values('url').last()
+        return InspectorValue.objects.filter(runner=self).values("url").last()
 
 
 class InspectorValue(models.Model):
@@ -190,15 +193,18 @@ class InspectorValue(models.Model):
         unique_together = ("inspector", "runner", "url")
 
     value = models.TextField(blank=True)
-    url = models.URLField(default='')
-    attribute = models.TextField(blank=True, null=True)
+    url = models.URLField(default="")
+    attribute = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
     inspector = models.ForeignKey(Inspector, on_delete=models.PROTECT)
     runner = models.ForeignKey(Runner, on_delete=models.PROTECT, default=1)
 
     def __str__(self) -> str:
-        return f"Runner: {self.runner}, Inspector: ({self.inspector.name}),  value: {self.value}, attribute: {self.attribute}"
+        return (
+            f"Runner: {self.runner},"
+            f" Inspector: ({self.inspector.name}),  value: {self.value}, attribute: {self.attribute}"
+        )
 
 
 class ConfigurationModel(SingletonModel):

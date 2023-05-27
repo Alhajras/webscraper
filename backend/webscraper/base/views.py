@@ -2,7 +2,6 @@ import logging
 import logging.handlers
 import re
 
-from django.core.serializers import serialize
 from django.utils import timezone
 import time
 
@@ -19,14 +18,26 @@ from urllib.parse import urlparse
 
 from .filters import InspectorFilter
 from .indexing.inverted_index import InvertedIndex
-from .models import Crawler, Template, Inspector, Runner, InspectorValue, RunnerStatus, Indexer, IndexerStatus, Action
+from .models import (
+    Crawler,
+    Template,
+    Inspector,
+    Runner,
+    InspectorValue,
+    RunnerStatus,
+    Indexer,
+    IndexerStatus,
+    Action,
+)
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
     CrawlerSerializer,
     UserSerializer,
     TemplateSerializer,
     InspectorSerializer,
-    RunnerSerializer, IndexerSerializer, InspectorValueSerializer, ActionPolymorphicSerializer,
+    RunnerSerializer,
+    IndexerSerializer,
+    ActionPolymorphicSerializer,
 )
 from .utils import extract_disallow_lines_from_url
 
@@ -60,23 +71,29 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         Create an index but without running it.
         """
         indexer = super().create(request, *args, **kwargs)
-        inspectors_ids = [selector['id'] for selector in request.data['selected_inspectors']]
-        Inspector.objects.filter(id__in=inspectors_ids).update(indexer=indexer.data['id'])
+        inspectors_ids = [
+            selector["id"] for selector in request.data["selected_inspectors"]
+        ]
+        Inspector.objects.filter(id__in=inspectors_ids).update(
+            indexer=indexer.data["id"]
+        )
         return indexer
 
     @action(detail=False, url_path="available-indexers", methods=["GET"])
     def available_indexers(self, request: Request) -> Response:
         inverted_index = InvertedIndex()
-        serialized_indexers = [IndexerSerializer(indexer).data for indexer in inverted_index.cached_indexers_keys()]
+        serialized_indexers = [
+            IndexerSerializer(indexer).data
+            for indexer in inverted_index.cached_indexers_keys()
+        ]
         return Response(status=200, data=serialized_indexers)
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
-        indexer_id = request.data['id']
+        indexer_id = request.data["id"]
         Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.RUNNING)
         inverted_index = InvertedIndex()
         inverted_index.create_index(indexer_id)
-        runner_serializer = RunnerSerializer(data=request.data)
         indexer = Indexer.objects.get(id=indexer_id)
         indexer.status = IndexerStatus.COMPLETED
         indexer.completed_at = timezone.now()
@@ -85,13 +102,19 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=True, url_path="search", methods=["POST"])
     def search(self, request: Request, pk: int) -> Response:
-        query = request.data['q'].lower().strip()
+        query = request.data["q"].lower().strip()
         inverted_index = InvertedIndex()
         result = inverted_index.process_query(query.split(" "), pk)
-        results = InspectorValue.objects.filter(id__in=result).values_list('url', flat=True)
+        results = InspectorValue.objects.filter(id__in=result).values_list(
+            "url", flat=True
+        )
         products = []
         for p in results:
-            products.append(InspectorValue.objects.filter(url=p).values('value', 'url', 'inspector', 'attribute'))
+            products.append(
+                InspectorValue.objects.filter(url=p).values(
+                    "value", "url", "inspector", "attribute"
+                )
+            )
         return Response(data=products)
 
 
@@ -147,7 +170,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
-        runner_id = request.data['id']
+        runner_id = request.data["id"]
         runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():
@@ -190,19 +213,21 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         start_url = crawler.seed_url
         # TODO: Use a better splitter
         # Urls that may crawler navigate by mistake
-        excluded_urls = crawler.excluded_urls.split("\";\"")
-        robot_disallow_links = [re.escape(bad_link) for bad_link in extract_disallow_lines_from_url(crawler.robot_file_url)]
+        excluded_urls = crawler.excluded_urls.split('";"')
+        robot_disallow_links = [
+            re.escape(bad_link)
+            for bad_link in extract_disallow_lines_from_url(crawler.robot_file_url)
+        ]
         # Make a regex that matches if any of our regexes match.
-        disallow_link_patterns = ''
+        disallow_link_patterns = ""
         if len(robot_disallow_links) != 0:
             disallow_link_patterns = "(" + ")|(".join(robot_disallow_links) + ")"
 
-        scope_divs = crawler.scope_divs.split("\";\"")
+        scope_divs = crawler.scope_divs.split('";"')
         # Stopping options
         max_collected_docs = crawler.max_collected_docs
         max_visited_links = crawler.max_pages
         max_rec_level = crawler.max_depth
-        base_urlparse = urlparse(base_url)
         # Define Browser Options
         chrome_options = Options()
         user_agent = (
@@ -244,7 +269,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                         pass
                 for scoped_element in scoped_elements:
                     # We start looking up for the elements we would like to collect inside the page/document
-                    inspectors_list = Inspector.objects.filter(template=crawler.template)
+                    inspectors_list = Inspector.objects.filter(
+                        template=crawler.template
+                    )
                     for inspector in inspectors_list:
                         inspector_elements = scoped_element.find_elements(
                             By.XPATH, inspector.selector
@@ -252,11 +279,15 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                         for inspector_element in inspector_elements:
                             attribute = None
                             if inspector.attribute is not None:
-                                attribute = inspector_element.get_attribute(inspector.attribute)
+                                attribute = inspector_element.get_attribute(
+                                    inspector.attribute
+                                )
                             InspectorValue.objects.update_or_create(
                                 url=link.url,
                                 attribute=attribute,
-                                value=inspector_element.text, inspector=inspector, runner=runner
+                                value=inspector_element.text,
+                                inspector=inspector,
+                                runner=runner,
                             )
             except Exception as e:
                 print(e)
@@ -269,7 +300,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     # We skip the fragments as they do not add any product, that why we split by #
                     href = a.get_attribute("href").split("#").pop()
                     # Respect the Robots.txt file protocol
-                    if disallow_link_patterns != '' and re.match(disallow_link_patterns, href):
+                    if disallow_link_patterns != "" and re.match(
+                        disallow_link_patterns, href
+                    ):
                         continue
                     # Skip unwanted links
                     if href in excluded_urls:
@@ -277,9 +310,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     # Links from outside the main host are skipped
                     if base_url != urlparse(href).hostname:
                         continue
-                    found_link = Link(
-                        url=href, visited=False, level=current_rec_level
-                    )
+                    found_link = Link(url=href, visited=False, level=current_rec_level)
                     if (
                         link.url != href
                         and href not in links
