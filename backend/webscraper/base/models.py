@@ -106,6 +106,7 @@ class Runner(models.Model):
     completed_at = models.DateTimeField(blank=True, null=True)
     deleted = models.BooleanField(default=False)
     crawler = models.ForeignKey(Crawler, on_delete=models.PROTECT)
+    name = models.CharField(max_length=50, default='New runner')
     status = models.CharField(
         max_length=10, choices=RunnerStatus.choices, default=RunnerStatus.NEW
     )

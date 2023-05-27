@@ -42,7 +42,7 @@
       <td>
 
         {{runner.name}}
-        {{runner.id}}
+        #{{runner.id}}
         <span
           *ngIf="runner.description"
           (mouseenter)="description.show($event)"
@@ -69,7 +69,7 @@
           </ng-template>
         </p-timeline>
       </td>
-      <td>{{runner.crawler}}</td>
+      <td>#{{runner.crawler}}</td>
       <td>
         <p>
           Created at:

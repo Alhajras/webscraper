@@ -129,9 +129,7 @@ export class CrawlerComponent {
         template: t,
       }))
     })
-
-    const urlReg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
-
+    const urlReg = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-z]{2,}(:[0-9]+)?(\/.*)?$/;
     this.template = this.fb.control('', [Validators.required])
     this.description = this.fb.control('')
     this.seedUrl = this.fb.control('' , [Validators.required, Validators.pattern(urlReg)])
