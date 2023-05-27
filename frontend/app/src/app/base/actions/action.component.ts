@@ -5,6 +5,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Inspector} from "src/app/models/inspector.model";
 import {InspectorService} from "src/app/services/inspector.service";
 import {Action, ActionChain} from "src/app/models/action.model";
+import {ActionService} from "src/app/services/action.service";
 
 @Component({
   selector: 'app-action',
@@ -34,7 +35,7 @@ export class ActionComponent implements OnInit {
 
   public constructor(
     private readonly fb: FormBuilder,
-    private readonly inspectorService: InspectorService,
+    private readonly actionService: ActionService,
   ) {
 
   }
@@ -58,8 +59,8 @@ export class ActionComponent implements OnInit {
       template: this.template.id,
     }
     if (this.updatedInspector !== null) {
-      this.inspectorService.update(this.updatedInspector.id, inspector).toPromise().then(() => {
-        this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
+      this.actionService.update(this.updatedInspector.id, inspector).toPromise().then(() => {
+        this.actionService.list({template: this.template.id}).subscribe(inspectors => {
           // this.inspectors = inspectors
         })
         this.closeModal()
@@ -72,8 +73,8 @@ export class ActionComponent implements OnInit {
       })
       return;
     }
-    this.inspectorService.post(inspector).toPromise().then(() => {
-      this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
+    this.actionService.post(inspector).toPromise().then(() => {
+      this.actionService.list({template: this.template.id}).subscribe(inspectors => {
         // this.inspectors = inspectors
       })
       this.closeModal()
@@ -87,8 +88,8 @@ export class ActionComponent implements OnInit {
 
   public deleteInspector(inspector: Inspector): void {
     inspector.deleted = true
-    this.inspectorService.update(inspector.id, inspector).toPromise().then(() => {
-      this.inspectorService.list().subscribe(inspectors => {
+    this.actionService.update(inspector.id, inspector).toPromise().then(() => {
+      this.actionService.list().subscribe(inspectors => {
         // this.inspectors = inspectors
       })
       this.closeModal()
@@ -114,8 +115,8 @@ export class ActionComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
-      // this.inspectors = inspectors
+    this.actionService.list({template: this.template.id}).subscribe(actions => {
+      this.beforeActions = actions
     })
     this.initForm()
   }
