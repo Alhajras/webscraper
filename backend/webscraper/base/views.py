@@ -11,6 +11,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -27,7 +28,7 @@ from .models import (
     RunnerStatus,
     Indexer,
     IndexerStatus,
-    Action,
+    Action, ClickAction, WaitAction, ScrollAction, ActionChain,
 )
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
@@ -178,6 +179,24 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         print(runner_serializer.data)
         crawler = Crawler.objects.get(pk=runner_serializer.data["crawler"])
 
+        def execute_all_before_actions() -> None:
+            template = crawler.template
+            actions_chain = ActionChain.objects.get(template=template)
+            all_actions = Action.objects.filter(action_chain=actions_chain).filter(deleted=False).order_by("order")
+            for action_to_be_excuted in all_actions:
+                if isinstance(action_to_be_excuted, ClickAction):
+                    driver.find_element(
+                        By.XPATH, action_to_be_excuted.selector
+                    ).click()
+                elif isinstance(action_to_be_excuted, WaitAction):
+                    time.sleep(action_to_be_excuted.time)
+                elif isinstance(action_to_be_excuted, ScrollAction):
+                    for _ in range(action_to_be_excuted.times):
+                        body = driver.find_element(By.CSS_SELECTOR, "body")
+                        body.send_keys(Keys.END)
+                        # We give time for the loading before scrolling again
+                        time.sleep(1000)
+
         def create_logger() -> logging:
             """
             Creates a logger for the runner to log the history  of the crawler runner.
@@ -259,6 +278,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             # Run the Webdriver, save page an quit browser
             # TODO: I should use `retry` here
             driver.get(link.url)
+
+            # We execute all the before actions before we start crawling
+            execute_all_before_actions()
             # This should be configured
             scoped_elements = []
             try:
