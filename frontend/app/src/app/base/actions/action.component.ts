@@ -68,7 +68,6 @@ export class ActionComponent implements OnInit {
       order: this.order.value,
       type: this.type.value.value,
     }
-    this.addActionTypeAttributes(action)
     if (this.updatedAction !== null) {
       this.actionService.update(this.updatedAction.id, action).toPromise().then(() => {
         this.actionService.list({template: this.template.id}).subscribe(action => {
@@ -84,6 +83,7 @@ export class ActionComponent implements OnInit {
       })
       return;
     }
+    this.addActionTypeAttributes(action)
     this.actionService.post(action).toPromise().then(() => {
       this.actionService.list({template: this.template.id}).subscribe(action => {
         // this.action = action
@@ -98,10 +98,10 @@ export class ActionComponent implements OnInit {
   }
 
   public deleteAction(action: Action): void {
-    // action.deleted = true
+    action.deleted = true
     this.actionService.update(action.id, action).toPromise().then(() => {
       this.actionService.list().subscribe(actions => {
-        // this.actions = actions
+        this.beforeActions = actions
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -112,11 +112,15 @@ export class ActionComponent implements OnInit {
     })
   }
 
-  public editAction(action: Action): void {
-    this.updatedAction = action
+  public editAction(action: any): void {
+    this.updatedAction = this.evaluateType(action)
     this.name = this.fb.control(action.name)
     this.order = this.fb.control(action.order)
     this.type = this.fb.control({key: action.type, value: action.type})
+    this.selector = this.fb.control(action.selector ?? '')
+    this.times = this.fb.control(action.times ?? 1)
+    this.direction = this.fb.control(action.direction ?? 'down')
+    this.time = this.fb.control(action.time ?? 0)
     this.form = this.fb.group({
       order: this.order,
       type: this.type,
@@ -173,7 +177,28 @@ export class ActionComponent implements OnInit {
         action.resourcetype = 'WaitAction'
         break;
     }
+    action = this.evaluateType(action)
     action.action_chain = 2
+    return action
+  }
+
+  /**
+   * Because action is a superclass we want to know which is the correct child class is the one we are editing
+   * @param action
+   * @private
+   */
+  private evaluateType(action: any): any {
+    switch (action.type) {
+      case 'click':
+        action.resourcetype = 'ClickAction'
+        break;
+      case 'scroll':
+        action.resourcetype = 'ScrollAction'
+        break;
+      case 'wait':
+        action.resourcetype = 'WaitAction'
+        break;
+    }
     return action
   }
 }

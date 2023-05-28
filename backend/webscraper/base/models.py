@@ -80,7 +80,7 @@ class Inspector(models.Model):
     name = models.CharField(max_length=100)
     selector = models.TextField()
     attribute = models.CharField(
-        max_length=25, choices=InspectorAttributes.choices, blank=True
+        max_length=25, choices=InspectorAttributes.choices, blank=True, default=''
     )
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
@@ -112,6 +112,7 @@ class Action(PolymorphicModel):
     )
     action_chain = models.ForeignKey(ActionChain, on_delete=models.PROTECT)
     order = models.PositiveIntegerField(default=1)
+    deleted = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return self.name
@@ -194,7 +195,7 @@ class InspectorValue(models.Model):
 
     value = models.TextField(blank=True)
     url = models.URLField(default="")
-    attribute = models.TextField(blank=True)
+    attribute = models.TextField(blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
     inspector = models.ForeignKey(Inspector, on_delete=models.PROTECT)

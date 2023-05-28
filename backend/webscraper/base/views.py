@@ -349,5 +349,5 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class ActionViewSet(EverythingButDestroyViewSet):
-    queryset = Action.objects.all()
+    queryset = Action.objects.all().filter(deleted=False)
     serializer_class = ActionPolymorphicSerializer

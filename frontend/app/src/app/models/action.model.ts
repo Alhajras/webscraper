@@ -4,6 +4,7 @@ export interface Action {
   type: string
   action_chain: number
   order: number
+  deleted: boolean
 }
 
 export interface ClickAction extends Action{
