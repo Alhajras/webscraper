@@ -78,10 +78,8 @@
           <app-time-ago [time]="runner.completed_at"></app-time-ago>
 
         </p>
-        <p>
-        </p>
         <p *ngIf="runner.collected_documents !== 0">
-          Collected documents: {{runner.collected_documents}}
+          #Documents: {{runner.collected_documents}}
           Current URL: <a [href]="runner.current_crawled_url.url"> {{runner.current_crawled_url.url | shortLink}}</a>
         </p>
 

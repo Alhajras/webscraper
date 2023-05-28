@@ -225,28 +225,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         logger = create_logger()
         links: dict[str, Link] = {}
-        q = []
-        # This is the base URL that the crawler should only crawl from
-        base_url = urlparse(crawler.seed_url).hostname
-        # start_url = "https://www.flaconi.de/damen-duftsets/"
-        start_url = crawler.seed_url
-        # TODO: Use a better splitter
-        # Urls that may crawler navigate by mistake
-        excluded_urls = crawler.excluded_urls.split('";"')
-        robot_disallow_links = [
-            re.escape(bad_link)
-            for bad_link in extract_disallow_lines_from_url(crawler.robot_file_url)
-        ]
-        # Make a regex that matches if any of our regexes match.
-        disallow_link_patterns = ""
-        if len(robot_disallow_links) != 0:
-            disallow_link_patterns = "(" + ")|(".join(robot_disallow_links) + ")"
-
-        scope_divs = crawler.scope_divs.split('";"')
-        # Stopping options
-        max_collected_docs = crawler.max_collected_docs
-        max_visited_links = crawler.max_pages
-        max_rec_level = crawler.max_depth
+        start = time.time()
         # Define Browser Options
         chrome_options = Options()
         user_agent = (
@@ -261,98 +240,123 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         chrome_path = r"/usr/bin/chromedriver"
         driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
 
-        def find_links():
-            runner = Runner.objects.get(id=runner_id)
+        def crawl_seed(seed: str):
+            q = []
+            # This is the base URL that the crawler should only crawl from
+            base_url = urlparse(seed).hostname
+            # start_url = "https://www.flaconi.de/damen-duftsets/"
+            start_url = seed
+            # TODO: Use a better splitter
+            # Urls that may crawler navigate by mistake
+            excluded_urls = crawler.excluded_urls.split('";"')
+            robot_disallow_links = [
+                re.escape(bad_link)
+                for bad_link in extract_disallow_lines_from_url(crawler.robot_file_url)
+            ]
+            # Make a regex that matches if any of our regexes match.
+            disallow_link_patterns = ""
+            if len(robot_disallow_links) != 0:
+                disallow_link_patterns = "(" + ")|(".join(robot_disallow_links) + ")"
 
-            if runner.status == str(RunnerStatus.EXIT):
-                return
-            if len(q) == 0:
-                return
-            link: Link = q.pop()
-            if runner.collected_documents >= max_collected_docs:
-                return
-            logger.info(link.url)
-            # We stop recursion when we reach tha mx level of digging into pages
-            if link.level > max_rec_level:
-                return
-            # Run the Webdriver, save page an quit browser
-            # TODO: I should use `retry` here
-            driver.get(link.url)
+            scope_divs = crawler.scope_divs.split('";"')
+            # Stopping options
+            max_collected_docs = crawler.max_collected_docs
+            max_visited_links = crawler.max_pages
+            max_rec_level = crawler.max_depth
 
-            # We execute all the before actions before we start crawling
-            execute_all_before_actions()
-            # This should be configured
-            scoped_elements = []
-            try:
-                for scope_div in scope_divs:
-                    try:
-                        scoped_elements.append(driver.find_element(By.XPATH, scope_div))
-                    except Exception:
-                        pass
-                for scoped_element in scoped_elements:
-                    # We start looking up for the elements we would like to collect inside the page/document
-                    inspectors_list = Inspector.objects.filter(
-                        template=crawler.template
-                    )
-                    for inspector in inspectors_list:
-                        inspector_elements = scoped_element.find_elements(
-                            By.XPATH, inspector.selector
+            def find_links():
+                runner = Runner.objects.get(id=runner_id)
+
+                if runner.status == str(RunnerStatus.EXIT):
+                    return
+                if len(q) == 0:
+                    return
+                link: Link = q.pop()
+                if runner.collected_documents >= max_collected_docs:
+                    return
+                logger.info(link.url)
+                # We stop recursion when we reach tha mx level of digging into pages
+                if link.level > max_rec_level:
+                    return
+                # Run the Webdriver, save page an quit browser
+                # TODO: I should use `retry` here
+                driver.get(link.url)
+
+                # We execute all the before actions before we start crawling
+                # execute_all_before_actions()
+                # This should be configured
+                scoped_elements = []
+                try:
+                    for scope_div in scope_divs:
+                        try:
+                            scoped_elements.append(driver.find_element(By.XPATH, scope_div))
+                        except Exception:
+                            pass
+                    for scoped_element in scoped_elements:
+                        # We start looking up for the elements we would like to collect inside the page/document
+                        inspectors_list = Inspector.objects.filter(
+                            template=crawler.template
                         )
-                        for inspector_element in inspector_elements:
-                            attribute = None
-                            if inspector.attribute is not None:
-                                attribute = inspector_element.get_attribute(
-                                    inspector.attribute
-                                )
-                            InspectorValue.objects.update_or_create(
-                                url=link.url,
-                                attribute=attribute,
-                                value=inspector_element.text,
-                                inspector=inspector,
-                                runner=runner,
+                        for inspector in inspectors_list:
+                            inspector_elements = scoped_element.find_elements(
+                                By.XPATH, inspector.selector
                             )
-            except Exception as e:
-                print(e)
-            for scoped_element in scoped_elements:
-                # We add one level
-                current_rec_level = link.level + 1
-                for a in scoped_element.find_elements(By.CSS_SELECTOR, "a"):
-                    if a.get_attribute("href") is None:
-                        continue
-                    # We skip the fragments as they do not add any product, that why we split by #
-                    href = a.get_attribute("href").split("#").pop()
-                    # Respect the Robots.txt file protocol
-                    if disallow_link_patterns != "" and re.match(
-                        disallow_link_patterns, href
-                    ):
-                        continue
-                    # Skip unwanted links
-                    if href in excluded_urls:
-                        continue
-                    # Links from outside the main host are skipped
-                    if base_url != urlparse(href).hostname:
-                        continue
-                    found_link = Link(url=href, visited=False, level=current_rec_level)
-                    if (
-                        link.url != href
-                        and href not in links
-                        and len(links) < max_visited_links
-                    ):
-                        links[href] = found_link
-                        q.append(Link(href))
-            return
+                            for inspector_element in inspector_elements:
+                                attribute = ''
+                                if inspector.attribute != '':
+                                    attribute = inspector_element.get_attribute(
+                                        inspector.attribute
+                                    )
+                                InspectorValue.objects.update_or_create(
+                                    url=link.url,
+                                    attribute=attribute,
+                                    value=inspector_element.text,
+                                    inspector=inspector,
+                                    runner=runner,
+                                )
+                except Exception as e:
+                    print(e)
+                for scoped_element in scoped_elements:
+                    # We add one level
+                    current_rec_level = link.level + 1
+                    for a in scoped_element.find_elements(By.CSS_SELECTOR, "a"):
+                        if a.get_attribute("href") is None:
+                            continue
+                        # We skip the fragments as they do not add any product, that why we split by #
+                        href = a.get_attribute("href").split("#").pop()
+                        # Respect the Robots.txt file protocol
+                        if disallow_link_patterns != "" and re.match(
+                            disallow_link_patterns, href
+                        ):
+                            continue
+                        # Skip unwanted links
+                        if href in excluded_urls:
+                            continue
+                        # Links from outside the main host are skipped
+                        if base_url != urlparse(href).hostname:
+                            continue
+                        found_link = Link(url=href, visited=False, level=current_rec_level)
+                        if (
+                            link.url != href
+                            and href not in links
+                            and len(links) < max_visited_links
+                        ):
+                            links[href] = found_link
+                            q.append(Link(href))
+                return
 
+            runner = Runner.objects.get(id=runner_id)
+            runner.status = RunnerStatus.RUNNING
+            runner.created_at = timezone.now()
+            runner.save()
+
+            q.append(Link(start_url))
+            while len(q) != 0:
+                find_links()
+                time.sleep(crawler.sleep)
+
+        crawl_seed(crawler.seed_url)
         runner = Runner.objects.get(id=runner_id)
-        runner.status = RunnerStatus.RUNNING
-        runner.created_at = timezone.now()
-        runner.save()
-
-        q.append(Link(start_url))
-        start = time.time()
-        while len(q) != 0:
-            find_links()
-            time.sleep(crawler.sleep)
-
         print(runner.collected_documents)
         end = time.time()
         print(end - start)
