@@ -141,6 +141,7 @@ export class CrawlerComponent {
     this.sleep= this.fb.control(0)
     this.timeout= this.fb.control(60)
     this.maxPages= this.fb.control('')
+    this.maxCollectedDocs= this.fb.control(20)
     this.maxDepth= this.fb.control(2)
     this.robotFileUrl= this.fb.control('', Validators.pattern(urlReg))
     this.excludedUrls= this.fb.control('')
