@@ -103,9 +103,6 @@ class ActionChain(models.Model):
 
 
 class Action(PolymorphicModel):
-    class Meta:
-        unique_together = ("action_chain", "order")
-
     name = models.CharField(max_length=50)
     type = models.CharField(
         max_length=10, choices=ActionTypes.choices, default=ActionTypes.CLICK

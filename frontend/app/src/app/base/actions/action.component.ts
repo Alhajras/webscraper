@@ -71,7 +71,7 @@ export class ActionComponent implements OnInit {
     if (this.updatedAction !== null) {
       this.actionService.update(this.updatedAction.id, action).toPromise().then(() => {
         this.actionService.list({template: this.template.id}).subscribe(action => {
-          // this.action = action
+          this.beforeActions = action
         })
         this.closeModal()
         this.currentlySubmitting = false
@@ -86,7 +86,7 @@ export class ActionComponent implements OnInit {
     this.addActionTypeAttributes(action)
     this.actionService.post(action).toPromise().then(() => {
       this.actionService.list({template: this.template.id}).subscribe(action => {
-        // this.action = action
+        this.beforeActions = action
       })
       this.closeModal()
       this.currentlySubmitting = false
