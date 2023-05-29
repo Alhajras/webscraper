@@ -1,6 +1,8 @@
 import logging
 import logging.handlers
 import re
+import threading
+from concurrent.futures import ThreadPoolExecutor, Future, wait
 
 from django.utils import timezone
 import time
@@ -11,6 +13,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
+from selenium.common import StaleElementReferenceException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
@@ -179,23 +182,23 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         print(runner_serializer.data)
         crawler = Crawler.objects.get(pk=runner_serializer.data["crawler"])
 
-        def execute_all_before_actions() -> None:
-            template = crawler.template
-            actions_chain = ActionChain.objects.get(template=template)
-            all_actions = Action.objects.filter(action_chain=actions_chain).filter(deleted=False).order_by("order")
-            for action_to_be_excuted in all_actions:
-                if isinstance(action_to_be_excuted, ClickAction):
-                    driver.find_element(
-                        By.XPATH, action_to_be_excuted.selector
-                    ).click()
-                elif isinstance(action_to_be_excuted, WaitAction):
-                    time.sleep(action_to_be_excuted.time)
-                elif isinstance(action_to_be_excuted, ScrollAction):
-                    for _ in range(action_to_be_excuted.times):
-                        body = driver.find_element(By.CSS_SELECTOR, "body")
-                        body.send_keys(Keys.END)
-                        # We give time for the loading before scrolling again
-                        time.sleep(1000)
+        # def execute_all_before_actions() -> None:
+        #     template = crawler.template
+        #     actions_chain = ActionChain.objects.get(template=template)
+        #     all_actions = Action.objects.filter(action_chain=actions_chain).filter(deleted=False).order_by("order")
+        #     for action_to_be_excuted in all_actions:
+        #         if isinstance(action_to_be_excuted, ClickAction):
+        #             driver.find_element(
+        #                 By.XPATH, action_to_be_excuted.selector
+        #             ).click()
+        #         elif isinstance(action_to_be_excuted, WaitAction):
+        #             time.sleep(action_to_be_excuted.time)
+        #         elif isinstance(action_to_be_excuted, ScrollAction):
+        #             for _ in range(action_to_be_excuted.times):
+        #                 body = driver.find_element(By.CSS_SELECTOR, "body")
+        #                 body.send_keys(Keys.END)
+        #                 # We give time for the loading before scrolling again
+        #                 time.sleep(1000)
 
         def create_logger() -> logging:
             """
@@ -225,6 +228,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         logger = create_logger()
         links: dict[str, Link] = {}
+
+        # This dictionary contain all the queues shared between threads
+        shared_queues: dict[int, list] = {}
         start = time.time()
         # Define Browser Options
         chrome_options = Options()
@@ -238,10 +244,18 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         chrome_options.add_argument("--headless")  # Hides the browser window
         # Reference the local Chromedriver instance
         chrome_path = r"/usr/bin/chromedriver"
-        driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
+        # driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
+        threads_metrics = {}
 
         def crawl_seed(seed: str):
-            q = []
+            thread_id = threading.get_native_id()
+            print(f"Thread: {thread_id} started!")
+            driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
+            links_queue = []
+
+            if thread_id not in shared_queues:
+                shared_queues[thread_id] = links_queue
+
             # This is the base URL that the crawler should only crawl from
             base_url = urlparse(seed).hostname
             # start_url = "https://www.flaconi.de/damen-duftsets/"
@@ -269,12 +283,12 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
                 if runner.status == str(RunnerStatus.EXIT):
                     return
-                if len(q) == 0:
+                if len(links_queue) == 0:
                     return
-                link: Link = q.pop()
+                link: Link = links_queue.pop()
                 if runner.collected_documents >= max_collected_docs:
                     return
-                logger.info(link.url)
+                logger.info(f"Thread: {thread_id} - {link.url}")
                 # We stop recursion when we reach tha mx level of digging into pages
                 if link.level > max_rec_level:
                     return
@@ -290,7 +304,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     for scope_div in scope_divs:
                         try:
                             scoped_elements.append(driver.find_element(By.XPATH, scope_div))
-                        except Exception:
+                        except Exception as e:
+                            print(e)
                             pass
                     for scoped_element in scoped_elements:
                         # We start looking up for the elements we would like to collect inside the page/document
@@ -307,6 +322,11 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                     attribute = inspector_element.get_attribute(
                                         inspector.attribute
                                     )
+                                if thread_id not in threads_metrics:
+                                    threads_metrics[thread_id] = 1
+                                else:
+                                    threads_metrics[thread_id] = threads_metrics[thread_id] + 1
+                                threads_metrics[thread_id] += 1
                                 InspectorValue.objects.update_or_create(
                                     url=link.url,
                                     attribute=attribute,
@@ -315,6 +335,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                     runner=runner,
                                 )
                 except Exception as e:
+                    print("noooooooooooooo")
                     print(e)
                 for scoped_element in scoped_elements:
                     # We add one level
@@ -342,25 +363,40 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                             and len(links) < max_visited_links
                         ):
                             links[href] = found_link
-                            q.append(Link(href))
+                            links_queue.append(Link(href))
                 return
+            print(f"Thread: {thread_id} completed!")
 
             runner = Runner.objects.get(id=runner_id)
             runner.status = RunnerStatus.RUNNING
             runner.created_at = timezone.now()
             runner.save()
 
-            q.append(Link(start_url))
-            while len(q) != 0:
+            links_queue.append(Link(start_url))
+            while len(links_queue) != 0:
                 find_links()
                 time.sleep(crawler.sleep)
+            driver.quit()
 
-        crawl_seed(crawler.seed_url)
+        # seed_urls = []
+        # seed_urls.append(crawler.seed_url)
+        # seed_urls.append("https://www.douglas.de/de/c/parfum/damenduefte/koerperpflege/010108")
+        # seed_urls.append()
+
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            crawl_1 = executor.submit(crawl_seed, crawler.seed_url)
+            crawl_2 = executor.submit(crawl_seed, "https://www.douglas.de/de/c/gesicht/gesichtsmasken/anti-aging-masken/120310")
+            crawl_3 = executor.submit(crawl_seed, "https://www.douglas.de/de/c/make-up/lippen/lippenstifte/030201")
+            crawl_4 = executor.submit(crawl_seed, "https://www.douglas.de/de/c/apotheke-gesundheit/ernaehrung-sport/muskel-gelenke-waermetherapie/070504")
+            futures: list[Future] = [crawl_1, crawl_2, crawl_3, crawl_4]
+            wait(futures)
+
         runner = Runner.objects.get(id=runner_id)
-        print(runner.collected_documents)
+        print(f"Docs: {runner.collected_documents}")
+        print(f"Visited Links: {len(links)}")
         end = time.time()
         print(end - start)
-        driver.quit()
+        print(threads_metrics)
         runner.status = RunnerStatus.COMPLETED
         runner.completed_at = timezone.now()
         runner.save()
