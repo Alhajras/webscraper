@@ -188,7 +188,7 @@ class Runner(models.Model):
 class InspectorValue(models.Model):
     class Meta:
         # TODO: This makes it slower I have to check this by using URLS.
-        unique_together = ("inspector", "runner", "url")
+        unique_together = ("value", "inspector", "runner", "url")
 
     value = models.TextField(blank=True)
     url = models.URLField(default="")

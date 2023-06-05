@@ -1,5 +1,6 @@
 import logging
 import logging.handlers
+import random
 import re
 import threading
 from concurrent.futures import ThreadPoolExecutor, Future, wait
@@ -130,6 +131,13 @@ class InspectorViewSet(EverythingButDestroyViewSet):
     filterset_fields = "template"
 
 
+class CrawlerThread:
+    def __init__(self, thread_id: int, running=True, queue=[]):
+        self.thread_id = thread_id
+        self.running = running
+        self.queue = queue
+
+
 class Link:
     def __init__(self, url: urlparse, visited=False, level=0):
         self.url = url
@@ -179,7 +187,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():
             pass
-        print(runner_serializer.data)
+
         crawler = Crawler.objects.get(pk=runner_serializer.data["crawler"])
 
         # def execute_all_before_actions() -> None:
@@ -230,7 +238,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         links: dict[str, Link] = {}
 
         # This dictionary contain all the queues shared between threads
-        shared_queues: dict[int, list] = {}
+        shared_threads_pool: dict[int, CrawlerThread] = {}
         start = time.time()
         # Define Browser Options
         chrome_options = Options()
@@ -247,36 +255,38 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         # driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
         threads_metrics = {}
 
+        # TODO: Use a better splitter
+        # Urls that may crawler navigate by mistake
+        excluded_urls = crawler.excluded_urls.split('";"')
+        robot_disallow_links = [
+            re.escape(bad_link)
+            for bad_link in extract_disallow_lines_from_url(crawler.robot_file_url)
+        ]
+        # Make a regex that matches if any of our regexes match.
+        disallow_link_patterns = ""
+        if len(robot_disallow_links) != 0:
+            disallow_link_patterns = "(" + ")|(".join(robot_disallow_links) + ")"
+
+        scope_divs = crawler.scope_divs.split('";"')
+        # Stopping options
+        max_collected_docs = crawler.max_collected_docs
+        max_visited_links = crawler.max_pages
+        max_rec_level = crawler.max_depth
+
         def crawl_seed(seed: str):
             thread_id = threading.get_native_id()
-            print(f"Thread: {thread_id} started!")
+            # print(f"Thread: {thread_id} started! Seed: {seed}")
             driver = webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
             links_queue = []
+            crawler_thread =CrawlerThread(thread_id=thread_id, running=True,queue=links_queue)
 
-            if thread_id not in shared_queues:
-                shared_queues[thread_id] = links_queue
+            if thread_id not in shared_threads_pool:
+                shared_threads_pool[thread_id] = crawler_thread
 
             # This is the base URL that the crawler should only crawl from
             base_url = urlparse(seed).hostname
             # start_url = "https://www.flaconi.de/damen-duftsets/"
             start_url = seed
-            # TODO: Use a better splitter
-            # Urls that may crawler navigate by mistake
-            excluded_urls = crawler.excluded_urls.split('";"')
-            robot_disallow_links = [
-                re.escape(bad_link)
-                for bad_link in extract_disallow_lines_from_url(crawler.robot_file_url)
-            ]
-            # Make a regex that matches if any of our regexes match.
-            disallow_link_patterns = ""
-            if len(robot_disallow_links) != 0:
-                disallow_link_patterns = "(" + ")|(".join(robot_disallow_links) + ")"
-
-            scope_divs = crawler.scope_divs.split('";"')
-            # Stopping options
-            max_collected_docs = crawler.max_collected_docs
-            max_visited_links = crawler.max_pages
-            max_rec_level = crawler.max_depth
 
             def find_links():
                 runner = Runner.objects.get(id=runner_id)
@@ -288,14 +298,19 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 link: Link = links_queue.pop()
                 if runner.collected_documents >= max_collected_docs:
                     return
-                logger.info(f"Thread: {thread_id} - {link.url}")
+                logger.info(f"Thread: {thread_id} - {link.url} out of {len(links_queue)}")
                 # We stop recursion when we reach tha mx level of digging into pages
                 if link.level > max_rec_level:
                     return
                 # Run the Webdriver, save page an quit browser
                 # TODO: I should use `retry` here
+                # print(f"Thread: {thread_id} is loading page {link.url}")
+                if links[link.url].visited:
+                    print("--------------------------------------------------- Already visited------------------------")
+                    return
                 driver.get(link.url)
-
+                links[link.url].visited = True
+                # time.sleep(random.random())
                 # We execute all the before actions before we start crawling
                 # execute_all_before_actions()
                 # This should be configured
@@ -303,97 +318,155 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 try:
                     for scope_div in scope_divs:
                         try:
+                            # print(f"Thread: {thread_id} is looking for scope elements.")
                             scoped_elements.append(driver.find_element(By.XPATH, scope_div))
                         except Exception as e:
-                            print(e)
+                            print(f"Thread id: {crawler_thread.thread_id} had an error, {e}")
                             pass
+                    for scoped_element in scoped_elements:
+                        # We add one level
+                        current_rec_level = link.level + 1
+                        all_links_in_the_page = scoped_element.find_elements(By.CSS_SELECTOR, "a")
+                        for a in all_links_in_the_page:
+                            if a.get_attribute("href") is None:
+                                continue
+                            # We skip the fragments as they do not add any product, that why we split by #
+                            href = a.get_attribute("href").split("#").pop()
+                            # Respect the Robots.txt file protocol
+                            if disallow_link_patterns != "" and re.match(
+                                    disallow_link_patterns, href
+                            ):
+                                continue
+                            # Skip unwanted links
+                            if href in excluded_urls:
+                                continue
+                            # Links from outside the main host are skipped
+                            if base_url != urlparse(href).hostname:
+                                continue
+                            found_link = Link(url=href, visited=False, level=current_rec_level)
+                            if (
+                                    link.url != href
+                                    and href not in links
+                                    and len(links) < max_visited_links
+                            ):
+                                links[href] = found_link
+                                links_queue.append(Link(href))
+
                     for scoped_element in scoped_elements:
                         # We start looking up for the elements we would like to collect inside the page/document
                         inspectors_list = Inspector.objects.filter(
                             template=crawler.template
                         )
                         for inspector in inspectors_list:
-                            inspector_elements = scoped_element.find_elements(
+                            inspector_element = scoped_element.find_element(
                                 By.XPATH, inspector.selector
                             )
-                            for inspector_element in inspector_elements:
-                                attribute = ''
-                                if inspector.attribute != '':
-                                    attribute = inspector_element.get_attribute(
-                                        inspector.attribute
-                                    )
-                                if thread_id not in threads_metrics:
-                                    threads_metrics[thread_id] = 1
-                                else:
-                                    threads_metrics[thread_id] = threads_metrics[thread_id] + 1
-                                threads_metrics[thread_id] += 1
-                                InspectorValue.objects.update_or_create(
-                                    url=link.url,
-                                    attribute=attribute,
-                                    value=inspector_element.text,
-                                    inspector=inspector,
-                                    runner=runner,
+                            attribute = ''
+                            if inspector.attribute != '':
+                                attribute = inspector_element.get_attribute(
+                                    inspector.attribute
                                 )
+                            if thread_id not in threads_metrics:
+                                threads_metrics[thread_id] = 1
+                            else:
+                                threads_metrics[thread_id] = threads_metrics[thread_id] + 1
+                            threads_metrics[thread_id] += 1
+                            InspectorValue.objects.update_or_create(
+                                url=link.url,
+                                attribute=attribute,
+                                value=inspector_element.text,
+                                inspector=inspector,
+                                runner=runner,
+                            )
                 except Exception as e:
-                    print("noooooooooooooo")
+                    print(f"{thread_id} encountered an error:")
                     print(e)
-                for scoped_element in scoped_elements:
-                    # We add one level
-                    current_rec_level = link.level + 1
-                    for a in scoped_element.find_elements(By.CSS_SELECTOR, "a"):
-                        if a.get_attribute("href") is None:
-                            continue
-                        # We skip the fragments as they do not add any product, that why we split by #
-                        href = a.get_attribute("href").split("#").pop()
-                        # Respect the Robots.txt file protocol
-                        if disallow_link_patterns != "" and re.match(
-                            disallow_link_patterns, href
-                        ):
-                            continue
-                        # Skip unwanted links
-                        if href in excluded_urls:
-                            continue
-                        # Links from outside the main host are skipped
-                        if base_url != urlparse(href).hostname:
-                            continue
-                        found_link = Link(url=href, visited=False, level=current_rec_level)
-                        if (
-                            link.url != href
-                            and href not in links
-                            and len(links) < max_visited_links
-                        ):
-                            links[href] = found_link
-                            links_queue.append(Link(href))
                 return
-            print(f"Thread: {thread_id} completed!")
-
             runner = Runner.objects.get(id=runner_id)
             runner.status = RunnerStatus.RUNNING
             runner.created_at = timezone.now()
             runner.save()
 
             links_queue.append(Link(start_url))
-            while len(links_queue) != 0:
-                find_links()
-                time.sleep(crawler.sleep)
+
+            max_length = 0
+            max_key = None
+            all_threads_completed = True
+            for key, value in shared_threads_pool.items():
+                if len(value.queue) > max_length:
+                    max_length = len(value.queue)
+                    max_key = key
+                if value.running:
+                    all_threads_completed = False
+
+            # print(f"max_length: {max_length}")
+            #  We only stop the thread if one queue is done AND all other threads are also completed
+            while len(links_queue) != 0 or not all_threads_completed:
+                if len(links_queue) != 0:
+                    find_links()
+
+                if len(links_queue) == 0:
+                    shared_threads_pool[thread_id].running = False
+                    time.sleep(10)
+                    all_threads_completed = True
+                    for key, value in shared_threads_pool.items():
+                        if len(value.queue) > max_length:
+                            max_length = len(value.queue)
+                            max_key = key
+                        if value.running:
+                            all_threads_completed = False
+                    long_queue = shared_threads_pool[max_key].queue
+                    half_length = len(long_queue) // 2
+                    shared_threads_pool[max_key].queue = long_queue[:half_length]
+                    links_queue = long_queue[half_length:]
+
+                # time.sleep(crawler.sleep)
             driver.quit()
+            shared_threads_pool[thread_id].running = False
+            print(f"Thread: {thread_id} completed!. Queue: {shared_threads_pool[thread_id]}. Docs: {threads_metrics[thread_id]}")
 
         # seed_urls = []
         # seed_urls.append(crawler.seed_url)
         # seed_urls.append("https://www.douglas.de/de/c/parfum/damenduefte/koerperpflege/010108")
         # seed_urls.append()
+        testing_urls = [
+            crawler.seed_url,
+            crawler.seed_url,
+            crawler.seed_url,
+            crawler.seed_url,
+            crawler.seed_url,
+            crawler.seed_url,
+        ]
+        links[testing_urls[0]] = Link(url=testing_urls[0], visited=False, level=1)
+        links[testing_urls[1]] = Link(url=testing_urls[1], visited=False, level=1)
+        links[testing_urls[2]] = Link(url=testing_urls[2], visited=False, level=1)
+        links[testing_urls[3]] = Link(url=testing_urls[3], visited=False, level=1)
+        links[testing_urls[4]] = Link(url=testing_urls[4], visited=False, level=1)
+        links[testing_urls[5]] = Link(url=testing_urls[5], visited=False, level=1)
+        with ThreadPoolExecutor(max_workers=6) as executor:
+            crawl_1 = executor.submit(crawl_seed, testing_urls[0])
+            crawl_2 = executor.submit(crawl_seed, testing_urls[1])
+            crawl_3 = executor.submit(crawl_seed,testing_urls[2])
+            crawl_4 = executor.submit(crawl_seed, testing_urls[3])
+            crawl_5 = executor.submit(crawl_seed,testing_urls[4])
+            crawl_6 = executor.submit(crawl_seed, testing_urls[5])
 
-        with ThreadPoolExecutor(max_workers=4) as executor:
-            crawl_1 = executor.submit(crawl_seed, crawler.seed_url)
-            crawl_2 = executor.submit(crawl_seed, "https://www.douglas.de/de/c/gesicht/gesichtsmasken/anti-aging-masken/120310")
-            crawl_3 = executor.submit(crawl_seed, "https://www.douglas.de/de/c/make-up/lippen/lippenstifte/030201")
-            crawl_4 = executor.submit(crawl_seed, "https://www.douglas.de/de/c/apotheke-gesundheit/ernaehrung-sport/muskel-gelenke-waermetherapie/070504")
-            futures: list[Future] = [crawl_1, crawl_2, crawl_3, crawl_4]
+            futures: list[Future] = [crawl_1, crawl_2, crawl_3, crawl_4, crawl_5, crawl_6]
             wait(futures)
 
         runner = Runner.objects.get(id=runner_id)
         print(f"Docs: {runner.collected_documents}")
-        print(f"Visited Links: {len(links)}")
+        total_visited_links = 0
+        total_non_useful_links = 0
+        for key, link in links.items():
+                if link.visited:
+                    total_visited_links += 1
+                if not InspectorValue.objects.filter(url=link.url).exists():
+                    print(link.url)
+                    total_non_useful_links += 1
+
+        print(f"Visited Links: {total_visited_links}")
+        print(f"total_non_useful_links: {total_non_useful_links}")
         end = time.time()
         print(end - start)
         print(threads_metrics)
