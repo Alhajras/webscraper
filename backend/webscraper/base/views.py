@@ -357,27 +357,41 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                         inspectors_list = Inspector.objects.filter(
                             template=crawler.template
                         )
+                        documents_dict = {}
                         for inspector in inspectors_list:
-                            inspector_element = scoped_element.find_element(
+                            inspector_elements = scoped_element.find_elements(
                                 By.XPATH, inspector.selector
                             )
-                            attribute = ''
-                            if inspector.attribute != '':
-                                attribute = inspector_element.get_attribute(
-                                    inspector.attribute
-                                )
-                            if thread_id not in threads_metrics:
-                                threads_metrics[thread_id] = 1
-                            else:
-                                threads_metrics[thread_id] = threads_metrics[thread_id] + 1
-                            threads_metrics[thread_id] += 1
-                            InspectorValue.objects.update_or_create(
-                                url=link.url,
-                                attribute=attribute,
-                                value=inspector_element.text,
-                                inspector=inspector,
-                                runner=runner,
-                            )
+                            documents_dict[inspector] = []
+                            for inspector_element in inspector_elements:
+                                attribute = ''
+                                if inspector.attribute != '':
+                                    attribute = inspector_element.get_attribute(
+                                        inspector.attribute
+                                    )
+                                if thread_id not in threads_metrics:
+                                    threads_metrics[thread_id] = 1
+                                else:
+                                    threads_metrics[thread_id] = threads_metrics[thread_id] + 1
+                                threads_metrics[thread_id] += 1
+                                documents_dict[inspector].append(InspectorValue(url=link.url,
+                                                                                attribute=attribute,
+                                                                                value=inspector_element.text,
+                                                                                inspector=inspector,
+                                                                                runner=runner,))
+
+                        lengths = [len(doc) for doc in documents_dict.values()]
+                        if not all(list_size == lengths[0] for list_size in lengths):
+                            return
+
+                        # We start saving documents
+                        for inspector in documents_dict.values():
+                            for inspector_value in inspector:
+                                InspectorValue.objects.update_or_create(url=inspector_value.url,
+                                                                                attribute=inspector_value.attribute,
+                                                                                value=inspector_value.value,
+                                                                                inspector=inspector_value.inspector,
+                                                                                runner=inspector_value.runner)
                 except Exception as e:
                     print(f"{thread_id} encountered an error:")
                     print(e)
@@ -407,7 +421,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
                 if len(links_queue) == 0:
                     shared_threads_pool[thread_id].running = False
-                    time.sleep(10)
+                    time.sleep(5)
                     all_threads_completed = True
                     for key, value in shared_threads_pool.items():
                         if len(value.queue) > max_length:
@@ -434,24 +448,18 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             crawler.seed_url,
             crawler.seed_url,
             crawler.seed_url,
-            crawler.seed_url,
-            crawler.seed_url,
         ]
         links[testing_urls[0]] = Link(url=testing_urls[0], visited=False, level=1)
         links[testing_urls[1]] = Link(url=testing_urls[1], visited=False, level=1)
         links[testing_urls[2]] = Link(url=testing_urls[2], visited=False, level=1)
         links[testing_urls[3]] = Link(url=testing_urls[3], visited=False, level=1)
-        links[testing_urls[4]] = Link(url=testing_urls[4], visited=False, level=1)
-        links[testing_urls[5]] = Link(url=testing_urls[5], visited=False, level=1)
-        with ThreadPoolExecutor(max_workers=6) as executor:
+        with ThreadPoolExecutor(max_workers=4) as executor:
             crawl_1 = executor.submit(crawl_seed, testing_urls[0])
             crawl_2 = executor.submit(crawl_seed, testing_urls[1])
-            crawl_3 = executor.submit(crawl_seed,testing_urls[2])
-            crawl_4 = executor.submit(crawl_seed, testing_urls[3])
-            crawl_5 = executor.submit(crawl_seed,testing_urls[4])
-            crawl_6 = executor.submit(crawl_seed, testing_urls[5])
+            # crawl_3 = executor.submit(crawl_seed,testing_urls[2])
+            # crawl_4 = executor.submit(crawl_seed, testing_urls[3])
 
-            futures: list[Future] = [crawl_1, crawl_2, crawl_3, crawl_4, crawl_5, crawl_6]
+            futures: list[Future] = [crawl_1, crawl_2]
             wait(futures)
 
         runner = Runner.objects.get(id=runner_id)
