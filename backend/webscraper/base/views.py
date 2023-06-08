@@ -295,6 +295,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     return
                 if len(links_queue) == 0:
                     return
+
+                # TODO: This should be configurable
                 link: Link = links_queue.pop()
                 if runner.collected_documents >= max_collected_docs:
                     return
@@ -362,7 +364,14 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                             inspector_elements = scoped_element.find_elements(
                                 By.XPATH, inspector.selector
                             )
+
+                            if len(inspector_elements) == 0:
+                                return
                             documents_dict[inspector] = []
+                            # TODO: this should be configurable
+                            allow_multi_elements = False
+                            if not allow_multi_elements:
+                                inspector_elements = [inspector_elements[0]]
                             for inspector_element in inspector_elements:
                                 attribute = ''
                                 if inspector.attribute != '':
@@ -382,6 +391,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
                         lengths = [len(doc) for doc in documents_dict.values()]
                         if not all(list_size == lengths[0] for list_size in lengths):
+                            logger.info(f"Thread: {thread_id} - The URL: {link.url} has different inspectors lists.")
                             return
 
                         # We start saving documents
