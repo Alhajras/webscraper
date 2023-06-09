@@ -31,16 +31,27 @@ def extract_disallow_lines_from_url(url):
     return disallow_lines
 
 
-def find_the_links_current_level(links_queues: dict[int, list]) -> int:
+def find_the_links_current_level(links_queues: dict[int, list], sorting_order: CrawlingLevelsOrder = CrawlingLevelsOrder.DES) -> int:
     """
     We would like to find the queue that contain links left
-    :param links_queues:
+    :param links_queues: A hashmap with a key of the level and the value is the queue
+    :param sorting_order: The order in which the resulting queue will be sorted.
     :return:
     """
+    levels_with_links = []
     for level in links_queues.keys():
         if len(links_queues[level]) > 0:
-            return level
-    return -1
+            levels_with_links.append(level)
+
+    if len(levels_with_links) == 0:
+        return -1
+
+    if sorting_order == CrawlingLevelsOrder.DES:
+        levels_with_links.sort(reverse=True)
+    else:
+        levels_with_links.sort()
+    print(levels_with_links)
+    return levels_with_links[0]
 
 
 def add_link_to_level(links_queues: dict[int, list], link: Link) -> None:

@@ -276,13 +276,11 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 if runner.collected_documents >= max_collected_docs:
                     return
                 logger.info(f"Thread: {thread_id} - {link.url} out of {len(current_active_queue)}")
-                # We stop recursion when we reach tha mx level of digging into pages
-                if link.level > max_rec_level:
-                    return
                 # Run the Webdriver, save page an quit browser
                 # TODO: I should use `retry` here
                 # print(f"Thread: {thread_id} is loading page {link.url}")
                 if links[link.url].visited:
+                    logger.info(f"Thread: {thread_id} - {link.url} already visited.")
                     return
                 driver.get(link.url)
                 links[link.url].visited = True
@@ -300,35 +298,37 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                             print(f"Thread id: {crawler_thread.thread_id} had an error, scope not found.")
                             pass
 
+                    # We stop recursion when we reach tha mx level of digging into pages
                     # We add one layer of depth
                     current_rec_level = link.level + 1
-                    for scoped_element in scoped_elements:
-                        # We add one level
-                        all_links_in_the_page = scoped_element.find_elements(By.CSS_SELECTOR, "a")
-                        for a in all_links_in_the_page:
-                            if a.get_attribute("href") is None:
-                                continue
-                            # We skip the fragments as they do not add any product, that why we split by #
-                            href = a.get_attribute("href").split("#").pop()
-                            # Respect the Robots.txt file protocol
-                            if disallow_link_patterns != "" and re.match(
-                                    disallow_link_patterns, href
-                            ):
-                                continue
-                            # Skip unwanted links
-                            if href in excluded_urls:
-                                continue
-                            # Links from outside the main host are skipped
-                            if base_url != urlparse(href).hostname:
-                                continue
-                            if (
-                                    link.url != href
-                                    and href not in links
-                                    and len(links) < max_visited_links
-                            ):
-                                found_link = Link(url=href, visited=False, level=current_rec_level)
-                                links[href] = found_link
-                                add_link_to_level(links_queues, found_link)
+                    if current_rec_level <= max_rec_level:
+                        for scoped_element in scoped_elements:
+                            # We add one level
+                            all_links_in_the_page = scoped_element.find_elements(By.CSS_SELECTOR, "a")
+                            for a in all_links_in_the_page:
+                                if a.get_attribute("href") is None:
+                                    continue
+                                # We skip the fragments as they do not add any product, that why we split by #
+                                href = a.get_attribute("href").split("#").pop()
+                                # Respect the Robots.txt file protocol
+                                if disallow_link_patterns != "" and re.match(
+                                        disallow_link_patterns, href
+                                ):
+                                    continue
+                                # Skip unwanted links
+                                if href in excluded_urls:
+                                    continue
+                                # Links from outside the main host are skipped
+                                if base_url != urlparse(href).hostname:
+                                    continue
+                                if (
+                                        link.url != href
+                                        and href not in links
+                                        and len(links) < max_visited_links
+                                ):
+                                    found_link = Link(url=href, visited=False, level=current_rec_level)
+                                    links[href] = found_link
+                                    add_link_to_level(links_queues, found_link)
                     for scoped_element in scoped_elements:
                         # We start looking up for the elements we would like to collect inside the page/document
                         inspectors_list = Inspector.objects.filter(
@@ -392,7 +392,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             #  We only stop the thread if one queue is done AND all other threads are also completed
             while len(current_active_queue) != 0 or not all_threads_completed(shared_threads_pool):
                 if len(current_active_queue) != 0:
-                    print(f"Thread: {thread_id} has queue with links: {len(current_active_queue)}")
                     find_links()
                 level = find_the_links_current_level(links_queues)
                 if level != -1:

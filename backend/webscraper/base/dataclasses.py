@@ -19,3 +19,8 @@ class Link:
         self.url = url
         self.visited = visited
         self.level = level
+
+
+class CrawlingLevelsOrder:
+    ASC = "ASC"
+    DES = "DES"
