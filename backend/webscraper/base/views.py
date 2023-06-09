@@ -393,19 +393,20 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             while len(current_active_queue) != 0 or not all_threads_completed(shared_threads_pool):
                 if len(current_active_queue) != 0:
                     find_links()
-                level = find_the_links_current_level(links_queues)
-                if level != -1:
-                    current_active_queue = links_queues[level]
                 else:
-                    print(f"Thread: {thread_id} looking for new queue")
-                    shared_threads_pool[thread_id].running = False
-                    time.sleep(random.random() * 5)
-                    # If all threads are done we break the loop
-                    new_queues = split_work_between_threads(shared_threads_pool)
-                    if new_queues is not None:
-                        shared_threads_pool[thread_id].running = True
-                        shared_threads_pool[thread_id].queues = new_queues
-                        current_active_queue = next(iter(new_queues.values()))
+                    level = find_the_links_current_level(links_queues)
+                    if level != -1:
+                        current_active_queue = links_queues[level]
+                    else:
+                        print(f"Thread: {thread_id} looking for new queue")
+                        shared_threads_pool[thread_id].running = False
+                        time.sleep(5)
+                        # If all threads are done we break the loop
+                        new_queues = split_work_between_threads(shared_threads_pool)
+                        if new_queues is not None:
+                            shared_threads_pool[thread_id].running = True
+                            shared_threads_pool[thread_id].queues = new_queues
+                            current_active_queue = next(iter(new_queues.values()))
 
             driver.quit()
             shared_threads_pool[thread_id].running = False
@@ -428,10 +429,10 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         with ThreadPoolExecutor(max_workers=4) as executor:
             crawl_1 = executor.submit(crawl_seed, testing_urls[0])
             crawl_2 = executor.submit(crawl_seed, testing_urls[1])
-            # crawl_3 = executor.submit(crawl_seed,testing_urls[2])
-            # crawl_4 = executor.submit(crawl_seed, testing_urls[3])
+            crawl_3 = executor.submit(crawl_seed,testing_urls[2])
+            crawl_4 = executor.submit(crawl_seed, testing_urls[3])
 
-            futures: list[Future] = [crawl_1, crawl_2]
+            futures: list[Future] = [crawl_1, crawl_2, crawl_3, crawl_4]
             wait(futures)
 
         runner = Runner.objects.get(id=runner_id)
