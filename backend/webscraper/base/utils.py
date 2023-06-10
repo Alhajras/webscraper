@@ -1,9 +1,15 @@
+import time
+
 import requests
+from selenium.webdriver import Keys
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.common.by import By
 
 from .dataclasses import *
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
+from .models import Template, ActionChain, Action, ClickAction, WaitAction, ScrollAction
 
 
 def extract_disallow_lines_from_url(url):
@@ -108,6 +114,10 @@ def split_work_between_threads(shared_threads_pool: dict[int, CrawlerThread]) ->
 
 
 def create_chrome_driver() -> WebDriver:
+    """
+    Create a new driver to be used for crawling
+    :return:chrome driver
+    """
     chrome_options = Options()
     user_agent = (
         "Mozilla/5.0 (Windows NT 6.1)"
@@ -120,3 +130,30 @@ def create_chrome_driver() -> WebDriver:
     # Reference the local Chromedriver instance
     chrome_path = r"/usr/bin/chromedriver"
     return webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
+
+
+def execute_all_before_actions(template: Template, driver: WebDriver) -> None:
+    """
+    Execute a list of actions to be done before the crawling process,
+    some sites needs to accept cookies for example.
+    :param template:
+    :param driver:
+    :return:
+    """
+    # TODO Change this to use the template
+    # actions_chain = ActionChain.objects.get(template=template)
+    actions_chain = ActionChain.objects.all()[0]
+    all_actions = Action.objects.filter(action_chain=actions_chain).filter(deleted=False).order_by("order")
+    for action_to_be_executed in all_actions:
+        if isinstance(action_to_be_executed, ClickAction):
+            driver.find_element(
+                By.XPATH, action_to_be_executed.selector
+            ).click()
+        elif isinstance(action_to_be_executed, WaitAction):
+            time.sleep(action_to_be_executed.time)
+        elif isinstance(action_to_be_executed, ScrollAction):
+            for _ in range(action_to_be_executed.times):
+                body = driver.find_element(By.CSS_SELECTOR, "body")
+                body.send_keys(Keys.END)
+                # We give time for the loading before scrolling again
+                time.sleep(1000)

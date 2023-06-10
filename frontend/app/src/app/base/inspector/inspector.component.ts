@@ -84,7 +84,7 @@ export class InspectorComponent implements OnInit {
     inspector.deleted = true
     this.inspectorService.update(inspector.id, inspector).toPromise().then(() => {
       this.inspectorService.list().subscribe(inspectors => {
-        this.inspectors = inspectors
+        this.inspectors = inspectors.filter(inspect=> inspect.template === this.template.id)
       })
       this.closeModal()
       this.currentlySubmitting = false

@@ -40,7 +40,7 @@ from .serializers import (
     ActionPolymorphicSerializer,
 )
 from .utils import (extract_disallow_lines_from_url, find_the_links_current_level, add_link_to_level,
-                    split_work_between_threads, create_chrome_driver, all_threads_completed)
+                    split_work_between_threads, create_chrome_driver, all_threads_completed, execute_all_before_actions)
 
 
 class EverythingButDestroyViewSet(
@@ -172,24 +172,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         crawler = Crawler.objects.get(pk=runner_serializer.data["crawler"])
 
-        # def execute_all_before_actions() -> None:
-        #     template = crawler.template
-        #     actions_chain = ActionChain.objects.get(template=template)
-        #     all_actions = Action.objects.filter(action_chain=actions_chain).filter(deleted=False).order_by("order")
-        #     for action_to_be_excuted in all_actions:
-        #         if isinstance(action_to_be_excuted, ClickAction):
-        #             driver.find_element(
-        #                 By.XPATH, action_to_be_excuted.selector
-        #             ).click()
-        #         elif isinstance(action_to_be_excuted, WaitAction):
-        #             time.sleep(action_to_be_excuted.time)
-        #         elif isinstance(action_to_be_excuted, ScrollAction):
-        #             for _ in range(action_to_be_excuted.times):
-        #                 body = driver.find_element(By.CSS_SELECTOR, "body")
-        #                 body.send_keys(Keys.END)
-        #                 # We give time for the loading before scrolling again
-        #                 time.sleep(1000)
-
         def create_logger() -> logging:
             """
             Creates a logger for the runner to log the history  of the crawler runner.
@@ -284,9 +266,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     return
                 driver.get(link.url)
                 links[link.url].visited = True
-                # time.sleep(random.random())
-                # We execute all the before actions before we start crawling
-                # execute_all_before_actions()
+                # We execute all the 'before actions' before we start crawling
+                execute_all_before_actions(crawler.template, driver)
                 # This should be configured
                 scoped_elements = []
                 try:
@@ -329,10 +310,11 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                     found_link = Link(url=href, visited=False, level=current_rec_level)
                                     links[href] = found_link
                                     add_link_to_level(links_queues, found_link)
+
                     for scoped_element in scoped_elements:
                         # We start looking up for the elements we would like to collect inside the page/document
                         inspectors_list = Inspector.objects.filter(
-                            template=crawler.template
+                            template=crawler.template, deleted=False
                         )
                         documents_dict = {}
                         for inspector in inspectors_list:
@@ -344,7 +326,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                 return
                             documents_dict[inspector] = []
                             # TODO: this should be configurable
-                            allow_multi_elements = False
+                            allow_multi_elements = True
                             if not allow_multi_elements:
                                 inspector_elements = [inspector_elements[0]]
                             for inspector_element in inspector_elements:
@@ -368,7 +350,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                         if not all(list_size == lengths[0] for list_size in lengths):
                             logger.info(f"Thread: {thread_id} - The URL: {link.url} has different inspectors lists.")
                             return
-
                         # We start saving documents
                         for inspector in documents_dict.values():
                             for inspector_value in inspector:
@@ -398,7 +379,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     if level != -1:
                         current_active_queue = links_queues[level]
                     else:
-                        print(f"Thread: {thread_id} looking for new queue")
                         shared_threads_pool[thread_id].running = False
                         time.sleep(5)
                         # If all threads are done we break the loop
@@ -413,13 +393,11 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             print(f"Thread: {thread_id} completed!. Queue: {shared_threads_pool[thread_id]}. Docs: {threads_metrics[thread_id]}")
 
         links[crawler.seed_url] = Link(url=crawler.seed_url, visited=False)
-        with ThreadPoolExecutor(max_workers=4) as executor:
-            crawl_1 = executor.submit(crawl_seed, crawler.seed_url)
-            crawl_2 = executor.submit(crawl_seed, crawler.seed_url)
-            crawl_3 = executor.submit(crawl_seed,crawler.seed_url)
-            crawl_4 = executor.submit(crawl_seed, crawler.seed_url)
-
-            futures: list[Future] = [crawl_1, crawl_2, crawl_3, crawl_4]
+        threads_number = 1
+        with ThreadPoolExecutor(max_workers=threads_number) as executor:
+            futures: list[Future] = []
+            for _ in range(threads_number):
+                futures.append(executor.submit(crawl_seed, crawler.seed_url))
             wait(futures)
 
         runner = Runner.objects.get(id=runner_id)

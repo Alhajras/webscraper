@@ -174,10 +174,7 @@ class Runner(models.Model):
     @property
     def collected_documents(self) -> int:
         return (
-            InspectorValue.objects.filter(runner=self)
-            .values("url")
-            .annotate(dcount=Count("url"))
-            .count()
+            InspectorValue.objects.filter(deleted=False, runner=self).count() / Inspector.objects.filter(deleted=False, template=self.crawler.template).count()
         )
 
     @property

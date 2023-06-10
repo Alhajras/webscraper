@@ -69,6 +69,7 @@ export class ActionComponent implements OnInit {
       type: this.type.value.value,
     }
     if (this.updatedAction !== null) {
+    this.addActionTypeAttributes(action)
       this.actionService.update(this.updatedAction.id, action).toPromise().then(() => {
         this.actionService.list({template: this.template.id}).subscribe(action => {
           this.beforeActions = action
