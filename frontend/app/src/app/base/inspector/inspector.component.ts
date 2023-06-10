@@ -49,7 +49,7 @@ export class InspectorComponent implements OnInit {
     const inspector = {
       name: this.name.value,
       selector: this.selector.value,
-      attribute: this.attribute.value === '' ? null : this.attribute.value,
+      attribute: this.attribute.value,
       template: this.template.id,
     }
     if (this.updatedInspector !== null) {
