@@ -412,25 +412,12 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             shared_threads_pool[thread_id].running = False
             print(f"Thread: {thread_id} completed!. Queue: {shared_threads_pool[thread_id]}. Docs: {threads_metrics[thread_id]}")
 
-        # seed_urls = []
-        # seed_urls.append(crawler.seed_url)
-        # seed_urls.append("https://www.douglas.de/de/c/parfum/damenduefte/koerperpflege/010108")
-        # seed_urls.append()
-        testing_urls = [
-            crawler.seed_url,
-            crawler.seed_url,
-            crawler.seed_url,
-            crawler.seed_url,
-        ]
-        links[testing_urls[0]] = Link(url=testing_urls[0], visited=False)
-        links[testing_urls[1]] = Link(url=testing_urls[1], visited=False)
-        links[testing_urls[3]] = Link(url=testing_urls[3], visited=False)
-        links[testing_urls[2]] = Link(url=testing_urls[2], visited=False)
+        links[crawler.seed_url] = Link(url=crawler.seed_url, visited=False)
         with ThreadPoolExecutor(max_workers=4) as executor:
-            crawl_1 = executor.submit(crawl_seed, testing_urls[0])
-            crawl_2 = executor.submit(crawl_seed, testing_urls[1])
-            crawl_3 = executor.submit(crawl_seed,testing_urls[2])
-            crawl_4 = executor.submit(crawl_seed, testing_urls[3])
+            crawl_1 = executor.submit(crawl_seed, crawler.seed_url)
+            crawl_2 = executor.submit(crawl_seed, crawler.seed_url)
+            crawl_3 = executor.submit(crawl_seed,crawler.seed_url)
+            crawl_4 = executor.submit(crawl_seed, crawler.seed_url)
 
             futures: list[Future] = [crawl_1, crawl_2, crawl_3, crawl_4]
             wait(futures)
