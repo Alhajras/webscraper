@@ -219,7 +219,13 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         if len(robot_disallow_links) != 0:
             disallow_link_patterns = "(" + ")|(".join(robot_disallow_links) + ")"
 
-        scope_divs = crawler.scope_divs.split('";"')
+        scope_divs = []
+        # We read the scopes from the user input if it is not empty otherwise we get all elements from the DOM body
+        if crawler.scope_divs != '':
+            scope_divs = crawler.scope_divs.split('";"')
+        else:
+            scope_divs = ['//body']
+        print(scope_divs)
         # Stopping options
         max_collected_docs = crawler.max_collected_docs
         max_visited_links = crawler.max_pages
@@ -262,25 +268,22 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 logger.info(f"Thread: {thread_id} - {link.url} out of {len(current_active_queue)}")
                 # Run the Webdriver, save page an quit browser
                 # TODO: I should use `retry` here
-                # print(f"Thread: {thread_id} is loading page {link.url}")
                 if links[link.url].visited:
                     logger.info(f"Thread: {thread_id} - {link.url} already visited.")
                     return
                 driver.get(link.url)
                 links[link.url].visited = True
                 # We execute all the 'before actions' before we start crawling
-                execute_all_before_actions(crawler.template, driver)
+                # execute_all_before_actions(crawler.template, driver)
                 # This should be configured
                 scoped_elements = []
                 try:
                     for scope_div in scope_divs:
                         try:
-                            # print(f"Thread: {thread_id} is looking for scope elements.")
                             scoped_elements.append(driver.find_element(By.XPATH, scope_div))
                         except Exception as e:
                             print(f"Thread id: {crawler_thread.thread_id} had an error, scope not found.")
                             pass
-
                     # We stop recursion when we reach tha mx level of digging into pages
                     # We add one layer of depth
                     current_rec_level = link.level + 1
@@ -328,7 +331,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                 return
                             documents_dict[inspector] = []
                             # TODO: this should be configurable
-                            allow_multi_elements = True
+                            allow_multi_elements = False
                             if not allow_multi_elements:
                                 inspector_elements = [inspector_elements[0]]
                             for inspector_element in inspector_elements:
@@ -373,24 +376,22 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             level = find_the_links_current_level(links_queues)
             current_active_queue = links_queues[level]
             #  We only stop the thread if one queue is done AND all other threads are also completed
-            while True:
+            while len(current_active_queue) != 0 or not all_threads_completed(shared_threads_pool):
                 if len(current_active_queue) != 0:
                     find_links()
-                    if len(current_active_queue) == 0:
-                        level = find_the_links_current_level(links_queues)
-                        if level != -1:
-                            current_active_queue = links_queues[level]
                 else:
-                    shared_threads_pool[thread_id].running = False
-                    time.sleep(5)
-                    # If all threads are done we break the loop
-                    new_queues = split_work_between_threads(shared_threads_pool)
-                    if new_queues is not None:
-                        shared_threads_pool[thread_id].running = True
-                        shared_threads_pool[thread_id].queues = new_queues
-                        current_active_queue = next(iter(new_queues.values()))
-                if len(current_active_queue) == 0 or all_threads_completed(shared_threads_pool):
-                    break
+                    level = find_the_links_current_level(links_queues)
+                    if level != -1:
+                        current_active_queue = links_queues[level]
+                    else:
+                        shared_threads_pool[thread_id].running = False
+                        time.sleep(5)
+                        # If all threads are done we break the loop
+                        new_queues = split_work_between_threads(shared_threads_pool)
+                        if new_queues is not None:
+                            shared_threads_pool[thread_id].running = True
+                            shared_threads_pool[thread_id].queues = new_queues
+                            current_active_queue = next(iter(new_queues.values()))
 
             driver.quit()
             shared_threads_pool[thread_id].running = False
