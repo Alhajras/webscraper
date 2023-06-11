@@ -225,9 +225,12 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         max_visited_links = crawler.max_pages
         max_rec_level = crawler.max_depth
 
-        def crawl_seed(seed: str):
+        def crawl_seed(seed: str) -> None:
+            """
+            This is the starting point where the crawling process start
+            :param seed: The root url to start crawling from
+            """
             thread_id = threading.get_native_id()
-            # print(f"Thread: {thread_id} started! Seed: {seed}")
             driver = create_chrome_driver()
 
             # This will hold all the queues for all the links different levels
@@ -239,7 +242,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
             # This is the base URL that the crawler should only crawl from
             base_url = urlparse(seed).hostname
-            # start_url = "https://www.flaconi.de/damen-duftsets/"
             start_url = seed
             current_active_queue = []
 
@@ -371,29 +373,31 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             level = find_the_links_current_level(links_queues)
             current_active_queue = links_queues[level]
             #  We only stop the thread if one queue is done AND all other threads are also completed
-            while len(current_active_queue) != 0 or not all_threads_completed(shared_threads_pool):
+            while True:
                 if len(current_active_queue) != 0:
                     find_links()
+                    if len(current_active_queue) == 0:
+                        level = find_the_links_current_level(links_queues)
+                        if level != -1:
+                            current_active_queue = links_queues[level]
                 else:
-                    level = find_the_links_current_level(links_queues)
-                    if level != -1:
-                        current_active_queue = links_queues[level]
-                    else:
-                        shared_threads_pool[thread_id].running = False
-                        time.sleep(5)
-                        # If all threads are done we break the loop
-                        new_queues = split_work_between_threads(shared_threads_pool)
-                        if new_queues is not None:
-                            shared_threads_pool[thread_id].running = True
-                            shared_threads_pool[thread_id].queues = new_queues
-                            current_active_queue = next(iter(new_queues.values()))
+                    shared_threads_pool[thread_id].running = False
+                    time.sleep(5)
+                    # If all threads are done we break the loop
+                    new_queues = split_work_between_threads(shared_threads_pool)
+                    if new_queues is not None:
+                        shared_threads_pool[thread_id].running = True
+                        shared_threads_pool[thread_id].queues = new_queues
+                        current_active_queue = next(iter(new_queues.values()))
+                if len(current_active_queue) == 0 or all_threads_completed(shared_threads_pool):
+                    break
 
             driver.quit()
             shared_threads_pool[thread_id].running = False
             print(f"Thread: {thread_id} completed!. Queue: {shared_threads_pool[thread_id]}. Docs: {threads_metrics[thread_id]}")
 
         links[crawler.seed_url] = Link(url=crawler.seed_url, visited=False)
-        threads_number = 1
+        threads_number = 4
         with ThreadPoolExecutor(max_workers=threads_number) as executor:
             futures: list[Future] = []
             for _ in range(threads_number):
@@ -404,12 +408,12 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         print(f"Docs: {runner.collected_documents}")
         total_visited_links = 0
         total_non_useful_links = 0
-        # for key, link in links.items():
-        #         if link.visited:
-        #             total_visited_links += 1
-        #         if not InspectorValue.objects.filter(url=link.url).exists():
-        #             print(link.url)
-        #             total_non_useful_links += 1
+        for key, link in links.items():
+                if link.visited:
+                    total_visited_links += 1
+                if not InspectorValue.objects.filter(url=link.url).exists():
+                    print(link.url)
+                    total_non_useful_links += 1
 
         print(f"Visited Links: {total_visited_links}")
         print(f"total_non_useful_links: {total_non_useful_links}")
