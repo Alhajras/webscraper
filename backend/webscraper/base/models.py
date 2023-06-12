@@ -33,6 +33,14 @@ class ActionTypes(models.TextChoices):
     SCROLL = "scroll"
 
 
+class CrawlingAlgorithms(models.TextChoices):
+    """
+    This is used to declare the supported parsing algorithms
+    """
+    BFS_TOP_DOWN = "BFS_TOP_DOWN"
+    BFS_BOTTOM_UP = "BFS_BOTTOM_UP"
+
+
 class ActionChainEvent(models.TextChoices):
     BEFORE = "before"
     AFTER = "after"
@@ -152,6 +160,9 @@ class Crawler(models.Model):
     robot_file_url = models.TextField(default="", blank=True)
     excluded_urls = models.TextField(blank=True)
     scope_divs = models.TextField(blank=True)
+    parsing_algorithm = models.CharField(
+        max_length=20, choices=CrawlingAlgorithms.choices, default=CrawlingAlgorithms.BFS_BOTTOM_UP
+    )
 
     def __str__(self) -> str:
         return self.name

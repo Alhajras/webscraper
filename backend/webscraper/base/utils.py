@@ -10,7 +10,7 @@ from .dataclasses import *
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from .models import Template, ActionChain, Action, ClickAction, WaitAction, ScrollAction
+from .models import Template, ActionChain, Action, ClickAction, WaitAction, ScrollAction, Crawler, CrawlingAlgorithms
 
 
 def extract_disallow_lines_from_url(url):
@@ -38,11 +38,12 @@ def extract_disallow_lines_from_url(url):
     return disallow_lines
 
 
-def find_the_links_current_level(links_queues: dict[int, list], sorting_order: CrawlingLevelsOrder = CrawlingLevelsOrder.DES) -> int:
+def find_the_links_current_level(links_queues: dict[int, list],
+                                 crawler: Crawler) -> int:
     """
     We would like to find the queue that contain links left
     :param links_queues: A hashmap with a key of the level and the value is the queue
-    :param sorting_order: The order in which the resulting queue will be sorted.
+    :param crawler: Crawler that is in progress.
     :return:
     """
     levels_with_links = []
@@ -53,7 +54,7 @@ def find_the_links_current_level(links_queues: dict[int, list], sorting_order: C
     if len(levels_with_links) == 0:
         return -1
 
-    if sorting_order == CrawlingLevelsOrder.DES:
+    if crawler.parsing_algorithm == CrawlingAlgorithms.BFS_BOTTOM_UP:
         levels_with_links.sort(reverse=True)
     else:
         levels_with_links.sort()
@@ -96,7 +97,7 @@ def split_work_between_threads(shared_threads_pool: dict[int, CrawlerThread]) ->
     max_level = -1
     thread_id_needs_help = -1
     for thread_id, thread in shared_threads_pool.items():
-        level = find_the_links_current_level(thread.queues)
+        level = find_the_links_current_level(thread.queues, thread.crawler)
         if level != -1 and len(thread.queues[level]) > max_length:
             max_length = len(thread.queues[level])
             thread_id_needs_help = thread_id

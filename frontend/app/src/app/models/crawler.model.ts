@@ -16,4 +16,5 @@ export interface Crawler {
   robot_file_url:string,
   excluded_urls:string,
   scope_divs:string
+  parsing_algorithm:string
 }

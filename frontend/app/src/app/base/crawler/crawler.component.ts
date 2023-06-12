@@ -21,6 +21,7 @@ export class CrawlerComponent {
   public updatedCrawler: Crawler | null = null
   public description!: FormControl
   public template!: FormControl
+  public parsingAlgorithm!: FormControl
   public seedUrl!: FormControl
   public name!: FormControl
   public threads!: FormControl
@@ -36,6 +37,7 @@ export class CrawlerComponent {
 
   public form!: FormGroup
   public templatesList: TemplateDropDown[] = []
+  public parsingAlgorithmsList = ['BFS_BOTTOM_UP', 'BFS_TOP_DOWN']
   public currentlySubmitting = false
   public displayModal = false
   public header = 'Crawler form'
@@ -61,6 +63,7 @@ export class CrawlerComponent {
       seed_url: this.seedUrl.value,
       template: this.template.value.template.id,
       threads: this.threads.value,
+      parsing_algorithm: this.parsingAlgorithm.value,
       retry: this.retry.value,
       sleep: this.sleep.value,
       timeout: this.timeout.value,
@@ -133,6 +136,7 @@ export class CrawlerComponent {
     })
     const urlReg = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-z]{2,}(:[0-9]+)?(\/.*)?$/;
     this.template = this.fb.control('', [Validators.required])
+    this.parsingAlgorithm = this.fb.control('BFS_TOP_DOWN')
     this.description = this.fb.control('')
     this.seedUrl = this.fb.control('' , [Validators.required, Validators.pattern(urlReg)])
     this.name = this.fb.control('', [Validators.required])
@@ -152,6 +156,7 @@ export class CrawlerComponent {
       url: this.seedUrl,
       name: this.name,
       threads: this.threads,
+      parsing_algorithm: this.parsingAlgorithm,
       retry: this.retry,
       sleep: this.sleep,
       timeout: this.timeout,
@@ -172,6 +177,7 @@ export class CrawlerComponent {
     const template = this.templatesList.find(t=>t.template.id ===crawler.template)
     this.template = this.fb.control(template)
     this.threads = this.fb.control(crawler.threads)
+    this.parsingAlgorithm = this.fb.control(crawler.parsing_algorithm)
     this.retry = this.fb.control(crawler.retry)
     this.sleep = this.fb.control(crawler.sleep)
     this.timeout = this.fb.control(crawler.timeout)
@@ -188,6 +194,7 @@ export class CrawlerComponent {
       name: this.name,
       template: this.template,
       threads: this.threads,
+      parsing_algorithm: this.parsingAlgorithm,
       retry: this.retry,
       sleep: this.sleep,
       timeout: this.timeout,

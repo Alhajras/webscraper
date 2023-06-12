@@ -1,6 +1,5 @@
 import logging
 import logging.handlers
-import random
 import re
 import threading
 from concurrent.futures import ThreadPoolExecutor, Future, wait
@@ -240,7 +239,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
             # This will hold all the queues for all the links different levels
             links_queues: dict[int, list] = {}
-            crawler_thread = CrawlerThread(thread_id=thread_id, running=True, queues=links_queues)
+            crawler_thread = CrawlerThread(thread_id=thread_id, crawler=crawler, running=True, queues=links_queues)
 
             if thread_id not in shared_threads_pool:
                 shared_threads_pool[thread_id] = crawler_thread
@@ -372,14 +371,14 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             runner.save()
 
             add_link_to_level(links_queues, Link(start_url))
-            level = find_the_links_current_level(links_queues)
+            level = find_the_links_current_level(links_queues, crawler)
             current_active_queue = links_queues[level]
             #  We only stop the thread if one queue is done AND all other threads are also completed
             while len(current_active_queue) != 0 or not all_threads_completed(shared_threads_pool):
                 if len(current_active_queue) != 0:
                     find_links()
                 else:
-                    level = find_the_links_current_level(links_queues)
+                    level = find_the_links_current_level(links_queues, crawler)
                     if level != -1:
                         current_active_queue = links_queues[level]
                     else:

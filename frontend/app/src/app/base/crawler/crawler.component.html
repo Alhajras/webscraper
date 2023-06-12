@@ -168,6 +168,21 @@
                   [formControl]="maxCollectedDocs"
                 />
               </app-input-field>
+
+              <app-input-field
+                [isRequired]="false"
+                labelText="Parsing algorithm"
+                helpText="Two algorithms are supported currently Breadth-First Search (Bottom-Up and Top-down)."
+              >
+                <p-dropdown
+                  id="parsing_algorithm-id"
+                  [formControl]="parsingAlgorithm"
+                  placeholder="Select an algorithm"
+                  [options]="parsingAlgorithmsList"
+                  [filter]="false"
+                ></p-dropdown>
+              </app-input-field>
+
               <app-input-field
                 [isRequired]="false"
                 labelId="description-id"
