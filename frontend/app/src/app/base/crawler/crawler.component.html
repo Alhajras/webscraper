@@ -187,6 +187,18 @@
             <div class="col-6">
               <app-input-field
                 [isRequired]="false"
+                labelText="Threads"
+                helpText="How many threads will be used in crawling process."
+              >
+                <input
+                  type="number"
+                  id="threads-id"
+                  pInputText
+                  [formControl]="threads"
+                />
+              </app-input-field>
+              <app-input-field
+                [isRequired]="false"
                 labelId="exclude-urls-id"
                 labelText="Excluded URLs"
                 helpText="The URLs that the crawler should avoid and never visit."

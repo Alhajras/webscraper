@@ -225,7 +225,6 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             scope_divs = crawler.scope_divs.split('";"')
         else:
             scope_divs = ['//body']
-        print(scope_divs)
         # Stopping options
         max_collected_docs = crawler.max_collected_docs
         max_visited_links = crawler.max_pages
@@ -398,7 +397,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             print(f"Thread: {thread_id} completed!. Queue: {shared_threads_pool[thread_id]}. Docs: {threads_metrics[thread_id]}")
 
         links[crawler.seed_url] = Link(url=crawler.seed_url, visited=False)
-        threads_number = 4
+        threads_number = crawler.threads
         with ThreadPoolExecutor(max_workers=threads_number) as executor:
             futures: list[Future] = []
             for _ in range(threads_number):
