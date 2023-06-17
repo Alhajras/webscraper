@@ -158,6 +158,7 @@ class Crawler(models.Model):
     max_pages = models.PositiveIntegerField(default=20)
     max_depth = models.PositiveSmallIntegerField(default=5)
     robot_file_url = models.TextField(default="", blank=True)
+    allow_multi_elements = models.BooleanField(default=False)
     excluded_urls = models.TextField(blank=True)
     scope_divs = models.TextField(blank=True)
     parsing_algorithm = models.CharField(

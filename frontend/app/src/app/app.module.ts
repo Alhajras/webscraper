@@ -49,6 +49,7 @@ import { ShortLinkPipe } from './shared/pipes/short-link.pipe';
 import {AccordionModule} from "primeng/accordion";
 import { DocumentationComponent } from './base/documentation/documentation.component';
 import {TabViewModule} from "primeng/tabview";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import {TabViewModule} from "primeng/tabview";
         FormsModule,
         SearchModule,
         AccordionModule,
-        TabViewModule
+        TabViewModule,
+        CheckboxModule
     ],
   providers: [],
   bootstrap: [AppComponent]

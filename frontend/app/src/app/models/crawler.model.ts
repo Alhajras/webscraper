@@ -17,4 +17,5 @@ export interface Crawler {
   excluded_urls:string,
   scope_divs:string
   parsing_algorithm:string
+  allow_multi_elements:boolean
 }

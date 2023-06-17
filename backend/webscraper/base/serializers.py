@@ -49,6 +49,7 @@ class CrawlerSerializer(serializers.ModelSerializer):
             "scope_divs",
             "max_collected_docs",
             "parsing_algorithm",
+            "allow_multi_elements",
         ]
 
 

@@ -328,9 +328,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                             if len(inspector_elements) == 0:
                                 return
                             documents_dict[inspector] = []
-                            # TODO: this should be configurable
-                            allow_multi_elements = False
-                            if not allow_multi_elements:
+                            if not crawler.allow_multi_elements:
                                 inspector_elements = [inspector_elements[0]]
                             for inspector_element in inspector_elements:
                                 attribute = ''

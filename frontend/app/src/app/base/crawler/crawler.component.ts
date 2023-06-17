@@ -34,10 +34,12 @@ export class CrawlerComponent {
   public excludedUrls!: FormControl
   public scopeDivs!: FormControl
   public maxCollectedDocs!: FormControl
+  public allowMultiElements!: FormControl
 
   public form!: FormGroup
   public templatesList: TemplateDropDown[] = []
   public parsingAlgorithmsList = ['BFS_BOTTOM_UP', 'BFS_TOP_DOWN']
+  public multiElementsOptions = ['Allow multi documentations', 'Single documentation per page']
   public currentlySubmitting = false
   public displayModal = false
   public header = 'Crawler form'
@@ -50,6 +52,7 @@ export class CrawlerComponent {
   }
 
   public submit(): void {
+    console.log(this.allowMultiElements.value)
     if (!this.form.valid) {
       // We should normally never get here since the submit button should be disabled.
       console.warn('Form not valid.')
@@ -69,6 +72,7 @@ export class CrawlerComponent {
       timeout: this.timeout.value,
       max_pages: this.maxPages.value,
       max_collected_docs: this.maxCollectedDocs.value,
+      allow_multi_elements: this.allowMultiElements.value === 'Allow multi documentations',
       max_depth: this.maxDepth.value,
       robot_file_url: this.robotFileUrl.value,
       excluded_urls: this.excludedUrls.value.length === 0 ? '' : this.excludedUrls.value.join('";"'),
@@ -145,7 +149,7 @@ export class CrawlerComponent {
     this.sleep= this.fb.control(0)
     this.timeout= this.fb.control(60)
     this.maxPages= this.fb.control('')
-    this.maxCollectedDocs= this.fb.control(20)
+    this.allowMultiElements= this.fb.control(false)
     this.maxDepth= this.fb.control(2)
     this.robotFileUrl= this.fb.control('', Validators.pattern(urlReg))
     this.excludedUrls= this.fb.control('')
@@ -162,6 +166,7 @@ export class CrawlerComponent {
       timeout: this.timeout,
       max_pages: this.maxPages,
       max_collected_docs: this.maxCollectedDocs,
+      allow_multi_elements: this.allowMultiElements,
       max_depth: this.maxDepth,
       robot_file_url: this.robotFileUrl,
       excluded_urls: this.excludedUrls,
@@ -183,6 +188,7 @@ export class CrawlerComponent {
     this.timeout = this.fb.control(crawler.timeout)
     this.maxPages = this.fb.control(crawler.max_pages)
     this.maxCollectedDocs = this.fb.control(crawler.max_collected_docs)
+    this.allowMultiElements = this.fb.control(crawler.allow_multi_elements)
     this.maxDepth = this.fb.control(crawler.max_depth)
     this.robotFileUrl = this.fb.control(crawler.robot_file_url)
     this.excludedUrls = this.fb.control(crawler.excluded_urls === '' ? '' : crawler.excluded_urls.split("\";\""))
@@ -200,6 +206,7 @@ export class CrawlerComponent {
       timeout: this.timeout,
       max_pages: this.maxPages,
       max_collected_docs: this.maxCollectedDocs,
+      allow_multi_elements: this.allowMultiElements,
       max_depth: this.maxDepth,
       robot_file_url: this.robotFileUrl,
       excluded_urls: this.excludedUrls,
@@ -207,4 +214,5 @@ export class CrawlerComponent {
     })
     this.displayModal = true
   }
+
 }

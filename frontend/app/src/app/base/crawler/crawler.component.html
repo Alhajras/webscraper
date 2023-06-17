@@ -182,24 +182,19 @@
                   [filter]="false"
                 ></p-dropdown>
               </app-input-field>
-
               <app-input-field
-                [isRequired]="false"
-                labelId="description-id"
-                labelText="Description"
-                helpText=""
+                [isRequired]="true"
+                labelText="Allow multi elements crawling"
+                helpText="If the documents are listed as a list in a page this can be set to true."
               >
-            <textarea
-              [rows]="10"
-              [cols]="100"
-              pInputTextarea
-              [formControl]="description"
-              ngDefaultControl
-            ></textarea>
+                <p-dropdown
+                  id="multi-elements-id"
+                  [formControl]="allowMultiElements"
+                  placeholder="Select a parsing selector"
+                  [options]="multiElementsOptions"
+                  [filter]="false"
+                ></p-dropdown>
               </app-input-field>
-
-            </div>
-            <div class="col-6">
               <app-input-field
                 [isRequired]="false"
                 labelText="Threads"
@@ -220,6 +215,9 @@
               >
                 <p-chips [formControl]="excludedUrls"></p-chips>
               </app-input-field>
+
+            </div>
+            <div class="col-6">
               <app-input-field
                 [isRequired]="false"
                 labelText="Robots file URL"
@@ -290,6 +288,20 @@
                   pInputText
                   [formControl]="maxDepth"
                 />
+              </app-input-field>
+              <app-input-field
+                [isRequired]="false"
+                labelId="description-id"
+                labelText="Description"
+                helpText=""
+              >
+            <textarea
+              [rows]="10"
+              [cols]="100"
+              pInputTextarea
+              [formControl]="description"
+              ngDefaultControl
+            ></textarea>
               </app-input-field>
 
 
