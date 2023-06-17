@@ -278,7 +278,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 try:
                     for scope_div in scope_divs:
                         try:
-                            scoped_elements.append(driver.find_element(By.XPATH, scope_div))
+                            scoped_elements += driver.find_elements(By.XPATH, scope_div)
                         except Exception as e:
                             print(f"Thread id: {crawler_thread.thread_id} had an error, scope not found.")
                             pass
@@ -314,38 +314,36 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                     links[href] = found_link
                                     add_link_to_level(links_queues, found_link)
 
-                    for scoped_element in scoped_elements:
-                        # We start looking up for the elements we would like to collect inside the page/document
-                        inspectors_list = Inspector.objects.filter(
-                            template=crawler.template, deleted=False
+                    # We start looking up for the elements we would like to collect inside the page/document
+                    inspectors_list = Inspector.objects.filter(
+                        template=crawler.template, deleted=False
+                    )
+                    documents_dict = {}
+                    for inspector in inspectors_list:
+                        inspector_elements = driver.find_elements(
+                            By.XPATH, inspector.selector
                         )
-                        documents_dict = {}
-                        for inspector in inspectors_list:
-                            inspector_elements = scoped_element.find_elements(
-                                By.XPATH, inspector.selector
-                            )
-
-                            if len(inspector_elements) == 0:
-                                return
-                            documents_dict[inspector] = []
-                            if not crawler.allow_multi_elements:
-                                inspector_elements = [inspector_elements[0]]
-                            for inspector_element in inspector_elements:
-                                attribute = ''
-                                if inspector.attribute != '':
-                                    attribute = inspector_element.get_attribute(
-                                        inspector.attribute
-                                    )
-                                if thread_id not in threads_metrics:
-                                    threads_metrics[thread_id] = 1
-                                else:
-                                    threads_metrics[thread_id] = threads_metrics[thread_id] + 1
-                                threads_metrics[thread_id] += 1
-                                documents_dict[inspector].append(InspectorValue(url=link.url,
-                                                                                attribute=attribute,
-                                                                                value=inspector_element.text,
-                                                                                inspector=inspector,
-                                                                                runner=runner,))
+                        if len(inspector_elements) == 0:
+                            return
+                        documents_dict[inspector] = []
+                        if not crawler.allow_multi_elements:
+                            inspector_elements = [inspector_elements[0]]
+                        for inspector_element in inspector_elements:
+                            attribute = ''
+                            if inspector.attribute != '':
+                                attribute = inspector_element.get_attribute(
+                                    inspector.attribute
+                                )
+                            if thread_id not in threads_metrics:
+                                threads_metrics[thread_id] = 1
+                            else:
+                                threads_metrics[thread_id] = threads_metrics[thread_id] + 1
+                            threads_metrics[thread_id] += 1
+                            documents_dict[inspector].append(InspectorValue(url=link.url,
+                                                                            attribute=attribute,
+                                                                            value=inspector_element.text,
+                                                                            inspector=inspector,
+                                                                            runner=runner,))
 
                         lengths = [len(doc) for doc in documents_dict.values()]
                         if not all(list_size == lengths[0] for list_size in lengths):
