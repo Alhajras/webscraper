@@ -100,33 +100,18 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             print("Cached")
             return hit
 
+        print("Creating dictionary ....")
         use_synonyms = True
         q = QGramIndex(3, use_synonyms)
         q.build_from_file("wikidata-entities.tsv")
         cache.set(cache_key, q)
-        return
-        raw_query = "how can I"
-        query = q.normalize(raw_query)
+        print("Done creating dictionary!")
 
-        # Process the keywords.
-        delta = int(len(query) / 4)
-
-        postings, _ = q.find_matches(query, delta)
-
-        r = []
-        for p in q.rank_matches(postings)[:5]:
-            entity_name = q.entities[p[0] - 1][0]
-            entity_synonyms = q.names[p[3] - 1]
-            entity_desc = q.entities[p[0] - 1][2]
-            entity_img = q.entities[p[0] - 1][6].strip()
-            if not entity_img:
-                entity_img = "noimage.png"
-            print(entity_name)
-
-        return
         Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.RUNNING)
+        print("Creating an index!")
         inverted_index = InvertedIndex()
         inverted_index.create_index(indexer_id)
+        print("Done creating an index!")
         indexer = Indexer.objects.get(id=indexer_id)
         indexer.status = IndexerStatus.COMPLETED
         indexer.completed_at = timezone.now()
@@ -154,12 +139,32 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="suggest", methods=["GET"])
     def suggest(self, request: Request) -> Response:
-        print("requestrequestrequest")
-        query = request.query_params.get("q").lower().strip()
+        print("Sdfsdfsdf")
+        raw_query = request.query_params.get("q").lower().strip()
         indexer_id = request.query_params.get("id").lower().strip()
-        use_synonyms = True
-        q = QGramIndex(3, use_synonyms)
-        q.build_from_file("wikidata-entities.tsv")
+        print("Before cache")
+        cache_key = f"qGramIndex:{indexer_id}"
+        q = cache.get(cache_key)
+        print("After cache")
+        query = q.normalize(raw_query)
+
+        # Process the keywords.
+        delta = int(len(query) / 4)
+        print("11111111111111111111")
+
+        postings, _ = q.find_matches(query, delta)
+        print("22222222222222222222222")
+
+        r = []
+        for p in q.rank_matches(postings)[:5]:
+            entity_name = q.entities[p[0] - 1][0]
+            entity_synonyms = q.names[p[3] - 1]
+            entity_desc = q.entities[p[0] - 1][2]
+            entity_img = q.entities[p[0] - 1][6].strip()
+            if not entity_img:
+                entity_img = "noimage.png"
+            print(entity_name)
+        print("333333333333333333333333")
 
 
 class InspectorViewSet(EverythingButDestroyViewSet):
