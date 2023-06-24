@@ -2,10 +2,16 @@
   <div class="flex justify-content-center flex-wrap p-4 gap-4">
     <div class="inputgroup">
       <input
+        #targetEl
         (keyup)="showSuggestions()"
         (keydown.enter)="searchProducts()"
         [(ngModel)]="searchText"
+        (click)="op.show($event, targetEl)"
         type="text" pInputText placeholder="Search..."/>
+      <p-overlayPanel #op>
+        <p *ngFor="let suggest of suggestions">{{suggest}}</p>
+      </p-overlayPanel>
+
       <button
         [disabled]="selectedIndexerForm === undefined"
         (click)="searchProducts()"
@@ -47,8 +53,8 @@
             *ngIf="products.length === 0"
           >
             <p>
-            There are no documents found!
-          </p>
+              There are no documents found!
+            </p>
           </td>
         </tr>
       </ng-template>

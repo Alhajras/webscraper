@@ -42,6 +42,7 @@ export class SearchComponent {
   public cached_indexers = []
   public selectedIndexerForm!: Indexer
   public headers: string[] = []
+  public suggestions :string[] = []
 
   public closeModal(): void {
     this.displayModal = false
@@ -106,7 +107,9 @@ export class SearchComponent {
   protected readonly ShortTextPipe = ShortTextPipe;
 
   showSuggestions() {
-    lastValueFrom(this.indexerService.suggest(1, this.searchText)).then().catch()
+    lastValueFrom(this.indexerService.suggest(1, this.searchText)).then(result=>{
+      this.suggestions = result.suggestions
+    }).catch()
     console.log(this.searchText)
   }
 }
