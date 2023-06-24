@@ -5,6 +5,7 @@ import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorValue} from "src/app/models/inspector-value.model";
 import {Indexer} from "src/app/models/indexer.model";
 import {ShortTextPipe} from "src/app/shared/pipes/short-text.pipe";
+import {lastValueFrom} from "rxjs";
 
 export interface TemplateDropDown {
   key: string
@@ -96,7 +97,6 @@ export class SearchComponent {
     this.products = []
     // TODO this is bad and must be dynamic
     this.indexerService.search(this.selectedIndexerForm.id, this.searchText).subscribe((values:{headers: string[], docs: any[]}) => {
-      console.log(values)
       this.headers = values.headers
       this.products = values.docs
       this.loading = false
@@ -104,4 +104,9 @@ export class SearchComponent {
   }
 
   protected readonly ShortTextPipe = ShortTextPipe;
+
+  showSuggestions() {
+    lastValueFrom(this.indexerService.suggest(1, this.searchText)).then().catch()
+    console.log(this.searchText)
+  }
 }

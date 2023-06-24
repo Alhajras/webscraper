@@ -4,6 +4,7 @@ import re
 import threading
 from concurrent.futures import ThreadPoolExecutor, Future, wait
 
+from django.core.cache import cache
 from django.utils import timezone
 import time
 
@@ -91,10 +92,19 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
+        indexer_id = request.data["id"]
+
+        cache_key = f"qGramIndex:{indexer_id}"
+        hit = cache.get(cache_key)
+        if hit is not None:
+            print("Cached")
+            return hit
+
         use_synonyms = True
         q = QGramIndex(3, use_synonyms)
         q.build_from_file("wikidata-entities.tsv")
-
+        cache.set(cache_key, q)
+        return
         raw_query = "how can I"
         query = q.normalize(raw_query)
 
@@ -114,7 +124,6 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             print(entity_name)
 
         return
-        indexer_id = request.data["id"]
         Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.RUNNING)
         inverted_index = InvertedIndex()
         inverted_index.create_index(indexer_id)
@@ -143,9 +152,11 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             headers = Inspector.objects.filter(id__in=[doc["inspector"]  for doc in docs[0]]).values_list("name", flat=True)
         return Response(data={"headers": headers,  "docs": docs})
 
-    @action(detail=True, url_path="suggest", methods=["POST"])
-    def suggest(self, request: Request, pk: int) -> Response:
-        query = request.data["q"].lower().strip()
+    @action(detail=False, url_path="suggest", methods=["GET"])
+    def suggest(self, request: Request) -> Response:
+        print("requestrequestrequest")
+        query = request.query_params.get("q").lower().strip()
+        indexer_id = request.query_params.get("id").lower().strip()
         use_synonyms = True
         q = QGramIndex(3, use_synonyms)
         q.build_from_file("wikidata-entities.tsv")

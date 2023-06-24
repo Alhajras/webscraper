@@ -37,10 +37,14 @@ export class IndexerService {
   }
 
   public search(indexer_id: number, q: string) {
-    return this.client.post<{headers: string[], docs: any[]}>(`${this.endpointPath}${indexer_id}/search/`, {q: q})
+    return this.client.post<{ headers: string[], docs: any[] }>(`${this.endpointPath}${indexer_id}/search/`, {q: q})
   }
 
-    public indexedIndexers(): Observable<any> {
+  public indexedIndexers(): Observable<any> {
     return this.client.get<any>(`${this.endpointPath}available-indexers/`)
+  }
+
+  public suggest(indexer_id: number, q: string){
+    return this.client.get<{ headers: string[], docs: any[] }>(`${this.endpointPath}/suggest?id=${indexer_id}&q=${q}`)
   }
 }

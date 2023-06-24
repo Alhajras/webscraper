@@ -2,7 +2,7 @@
   <div class="flex justify-content-center flex-wrap p-4 gap-4">
     <div class="inputgroup">
       <input
-        [disabled]="selectedIndexerForm === undefined"
+        (keyup)="showSuggestions()"
         (keydown.enter)="searchProducts()"
         [(ngModel)]="searchText"
         type="text" pInputText placeholder="Search..."/>
