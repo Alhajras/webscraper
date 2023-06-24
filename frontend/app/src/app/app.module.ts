@@ -50,6 +50,7 @@ import {AccordionModule} from "primeng/accordion";
 import { DocumentationComponent } from './base/documentation/documentation.component';
 import {TabViewModule} from "primeng/tabview";
 import {CheckboxModule} from "primeng/checkbox";
+import {ShortTextPipe} from "src/app/shared/pipes/short-text.pipe";
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import {CheckboxModule} from "primeng/checkbox";
     FlaconiResultTemplateComponent,
     DouglasResultTemplateComponent,
     ShortLinkPipe,
+    ShortTextPipe,
     DocumentationComponent
   ],
     imports: [

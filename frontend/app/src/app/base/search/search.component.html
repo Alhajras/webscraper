@@ -24,21 +24,35 @@
 
   </div>
   <div class="card">
-    <p-dataView
-      [loading]="loading"
-      emptyMessage="There are no products found!"
-      #dv [value]="products">
-      <ng-template let-product pTemplate="listItem">
-        <div class="col-12">
-          <container-element [ngSwitch]="selectedIndexerForm.name">
-            <app-flaconi-result-template *ngSwitchCase="'Flaconi'" [product]="product"
-                                         [searchText]="searchText"></app-flaconi-result-template>
-            <app-douglas-result-template *ngSwitchCase="'Douglas'" [product]="product"
-                                         [searchText]="searchText"></app-douglas-result-template>
-          </container-element>
-
-        </div>
+    <p-table [loading]="loading"
+             [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let header of headers">{{header}}</th>
+        </tr>
       </ng-template>
-    </p-dataView>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td *ngFor="let value of product">
+            <p>
+              <app-marked-text [text]="(value.value | shortText) ?? ''" [searchString]="searchText">
+              </app-marked-text>
+            </p>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td
+            *ngIf="products.length === 0"
+          >
+            <p>
+            There are no documents found!
+          </p>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
   </div>
 </div>

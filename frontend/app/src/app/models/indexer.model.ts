@@ -7,4 +7,8 @@ export interface Indexer {
   inspectors_to_be_indexed: number[],
   description: string,
   status: string,
+  k_parameter: number,
+  b_parameter: number,
+  skip_words: string,
+  small_words_threshold: number,
 }

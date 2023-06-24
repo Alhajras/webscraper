@@ -4,6 +4,7 @@ import {Template} from "src/app/models/template.model";
 import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorValue} from "src/app/models/inspector-value.model";
 import {Indexer} from "src/app/models/indexer.model";
+import {ShortTextPipe} from "src/app/shared/pipes/short-text.pipe";
 
 export interface TemplateDropDown {
   key: string
@@ -39,6 +40,7 @@ export class SearchComponent {
   public searchText = ''
   public cached_indexers = []
   public selectedIndexerForm!: Indexer
+  public headers: string[] = []
 
   public closeModal(): void {
     this.displayModal = false
@@ -93,13 +95,13 @@ export class SearchComponent {
     this.loading = true
     this.products = []
     // TODO this is bad and must be dynamic
-    this.indexerService.search(this.selectedIndexerForm.id, this.searchText).subscribe(values => {
+    this.indexerService.search(this.selectedIndexerForm.id, this.searchText).subscribe((values:{headers: string[], docs: any[]}) => {
       console.log(values)
-      values.forEach(p => {
-
-        this.products = [...this.products, this.selectedIndexerForm.name === "Flaconi" ? this.createFlaconiProduct(p) : this.createDouglasiProduct(p)]
-      })
+      this.headers = values.headers
+      this.products = values.docs
       this.loading = false
     })
   }
+
+  protected readonly ShortTextPipe = ShortTextPipe;
 }

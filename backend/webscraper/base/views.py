@@ -17,6 +17,7 @@ from selenium.webdriver.common.by import By
 from .dataclasses import *
 from .filters import InspectorFilter
 from .indexing.inverted_index import InvertedIndex
+from .indexing.qgram_index import QGramIndex
 from .models import (
     Crawler,
     Template,
@@ -90,6 +91,29 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
+        use_synonyms = True
+        q = QGramIndex(3, use_synonyms)
+        q.build_from_file("wikidata-entities.tsv")
+
+        raw_query = "how can I"
+        query = q.normalize(raw_query)
+
+        # Process the keywords.
+        delta = int(len(query) / 4)
+
+        postings, _ = q.find_matches(query, delta)
+
+        r = []
+        for p in q.rank_matches(postings)[:5]:
+            entity_name = q.entities[p[0] - 1][0]
+            entity_synonyms = q.names[p[3] - 1]
+            entity_desc = q.entities[p[0] - 1][2]
+            entity_img = q.entities[p[0] - 1][6].strip()
+            if not entity_img:
+                entity_img = "noimage.png"
+            print(entity_name)
+
+        return
         indexer_id = request.data["id"]
         Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.RUNNING)
         inverted_index = InvertedIndex()
@@ -104,18 +128,27 @@ class IndexerViewSet(EverythingButDestroyViewSet):
     def search(self, request: Request, pk: int) -> Response:
         query = request.data["q"].lower().strip()
         inverted_index = InvertedIndex()
-        result = inverted_index.process_query(query.split(" "), pk)
-        results = InspectorValue.objects.filter(id__in=result).values_list(
-            "url", flat=True
-        )
-        products = []
-        for p in results:
-            products.append(
-                InspectorValue.objects.filter(url=p).values(
+        result = inverted_index.process_query(query.split(" "), pk)[:25]
+        # TODO: 25 should be configurable
+        docs_ids = [d.document_db_id for d in result]
+        docs = []
+        for doc_id in docs_ids:
+            docs.append(
+                InspectorValue.objects.filter(document__id=doc_id).values(
                     "value", "url", "inspector", "attribute"
                 )
             )
-        return Response(data=products)
+        headers = None
+        if len(docs) != 0:
+            headers = Inspector.objects.filter(id__in=[doc["inspector"]  for doc in docs[0]]).values_list("name", flat=True)
+        return Response(data={"headers": headers,  "docs": docs})
+
+    @action(detail=True, url_path="suggest", methods=["POST"])
+    def suggest(self, request: Request, pk: int) -> Response:
+        query = request.data["q"].lower().strip()
+        use_synonyms = True
+        q = QGramIndex(3, use_synonyms)
+        q.build_from_file("wikidata-entities.tsv")
 
 
 class InspectorViewSet(EverythingButDestroyViewSet):

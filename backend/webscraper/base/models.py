@@ -65,10 +65,14 @@ class Template(models.Model):
 
 class Indexer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
+    b_parameter = models.FloatField(default=0.75)
+    k_parameter = models.FloatField(default=1.75)
+    skip_words = models.TextField(blank=True)
+    small_words_threshold = models.PositiveSmallIntegerField(default=0)
     completed_at = models.DateTimeField(blank=True, null=True)
     deleted = models.BooleanField(default=False)
     name = models.CharField(max_length=50, unique=True)
-    description = (models.TextField(blank=True),)
+    description = models.TextField(blank=True)
     status = models.CharField(
         max_length=10, choices=IndexerStatus.choices, default=IndexerStatus.NEW
     )
@@ -138,6 +142,16 @@ class WaitAction(Action):
     time = models.FloatField(default=1)
 
 
+class Document(models.Model):
+    """
+    Document represent the saved results of template,
+    for example one movie, onr product or one-page result count as one document.
+    """
+    template = models.ForeignKey(
+        Template, on_delete=models.PROTECT,null=True
+    )
+
+
 class Crawler(models.Model):
     class Meta:
         ordering = ("created_at",)
@@ -202,6 +216,7 @@ class InspectorValue(models.Model):
     deleted = models.BooleanField(default=False)
     inspector = models.ForeignKey(Inspector, on_delete=models.PROTECT)
     runner = models.ForeignKey(Runner, on_delete=models.PROTECT, default=1)
+    document = models.ForeignKey(Document, on_delete=models.PROTECT, default=1)
 
     def __str__(self) -> str:
         return (

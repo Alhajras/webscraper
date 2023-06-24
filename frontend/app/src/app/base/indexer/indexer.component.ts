@@ -13,14 +13,18 @@ import {InspectorService} from "src/app/services/inspector.service";
 })
 export class IndexerComponent implements OnInit {
   public indexers: Indexer[] = []
-  public updatedIndexer: Inspector | null = null
+  public updatedIndexer: Indexer | null = null
+  public name!: FormControl
+  public selectedInspectors!: FormControl
+  public kParameter!: FormControl
+  public bParameter!: FormControl
   public description!: FormControl
+  public skipWordsList!: FormControl
+  public smallWordsThreshold!: FormControl
   public currentlySubmitting = false
   public displayModal = false
   public form!: FormGroup
   public header = 'Indexer form'
-  public name!: FormControl
-  public selectedInspectors!: FormControl
   public selectorsIdsOptions: { name: string, id: number }[] = []
   public errorMessage = ''
   public readonly columnCount = 8
@@ -44,25 +48,26 @@ export class IndexerComponent implements OnInit {
       console.warn('Form not valid.')
       return
     }
-
+    console.log(this.selectedInspectors.value)
     this.currentlySubmitting = true
     const indexer = {
       name: this.name.value,
-      selected_inspectors: this.selectedInspectors.value
+      k_parameter: this.kParameter.value,
+      b_parameter: this.bParameter.value,
+      small_words_threshold: this.smallWordsThreshold.value,
+      skip_words: this.skipWordsList.value.length === 0 ? '' : this.skipWordsList.value.join('";"'),
     }
     if (this.updatedIndexer !== null) {
-      // this.inspectorService.update(this.updatedInspector.id, inspector).toPromise().then(() => {
-      //   this.inspectorService.list({template: this.template.id}).subscribe(inspectors => {
-      //     this.inspectors = inspectors
-      //   })
-      //   this.closeModal()
-      //   this.currentlySubmitting = false
-      //   this.updatedInspector = null
-      // }).catch((err: HttpErrorResponse) => {
-      //   this.errorMessage = err.error
-      //   this.currentlySubmitting = false
-      //   console.log(err)
-      // })
+      this.indexerService.update(this.updatedIndexer.id, indexer).toPromise().then(() => {
+        this.ngOnInit()
+        this.closeModal()
+        this.currentlySubmitting = false
+        this.updatedIndexer = null
+      }).catch((err: HttpErrorResponse) => {
+        this.errorMessage = err.error
+        this.currentlySubmitting = false
+        console.log(err)
+      })
       return;
     }
     this.indexerService.post(indexer).toPromise().then(() => {
@@ -90,15 +95,21 @@ export class IndexerComponent implements OnInit {
     // })
   }
 
-  public editInspector(inspector: Inspector): void {
-    // this.updatedIndexer = inspector
-    // this.name = this.fb.control(inspector.name)
-    // this.selector = this.fb.control(inspector.selector)
-    // this.form = this.fb.group({
-    //   selector: this.selector,
-    //   name: this.name,
-    // })
-    // this.displayModal = true
+  public editInspector(indexer: Indexer): void {
+    this.updatedIndexer = indexer
+    this.name = this.fb.control(indexer.name)
+    this.kParameter = this.fb.control(indexer.k_parameter)
+    this.bParameter = this.fb.control(indexer.b_parameter)
+    this.smallWordsThreshold = this.fb.control(indexer.small_words_threshold)
+    this.skipWordsList = this.fb.control(indexer.skip_words === '' ? '' : indexer.skip_words.split("\";\""))
+    this.form = this.fb.group({
+      name: this.name,
+      kParameter: this.kParameter,
+      bParameter: this.bParameter,
+      smallWordsThreshold: this.smallWordsThreshold,
+      skip_words: this.skipWordsList,
+    })
+    this.displayModal = true
   }
 
   public ngOnInit(): void {
@@ -126,9 +137,17 @@ export class IndexerComponent implements OnInit {
     // this.description = this.fb.control('')
     this.selectedInspectors = this.fb.control('')
     this.name = this.fb.control('')
+    this.skipWordsList = this.fb.control('')
+    this.smallWordsThreshold = this.fb.control(0)
+    this.kParameter = this.fb.control(1.75)
+    this.bParameter = this.fb.control(0.75)
     this.form = this.fb.group({
       selectedInspectors: this.selectedInspectors,
       name: this.name,
+      skipWordsList: this.skipWordsList,
+      smallWordsThreshold: this.smallWordsThreshold,
+      bParameter: this.bParameter,
+      kParameter: this.kParameter,
     })
   }
 

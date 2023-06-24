@@ -1,184 +1,235 @@
 <div class="mt-4 ml-6 mr-6">
-<p-table
-  [loading]="loading"
-  [value]="indexers" [tableStyle]="{'min-width': '60rem'}">
-  <ng-template pTemplate="caption">
-    <div class="grid">
-      <div class="col">
-        Indexers
-      </div>
-      <div class="col-2">
-        <button
-          icon="pi pi-plus"
-          id="open-dialog"
-          pButton
-          pRipple
-          class="p-button-outlined"
-          label="Create an indexer"
-          (click)="createIndexer()"
-        ></button>
+  <p-table
+    [loading]="loading"
+    [value]="indexers" [tableStyle]="{'min-width': '60rem'}">
+    <ng-template pTemplate="caption">
+      <div class="grid">
+        <div class="col">
+          Indexers
+        </div>
+        <div class="col-2">
+          <button
+            icon="pi pi-plus"
+            id="open-dialog"
+            pButton
+            pRipple
+            class="p-button-outlined"
+            label="Create an indexer"
+            (click)="createIndexer()"
+          ></button>
 
+        </div>
       </div>
-    </div>
-  </ng-template>
-  <ng-template pTemplate="header">
-    <tr>
-      <th pSortableColumn="name">Name
-        <p-sortIcon field="name"></p-sortIcon>
-      </th>
-      <th pSortableColumn="status">Status
-        <p-sortIcon field="status"></p-sortIcon>
-      </th>
-      <th pSortableColumn="selector">Selector
-        <p-sortIcon field="selector"></p-sortIcon>
-      </th>
-      <th pSortableColumn="created_at">Progress
-        <p-sortIcon field="created_at"></p-sortIcon>
-      </th>
-      <th>Actions
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-indexer>
-    <tr>
-      <td>{{indexer.name}}</td>
-      <td>{{indexer.status}}</td>
-      <td>{{indexer.selector}}</td>
-      <td>
-        <p>
-          Created:
-          <app-time-ago [time]="indexer.created_at"></app-time-ago>
-        </p>
-        <p>
-          Completed:
-          <app-time-ago [time]="indexer.completed_at"></app-time-ago>
-        </p>
-      </td>
-      <td>
-        <div>
-          <button
-            [disabled]="indexer.status === 'Running' || currentlySubmitting"
-            class="
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">Name
+          <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="status">Status
+          <p-sortIcon field="status"></p-sortIcon>
+        </th>
+        <th pSortableColumn="selector">Selector
+          <p-sortIcon field="selector"></p-sortIcon>
+        </th>
+        <th pSortableColumn="created_at">Progress
+          <p-sortIcon field="created_at"></p-sortIcon>
+        </th>
+        <th>Actions
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-indexer>
+      <tr>
+        <td>{{indexer.name}}</td>
+        <td>{{indexer.status}}</td>
+        <td>{{indexer.selector}}</td>
+        <td>
+          <p>
+            Created:
+            <app-time-ago [time]="indexer.created_at"></app-time-ago>
+          </p>
+          <p>
+            Completed:
+            <app-time-ago [time]="indexer.completed_at"></app-time-ago>
+          </p>
+        </td>
+        <td>
+          <div>
+            <button
+              [disabled]="indexer.status === 'Running' || currentlySubmitting"
+              class="
         ml-1 p-button-outlined p-button-sm
         no-icon
       "
-            type="button"
-            pButton
-            pRipple
-            label="Start indexing"
-            (click)="startIndexing(indexer)"
-          ></button>
-          <button
-            [disabled]="currentlySubmitting"
-            class="
+              type="button"
+              pButton
+              pRipple
+              label="Start indexing"
+              (click)="startIndexing(indexer)"
+            ></button>
+            <button
+              [disabled]="currentlySubmitting"
+              class="
         ml-1 p-button-outlined p-button-sm
         no-icon
       "
-            type="button"
-            pButton
-            pRipple
-            label="Edit"
-            (click)="editInspector(indexer)"
-          ></button>
-          <button
-            [disabled]="currentlySubmitting"
-            class="
+              type="button"
+              pButton
+              pRipple
+              label="Edit"
+              (click)="editInspector(indexer)"
+            ></button>
+            <button
+              [disabled]="currentlySubmitting"
+              class="
         ml-1 p-button-danger p-button-outlined p-button-sm
         no-icon
       "
-            type="button"
-            pButton
-            pRipple
-            label="Delete"
-            (click)="deleteInspector(indexer)"
-          ></button>
-        </div>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="emptymessage">
-    <tr>
-      <td
-        attr.colspan="{{ columnCount }}"
-        *ngIf="indexers.length === 0"
+              type="button"
+              pButton
+              pRipple
+              label="Delete"
+              (click)="deleteInspector(indexer)"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td
+          attr.colspan="{{ columnCount }}"
+          *ngIf="indexers.length === 0"
+        >
+          No indexers assigned.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog
+    [(visible)]="displayModal"
+    [header]="header"
+    [modal]="true"
+    (onHide)="closeModal()"
+    [maximizable]="true"
+    styleClass="indexer-dialog"
+  >
+    <div *ngIf="displayModal">
+      <p-card>
+        <form class="p-fluid" action="" [formGroup]="form" (ngSubmit)="submit()">
+          <p-message
+            *ngIf="errorMessage"
+            severity="error"
+            text="The inspector could not be created:"
+            class="p-mr-2"
+          ></p-message>
+          <div class="grid">
+            <div class="col-6">
+              <app-input-field
+                [isRequired]="true"
+                labelId="version-label-id"
+                labelText="Name"
+                helpText=""
+              >
+                <input
+                  id="start-time-id"
+                  type="text"
+                  pInputText
+                  [formControl]="name"
+                />
+              </app-input-field>
+              <app-input-field
+                [isRequired]="true"
+                labelId="b-param-label-id"
+                labelText="B parameter"
+                helpText="B parameter for the  BM25 formula."
+              >
+                <input
+                  id="b-param-id"
+                  type="number"
+                  pInputText
+                  [formControl]="bParameter"
+                />
+              </app-input-field>
+              <app-input-field
+                [isRequired]="false"
+                labelId="skip-words-list-id"
+                labelText="Stop words list"
+                helpText="List of words that should be excluded during indexing process."
+              >
+                <p-chips [formControl]="skipWordsList"></p-chips>
+              </app-input-field>
+            </div>
+            <div class="col-6">
+              <app-input-field
+                [isRequired]="true"
+                labelId="inspectors-id"
+                labelText="Inspectors"
+                helpText=""
+              >
+                <form [formGroup]="form">
+                  <p-multiSelect [options]="selectorsIdsOptions" formControlName="selectedInspectors"
+                                 optionLabel="name"></p-multiSelect>
+                </form>
+              </app-input-field>
+              <app-input-field
+                [isRequired]="true"
+                labelId="b-param-label-id"
+                labelText="K parameter"
+                helpText="K parameter for the  BM25 formula."
+              >
+                <input
+                  id="k-param-id"
+                  type="number"
+                  pInputText
+                  [formControl]="kParameter"
+                />
+              </app-input-field>
+              <app-input-field
+                [isRequired]="false"
+                labelId="small-words-threshold-id"
+                labelText="Small Words Threshold"
+                helpText="The threshold of which the word can be considered small and will be skipped, by default 0 meaning empty spaces will be skipped from indexing process."
+              >
+                <input
+                  id="small-words-threshold-id"
+                  type="number"
+                  pInputText
+                  [formControl]="smallWordsThreshold"
+                />
+              </app-input-field>
+
+            </div>
+          </div>
+        </form>
+      </p-card>
+    </div>
+    <ng-template pTemplate="footer">
+      <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
+      <!--      <loading msg="Submitting ..."></loading>-->
+      <!--    </span>-->
+      <button
+        id="run-btn"
+        type="button"
+        pButton
+        pRipple
+        (click)="submit()"
+        class="p-mr-2"
       >
-        No indexers assigned.
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
-
-<p-dialog
-  [(visible)]="displayModal"
-  [header]="header"
-  [modal]="true"
-  (onHide)="closeModal()"
-  [maximizable]="true"
-  styleClass="indexer-dialog"
->
-  <div *ngIf="displayModal">
-    <p-card>
-      <form class="p-fluid" action="" [formGroup]="form" (ngSubmit)="submit()">
-        <p-message
-          *ngIf="errorMessage"
-          severity="error"
-          text="The inspector could not be created:"
-          class="p-mr-2"
-        ></p-message>
-        <div>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Name"
-            helpText=""
-          >
-
-            <input
-              id="start-time-id"
-              type="text"
-              pInputText
-              [formControl]="name"
-            />
-          </app-input-field>
-          <app-input-field
-            [isRequired]="true"
-            labelId="inspectors-id"
-            labelText="Inspectors"
-            helpText=""
-          >
-            <form [formGroup]="form">
-              <p-multiSelect [options]="selectorsIdsOptions" formControlName="selectedInspectors"
-                             optionLabel="name"></p-multiSelect>
-            </form>
-          </app-input-field>
-        </div>
-      </form>
-    </p-card>
-  </div>
-  <ng-template pTemplate="footer">
-    <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
-    <!--      <loading msg="Submitting ..."></loading>-->
-    <!--    </span>-->
-    <button
-      id="run-btn"
-      type="button"
-      pButton
-      pRipple
-      (click)="submit()"
-      class="p-mr-2"
-    >
-      <span>{{ updatedIndexer !== null ? 'Update' : 'Create'}}</span>
-    </button>
-    <button
-      [disabled]="currentlySubmitting"
-      id="cancel-btn"
-      class="p-button-secondary"
-      type="button"
-      pButton
-      pRipple
-      label="Cancel"
-      (click)="closeModal()"
-    ></button>
-  </ng-template>
-</p-dialog>
+        <span>{{ updatedIndexer !== null ? 'Update' : 'Create'}}</span>
+      </button>
+      <button
+        [disabled]="currentlySubmitting"
+        id="cancel-btn"
+        class="p-button-secondary"
+        type="button"
+        pButton
+        pRipple
+        label="Cancel"
+        (click)="closeModal()"
+      ></button>
+    </ng-template>
+  </p-dialog>
 </div>
