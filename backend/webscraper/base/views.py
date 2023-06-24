@@ -92,21 +92,27 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
+
+
         indexer_id = request.data["id"]
 
-        cache_key = f"qGramIndex:{indexer_id}"
-        hit = cache.get(cache_key)
-        if hit is not None:
-            print("Cached")
-            return hit
+        # cache_key = f"qGramIndex:{indexer_id}"
+        # hit = cache.get(cache_key,None)
+        # if hit is not None:
+        #     print("Cached")
+        #     return hit
 
         print("Creating dictionary ....")
         use_synonyms = True
-        q = QGramIndex(3, use_synonyms)
-        q.build_from_file("wikidata-entities.tsv")
-        cache.set(cache_key, q)
-        print("Done creating dictionary!")
 
+        q_obj = QGramIndex(3, use_synonyms)
+        print(id(q_obj))
+        if len(q_obj.names) != 0:
+            return
+        q_obj.build_from_file("wikidata-entities.tsv")
+        # cache.set(cache_key, q_obj)
+        print("Done creating dictionary!")
+        return
         Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.RUNNING)
         print("Creating an index!")
         inverted_index = InvertedIndex()
@@ -139,21 +145,16 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="suggest", methods=["GET"])
     def suggest(self, request: Request) -> Response:
-        print("Sdfsdfsdf")
         raw_query = request.query_params.get("q").lower().strip()
         indexer_id = request.query_params.get("id").lower().strip()
-        print("Before cache")
-        cache_key = f"qGramIndex:{indexer_id}"
-        q = cache.get(cache_key)
-        print("After cache")
+        q = QGramIndex(3, True)
+
         query = q.normalize(raw_query)
 
         # Process the keywords.
         delta = int(len(query) / 4)
-        print("11111111111111111111")
 
         postings, _ = q.find_matches(query, delta)
-        print("22222222222222222222222")
 
         r = []
         for p in q.rank_matches(postings)[:5]:
@@ -163,8 +164,8 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             entity_img = q.entities[p[0] - 1][6].strip()
             if not entity_img:
                 entity_img = "noimage.png"
-            print(entity_name)
-        print("333333333333333333333333")
+            r.append(entity_name)
+        return Response(data={"suggestions": r})
 
 
 class InspectorViewSet(EverythingButDestroyViewSet):

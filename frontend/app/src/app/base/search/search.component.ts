@@ -106,7 +106,7 @@ export class SearchComponent {
   protected readonly ShortTextPipe = ShortTextPipe;
 
   showSuggestions() {
-    lastValueFrom(this.indexerService.suggest(this.selectedIndexerForm.id, this.searchText)).then().catch()
+    lastValueFrom(this.indexerService.suggest(1, this.searchText)).then().catch()
     console.log(this.searchText)
   }
 }
