@@ -45,6 +45,6 @@ export class IndexerService {
   }
 
   public suggest(indexer_id: number, q: string){
-    return this.client.get<{ suggestions: string[] }>(`${this.endpointPath}suggest?id=${indexer_id}&q=${q}`)
+    return this.client.get<{ suggestions: string[] }>(`${this.endpointPath}suggest/?id=${indexer_id}&q=${q}`)
   }
 }
