@@ -8,6 +8,7 @@ import {ShortTextPipe} from "src/app/shared/pipes/short-text.pipe";
 import {debounceTime, distinctUntilChanged, lastValueFrom, Observable, Subject, switchMap} from "rxjs";
 import {Overlay} from "primeng/overlay";
 import {OverlayPanel} from "primeng/overlaypanel";
+import {MenuItem} from "primeng/api";
 
 export interface TemplateDropDown {
   key: string
@@ -47,10 +48,11 @@ export class SearchComponent {
   public cached_indexers = []
   public selectedIndexerForm!: Indexer
   public headers: string[] = []
-  public suggestions:  string[] = []
+  public suggestions: MenuItem[] = []
   private searchText$ = new Subject<string>();
   public event!: KeyboardEvent
   public targetEl!: HTMLInputElement
+
   public closeModal(): void {
     this.displayModal = false
   }
@@ -63,15 +65,20 @@ export class SearchComponent {
     })
   }
 
-  public ngOnInit():void {
+  public ngOnInit(): void {
     this.searchText$.pipe(
       debounceTime(500),
       distinctUntilChanged(),
       switchMap(suggestion =>
         this.indexerService.suggest(1, suggestion)
-    )).subscribe(s=>{
-      this.suggestions = s.suggestions
-      if (this.suggestions.length > 0){
+      )).subscribe(s => {
+      this.suggestions = s.suggestions.map(s => ({
+        label: s, command: (s: { event: PointerEvent, item: MenuItem }) => {
+          this.searchText = s.item.label ?? this.searchText
+          this.searchProducts()
+        }
+      }))
+      if (this.suggestions.length > 0) {
         console.log(this.suggestionsOverlayPanel)
         this.suggestionsOverlayPanel.show(this.event, this.targetEl)
       }
@@ -79,6 +86,7 @@ export class SearchComponent {
   }
 
   public searchProducts() {
+    this.suggestionsOverlayPanel.hide()
     this.loading = true
     this.products = []
     // TODO this is bad and must be dynamic
