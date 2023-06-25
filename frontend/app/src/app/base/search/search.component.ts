@@ -5,7 +5,7 @@ import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorValue} from "src/app/models/inspector-value.model";
 import {Indexer} from "src/app/models/indexer.model";
 import {ShortTextPipe} from "src/app/shared/pipes/short-text.pipe";
-import {lastValueFrom} from "rxjs";
+import {debounceTime, distinctUntilChanged, lastValueFrom, Observable, Subject, switchMap} from "rxjs";
 
 export interface TemplateDropDown {
   key: string
@@ -42,7 +42,8 @@ export class SearchComponent {
   public cached_indexers = []
   public selectedIndexerForm!: Indexer
   public headers: string[] = []
-  public suggestions :string[] = []
+  public suggestions:  string[] = []
+  private searchText$ = new Subject<string>();
 
   public closeModal(): void {
     this.displayModal = false
@@ -53,6 +54,17 @@ export class SearchComponent {
   ) {
     this.indexerService.indexedIndexers().subscribe(cached_indexers => {
       this.cached_indexers = cached_indexers
+    })
+  }
+
+  public ngOnInit() {
+    this.searchText$.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(suggestion =>
+        this.indexerService.suggest(1, suggestion)
+    )).subscribe(s=>{
+      this.suggestions = s.suggestions
     })
   }
 
@@ -97,19 +109,17 @@ export class SearchComponent {
     this.loading = true
     this.products = []
     // TODO this is bad and must be dynamic
-    this.indexerService.search(this.selectedIndexerForm.id, this.searchText).subscribe((values:{headers: string[], docs: any[]}) => {
+    this.indexerService.search(this.selectedIndexerForm.id, this.searchText).subscribe((values: {
+      headers: string[],
+      docs: any[]
+    }) => {
       this.headers = values.headers
       this.products = values.docs
       this.loading = false
     })
   }
 
-  protected readonly ShortTextPipe = ShortTextPipe;
-
-  showSuggestions() {
-    lastValueFrom(this.indexerService.suggest(1, this.searchText)).then(result=>{
-      this.suggestions = result.suggestions
-    }).catch()
-    console.log(this.searchText)
+  public showSuggestions(): void {
+    this.searchText$.next(this.searchText);
   }
 }
