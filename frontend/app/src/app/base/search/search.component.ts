@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ContentChild, ViewChild} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {Template} from "src/app/models/template.model";
 import {IndexerService} from "src/app/services/indexer.service";
@@ -6,6 +6,8 @@ import {InspectorValue} from "src/app/models/inspector-value.model";
 import {Indexer} from "src/app/models/indexer.model";
 import {ShortTextPipe} from "src/app/shared/pipes/short-text.pipe";
 import {debounceTime, distinctUntilChanged, lastValueFrom, Observable, Subject, switchMap} from "rxjs";
+import {Overlay} from "primeng/overlay";
+import {OverlayPanel} from "primeng/overlaypanel";
 
 export interface TemplateDropDown {
   key: string
@@ -31,6 +33,9 @@ export interface Product {
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
+  @ViewChild('op')
+  public suggestionsOverlayPanel!: OverlayPanel
+
   public form!: FormGroup
   public currentlySubmitting = false
   public displayModal = false
@@ -44,7 +49,8 @@ export class SearchComponent {
   public headers: string[] = []
   public suggestions:  string[] = []
   private searchText$ = new Subject<string>();
-
+  public event!: KeyboardEvent
+  public targetEl!: HTMLInputElement
   public closeModal(): void {
     this.displayModal = false
   }
@@ -57,7 +63,7 @@ export class SearchComponent {
     })
   }
 
-  public ngOnInit() {
+  public ngOnInit():void {
     this.searchText$.pipe(
       debounceTime(500),
       distinctUntilChanged(),
@@ -65,44 +71,11 @@ export class SearchComponent {
         this.indexerService.suggest(1, suggestion)
     )).subscribe(s=>{
       this.suggestions = s.suggestions
-    })
-  }
-
-  private createFlaconiProduct(items: InspectorValue[]): Partial<Product> {
-    const product: Product = {}
-    items.forEach((item: InspectorValue) => {
-      switch (item.inspector) {
-        case 1:
-          product.name = item.value
-          break;
-        case 2:
-          product.price = item.value
-          break;
-        default:
-          product.image = item.attribute
+      if (this.suggestions.length > 0){
+        console.log(this.suggestionsOverlayPanel)
+        this.suggestionsOverlayPanel.show(this.event, this.targetEl)
       }
     })
-    return product
-  }
-
-  private createDouglasiProduct(items: InspectorValue[]): Partial<Product> {
-    const product: Product = {}
-    items.forEach((item: InspectorValue) => {
-      switch (item.inspector) {
-        case 4:
-          product.name = item.value
-          break;
-        case 5:
-          product.price = item.value
-          break;
-        case 6:
-          product.image = item.attribute
-          break;
-        default:
-          break;
-      }
-    })
-    return product
   }
 
   public searchProducts() {
@@ -119,7 +92,9 @@ export class SearchComponent {
     })
   }
 
-  public showSuggestions(): void {
+  public showSuggestions(event: KeyboardEvent, targetEl: HTMLInputElement): void {
+    this.event = event
+    this.targetEl = targetEl
     this.searchText$.next(this.searchText);
   }
 }

@@ -3,10 +3,9 @@
     <div class="inputgroup">
       <input
         #targetEl
-        (keyup)="showSuggestions()"
+        (keyup)="showSuggestions($event, targetEl)"
         (keydown.enter)="searchProducts()"
         [(ngModel)]="searchText"
-        (click)="op.show($event, targetEl)"
         type="text" pInputText placeholder="Search..."/>
       <p-overlayPanel #op>
         <p *ngFor="let suggest of suggestions">{{suggest}}</p>
