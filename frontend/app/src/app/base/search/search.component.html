@@ -9,7 +9,11 @@
         [(ngModel)]="searchText"
         type="text" pInputText placeholder="Search..."/>
       <p-overlayPanel #op>
-        <p-menu [style]="{'width': '40rem'}" [model]="suggestions"></p-menu>
+        <div [style]="{'width': '40rem'}" >
+        <p-progressSpinner *ngIf="loadingSuggestions" styleClass="flex justify-content-center w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
+                           animationDuration=".5s"></p-progressSpinner>
+        <p-menu *ngIf="!loadingSuggestions"  [style]="{'width': '40rem'}"  [model]="suggestions"></p-menu>
+          </div>
       </p-overlayPanel>
 
       <button

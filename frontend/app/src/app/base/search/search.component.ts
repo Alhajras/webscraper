@@ -52,6 +52,7 @@ export class SearchComponent {
   private searchText$ = new Subject<string>();
   public event!: KeyboardEvent
   public targetEl!: HTMLInputElement
+  public loadingSuggestions = false
 
   public closeModal(): void {
     this.displayModal = false
@@ -75,9 +76,11 @@ export class SearchComponent {
       this.suggestions = s.suggestions.map(s => ({
         label: s, command: (s: { event: PointerEvent, item: MenuItem }) => {
           this.searchText = s.item.label ?? this.searchText
+          this.loadingSuggestions = false
           this.searchProducts()
         }
       }))
+      this.loadingSuggestions = false
       if (this.suggestions.length > 0) {
         console.log(this.suggestionsOverlayPanel)
         this.suggestionsOverlayPanel.show(this.event, this.targetEl)
@@ -103,6 +106,7 @@ export class SearchComponent {
   public showSuggestions(event: KeyboardEvent, targetEl: HTMLInputElement): void {
     this.event = event
     this.targetEl = targetEl
+    this.loadingSuggestions = true
     this.searchText$.next(this.searchText);
   }
 }
