@@ -18,6 +18,9 @@ export class IndexerComponent implements OnInit {
   public selectedInspectors!: FormControl
   public kParameter!: FormControl
   public bParameter!: FormControl
+  public useSynonym!: FormControl
+  public qGram!: FormControl
+
   public description!: FormControl
   public skipWordsList!: FormControl
   public smallWordsThreshold!: FormControl
@@ -55,6 +58,8 @@ export class IndexerComponent implements OnInit {
       name: this.name.value,
       k_parameter: this.kParameter.value,
       b_parameter: this.bParameter.value,
+      q_gram_use_synonym: this.useSynonym.value,
+      q_gram_q: this.qGram.value,
       dictionary: this.dictionary.value,
       small_words_threshold: this.smallWordsThreshold.value,
       skip_words: this.skipWordsList.value.length === 0 ? '' : this.skipWordsList.value.join('";"'),
@@ -102,6 +107,8 @@ export class IndexerComponent implements OnInit {
     this.name = this.fb.control(indexer.name)
     this.kParameter = this.fb.control(indexer.k_parameter)
     this.bParameter = this.fb.control(indexer.b_parameter)
+    this.useSynonym = this.fb.control(indexer.q_gram_use_synonym)
+    this.qGram = this.fb.control(indexer.q_gram_q)
     this.dictionary = this.fb.control(indexer.dictionary)
     this.smallWordsThreshold = this.fb.control(indexer.small_words_threshold)
     this.skipWordsList = this.fb.control(indexer.skip_words === '' ? '' : indexer.skip_words.split("\";\""))
@@ -109,6 +116,8 @@ export class IndexerComponent implements OnInit {
       name: this.name,
       kParameter: this.kParameter,
       bParameter: this.bParameter,
+      useSynonym: this.useSynonym,
+      qGram: this.qGram,
       dictionary: this.dictionary,
       smallWordsThreshold: this.smallWordsThreshold,
       skip_words: this.skipWordsList,
@@ -145,6 +154,8 @@ export class IndexerComponent implements OnInit {
     this.smallWordsThreshold = this.fb.control(0)
     this.kParameter = this.fb.control(1.75)
     this.bParameter = this.fb.control(0.75)
+    this.useSynonym = this.fb.control(true)
+    this.qGram = this.fb.control(3)
     this.dictionary = this.fb.control('wikidata-entities.tsv')
     this.form = this.fb.group({
       selectedInspectors: this.selectedInspectors,
@@ -152,6 +163,8 @@ export class IndexerComponent implements OnInit {
       skipWordsList: this.skipWordsList,
       smallWordsThreshold: this.smallWordsThreshold,
       bParameter: this.bParameter,
+      useSynonym: this.useSynonym,
+      qGram: this.qGram,
       dictionary: this.dictionary,
       kParameter: this.kParameter,
     })

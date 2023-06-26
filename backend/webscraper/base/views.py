@@ -101,9 +101,8 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         #     return hit
 
         print("Creating dictionary ....")
-        use_synonyms = True
 
-        q_obj = QGramIndex(3, use_synonyms)
+        q_obj = QGramIndex(indexer.q_gram_q, indexer.q_gram_use_synonym)
         print(id(q_obj))
         if len(q_obj.names) != 0:
             return

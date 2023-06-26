@@ -174,7 +174,16 @@
                   [formControl]="dictionary"
                 />
               </app-input-field>
-
+              <app-input-field
+                [isRequired]="false"
+                labelId="use-synonym-id"
+                labelText="Use Synonyms"
+                helpText="Enable using synonyms in the suggestions list, for example, typing 'USA' will result on 'United States of America'."
+              >
+                <div>
+                <p-inputSwitch [formControl]="useSynonym"></p-inputSwitch>
+              </div>
+              </app-input-field>
             </div>
             <div class="col-6">
               <app-input-field
@@ -215,15 +224,27 @@
                 />
               </app-input-field>
 
+
+                            <app-input-field
+                [isRequired]="true"
+                labelId="q-gram-id"
+                labelText="Q-Gram"
+                helpText="How many letters should the word be split to, for example q=3,word=freiburg, will result in { 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg' }."
+              >
+                <input
+                  id="q-gram-id"
+                  type="number"
+                  pInputText
+                  [formControl]="qGram"
+                />
+              </app-input-field>
+
             </div>
           </div>
         </form>
       </p-card>
     </div>
     <ng-template pTemplate="footer">
-      <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
-      <!--      <loading msg="Submitting ..."></loading>-->
-      <!--    </span>-->
       <button
         id="run-btn"
         type="button"

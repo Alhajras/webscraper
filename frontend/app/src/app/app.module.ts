@@ -53,6 +53,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {ShortTextPipe} from "src/app/shared/pipes/short-text.pipe";
 import {SpinnerModule} from "primeng/spinner";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {InputSwitchModule} from "primeng/inputswitch";
 
 @NgModule({
   declarations: [
@@ -76,40 +77,41 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     ShortTextPipe,
     DocumentationComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MenuModule,
-    BrowserAnimationsModule,
-    TableModule,
-    HttpClientModule,
-    DialogModule,
-    CardModule,
-    DropdownModule,
-    MessageModule,
-    ReactiveFormsModule,
-    InputTextareaModule,
-    InputTextModule,
-    ButtonModule,
-    RippleModule,
-    TreeTableModule,
-    StepsModule,
-    TimelineModule,
-    ChipsModule,
-    OverlayPanelModule,
-    MenubarModule,
-    MultiSelectModule,
-    DataViewModule,
-    RatingModule,
-    TagModule,
-    FormsModule,
-    SearchModule,
-    AccordionModule,
-    TabViewModule,
-    CheckboxModule,
-    SpinnerModule,
-    ProgressSpinnerModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MenuModule,
+        BrowserAnimationsModule,
+        TableModule,
+        HttpClientModule,
+        DialogModule,
+        CardModule,
+        DropdownModule,
+        MessageModule,
+        ReactiveFormsModule,
+        InputTextareaModule,
+        InputTextModule,
+        ButtonModule,
+        RippleModule,
+        TreeTableModule,
+        StepsModule,
+        TimelineModule,
+        ChipsModule,
+        OverlayPanelModule,
+        MenubarModule,
+        MultiSelectModule,
+        DataViewModule,
+        RatingModule,
+        TagModule,
+        FormsModule,
+        SearchModule,
+        AccordionModule,
+        TabViewModule,
+        CheckboxModule,
+        SpinnerModule,
+        ProgressSpinnerModule,
+        InputSwitchModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
