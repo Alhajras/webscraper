@@ -2,6 +2,7 @@
   <div class="flex justify-content-center flex-wrap p-4 gap-4">
     <div class="inputgroup">
       <input
+        [disabled]="selectedIndexerForm === undefined"
         #targetEl
         class="search-bar"
         (keyup)="showSuggestions($event, targetEl)"

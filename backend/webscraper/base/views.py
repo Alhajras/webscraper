@@ -17,7 +17,7 @@ from selenium.webdriver.common.by import By
 from .dataclasses import *
 from .filters import InspectorFilter
 from .indexing.inverted_index import InvertedIndex
-from .indexing.qgram_index import QGramIndex
+from .indexing.qgram_index import QGramIndex, SingletonMeta
 from .models import (
     Crawler,
     Template,
@@ -93,23 +93,20 @@ class IndexerViewSet(EverythingButDestroyViewSet):
     def start(self, request: Request) -> Response:
         indexer_id = request.data["id"]
         indexer = Indexer.objects.get(id=indexer_id)
-
-        # cache_key = f"qGramIndex:{indexer_id}"
-        # hit = cache.get(cache_key,None)
-        # if hit is not None:
-        #     print("Cached")
-        #     return hit
+        singleton_cache = SingletonMeta
+        cache_key = f"qGramIndex:{indexer_id}"
+        hit = singleton_cache.suggestions_cache.get(cache_key, None)
+        if hit is not None:
+            print("Cached")
+            return hit
 
         print("Creating dictionary ....")
-
         q_obj = QGramIndex(indexer.q_gram_q, indexer.q_gram_use_synonym)
-        print(id(q_obj))
         if len(q_obj.names) != 0:
             return
         q_obj.build_from_file(indexer.dictionary)
-        # cache.set(cache_key, q_obj)
+        singleton_cache.suggestions_cache[cache_key] = q_obj
         print("Done creating dictionary!")
-        return
         Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.RUNNING)
         print("Creating an index!")
         inverted_index = InvertedIndex()
@@ -143,8 +140,9 @@ class IndexerViewSet(EverythingButDestroyViewSet):
     def suggest(self, request: Request) -> Response:
         raw_query = request.query_params.get("q").lower().strip()
         indexer_id = request.query_params.get("id").lower().strip()
-        q = QGramIndex(3, True)
-
+        singleton_cache = SingletonMeta
+        cache_key = f"qGramIndex:{indexer_id}"
+        q = singleton_cache.suggestions_cache.get(cache_key, None)
         query = q.normalize(raw_query)
 
         # Process the keywords.

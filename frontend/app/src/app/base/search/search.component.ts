@@ -107,7 +107,7 @@ export class SearchComponent {
       debounceTime(500),
       distinctUntilChanged(),
       switchMap(suggestion =>
-        this.indexerService.suggest(1, suggestion)
+        this.indexerService.suggest(this.selectedIndexerForm.id, suggestion)
       )).subscribe(s => {
       this.suggestions = s.suggestions.map(s => ({
         label: s, command: (s: { event: PointerEvent, item: MenuItem }) => {
@@ -140,9 +140,11 @@ export class SearchComponent {
   }
 
   public showSuggestions(event: KeyboardEvent, targetEl: HTMLInputElement): void {
-    this.event = event
-    this.targetEl = targetEl
-    this.loadingSuggestions = true
-    this.searchText$.next(this.searchText);
+    if (/^[a-zA-Z]$/.test(event.key)) {
+      this.event = event
+      this.targetEl = targetEl
+      this.loadingSuggestions = true
+      this.searchText$.next(this.searchText);
+    }
   }
 }

@@ -17,6 +17,7 @@ from typing import List, Tuple, Optional
 
 from ped_c import ped
 
+
 class SingletonMeta(type):
     """
     The Singleton class can be implemented in different ways in Python. Some
@@ -25,6 +26,9 @@ class SingletonMeta(type):
     """
 
     _instances = {}
+    # This will contain all indexers keys and values
+    indexers_cache = {}
+    suggestions_cache = {}
 
     def __call__(cls, *args, **kwargs):
         """
@@ -37,7 +41,7 @@ class SingletonMeta(type):
         return cls._instances[cls]
 
 
-class QGramIndex(metaclass=SingletonMeta):
+class QGramIndex:
     """
     A QGram-Index.
     """

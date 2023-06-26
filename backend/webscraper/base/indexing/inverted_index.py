@@ -7,6 +7,7 @@ import math
 
 from django.core.cache import cache
 
+from .qgram_index import SingletonMeta
 from ..models import InspectorValue, Inspector, Indexer
 
 DEFAULT_B = 0.75
@@ -52,8 +53,10 @@ class InvertedIndex:
         """
         # The list which contains the ids of the
         #         inspectors to be included in the indexing process.
+        singleton_cache = SingletonMeta
+
         cache_key = f"indexer:{indexer_id}"
-        hit = cache.get(cache_key)
+        hit = singleton_cache.indexers_cache.get(cache_key, None)
         if hit is not None:
             print("Cached")
             return hit
@@ -148,14 +151,16 @@ class InvertedIndex:
                                                  score=score,
                                                  document_db_id=document_score.document_db_id)
 
-        cache.set(cache_key, self.inverted_lists)
+        singleton_cache.indexers_cache[cache_key] = self.inverted_lists
 
     def cached_indexers_keys(self):
+        singleton_cache = SingletonMeta
+
         indexers = Indexer.objects.filter(deleted=False)
         cached_indexers = []
         for indexer in indexers:
             cache_key = f"indexer:{indexer.id}"
-            if cache.get(cache_key) is not None:
+            if singleton_cache.indexers_cache.get(cache_key) is not None:
                 cached_indexers.append(indexer)
         return cached_indexers
 
