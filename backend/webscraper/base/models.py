@@ -27,6 +27,12 @@ class InspectorAttributes(models.TextChoices):
     VALUE = "value"
 
 
+class InspectorTypes(models.TextChoices):
+    IMAGE = "image"
+    TEXT = "text"
+    LINK = "link"
+
+
 class ActionTypes(models.TextChoices):
     CLICK = "click"
     WAIT = "wait"
@@ -96,6 +102,9 @@ class Inspector(models.Model):
     selector = models.TextField()
     attribute = models.CharField(
         max_length=25, choices=InspectorAttributes.choices, blank=True, default=''
+    )
+    type = models.CharField(
+        max_length=10, choices=InspectorTypes.choices, blank=True, default=InspectorTypes.TEXT
     )
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
@@ -226,6 +235,10 @@ class InspectorValue(models.Model):
             f"Runner: {self.runner},"
             f" Inspector: ({self.inspector.name}),  value: {self.value}, attribute: {self.attribute}"
         )
+
+    @property
+    def type(self):
+        return self.inspector.type
 
 
 class ConfigurationModel(SingletonModel):

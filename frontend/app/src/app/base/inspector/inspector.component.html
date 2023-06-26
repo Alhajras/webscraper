@@ -23,6 +23,10 @@
       <th pSortableColumn="name">Name
         <p-sortIcon field="name"></p-sortIcon>
       </th>
+      <th pSortableColumn="type">Type
+        <p-sortIcon field="type"></p-sortIcon>
+      </th>
+
       <th pSortableColumn="selector">Selector
         <p-sortIcon field="selector"></p-sortIcon>
       </th>
@@ -36,6 +40,7 @@
   <ng-template pTemplate="body" let-inspector>
     <tr>
       <td>{{inspector.name}}</td>
+      <td>{{inspector.type}}</td>
       <td>{{inspector.selector}}</td>
       <td>
         <p>
@@ -109,6 +114,21 @@
           </app-input-field>
           <app-input-field
             [isRequired]="true"
+            labelId="type-id"
+            labelText="Type"
+            helpText="Type of the inspector."
+          >
+            <p-dropdown
+              id="type-id"
+              [formControl]="type"
+              placeholder="Select a type"
+              [options]="typesList"
+              optionLabel="key"
+              [filter]="true"
+            ></p-dropdown>
+          </app-input-field>
+          <app-input-field
+            [isRequired]="true"
             labelId="version-label-id"
             labelText="Selector"
             helpText="XPath expression for the selected element, example: //*[contains(@class, 'product-title')]"
@@ -140,9 +160,6 @@
     </p-card>
   </div>
   <ng-template pTemplate="footer">
-    <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
-    <!--      <loading msg="Submitting ..."></loading>-->
-    <!--    </span>-->
     <button
       id="run-btn"
       type="button"

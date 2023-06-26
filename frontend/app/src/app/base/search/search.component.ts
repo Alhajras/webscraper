@@ -43,11 +43,47 @@ export class SearchComponent {
   public errorMessage = ''
   public readonly columnCount = 8
   public loading = false
-  public products: any[] = []
+  public products: InspectorValue[][] = [[{
+    id: 1,
+    value: 'https://i.otto.de/i/otto/af18196d-efa9-5499-810e-4bf355a9d6d0?h=520&w=551&sm=clamp',
+    url: 'https://i.otto.de/i/otto/af18196d-efa9-5499-810e-4bf355a9d6d0?h=520&w=551&sm=clamp',
+    type: 'image',
+    inspector: 1,
+    attribute: '',
+  }, {
+    id: 1,
+    value: 'Dior perfume',
+    url: '',
+    type: 'text',
+    inspector: 1,
+    attribute: '',
+  }, {
+    id: 1,
+    value: 'Luxury label\'s designer fashion store, also selling cosmetics, jewelry & other accessories.',
+    url: '',
+    type: 'text',
+    inspector: 1,
+    attribute: '',
+  }, {
+    id: 1,
+    value: '55$',
+    url: '',
+    type: 'text',
+    inspector: 1,
+    attribute: '',
+  },
+    {
+      id: 1,
+      value: 'dior.de',
+      type: 'link',
+      url: '',
+      inspector: 1,
+      attribute: '',
+    }]]
   public searchText = ''
   public cached_indexers = []
   public selectedIndexerForm!: Indexer
-  public headers: string[] = []
+  public headers: string[] = ['Image', 'Title', 'Description', 'Source', 'Price']
   public suggestions: MenuItem[] = []
   private searchText$ = new Subject<string>();
   public event!: KeyboardEvent

@@ -6,4 +6,5 @@ export interface Inspector {
   created_at: string
   deleted: boolean
   template: number
+  type: string
 }

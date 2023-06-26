@@ -62,7 +62,7 @@ class InspectorSerializer(serializers.ModelSerializer):
 class InspectorValueSerializer(serializers.ModelSerializer):
     class Meta:
         model = InspectorValue
-        fields = "__all__"
+        fields = ["value", "url", "type", "attribute", "created_at", "deleted", "inspector", "runner", "document"]
 
 
 class RunnerSerializer(serializers.ModelSerializer):

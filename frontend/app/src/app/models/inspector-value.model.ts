@@ -4,4 +4,5 @@ export interface InspectorValue {
   url: string
   inspector: number
   attribute: string
+  type: string
 }

@@ -9,11 +9,12 @@
         [(ngModel)]="searchText"
         type="text" pInputText placeholder="Search..."/>
       <p-overlayPanel #op>
-        <div [style]="{'width': '40rem'}" >
-        <p-progressSpinner *ngIf="loadingSuggestions" styleClass="flex justify-content-center w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
-                           animationDuration=".5s"></p-progressSpinner>
-        <p-menu *ngIf="!loadingSuggestions"  [style]="{'width': '40rem'}"  [model]="suggestions"></p-menu>
-          </div>
+        <div [style]="{'width': '40rem'}">
+          <p-progressSpinner *ngIf="loadingSuggestions" styleClass="flex justify-content-center w-4rem h-4rem"
+                             strokeWidth="8" fill="var(--surface-ground)"
+                             animationDuration=".5s"></p-progressSpinner>
+          <p-menu *ngIf="!loadingSuggestions" [style]="{'width': '40rem'}" [model]="suggestions"></p-menu>
+        </div>
       </p-overlayPanel>
 
       <button
@@ -45,8 +46,15 @@
         <tr>
           <td *ngFor="let value of product">
             <p>
-              <app-marked-text [text]="(value.value | shortText) ?? ''" [searchString]="searchText">
-              </app-marked-text>
+              <container-element [ngSwitch]="value.type">
+                <img
+                  *ngSwitchCase="'image'"
+                  class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
+                  [src]="value.value"/>
+                <a *ngSwitchCase="'link'" [href]="value.value">{{value.value}}</a>
+                <app-marked-text *ngSwitchDefault [text]="(value.value | shortText) ?? ''" [searchString]="searchText">
+                </app-marked-text>
+              </container-element>
             </p>
           </td>
         </tr>

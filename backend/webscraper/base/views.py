@@ -37,7 +37,7 @@ from .serializers import (
     InspectorSerializer,
     RunnerSerializer,
     IndexerSerializer,
-    ActionPolymorphicSerializer,
+    ActionPolymorphicSerializer, InspectorValueSerializer,
 )
 from .utils import (extract_disallow_lines_from_url, find_the_links_current_level, add_link_to_level,
                     split_work_between_threads, create_chrome_driver, all_threads_completed, execute_all_before_actions)
@@ -170,6 +170,11 @@ class InspectorViewSet(EverythingButDestroyViewSet):
     filterset_class = InspectorFilter
     filter_backends = [DjangoFilterBackend]
     filterset_fields = "template"
+
+
+class InspectorValueViewSet(EverythingButDestroyViewSet):
+    queryset = InspectorValue.objects.filter(deleted=False)
+    serializer_class = InspectorValueSerializer
 
 
 class RunnerViewSet(EverythingButDestroyViewSet):

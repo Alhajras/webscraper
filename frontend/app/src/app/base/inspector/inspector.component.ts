@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Inspector} from "src/app/models/inspector.model";
 import {InspectorService} from "src/app/services/inspector.service";
+import {TypeDropDown} from "src/app/base/actions/action.component";
 
 @Component({
   selector: 'app-inspector',
@@ -20,12 +21,17 @@ export class InspectorComponent implements OnInit {
   public displayModal = false
   public selector!: FormControl
   public attribute!: FormControl
+  public type!: FormControl
+  public name!: FormControl
   public form!: FormGroup
   public header = 'Inspector form'
-  public name!: FormControl
   public errorMessage = ''
   public templates = []
   public readonly columnCount = 8
+  public typesList: TypeDropDown[] = [
+    {key: 'text', value: 'text'},
+    {key: 'image', value: 'image'},
+    {key: 'link', value: 'link'}]
 
   public constructor(
     private readonly fb: FormBuilder,
@@ -48,6 +54,7 @@ export class InspectorComponent implements OnInit {
     this.currentlySubmitting = true
     const inspector = {
       name: this.name.value,
+      type: this.type.value.value,
       selector: this.selector.value,
       attribute: this.attribute.value,
       template: this.template.id,
@@ -84,7 +91,7 @@ export class InspectorComponent implements OnInit {
     inspector.deleted = true
     this.inspectorService.update(inspector.id, inspector).toPromise().then(() => {
       this.inspectorService.list().subscribe(inspectors => {
-        this.inspectors = inspectors.filter(inspect=> inspect.template === this.template.id)
+        this.inspectors = inspectors.filter(inspect => inspect.template === this.template.id)
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -98,12 +105,14 @@ export class InspectorComponent implements OnInit {
   public editInspector(inspector: Inspector): void {
     this.updatedInspector = inspector
     this.name = this.fb.control(inspector.name)
+    this.type = this.fb.control({key: inspector.type, value: inspector.type})
     this.selector = this.fb.control(inspector.selector)
     this.attribute = this.fb.control(inspector.attribute)
     this.form = this.fb.group({
       selector: this.selector,
       attribute: this.attribute,
       name: this.name,
+      type: this.type,
     })
     this.displayModal = true
   }
@@ -115,22 +124,24 @@ export class InspectorComponent implements OnInit {
     this.initForm()
   }
 
-  public createInspector():void {
+  public createInspector(): void {
     this.initForm()
     this.updatedInspector = null
     this.displayModal = true
   }
 
-  private initForm():void {
+  private initForm(): void {
     this.description = this.fb.control('')
     this.selector = this.fb.control('')
     this.attribute = this.fb.control('')
     this.name = this.fb.control('')
+    this.type = this.fb.control({key: 'text', value: 'text'})
     this.form = this.fb.group({
       description: this.description,
       url: this.selector,
       attribute: this.attribute,
       name: this.name,
+      type: this.type,
     })
   }
 }
