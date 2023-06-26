@@ -1,0 +1,6 @@
+ped_c_module.c
+setup.py
+ped_c.egg-info/PKG-INFO
+ped_c.egg-info/SOURCES.txt
+ped_c.egg-info/dependency_links.txt
+ped_c.egg-info/top_level.txt
