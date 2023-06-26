@@ -9,6 +9,7 @@ export interface Indexer {
   status: string,
   k_parameter: number,
   b_parameter: number,
+  dictionary: string,
   skip_words: string,
   small_words_threshold: number,
 }

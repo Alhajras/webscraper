@@ -67,6 +67,7 @@ class Indexer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     b_parameter = models.FloatField(default=0.75)
     k_parameter = models.FloatField(default=1.75)
+    dictionary = models.CharField(default='wikidata-entities.tsv', max_length=200)
     skip_words = models.TextField(blank=True)
     small_words_threshold = models.PositiveSmallIntegerField(default=0)
     completed_at = models.DateTimeField(blank=True, null=True)

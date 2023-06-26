@@ -161,6 +161,20 @@
               >
                 <p-chips [formControl]="skipWordsList"></p-chips>
               </app-input-field>
+              <app-input-field
+                [isRequired]="true"
+                labelId="dictionary-id"
+                labelText="Dictionary file name"
+                helpText="The name of the dictionary file name, this file help the suggestions list by using synonymes."
+              >
+                <input
+                  id="dictionary-id"
+                  type="text"
+                  pInputText
+                  [formControl]="dictionary"
+                />
+              </app-input-field>
+
             </div>
             <div class="col-6">
               <app-input-field

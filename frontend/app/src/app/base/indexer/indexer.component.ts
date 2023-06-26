@@ -21,13 +21,14 @@ export class IndexerComponent implements OnInit {
   public description!: FormControl
   public skipWordsList!: FormControl
   public smallWordsThreshold!: FormControl
+  public dictionary!: FormControl
   public currentlySubmitting = false
   public displayModal = false
   public form!: FormGroup
   public header = 'Indexer form'
   public selectorsIdsOptions: { name: string, id: number }[] = []
   public errorMessage = ''
-  public readonly columnCount = 8
+  public readonly columnCount = 5
   public loading = false
 
   public constructor(
@@ -54,6 +55,7 @@ export class IndexerComponent implements OnInit {
       name: this.name.value,
       k_parameter: this.kParameter.value,
       b_parameter: this.bParameter.value,
+      dictionary: this.dictionary.value,
       small_words_threshold: this.smallWordsThreshold.value,
       skip_words: this.skipWordsList.value.length === 0 ? '' : this.skipWordsList.value.join('";"'),
     }
@@ -100,12 +102,14 @@ export class IndexerComponent implements OnInit {
     this.name = this.fb.control(indexer.name)
     this.kParameter = this.fb.control(indexer.k_parameter)
     this.bParameter = this.fb.control(indexer.b_parameter)
+    this.dictionary = this.fb.control(indexer.dictionary)
     this.smallWordsThreshold = this.fb.control(indexer.small_words_threshold)
     this.skipWordsList = this.fb.control(indexer.skip_words === '' ? '' : indexer.skip_words.split("\";\""))
     this.form = this.fb.group({
       name: this.name,
       kParameter: this.kParameter,
       bParameter: this.bParameter,
+      dictionary: this.dictionary,
       smallWordsThreshold: this.smallWordsThreshold,
       skip_words: this.skipWordsList,
     })
@@ -141,12 +145,14 @@ export class IndexerComponent implements OnInit {
     this.smallWordsThreshold = this.fb.control(0)
     this.kParameter = this.fb.control(1.75)
     this.bParameter = this.fb.control(0.75)
+    this.dictionary = this.fb.control('wikidata-entities.tsv')
     this.form = this.fb.group({
       selectedInspectors: this.selectedInspectors,
       name: this.name,
       skipWordsList: this.skipWordsList,
       smallWordsThreshold: this.smallWordsThreshold,
       bParameter: this.bParameter,
+      dictionary: this.dictionary,
       kParameter: this.kParameter,
     })
   }

@@ -4,7 +4,6 @@ import re
 import threading
 from concurrent.futures import ThreadPoolExecutor, Future, wait
 
-from django.core.cache import cache
 from django.utils import timezone
 import time
 
@@ -92,9 +91,8 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="start", methods=["post"])
     def start(self, request: Request) -> Response:
-
-
         indexer_id = request.data["id"]
+        indexer = Indexer.objects.get(id=indexer_id)
 
         # cache_key = f"qGramIndex:{indexer_id}"
         # hit = cache.get(cache_key,None)
@@ -109,7 +107,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         print(id(q_obj))
         if len(q_obj.names) != 0:
             return
-        q_obj.build_from_file("wikidata-entities.tsv")
+        q_obj.build_from_file(indexer.dictionary)
         # cache.set(cache_key, q_obj)
         print("Done creating dictionary!")
         return
@@ -118,7 +116,6 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         inverted_index = InvertedIndex()
         inverted_index.create_index(indexer_id)
         print("Done creating an index!")
-        indexer = Indexer.objects.get(id=indexer_id)
         indexer.status = IndexerStatus.COMPLETED
         indexer.completed_at = timezone.now()
         indexer.save()
