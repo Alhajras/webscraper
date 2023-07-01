@@ -161,7 +161,7 @@ class Document(models.Model):
     for example one movie, onr product or one-page result count as one document.
     """
     template = models.ForeignKey(
-        Template, on_delete=models.PROTECT,null=True
+        Template, on_delete=models.PROTECT, null=True
     )
 
 

@@ -54,7 +54,6 @@ class InvertedIndex:
         # The list which contains the ids of the
         #         inspectors to be included in the indexing process.
         singleton_cache = SingletonMeta
-
         cache_key = f"indexer:{indexer_id}"
         hit = singleton_cache.indexers_cache.get(cache_key, None)
         if hit is not None:
@@ -84,6 +83,9 @@ class InvertedIndex:
         ).values_list("id", flat=True)
         # For first stage we want to index by the document title as testing only
         inspector_values = InspectorValue.objects.filter(inspector__in=included_inspectors_ids).order_by("created_at")
+        if len(inspector_values) == 0:
+            print("No documents are found to be indexed!")
+            return
         doc_lengths = []
         doc_id = 0
         for inspector_value in inspector_values:

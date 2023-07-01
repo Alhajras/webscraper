@@ -27,7 +27,7 @@ from .models import (
     RunnerStatus,
     Indexer,
     IndexerStatus,
-    Action,
+    Action, Document, InspectorTypes,
 )
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
@@ -73,7 +73,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         """
         indexer = super().create(request, *args, **kwargs)
         inspectors_ids = [
-            selector["id"] for selector in request.data["selected_inspectors"]
+            selector["id"] for selector in request.data["inspectors_to_be_indexed"]
         ]
         Inspector.objects.filter(id__in=inspectors_ids).update(
             indexer=indexer.data["id"]
@@ -96,18 +96,15 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         singleton_cache = SingletonMeta
         cache_key = f"qGramIndex:{indexer_id}"
         hit = singleton_cache.suggestions_cache.get(cache_key, None)
-        if hit is not None:
-            print("Cached")
-            return hit
-
-        print("Creating dictionary ....")
-        q_obj = QGramIndex(indexer.q_gram_q, indexer.q_gram_use_synonym)
-        if len(q_obj.names) != 0:
-            return
-        Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.DICTIONARY)
-        q_obj.build_from_file(indexer.dictionary)
-        singleton_cache.suggestions_cache[cache_key] = q_obj
-        print("Done creating dictionary!")
+        if hit is None:
+            print("Creating dictionary ....")
+            q_obj = QGramIndex(indexer.q_gram_q, indexer.q_gram_use_synonym)
+            if len(q_obj.names) != 0:
+                return
+            Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.DICTIONARY)
+            q_obj.build_from_file(indexer.dictionary)
+            singleton_cache.suggestions_cache[cache_key] = q_obj
+            print("Done creating dictionary!")
         Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.INDEXING)
         print("Creating an index!")
         inverted_index = InvertedIndex()
@@ -134,7 +131,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             )
         headers = None
         if len(docs) != 0:
-            headers = Inspector.objects.filter(id__in=[doc["inspector"]  for doc in docs[0]]).values_list("name", flat=True)
+            headers = Inspector.objects.filter(id__in=[doc["inspector"] for doc in docs[0]]).values_list("name", flat=True)
         return Response(data={"headers": headers,  "docs": docs})
 
     @action(detail=False, url_path="suggest", methods=["GET"])
@@ -164,7 +161,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
 
 class InspectorViewSet(EverythingButDestroyViewSet):
-    queryset = Inspector.objects.filter(deleted=False)
+    queryset = Inspector.objects.filter(deleted=False).filter(type=InspectorTypes.TEXT)
     serializer_class = InspectorSerializer
     filterset_class = InspectorFilter
     filter_backends = [DjangoFilterBackend]
@@ -322,7 +319,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 driver.get(link.url)
                 links[link.url].visited = True
                 # We execute all the 'before actions' before we start crawling
-                # execute_all_before_actions(crawler.template, driver)
+                execute_all_before_actions(crawler.template, driver)
                 # This should be configured
                 scoped_elements = []
                 try:
@@ -399,12 +396,18 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                         if not all(list_size == lengths[0] for list_size in lengths):
                             logger.info(f"Thread: {thread_id} - The URL: {link.url} has different inspectors lists.")
                             return
+                        documents_number = lengths[0]
+                        doc_pk = Document.objects.last().id
                         # We start saving documents
-                        for inspector in documents_dict.values():
-                            for inspector_value in inspector:
+                        for i in range(documents_number):
+                            Document.objects.create(template=crawler.template)
+                            doc = Document.objects.last()
+                            for inspector in documents_dict.keys():
+                                inspector_value= documents_dict[inspector][i]
                                 InspectorValue.objects.update_or_create(url=inspector_value.url,
                                                                         attribute=inspector_value.attribute,
                                                                         value=inspector_value.value,
+                                                                        document=doc,
                                                                         inspector=inspector_value.inspector,
                                                                         runner=inspector_value.runner)
                 except Exception as e:
