@@ -248,8 +248,9 @@ class InvertedIndex:
         if not keywords:
             return []
 
+        singleton_cache = SingletonMeta
         cache_key = f"indexer:{indexer_id}"
-        self.inverted_lists = cache.get(cache_key)
+        self.inverted_lists = singleton_cache.indexers_cache.get(cache_key, None)
         if self.inverted_lists is None:
             print(
                 f"There is no indexer found with an ID {indexer_id}!"
