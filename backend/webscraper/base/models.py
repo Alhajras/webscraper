@@ -44,6 +44,7 @@ class CrawlingAlgorithms(models.TextChoices):
     """
     This is used to declare the supported parsing algorithms
     """
+
     BFS_TOP_DOWN = "BFS_TOP_DOWN"
     BFS_BOTTOM_UP = "BFS_BOTTOM_UP"
 
@@ -76,7 +77,7 @@ class Indexer(models.Model):
     k_parameter = models.FloatField(default=1.75)
     q_gram_use_synonym = models.BooleanField(default=True)
     q_gram_q = models.SmallIntegerField(default=3)
-    dictionary = models.CharField(default='wikidata-entities.tsv', max_length=200)
+    dictionary = models.CharField(default="wikidata-entities.tsv", max_length=200)
     skip_words = models.TextField(blank=True)
     small_words_threshold = models.PositiveSmallIntegerField(default=0)
     completed_at = models.DateTimeField(blank=True, null=True)
@@ -102,10 +103,13 @@ class Inspector(models.Model):
     name = models.CharField(max_length=100)
     selector = models.TextField()
     attribute = models.CharField(
-        max_length=25, choices=InspectorAttributes.choices, blank=True, default=''
+        max_length=25, choices=InspectorAttributes.choices, blank=True, default=""
     )
     type = models.CharField(
-        max_length=10, choices=InspectorTypes.choices, blank=True, default=InspectorTypes.TEXT
+        max_length=10,
+        choices=InspectorTypes.choices,
+        blank=True,
+        default=InspectorTypes.TEXT,
     )
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
@@ -160,9 +164,8 @@ class Document(models.Model):
     Document represent the saved results of template,
     for example one movie, onr product or one-page result count as one document.
     """
-    template = models.ForeignKey(
-        Template, on_delete=models.PROTECT, null=True
-    )
+
+    template = models.ForeignKey(Template, on_delete=models.PROTECT, null=True)
 
 
 class Crawler(models.Model):
@@ -189,7 +192,9 @@ class Crawler(models.Model):
     excluded_urls = models.TextField(blank=True)
     scope_divs = models.TextField(blank=True)
     parsing_algorithm = models.CharField(
-        max_length=20, choices=CrawlingAlgorithms.choices, default=CrawlingAlgorithms.BFS_BOTTOM_UP
+        max_length=20,
+        choices=CrawlingAlgorithms.choices,
+        default=CrawlingAlgorithms.BFS_BOTTOM_UP,
     )
 
     def __str__(self) -> str:
@@ -213,7 +218,10 @@ class Runner(models.Model):
     @property
     def collected_documents(self) -> int:
         return (
-            InspectorValue.objects.filter(deleted=False, runner=self).count() / Inspector.objects.filter(deleted=False, template=self.crawler.template).count()
+            InspectorValue.objects.filter(deleted=False, runner=self)
+            .values("document__id")
+            .annotate(dcount=Count("id"))
+            .count()
         )
 
     @property
@@ -224,7 +232,7 @@ class Runner(models.Model):
 class InspectorValue(models.Model):
     value = models.TextField(blank=True)
     url = models.URLField(default="")
-    attribute = models.TextField(blank=True, default='')
+    attribute = models.TextField(blank=True, default="")
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
     inspector = models.ForeignKey(Inspector, on_delete=models.PROTECT)

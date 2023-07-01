@@ -18,7 +18,10 @@ class DocumentScore:
     """
     Class that represent the document saved for indexing
     """
-    def __init__(self, counter: int, inspector_db_id: int, score: int, document_db_id: int):
+
+    def __init__(
+        self, counter: int, inspector_db_id: int, score: int, document_db_id: int
+    ):
         self.counter = counter
         self.inspector_db_id = inspector_db_id
         self.document_db_id = document_db_id
@@ -71,7 +74,9 @@ class InvertedIndex:
 
         # Words that should be skipped from indexing
         skip_words_list = indexer.skip_words.split('";"')
-        skip_words_dictionary = {value: index for index, value in enumerate(skip_words_list)}
+        skip_words_dictionary = {
+            value: index for index, value in enumerate(skip_words_list)
+        }
 
         # TODO: make this configurable
         words_weights = {}
@@ -82,7 +87,9 @@ class InvertedIndex:
             indexer=indexer_id
         ).values_list("id", flat=True)
         # For first stage we want to index by the document title as testing only
-        inspector_values = InspectorValue.objects.filter(inspector__in=included_inspectors_ids).order_by("created_at")
+        inspector_values = InspectorValue.objects.filter(
+            inspector__in=included_inspectors_ids
+        ).order_by("created_at")
         if len(inspector_values) == 0:
             print("No documents are found to be indexed!")
             return
@@ -105,23 +112,35 @@ class InvertedIndex:
                 if word not in self.inverted_lists:
                     # The word is seen for first time, create new list.
                     self.inverted_lists[word] = [
-                        DocumentScore(counter=doc_id, inspector_db_id=inspector_value.id, score=1,
-                                      document_db_id=inspector_value.document.id)]
+                        DocumentScore(
+                            counter=doc_id,
+                            inspector_db_id=inspector_value.id,
+                            score=1,
+                            document_db_id=inspector_value.document.id,
+                        )
+                    ]
                     continue
 
                 # Get last posting to check if the doc was already seen.
                 last: DocumentScore = self.inverted_lists[word][-1]
                 if last.counter == doc_id:
                     # The doc was already seen, increment tf by 1.
-                    self.inverted_lists[word][-1] = DocumentScore(counter=doc_id,
-                                                                  inspector_db_id=inspector_value.id,
-                                                                  score=last.score + 1,
-                                                                  document_db_id=inspector_value.document.id)
+                    self.inverted_lists[word][-1] = DocumentScore(
+                        counter=doc_id,
+                        inspector_db_id=inspector_value.id,
+                        score=last.score + 1,
+                        document_db_id=inspector_value.document.id,
+                    )
                 else:
                     # The doc was not already seen, set tf to 1.
                     self.inverted_lists[word].append(
-                        DocumentScore(counter=doc_id, inspector_db_id=inspector_value.id, score=1,
-                                      document_db_id=inspector_value.document.id))
+                        DocumentScore(
+                            counter=doc_id,
+                            inspector_db_id=inspector_value.id,
+                            score=1,
+                            document_db_id=inspector_value.document.id,
+                        )
+                    )
             # Register the document length.
             doc_lengths.append(dl)
 
@@ -149,9 +168,12 @@ class InvertedIndex:
                 score = tf2 * math.log(n / df, 2)
                 if word in words_weights:
                     score += words_weights[word]
-                inverted_list[i] = DocumentScore(counter=doc_id, inspector_db_id=document_score.inspector_db_id,
-                                                 score=score,
-                                                 document_db_id=document_score.document_db_id)
+                inverted_list[i] = DocumentScore(
+                    counter=doc_id,
+                    inspector_db_id=document_score.inspector_db_id,
+                    score=score,
+                    document_db_id=document_score.document_db_id,
+                )
 
         singleton_cache.indexers_cache[cache_key] = self.inverted_lists
 
@@ -201,9 +223,14 @@ class InvertedIndex:
         # Iterate the lists in an interleaving order and aggregate the scores.
         while i < len(list1) and j < len(list2):
             if i < list1[i].counter == list2[j].counter:
-                result.append(DocumentScore(counter=list1[i].counter, inspector_db_id=list1[i].inspector_db_id,
-                                            score=list1[i].score + list2[j].score,
-                                            document_db_id=list1[i].document_db_id))
+                result.append(
+                    DocumentScore(
+                        counter=list1[i].counter,
+                        inspector_db_id=list1[i].inspector_db_id,
+                        score=list1[i].score + list2[j].score,
+                        document_db_id=list1[i].document_db_id,
+                    )
+                )
                 i += 1
                 j += 1
             elif list1[i].counter < list2[j].counter:

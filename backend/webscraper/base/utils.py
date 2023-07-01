@@ -10,7 +10,16 @@ from .dataclasses import *
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from .models import Template, ActionChain, Action, ClickAction, WaitAction, ScrollAction, Crawler, CrawlingAlgorithms
+from .models import (
+    Template,
+    ActionChain,
+    Action,
+    ClickAction,
+    WaitAction,
+    ScrollAction,
+    Crawler,
+    CrawlingAlgorithms,
+)
 
 
 def extract_disallow_lines_from_url(url):
@@ -38,8 +47,9 @@ def extract_disallow_lines_from_url(url):
     return disallow_lines
 
 
-def find_the_links_current_level(links_queues: dict[int, list],
-                                 crawler: Crawler) -> int:
+def find_the_links_current_level(
+    links_queues: dict[int, list], crawler: Crawler
+) -> int:
     """
     We would like to find the queue that contain links left
     :param links_queues: A hashmap with a key of the level and the value is the queue
@@ -87,7 +97,9 @@ def all_threads_completed(shared_threads_pool: dict[int, CrawlerThread]) -> bool
     return True
 
 
-def split_work_between_threads(shared_threads_pool: dict[int, CrawlerThread]) -> dict[int, list] | None:
+def split_work_between_threads(
+    shared_threads_pool: dict[int, CrawlerThread]
+) -> dict[int, list] | None:
     """
     This function will check which threads are not done crawling and will distribute the work between them
     :param shared_threads_pool:
@@ -107,7 +119,9 @@ def split_work_between_threads(shared_threads_pool: dict[int, CrawlerThread]) ->
     if len(long_queue) < 5:
         return None
     half_length = len(long_queue) // 2
-    shared_threads_pool[thread_id_needs_help].queues[max_level] = long_queue[:half_length]
+    shared_threads_pool[thread_id_needs_help].queues[max_level] = long_queue[
+        :half_length
+    ]
     print(len(long_queue[half_length:]))
     if len(long_queue[half_length:]) == 0:
         return None
@@ -145,13 +159,15 @@ def execute_all_before_actions(template: Template, driver: WebDriver) -> None:
     # TODO Change this to use the template
     # actions_chain = ActionChain.objects.get(template=template)
     actions_chain = ActionChain.objects.all()[0]
-    all_actions = Action.objects.filter(action_chain=actions_chain).filter(deleted=False).order_by("order")
+    all_actions = (
+        Action.objects.filter(action_chain=actions_chain)
+        .filter(deleted=False)
+        .order_by("order")
+    )
     for action_to_be_executed in all_actions:
         try:
             if isinstance(action_to_be_executed, ClickAction):
-                driver.find_element(
-                    By.XPATH, action_to_be_executed.selector
-                ).click()
+                driver.find_element(By.XPATH, action_to_be_executed.selector).click()
             elif isinstance(action_to_be_executed, WaitAction):
                 time.sleep(action_to_be_executed.time)
             elif isinstance(action_to_be_executed, ScrollAction):
@@ -162,4 +178,3 @@ def execute_all_before_actions(template: Template, driver: WebDriver) -> None:
                     time.sleep(2000)
         except NoSuchElementException:
             print("Action button was not found")
-

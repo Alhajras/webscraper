@@ -45,6 +45,7 @@ class QGramIndex:
     """
     A QGram-Index.
     """
+
     def __init__(self, q: int, use_syns: Optional[bool] = False):
         """
         Creates an empty qgram index.
@@ -79,9 +80,16 @@ class QGramIndex:
          ('rei', [(1, 1), (2, 1)])]
         """
         import pathlib
+
         pathlib.Path().resolve()
 
-        with open(os.path.join(f"{pathlib.Path().resolve()}/base/indexing/dictionaries", file_name), "r", encoding="utf-8") as f:
+        with open(
+            os.path.join(
+                f"{pathlib.Path().resolve()}/base/indexing/dictionaries", file_name
+            ),
+            "r",
+            encoding="utf-8",
+        ) as f:
             ent_id = 0
             name_id = 0
             f.readline()  # skip first line
@@ -110,8 +118,10 @@ class QGramIndex:
                     for qgram in self.compute_qgrams(normed_name):
                         if qgram not in self.inverted_lists:
                             self.inverted_lists[qgram] = []
-                        if (len(self.inverted_lists[qgram]) > 0 and
-                                self.inverted_lists[qgram][-1][0] == name_id):
+                        if (
+                            len(self.inverted_lists[qgram]) > 0
+                            and self.inverted_lists[qgram][-1][0] == name_id
+                        ):
                             freq = self.inverted_lists[qgram][-1][1] + 1
                             self.inverted_lists[qgram][-1] = (name_id, freq)
                         else:
@@ -128,11 +138,10 @@ class QGramIndex:
         ret = []
         padded = self.padding + word
         for i in range(0, len(word)):
-            ret.append(padded[i:i + self.q])
+            ret.append(padded[i : i + self.q])
         return ret
 
-    def merge_lists(self, lists: List[List[Tuple[int, int]]])\
-            -> List[Tuple[int, int]]:
+    def merge_lists(self, lists: List[List[Tuple[int, int]]]) -> List[Tuple[int, int]]:
         """
         Merges the given inverted lists.
 
@@ -158,8 +167,9 @@ class QGramIndex:
         self.merge_time = (time.monotonic() - start) * 1000
         return merged
 
-    def find_matches(self, prefix: str, delta: int)\
-            -> Tuple[List[Tuple[int, int, int, int]], int]:
+    def find_matches(
+        self, prefix: str, delta: int
+    ) -> Tuple[List[Tuple[int, int, int, int]], int]:
         """
         Finds all entities y with PED(x, y) <= delta for a given integer delta
         and a given (normalized) prefix x.
@@ -202,8 +212,7 @@ class QGramIndex:
                 pedist = ped(prefix, self.norm_names[pair[0] - 1], delta)
                 c += 1
                 if pedist <= delta:
-                    matches.append(
-                        (self.name_ent[pair[0] - 1], pedist, pair[0]))
+                    matches.append((self.name_ent[pair[0] - 1], pedist, pair[0]))
                     continue
 
         self.ped_calcs = (c, tot)
@@ -216,8 +225,9 @@ class QGramIndex:
 
         for match in matches:
             if len(ret) == 0 or ret[-1][0] != match[0]:
-                ret.append((match[0], match[1], int(
-                    self.entities[match[0] - 1][1]), match[2]))
+                ret.append(
+                    (match[0], match[1], int(self.entities[match[0] - 1][1]), match[2])
+                )
 
         return ret, c
 
@@ -232,10 +242,11 @@ class QGramIndex:
         'freiburg'
         """
         low = word.lower()
-        return ''.join([i for i in low if i.isalnum()])
+        return "".join([i for i in low if i.isalnum()])
 
-    def rank_matches(self, matches: List[Tuple[int, int, int, int]])\
-            -> List[Tuple[int, int, int, int]]:
+    def rank_matches(
+        self, matches: List[Tuple[int, int, int, int]]
+    ) -> List[Tuple[int, int, int, int]]:
         """
         Ranks the given list of (entity id, PED, s), where PED is the PED
         value and s is the popularity score of an entity.
@@ -289,12 +300,15 @@ def main():
             f"tot. {q.merges[1]} elements ({q.merge_time} ms), "
             f"{q.ped_calcs[0]}/{q.ped_calcs[1]} ped calculations ({q.ped_time}"
             f" ms), took \033[1m{(time.monotonic() - start) * 1000} ms\033[0m"
-            f" total.")
+            f" total."
+        )
 
         for ent in q.rank_matches(postings)[:5]:
-            print(f"\n\033[1m{q.entities[ent[0] - 1][0]}\033[0m (score="
-                  f"{ent[2]}, ped={ent[1]}, via '{q.names[ent[3] - 1]}'):\n"
-                  f"{q.entities[ent[0] - 1][2]}")
+            print(
+                f"\n\033[1m{q.entities[ent[0] - 1][0]}\033[0m (score="
+                f"{ent[2]}, ped={ent[1]}, via '{q.names[ent[3] - 1]}'):\n"
+                f"{q.entities[ent[0] - 1][2]}"
+            )
 
 
 if __name__ == "__main__":

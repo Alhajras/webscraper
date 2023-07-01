@@ -27,7 +27,9 @@ from .models import (
     RunnerStatus,
     Indexer,
     IndexerStatus,
-    Action, Document, InspectorTypes,
+    Action,
+    Document,
+    InspectorTypes,
 )
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
@@ -37,10 +39,18 @@ from .serializers import (
     InspectorSerializer,
     RunnerSerializer,
     IndexerSerializer,
-    ActionPolymorphicSerializer, InspectorValueSerializer,
+    ActionPolymorphicSerializer,
+    InspectorValueSerializer,
 )
-from .utils import (extract_disallow_lines_from_url, find_the_links_current_level, add_link_to_level,
-                    split_work_between_threads, create_chrome_driver, all_threads_completed, execute_all_before_actions)
+from .utils import (
+    extract_disallow_lines_from_url,
+    find_the_links_current_level,
+    add_link_to_level,
+    split_work_between_threads,
+    create_chrome_driver,
+    all_threads_completed,
+    execute_all_before_actions,
+)
 
 
 class EverythingButDestroyViewSet(
@@ -101,7 +111,9 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             q_obj = QGramIndex(indexer.q_gram_q, indexer.q_gram_use_synonym)
             if len(q_obj.names) != 0:
                 return
-            Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.DICTIONARY)
+            Indexer.objects.filter(id=indexer_id).update(
+                status=IndexerStatus.DICTIONARY
+            )
             q_obj.build_from_file(indexer.dictionary)
             singleton_cache.suggestions_cache[cache_key] = q_obj
             print("Done creating dictionary!")
@@ -131,8 +143,10 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             )
         headers = None
         if len(docs) != 0:
-            headers = Inspector.objects.filter(id__in=[doc["inspector"] for doc in docs[0]]).values_list("name", flat=True)
-        return Response(data={"headers": headers,  "docs": docs})
+            headers = Inspector.objects.filter(
+                id__in=[doc["inspector"] for doc in docs[0]]
+            ).values_list("name", flat=True)
+        return Response(data={"headers": headers, "docs": docs})
 
     @action(detail=False, url_path="suggest", methods=["GET"])
     def suggest(self, request: Request) -> Response:
@@ -267,10 +281,10 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         scope_divs = []
         # We read the scopes from the user input if it is not empty otherwise we get all elements from the DOM body
-        if crawler.scope_divs != '':
+        if crawler.scope_divs != "":
             scope_divs = crawler.scope_divs.split('";"')
         else:
-            scope_divs = ['//body']
+            scope_divs = ["//body"]
         # Stopping options
         max_collected_docs = crawler.max_collected_docs
         max_visited_links = crawler.max_pages
@@ -286,7 +300,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
             # This will hold all the queues for all the links different levels
             links_queues: dict[int, list] = {}
-            crawler_thread = CrawlerThread(thread_id=thread_id, crawler=crawler, running=True, queues=links_queues)
+            crawler_thread = CrawlerThread(
+                thread_id=thread_id, crawler=crawler, running=True, queues=links_queues
+            )
 
             if thread_id not in shared_threads_pool:
                 shared_threads_pool[thread_id] = crawler_thread
@@ -310,7 +326,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                 link: Link = current_active_queue.pop()
                 if runner.collected_documents >= max_collected_docs:
                     return
-                logger.info(f"Thread: {thread_id} - {link.url} out of {len(current_active_queue)}")
+                logger.info(
+                    f"Thread: {thread_id} - {link.url} out of {len(current_active_queue)}"
+                )
                 # Run the Webdriver, save page an quit browser
                 # TODO: I should use `retry` here
                 if links[link.url].visited:
@@ -327,7 +345,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                         try:
                             scoped_elements += driver.find_elements(By.XPATH, scope_div)
                         except Exception as e:
-                            print(f"Thread id: {crawler_thread.thread_id} had an error, scope not found.")
+                            print(
+                                f"Thread id: {crawler_thread.thread_id} had an error, scope not found."
+                            )
                             pass
                     # We stop recursion when we reach tha mx level of digging into pages
                     # We add one layer of depth
@@ -335,7 +355,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                     if current_rec_level <= max_rec_level:
                         for scoped_element in scoped_elements:
                             # We add one level
-                            all_links_in_the_page = scoped_element.find_elements(By.CSS_SELECTOR, "a")
+                            all_links_in_the_page = scoped_element.find_elements(
+                                By.CSS_SELECTOR, "a"
+                            )
                             for a in all_links_in_the_page:
                                 if a.get_attribute("href") is None:
                                     continue
@@ -343,7 +365,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                 href = a.get_attribute("href").split("#").pop()
                                 # Respect the Robots.txt file protocol
                                 if disallow_link_patterns != "" and re.match(
-                                        disallow_link_patterns, href
+                                    disallow_link_patterns, href
                                 ):
                                     continue
                                 # Skip unwanted links
@@ -353,11 +375,13 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                 if base_url != urlparse(href).hostname:
                                     continue
                                 if (
-                                        link.url != href
-                                        and href not in links
-                                        and len(links) < max_visited_links
+                                    link.url != href
+                                    and href not in links
+                                    and len(links) < max_visited_links
                                 ):
-                                    found_link = Link(url=href, visited=False, level=current_rec_level)
+                                    found_link = Link(
+                                        url=href, visited=False, level=current_rec_level
+                                    )
                                     links[href] = found_link
                                     add_link_to_level(links_queues, found_link)
 
@@ -376,25 +400,33 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                         if not crawler.allow_multi_elements:
                             inspector_elements = [inspector_elements[0]]
                         for inspector_element in inspector_elements:
-                            attribute = ''
-                            if inspector.attribute != '':
+                            attribute = ""
+                            if inspector.attribute != "":
                                 attribute = inspector_element.get_attribute(
                                     inspector.attribute
                                 )
                             if thread_id not in threads_metrics:
                                 threads_metrics[thread_id] = 1
                             else:
-                                threads_metrics[thread_id] = threads_metrics[thread_id] + 1
+                                threads_metrics[thread_id] = (
+                                    threads_metrics[thread_id] + 1
+                                )
                             threads_metrics[thread_id] += 1
-                            documents_dict[inspector].append(InspectorValue(url=link.url,
-                                                                            attribute=attribute,
-                                                                            value=inspector_element.text,
-                                                                            inspector=inspector,
-                                                                            runner=runner,))
+                            documents_dict[inspector].append(
+                                InspectorValue(
+                                    url=link.url,
+                                    attribute=attribute,
+                                    value=inspector_element.text,
+                                    inspector=inspector,
+                                    runner=runner,
+                                )
+                            )
 
                         lengths = [len(doc) for doc in documents_dict.values()]
                         if not all(list_size == lengths[0] for list_size in lengths):
-                            logger.info(f"Thread: {thread_id} - The URL: {link.url} has different inspectors lists.")
+                            logger.info(
+                                f"Thread: {thread_id} - The URL: {link.url} has different inspectors lists."
+                            )
                             return
                         documents_number = lengths[0]
                         doc_pk = Document.objects.last().id
@@ -403,17 +435,20 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                             Document.objects.create(template=crawler.template)
                             doc = Document.objects.last()
                             for inspector in documents_dict.keys():
-                                inspector_value= documents_dict[inspector][i]
-                                InspectorValue.objects.update_or_create(url=inspector_value.url,
-                                                                        attribute=inspector_value.attribute,
-                                                                        value=inspector_value.value,
-                                                                        document=doc,
-                                                                        inspector=inspector_value.inspector,
-                                                                        runner=inspector_value.runner)
+                                inspector_value = documents_dict[inspector][i]
+                                InspectorValue.objects.update_or_create(
+                                    url=inspector_value.url,
+                                    attribute=inspector_value.attribute,
+                                    value=inspector_value.value,
+                                    document=doc,
+                                    inspector=inspector_value.inspector,
+                                    runner=inspector_value.runner,
+                                )
                 except Exception as e:
                     print(f"{thread_id} encountered an error:")
                     print(e)
                 return
+
             runner = Runner.objects.get(id=runner_id)
             runner.status = RunnerStatus.RUNNING
             runner.created_at = timezone.now()
@@ -423,7 +458,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             level = find_the_links_current_level(links_queues, crawler)
             current_active_queue = links_queues[level]
             #  We only stop the thread if one queue is done AND all other threads are also completed
-            while len(current_active_queue) != 0 or not all_threads_completed(shared_threads_pool):
+            while len(current_active_queue) != 0 or not all_threads_completed(
+                shared_threads_pool
+            ):
                 if len(current_active_queue) != 0:
                     find_links()
                 else:
@@ -442,7 +479,9 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
             driver.quit()
             shared_threads_pool[thread_id].running = False
-            print(f"Thread: {thread_id} completed!. Queue: {shared_threads_pool[thread_id]}. Docs: {threads_metrics[thread_id]}")
+            print(
+                f"Thread: {thread_id} completed!. Queue: {shared_threads_pool[thread_id]}. Docs: {threads_metrics[thread_id]}"
+            )
 
         links[crawler.seed_url] = Link(url=crawler.seed_url, visited=False)
         threads_number = crawler.threads
@@ -457,11 +496,11 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         total_visited_links = 0
         total_non_useful_links = 0
         for key, link in links.items():
-                if link.visited:
-                    total_visited_links += 1
-                if not InspectorValue.objects.filter(url=link.url).exists():
-                    print(link.url)
-                    total_non_useful_links += 1
+            if link.visited:
+                total_visited_links += 1
+            if not InspectorValue.objects.filter(url=link.url).exists():
+                print(link.url)
+                total_non_useful_links += 1
 
         print(f"Visited Links: {total_visited_links}")
         print(f"total_non_useful_links: {total_non_useful_links}")

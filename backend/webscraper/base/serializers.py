@@ -62,7 +62,17 @@ class InspectorSerializer(serializers.ModelSerializer):
 class InspectorValueSerializer(serializers.ModelSerializer):
     class Meta:
         model = InspectorValue
-        fields = ["value", "url", "type", "attribute", "created_at", "deleted", "inspector", "runner", "document"]
+        fields = [
+            "value",
+            "url",
+            "type",
+            "attribute",
+            "created_at",
+            "deleted",
+            "inspector",
+            "runner",
+            "document",
+        ]
 
 
 class RunnerSerializer(serializers.ModelSerializer):
