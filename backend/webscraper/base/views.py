@@ -161,7 +161,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
 
 class InspectorViewSet(EverythingButDestroyViewSet):
-    queryset = Inspector.objects.filter(deleted=False).filter(type=InspectorTypes.TEXT)
+    queryset = Inspector.objects.filter(deleted=False)
     serializer_class = InspectorSerializer
     filterset_class = InspectorFilter
     filter_backends = [DjangoFilterBackend]

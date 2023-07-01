@@ -141,7 +141,7 @@ export class IndexerComponent implements OnInit {
 
   private initForm() {
     this.inspectorService.list().subscribe(inspectors => {
-      this.selectorsIdsOptions = inspectors.map(inspector => {
+      this.selectorsIdsOptions = inspectors.filter(inspector=>inspector.type !== 'image').map(inspector => {
         return {
           name: inspector.name,
           id: inspector.id
