@@ -104,10 +104,11 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         q_obj = QGramIndex(indexer.q_gram_q, indexer.q_gram_use_synonym)
         if len(q_obj.names) != 0:
             return
+        Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.DICTIONARY)
         q_obj.build_from_file(indexer.dictionary)
         singleton_cache.suggestions_cache[cache_key] = q_obj
         print("Done creating dictionary!")
-        Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.RUNNING)
+        Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.INDEXING)
         print("Creating an index!")
         inverted_index = InvertedIndex()
         inverted_index.create_index(indexer_id)

@@ -14,7 +14,8 @@ class RunnerStatus(models.TextChoices):
 
 class IndexerStatus(models.TextChoices):
     NEW = "New"
-    RUNNING = "Running"
+    DICTIONARY = "Dictionary"
+    INDEXING = "Indexing"
     COMPLETED = "Completed"
     EXIT = "Exit"
 
