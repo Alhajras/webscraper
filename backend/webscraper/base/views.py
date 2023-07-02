@@ -409,6 +409,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                 attribute = inspector_element.get_attribute(
                                     inspector.attribute
                                 )
+                                if attribute is None:
+                                    attribute = ''
                             if thread_id not in threads_metrics:
                                 threads_metrics[thread_id] = 1
                             else:

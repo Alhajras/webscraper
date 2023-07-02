@@ -160,6 +160,8 @@ def execute_all_before_actions(template: Template, driver: WebDriver) -> None:
     # TODO Change this to use the template
     # actions_chain = ActionChain.objects.get(template=template)
     actions_chain = ActionChain.objects.all()[0]
+    if actions_chain.disabled:
+        return
     all_actions = (
         Action.objects.filter(action_chain=actions_chain)
         .filter(deleted=False)
