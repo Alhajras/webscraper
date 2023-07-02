@@ -122,6 +122,7 @@ class Inspector(models.Model):
 
 class ActionChain(models.Model):
     name = models.CharField(max_length=100, default="default-actions")
+    disabled = models.BooleanField(default=True)
     template = models.ForeignKey(Template, on_delete=models.PROTECT)
     event = models.CharField(
         max_length=10, choices=ActionChainEvent.choices, default=ActionChainEvent.BEFORE

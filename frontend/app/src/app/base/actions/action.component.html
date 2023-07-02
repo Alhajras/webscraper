@@ -22,6 +22,19 @@
 
       <ng-template pTemplate="header">
         <tr>
+          <th>
+            <app-input-field
+              [isRequired]="false"
+              labelId="show-browser-id"
+              labelText="Disable"
+            >
+              <div>
+              <p-inputSwitch
+              pTooltip="Disable all actions and don't apply them."
+                [formControl]="disableActions"></p-inputSwitch>
+            </div></app-input-field>
+
+          </th>
           <th pSortableColumn="name">Name
             <p-sortIcon field="name"></p-sortIcon>
           </th>
@@ -37,6 +50,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-inspector>
         <tr>
+          <td></td>
           <td>{{inspector.name}}</td>
           <td>{{inspector.type}}</td>
           <td>{{inspector.order}}</td>

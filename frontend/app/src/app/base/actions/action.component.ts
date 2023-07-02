@@ -43,6 +43,7 @@ export class ActionComponent implements OnInit {
   public times!: FormControl
   public direction!: FormControl
   public time!: FormControl
+  public disableActions!: FormControl
 
   public constructor(
     private readonly fb: FormBuilder,
@@ -66,6 +67,7 @@ export class ActionComponent implements OnInit {
     const action = {
       name: this.name.value,
       order: this.order.value,
+      disabled: this.disableActions.value,
       type: this.type.value.value,
     }
     if (this.updatedAction !== null) {
@@ -117,6 +119,7 @@ export class ActionComponent implements OnInit {
     this.updatedAction = this.evaluateType(action)
     this.name = this.fb.control(action.name)
     this.order = this.fb.control(action.order)
+    this.disableActions = this.fb.control(action.disabled)
     this.type = this.fb.control({key: action.type, value: action.type})
     this.selector = this.fb.control(action.selector ?? '')
     this.times = this.fb.control(action.times ?? 1)
@@ -126,6 +129,7 @@ export class ActionComponent implements OnInit {
       order: this.order,
       type: this.type,
       name: this.name,
+      disabled: this.disableActions,
     })
     this.displayModal = true
   }
@@ -145,6 +149,7 @@ export class ActionComponent implements OnInit {
 
   private initForm(): void {
     this.order = this.fb.control('')
+    this.disableActions = this.fb.control(false)
     this.name = this.fb.control('')
     this.type = this.fb.control('')
     this.selector = this.fb.control('')
@@ -154,6 +159,7 @@ export class ActionComponent implements OnInit {
     this.form = this.fb.group({
       order: this.order,
       type: this.type,
+      disabled: this.disableActions,
       name: this.name,
       selector: this.selector,
       times: this.times,
