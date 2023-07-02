@@ -104,7 +104,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         indexer_id = request.data["id"]
         indexer = Indexer.objects.get(id=indexer_id)
         singleton_cache = SingletonMeta
-        cache_key = f"qGramIndex:{indexer_id}"
+        cache_key = f"qGramIndex:{indexer.dictionary}"
         hit = singleton_cache.suggestions_cache.get(cache_key, None)
         if hit is None:
             print("Creating dictionary ....")
@@ -157,7 +157,8 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         raw_query = request.query_params.get("q").lower().strip()
         indexer_id = request.query_params.get("id").lower().strip()
         singleton_cache = SingletonMeta
-        cache_key = f"qGramIndex:{indexer_id}"
+        indexer = Indexer.objects.get(id=indexer_id)
+        cache_key = f"qGramIndex:{indexer.dictionary}"
         q = singleton_cache.suggestions_cache.get(cache_key, None)
         query = q.normalize(raw_query)
 
