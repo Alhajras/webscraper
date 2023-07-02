@@ -1,12 +1,10 @@
-import {Component, ContentChild, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {Template} from "src/app/models/template.model";
 import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorValue} from "src/app/models/inspector-value.model";
 import {Indexer} from "src/app/models/indexer.model";
-import {ShortTextPipe} from "src/app/shared/pipes/short-text.pipe";
-import {debounceTime, distinctUntilChanged, lastValueFrom, Observable, Subject, switchMap} from "rxjs";
-import {Overlay} from "primeng/overlay";
+import {debounceTime, distinctUntilChanged, Subject, switchMap} from "rxjs";
 import {OverlayPanel} from "primeng/overlaypanel";
 import {MenuItem} from "primeng/api";
 
@@ -15,17 +13,9 @@ export interface TemplateDropDown {
   template: Template
 }
 
-export interface Product {
-  id?: string;
-  code?: string;
-  name?: string;
-  description?: string;
-  price?: string;
-  quantity?: number;
-  inventoryStatus?: string;
-  category?: string;
-  image?: string;
-  rating?: number;
+export interface Document {
+  id: number;
+  inspector_values: any[];
 }
 
 @Component({
@@ -43,43 +33,8 @@ export class SearchComponent {
   public errorMessage = ''
   public readonly columnCount = 8
   public loading = false
-  public products: InspectorValue[][] = [[{
-    id: 1,
-    value: 'https://i.otto.de/i/otto/af18196d-efa9-5499-810e-4bf355a9d6d0?h=520&w=551&sm=clamp',
-    url: 'https://i.otto.de/i/otto/af18196d-efa9-5499-810e-4bf355a9d6d0?h=520&w=551&sm=clamp',
-    type: 'image',
-    inspector: 1,
-    attribute: '',
-  }, {
-    id: 1,
-    value: 'Dior perfume',
-    url: '',
-    type: 'text',
-    inspector: 1,
-    attribute: '',
-  }, {
-    id: 1,
-    value: 'Luxury label\'s designer fashion store, also selling cosmetics, jewelry & other accessories.',
-    url: '',
-    type: 'text',
-    inspector: 1,
-    attribute: '',
-  }, {
-    id: 1,
-    value: '55$',
-    url: '',
-    type: 'text',
-    inspector: 1,
-    attribute: '',
-  },
-    {
-      id: 1,
-      value: 'dior.de',
-      type: 'link',
-      url: '',
-      inspector: 1,
-      attribute: '',
-    }]]
+  public documents: Record<number, Document[]> = {}
+
   public searchText = ''
   public cached_indexers = []
   public selectedIndexerForm!: Indexer
@@ -127,14 +82,14 @@ export class SearchComponent {
   public searchProducts() {
     this.suggestionsOverlayPanel.hide()
     this.loading = true
-    this.products = []
+    this.documents = []
     // TODO this is bad and must be dynamic
     this.indexerService.search(this.selectedIndexerForm.id, this.searchText).subscribe((values: {
       headers: string[],
-      docs: any[]
+      docs: Record<number, Document[]>
     }) => {
       this.headers = values.headers
-      this.products = values.docs
+      this.documents = values.docs
       this.loading = false
     })
   }

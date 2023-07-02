@@ -134,17 +134,23 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         result = inverted_index.process_query(query.split(" "), pk)[:25]
         # TODO: 25 should be configurable
         docs_ids = [d.document_db_id for d in result]
-        docs = []
+        values = []
         headers = {}
+        documents = {}
         for doc_id in docs_ids:
             inspector_values = InspectorValue.objects.filter(document__id=doc_id).values(
-                "value", "url", "inspector", "inspector__name","attribute"
+                "value", "url", "inspector", "inspector__name", "attribute", "document", "inspector__type"
             )
             for inspector_value in inspector_values:
-                docs.append(inspector_value)
+                document = inspector_value["document"]
+                if document not in documents:
+                    documents[document] = [inspector_value]
+                else:
+                    documents[document].append(inspector_value)
+                values.append(inspector_value)
                 header_name = inspector_value["inspector__name"]
                 headers[header_name] = header_name
-        return Response(data={"headers": headers.keys(), "docs": docs})
+        return Response(data={"headers": headers.keys(), "docs": documents})
 
     @action(detail=False, url_path="suggest", methods=["GET"])
     def suggest(self, request: Request) -> Response:
@@ -420,28 +426,27 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                                 )
                             )
 
-                        lengths = [len(doc) for doc in documents_dict.values()]
-                        if not all(list_size == lengths[0] for list_size in lengths):
-                            logger.info(
-                                f"Thread: {thread_id} - The URL: {link.url} has different inspectors lists {lengths}."
+                    lengths = [len(doc) for doc in documents_dict.values()]
+                    if not all(list_size == lengths[0] for list_size in lengths):
+                        logger.info(
+                            f"Thread: {thread_id} - The URL: {link.url} has different inspectors lists {lengths}."
+                        )
+                        return
+                    documents_number = lengths[0]
+                    # We start saving documents
+                    for i in range(documents_number):
+                        Document.objects.create(template=crawler.template)
+                        doc = Document.objects.last()
+                        for inspector in documents_dict.keys():
+                            inspector_value = documents_dict[inspector][i]
+                            InspectorValue.objects.update_or_create(
+                                url=inspector_value.url,
+                                attribute=inspector_value.attribute,
+                                value=inspector_value.value,
+                                document=doc,
+                                inspector=inspector_value.inspector,
+                                runner=inspector_value.runner,
                             )
-                            return
-                        documents_number = lengths[0]
-                        doc_pk = Document.objects.last().id
-                        # We start saving documents
-                        for i in range(documents_number):
-                            Document.objects.create(template=crawler.template)
-                            doc = Document.objects.last()
-                            for inspector in documents_dict.keys():
-                                inspector_value = documents_dict[inspector][i]
-                                InspectorValue.objects.update_or_create(
-                                    url=inspector_value.url,
-                                    attribute=inspector_value.attribute,
-                                    value=inspector_value.value,
-                                    document=doc,
-                                    inspector=inspector_value.inspector,
-                                    runner=inspector_value.runner,
-                                )
                 except Exception as e:
                     print(f"{thread_id} encountered an error:")
                     print(e)

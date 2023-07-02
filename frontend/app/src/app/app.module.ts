@@ -39,12 +39,6 @@ import {TagModule} from "primeng/tag";
 import {MarkedTextComponent} from "src/app/shared/marked-text/marked-text.component";
 import {InputFieldErrorComponent} from "src/app/shared/input-field-error/input-field-error.component";
 import {SearchModule} from "src/app/base/search/search.module";
-import {
-  FlaconiResultTemplateComponent
-} from "src/app/base/search/flaconi-result-template/flaconi-result-template.component";
-import {
-  DouglasResultTemplateComponent
-} from "src/app/base/search/douglas-result-template/douglas-result-template.component";
 import { ShortLinkPipe } from './shared/pipes/short-link.pipe';
 import {AccordionModule} from "primeng/accordion";
 import { DocumentationComponent } from './base/documentation/documentation.component';
@@ -71,8 +65,6 @@ import {InputSwitchModule} from "primeng/inputswitch";
     SearchComponent,
     MarkedTextComponent,
     InputFieldErrorComponent,
-    FlaconiResultTemplateComponent,
-    DouglasResultTemplateComponent,
     ShortLinkPipe,
     ShortTextPipe,
     DocumentationComponent

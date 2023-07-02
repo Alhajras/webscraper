@@ -37,21 +37,21 @@
   </div>
   <div class="card">
     <p-table [loading]="loading"
-             [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+             [value]="documents | keyvalue" [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template pTemplate="header">
         <tr>
-          <th *ngFor="let header of headers">{{header}}</th>
+          <th *ngFor="let header of headers">{{ header }}</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-product>
+      <ng-template pTemplate="body" let-document>
         <tr>
-          <td *ngFor="let value of product">
+          <td *ngFor="let value of document.value">
             <p>
-              <container-element [ngSwitch]="value.type">
+              <container-element [ngSwitch]="value.inspector__type">
                 <img
                   *ngSwitchCase="'image'"
                   class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
-                  [src]="value.value"/>
+                  [src]="value.attribute"/>
                 <a *ngSwitchCase="'link'" [href]="value.value">{{value.value}}</a>
                 <app-marked-text *ngSwitchDefault [text]="(value.value | shortText) ?? ''" [searchString]="searchText">
                 </app-marked-text>
@@ -63,7 +63,7 @@
       <ng-template pTemplate="emptymessage">
         <tr>
           <td
-            *ngIf="products.length === 0"
+            *ngIf="(documents | keyvalue).keys.length === 0"
           >
             <p>
               There are no documents found!
