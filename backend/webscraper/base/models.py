@@ -249,6 +249,10 @@ class InspectorValue(models.Model):
     def type(self):
         return self.inspector.type
 
+    @property
+    def table_header(self):
+        return self.inspector.name
+
 
 class ConfigurationModel(SingletonModel):
     max_num_crawlers = models.PositiveSmallIntegerField(default=2)

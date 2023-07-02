@@ -142,7 +142,7 @@ def create_chrome_driver() -> WebDriver:
     chrome_options.add_argument(f"user-agent={user_agent}")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--window-size=2560,1440")
-    chrome_options.add_argument("--headless")  # Hides the browser window
+    # chrome_options.add_argument("--headless")  # Hides the browser window
     # Reference the local Chromedriver instance
     chrome_path = r"/usr/bin/chromedriver"
     return webdriver.Chrome(executable_path=chrome_path, options=chrome_options)
@@ -173,8 +173,8 @@ def execute_all_before_actions(template: Template, driver: WebDriver) -> None:
             elif isinstance(action_to_be_executed, ScrollAction):
                 for _ in range(action_to_be_executed.times):
                     body = driver.find_element(By.CSS_SELECTOR, "body")
-                    body.send_keys(Keys.END)
+                    body.send_keys(Keys.SPACE)
                     # We give time for the loading before scrolling again
-                    time.sleep(2000)
+                    time.sleep(2)
         except NoSuchElementException:
             print("Action button was not found")

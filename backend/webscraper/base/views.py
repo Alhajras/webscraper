@@ -135,18 +135,16 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         # TODO: 25 should be configurable
         docs_ids = [d.document_db_id for d in result]
         docs = []
+        headers = {}
         for doc_id in docs_ids:
-            docs.append(
-                InspectorValue.objects.filter(document__id=doc_id).values(
-                    "value", "url", "inspector", "attribute"
-                )
+            inspector_values = InspectorValue.objects.filter(document__id=doc_id).values(
+                "value", "url", "inspector", "inspector__name","attribute"
             )
-        headers = None
-        if len(docs) != 0:
-            headers = Inspector.objects.filter(
-                id__in=[doc["inspector"] for doc in docs[0]]
-            ).values_list("name", flat=True)
-        return Response(data={"headers": headers, "docs": docs})
+            for inspector_value in inspector_values:
+                docs.append(inspector_value)
+                header_name = inspector_value["inspector__name"]
+                headers[header_name] = header_name
+        return Response(data={"headers": headers.keys(), "docs": docs})
 
     @action(detail=False, url_path="suggest", methods=["GET"])
     def suggest(self, request: Request) -> Response:
@@ -425,7 +423,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
                         lengths = [len(doc) for doc in documents_dict.values()]
                         if not all(list_size == lengths[0] for list_size in lengths):
                             logger.info(
-                                f"Thread: {thread_id} - The URL: {link.url} has different inspectors lists."
+                                f"Thread: {thread_id} - The URL: {link.url} has different inspectors lists {lengths}."
                             )
                             return
                         documents_number = lengths[0]
