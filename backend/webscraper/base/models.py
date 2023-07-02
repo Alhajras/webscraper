@@ -119,6 +119,10 @@ class Inspector(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    @property
+    def template_name(self):
+        return self.template.name
+
 
 class ActionChain(models.Model):
     name = models.CharField(max_length=100, default="default-actions")

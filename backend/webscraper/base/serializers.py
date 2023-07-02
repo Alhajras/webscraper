@@ -57,7 +57,16 @@ class CrawlerSerializer(serializers.ModelSerializer):
 class InspectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inspector
-        fields = "__all__"
+        fields = [
+            "name",
+            "selector",
+            "attribute",
+            "type",
+            "created_at",
+            "deleted",
+            "template",
+            "template_name",
+            "indexer"]
 
 
 class InspectorValueSerializer(serializers.ModelSerializer):

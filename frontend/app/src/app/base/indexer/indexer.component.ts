@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
-import {Inspector} from "src/app/models/inspector.model";
 import {Indexer} from "src/app/models/indexer.model";
 import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorService} from "src/app/services/inspector.service";
@@ -52,7 +51,6 @@ export class IndexerComponent implements OnInit {
       console.warn('Form not valid.')
       return
     }
-    console.log(this.selectedInspectors.value)
     this.currentlySubmitting = true
     const indexer = {
       name: this.name.value,
@@ -79,6 +77,7 @@ export class IndexerComponent implements OnInit {
       return;
     }
     this.indexerService.post(indexer).toPromise().then(() => {
+      this.reloadIndexers()
       this.closeModal()
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
@@ -146,7 +145,7 @@ export class IndexerComponent implements OnInit {
     this.inspectorService.list().subscribe(inspectors => {
       this.selectorsIdsOptions = inspectors.filter(inspector => inspector.type !== 'image').map(inspector => {
         return {
-          name: inspector.name,
+          name: `${inspector.name} (${inspector.template_name}) `,
           id: inspector.id
         }
       })

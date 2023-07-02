@@ -7,4 +7,5 @@ export interface Inspector {
   deleted: boolean
   template: number
   type: string
+  template_name: string
 }
