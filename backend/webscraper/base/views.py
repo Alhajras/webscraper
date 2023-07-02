@@ -300,7 +300,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             :param seed: The root url to start crawling from
             """
             thread_id = threading.get_native_id()
-            driver = create_chrome_driver()
+            driver = create_chrome_driver(crawler.show_browser)
 
             # This will hold all the queues for all the links different levels
             links_queues: dict[int, list] = {}

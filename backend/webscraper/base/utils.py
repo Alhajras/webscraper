@@ -129,7 +129,7 @@ def split_work_between_threads(
     return result
 
 
-def create_chrome_driver() -> WebDriver:
+def create_chrome_driver(show_browser: bool) -> WebDriver:
     """
     Create a new driver to be used for crawling
     :return:chrome driver
@@ -142,7 +142,8 @@ def create_chrome_driver() -> WebDriver:
     chrome_options.add_argument(f"user-agent={user_agent}")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--window-size=2560,1440")
-    # chrome_options.add_argument("--headless")  # Hides the browser window
+    if not show_browser:
+        chrome_options.add_argument("--headless")  # Hides the browser window
     # Reference the local Chromedriver instance
     chrome_path = r"/usr/bin/chromedriver"
     return webdriver.Chrome(executable_path=chrome_path, options=chrome_options)

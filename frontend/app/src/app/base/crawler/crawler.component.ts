@@ -35,6 +35,7 @@ export class CrawlerComponent {
   public scopeDivs!: FormControl
   public maxCollectedDocs!: FormControl
   public allowMultiElements!: FormControl
+  public showBrowser!: FormControl
 
   public form!: FormGroup
   public templatesList: TemplateDropDown[] = []
@@ -69,6 +70,7 @@ export class CrawlerComponent {
       parsing_algorithm: this.parsingAlgorithm.value,
       retry: this.retry.value,
       sleep: this.sleep.value,
+      show_browser: this.showBrowser.value,
       timeout: this.timeout.value,
       max_pages: this.maxPages.value,
       max_collected_docs: this.maxCollectedDocs.value,
@@ -146,6 +148,7 @@ export class CrawlerComponent {
     this.name = this.fb.control('', [Validators.required])
     this.threads= this.fb.control(1)
     this.retry= this.fb.control(0)
+    this.showBrowser= this.fb.control(false)
     this.sleep= this.fb.control(0)
     this.timeout= this.fb.control(60)
     this.maxPages= this.fb.control('')
@@ -162,6 +165,7 @@ export class CrawlerComponent {
       threads: this.threads,
       parsing_algorithm: this.parsingAlgorithm,
       retry: this.retry,
+      show_browser: this.showBrowser,
       sleep: this.sleep,
       timeout: this.timeout,
       max_pages: this.maxPages,
@@ -184,6 +188,7 @@ export class CrawlerComponent {
     this.threads = this.fb.control(crawler.threads)
     this.parsingAlgorithm = this.fb.control(crawler.parsing_algorithm)
     this.retry = this.fb.control(crawler.retry)
+    this.showBrowser = this.fb.control(crawler.show_browser)
     this.sleep = this.fb.control(crawler.sleep)
     this.timeout = this.fb.control(crawler.timeout)
     this.maxPages = this.fb.control(crawler.max_pages)
@@ -203,6 +208,7 @@ export class CrawlerComponent {
       parsing_algorithm: this.parsingAlgorithm,
       retry: this.retry,
       sleep: this.sleep,
+      showBrowser: this.showBrowser,
       timeout: this.timeout,
       max_pages: this.maxPages,
       max_collected_docs: this.maxCollectedDocs,

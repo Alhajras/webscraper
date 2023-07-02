@@ -186,6 +186,7 @@ class Crawler(models.Model):
     timeout = models.FloatField(default=10)
     max_collected_docs = models.PositiveIntegerField(default=20)
     max_pages = models.PositiveIntegerField(default=20)
+    show_browser = models.BooleanField(default=False)
     max_depth = models.PositiveSmallIntegerField(default=5)
     robot_file_url = models.TextField(default="", blank=True)
     allow_multi_elements = models.BooleanField(default=False)

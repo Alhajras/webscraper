@@ -18,4 +18,5 @@ export interface Crawler {
   scope_divs:string
   parsing_algorithm:string
   allow_multi_elements:boolean
+  show_browser:boolean
 }
