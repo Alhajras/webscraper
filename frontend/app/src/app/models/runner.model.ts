@@ -8,4 +8,6 @@ export interface Runner {
   description: string,
   id: number,
   status: string,
+  name: string,
+  machine: string,
 }

@@ -1,53 +1,53 @@
 <div class="mt-4 ml-6 mr-6">
-<p-table [loading]="loading" [value]="runners" [tableStyle]="{'min-width': '60rem'}">
-  <ng-template pTemplate="caption">
-    <div class="grid">
-      <div class="col">
-        Runners
+  <p-table [loading]="loading" [value]="runners" [tableStyle]="{'min-width': '60rem'}">
+    <ng-template pTemplate="caption">
+      <div class="grid">
+        <div class="col">
+          Runners
+        </div>
+        <div class="col-2">
+          <button
+            icon="pi pi-plus"
+            id="open-dialog"
+            pButton
+            pRipple
+            class="p-button-outlined"
+            label="Create a runner"
+            (click)="displayModal = true"
+          ></button>
+        </div>
       </div>
-      <div class="col-2">
-        <button
-          icon="pi pi-plus"
-          id="open-dialog"
-          pButton
-          pRipple
-          class="p-button-outlined"
-          label="Create a runner"
-          (click)="displayModal = true"
-        ></button>
-      </div>
-    </div>
-  </ng-template>
+    </ng-template>
 
-  <ng-template pTemplate="header">
-    <tr>
-      <th pSortableColumn="id">ID
-        <p-sortIcon field="id"></p-sortIcon>
-      </th>
-      <th pSortableColumn="status">Status
-        <p-sortIcon field="status"></p-sortIcon>
-      </th>
-      <th pSortableColumn="crawler">Crawler
-        <p-sortIcon field="crawler"></p-sortIcon>
-      </th>
-      <th pSortableColumn="created_at">Progress
-        <p-sortIcon field="created_at"></p-sortIcon>
-      </th>
-      <th>Actions
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-runner>
-    <tr>
-      <td>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id">ID
+          <p-sortIcon field="id"></p-sortIcon>
+        </th>
+        <th pSortableColumn="status">Status
+          <p-sortIcon field="status"></p-sortIcon>
+        </th>
+        <th pSortableColumn="crawler">Crawler
+          <p-sortIcon field="crawler"></p-sortIcon>
+        </th>
+        <th pSortableColumn="created_at">Progress
+          <p-sortIcon field="created_at"></p-sortIcon>
+        </th>
+        <th>Actions
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-runner>
+      <tr>
+        <td>
 
-        {{runner.name}}
-        #{{runner.id}}
-        <span
-          *ngIf="runner.description"
-          (mouseenter)="description.show($event)"
-          (mouseleave)="description.hide()"
-        >
+          {{runner.name}}
+          #{{runner.id}}
+          <span
+            *ngIf="runner.description"
+            (mouseenter)="description.show($event)"
+            (mouseleave)="description.hide()"
+          >
                   <i
                     *ngIf="runner.description"
                     class="pi pi-info-circle" aria-hidden="true"></i>
@@ -59,132 +59,148 @@
                     <div [innerHTML]="runner.description"></div>
                   </p-overlayPanel>
                 </span>
-      </td>
-      <td>
-        <p-timeline [value]="events" layout="horizontal">
-          <ng-template pTemplate="content" let-event>
+        </td>
+        <td>
+          <p-timeline [value]="events" layout="horizontal">
+            <ng-template pTemplate="content" let-event>
             <span
               [ngClass]="event.status.toLocaleLowerCase() === runner.status.toLocaleLowerCase() ? 'successful secondary-text' : 'secondary-text'">
               {{event.status}}</span>
-          </ng-template>
-        </p-timeline>
-      </td>
-      <td>#{{runner.crawler}}</td>
-      <td>
-        <p>
-          Created at:
-          <app-time-ago [time]="runner.created_at"></app-time-ago>
-          / Completed at:
-          <app-time-ago [time]="runner.completed_at"></app-time-ago>
+            </ng-template>
+          </p-timeline>
+        </td>
+        <td>#{{runner.crawler}}</td>
+        <td>
+          <p>
+            Created at:
+            <app-time-ago [time]="runner.created_at"></app-time-ago>
+            / Completed at:
+            <app-time-ago [time]="runner.completed_at"></app-time-ago>
 
-        </p>
-        <p *ngIf="runner.collected_documents !== 0">
-          #Documents: {{runner.collected_documents}}
-          Current URL: <a [href]="runner.current_crawled_url.url"> {{runner.current_crawled_url.url | shortLink}}</a>
-        </p>
+          </p>
+          <p *ngIf="runner.collected_documents !== 0">
+            #Documents: {{runner.collected_documents}}
+            Current URL: <a [href]="runner.current_crawled_url.url"> {{runner.current_crawled_url.url | shortLink}}</a>
+          </p>
 
-      </td>
-      <td>
-        <div>
-          <button
-            [disabled]="runner.status === 'Exit' || runner.status === 'Completed' "
-            class="ml-1 p-button-outlined p-button-sm no-icon"
-            type="button"
-            pButton
-            pRipple
-            label="Stop"
-            (click)="stopRunner(runner)"
-          ></button>
-          <button
-            class="
+        </td>
+        <td>
+          <div>
+            <button
+              [disabled]="runner.status === 'Exit' || runner.status === 'Completed' "
+              class="ml-1 p-button-outlined p-button-sm no-icon"
+              type="button"
+              pButton
+              pRipple
+              label="Stop"
+              (click)="stopRunner(runner)"
+            ></button>
+            <button
+              class="
         ml-1 p-button-outlined p-button-sm
         no-icon
       "
-            type="button"
-            pButton
-            pRipple
-            label="Edit"
-            (click)="editRunner(runner)"
-          ></button>
-          <button
-            class="
+              type="button"
+              pButton
+              pRipple
+              label="Edit"
+              (click)="editRunner(runner)"
+            ></button>
+            <button
+              class="
         ml-1 p-button-danger p-button-outlined p-button-sm
         no-icon
       "
-            type="button"
-            pButton
-            pRipple
-            label="Delete"
-            (click)="deleteRunner(runner)"
-          ></button>
-        </div>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="emptymessage">
-    <tr>
-      <td
-        attr.colspan="{{ columnCount }}"
-        *ngIf="runners.length === 0"
-      >
-        No runners assigned.
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+              type="button"
+              pButton
+              pRipple
+              label="Delete"
+              (click)="deleteRunner(runner)"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td
+          attr.colspan="{{ columnCount }}"
+          *ngIf="runners.length === 0"
+        >
+          No runners assigned.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 
-<p-dialog
-  [(visible)]="displayModal"
-  [header]="header"
-  [modal]="true"
-  (onHide)="closeModal()"
-  [maximizable]="true"
->
-  <div *ngIf="displayModal">
-    <p-card>
-      <form class="p-fluid" action="" [formGroup]="form" (ngSubmit)="submit()">
-        <p-message
-          *ngIf="errorMessage"
-          severity="error"
-          text="The crawler could not be created:"
-          class="p-mr-2"
-        ></p-message>
-        <div>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Crawler"
-            helpText=""
-          >
-            <p-dropdown
-              id="version-id"
-              [formControl]="crawlerForm"
-              placeholder="Select a crawler"
-              [options]="crawlersList"
-              optionLabel="key"
-              [filter]="true"
-            ></p-dropdown>
-          </app-input-field>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Name"
-            helpText=""
-          >
+  <p-dialog
+    [(visible)]="displayModal"
+    [header]="header"
+    [modal]="true"
+    (onHide)="closeModal()"
+    [maximizable]="true"
+  >
+    <div *ngIf="displayModal">
+      <p-card>
+        <form class="p-fluid" action="" [formGroup]="form" (ngSubmit)="submit()">
+          <p-message
+            *ngIf="errorMessage"
+            severity="error"
+            text="The crawler could not be created:"
+            class="p-mr-2"
+          ></p-message>
+          <div>
+            <app-input-field
+              [isRequired]="true"
+              labelId="version-label-id"
+              labelText="Name"
+              helpText=""
+            >
 
-            <input
-              id="start-time-id"
-              type="text"
-              pInputText
-              [formControl]="name"
-            />
-          </app-input-field>
-          <app-input-field
-            [isRequired]="false"
-            labelId="version-label-id"
-            labelText="Description"
-            helpText=""
-          >
+              <input
+                id="start-time-id"
+                type="text"
+                pInputText
+                [formControl]="name"
+              />
+            </app-input-field>
+
+            <app-input-field
+              [isRequired]="true"
+              labelId="version-label-id"
+              labelText="Crawler"
+              helpText=""
+            >
+              <p-dropdown
+                id="version-id"
+                [formControl]="crawlerForm"
+                placeholder="Select a crawler"
+                [options]="crawlersList"
+                optionLabel="key"
+                [filter]="true"
+              ></p-dropdown>
+            </app-input-field>
+
+            <app-input-field
+              [isRequired]="true"
+              labelId="machine-id"
+              labelText="Machine"
+              helpText="Node that will run the crawler"
+            >
+              <input
+                id="machine-id"
+                type="text"
+                pInputText
+                [formControl]="machine"
+              />
+            </app-input-field>
+
+            <app-input-field
+              [isRequired]="false"
+              labelId="version-label-id"
+              labelText="Description"
+              helpText=""
+            >
             <textarea
               [rows]="10"
               [cols]="100"
@@ -192,36 +208,36 @@
               [formControl]="descriptionForm"
               ngDefaultControl
             ></textarea>
-          </app-input-field>
-        </div>
-      </form>
-    </p-card>
-  </div>
-  <ng-template pTemplate="footer">
-    <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
-    <!--      <loading msg="Submitting ..."></loading>-->
-    <!--    </span>-->
-    <button
-      [disabled]="!form.valid"
-      id="run-btn"
-      type="button"
-      pButton
-      pRipple
-      (click)="start()"
-      class="p-mr-2"
-    >
-      <span>{{ updatedRunner !== null ? 'Update' : 'Create'}}</span>
-    </button>
-    <button
-      [disabled]="currentlySubmitting"
-      id="cancel-btn"
-      class="p-button-secondary"
-      type="button"
-      pButton
-      pRipple
-      label="Cancel"
-      (click)="closeModal()"
-    ></button>
-  </ng-template>
-</p-dialog>
+            </app-input-field>
+          </div>
+        </form>
+      </p-card>
+    </div>
+    <ng-template pTemplate="footer">
+      <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
+      <!--      <loading msg="Submitting ..."></loading>-->
+      <!--    </span>-->
+      <button
+        [disabled]="!form.valid"
+        id="run-btn"
+        type="button"
+        pButton
+        pRipple
+        (click)="start()"
+        class="p-mr-2"
+      >
+        <span>{{ updatedRunner !== null ? 'Update' : 'Create'}}</span>
+      </button>
+      <button
+        [disabled]="currentlySubmitting"
+        id="cancel-btn"
+        class="p-button-secondary"
+        type="button"
+        pButton
+        pRipple
+        label="Cancel"
+        (click)="closeModal()"
+      ></button>
+    </ng-template>
+  </p-dialog>
 </div>

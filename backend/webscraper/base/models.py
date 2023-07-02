@@ -217,6 +217,7 @@ class Runner(models.Model):
     status = models.CharField(
         max_length=10, choices=RunnerStatus.choices, default=RunnerStatus.NEW
     )
+    machine = models.CharField(max_length=225, default="localhost")
 
     def __str__(self) -> str:
         return str(self.pk)

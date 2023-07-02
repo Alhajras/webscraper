@@ -99,6 +99,7 @@ class RunnerSerializer(serializers.ModelSerializer):
             "collected_documents",
             "current_crawled_url",
             "name",
+            "machine",
         ]
 
 

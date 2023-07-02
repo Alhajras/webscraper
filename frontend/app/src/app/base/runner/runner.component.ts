@@ -22,6 +22,7 @@ export class RunnerComponent {
   public descriptionForm: FormControl = this.fb.control('')
   public crawlerForm: FormControl = this.fb.control('', [Validators.required])
   public name: FormControl = this.fb.control('', [Validators.required])
+  public machine: FormControl = this.fb.control('localhost', [Validators.required])
   public crawlersList: CrawlerDropDown[] = []
   public currentlySubmitting = false
   public displayModal = false
@@ -154,6 +155,10 @@ export class RunnerComponent {
 
   public editRunner(runner: Runner): void {
     this.updatedRunner = runner
+    this.descriptionForm = this.fb.control(runner.description)
+    this.name = this.fb.control(runner.name, [Validators.required])
+    this.machine = this.fb.control(runner.machine, [Validators.required])
+
     this.descriptionForm = this.fb.control(runner.description)
     this.form = this.fb.group({
       description: this.descriptionForm,
