@@ -4,6 +4,7 @@ import re
 import threading
 from concurrent.futures import ThreadPoolExecutor, Future, wait
 
+from django.db import transaction
 from django.utils import timezone
 import time
 
@@ -77,14 +78,14 @@ class IndexerViewSet(EverythingButDestroyViewSet):
     queryset = Indexer.objects.filter(deleted=False).order_by("-id")
     serializer_class = IndexerSerializer
 
+    @transaction.atomic
     def create(self, request: Request, *args, **kwargs) -> Response:
         """
         Create an index but without running it.
         """
         indexer = super().create(request, *args, **kwargs)
-        inspectors_ids = [
-            selector["id"] for selector in request.data["inspectors_to_be_indexed"]
-        ]
+        inspectors_ids = request.data["inspectors_to_be_indexed"]
+
         Inspector.objects.filter(id__in=inspectors_ids).update(
             indexer=indexer.data["id"]
         )

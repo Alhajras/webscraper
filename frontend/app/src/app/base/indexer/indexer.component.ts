@@ -59,7 +59,7 @@ export class IndexerComponent implements OnInit {
       k_parameter: this.kParameter.value,
       b_parameter: this.bParameter.value,
       q_gram_use_synonym: this.useSynonym.value,
-      inspectors_to_be_indexed: this.selectedInspectors.value.map((inspector : any)=>inspector.id),
+      inspectors_to_be_indexed: this.selectedInspectors.value.map((inspector: any) => inspector.id),
       q_gram_q: this.qGram.value,
       dictionary: this.dictionary.value,
       small_words_threshold: this.smallWordsThreshold.value,
@@ -88,19 +88,17 @@ export class IndexerComponent implements OnInit {
     })
   }
 
-  public deleteInspector(inspector: Inspector): void {
-    inspector.deleted = true
-    // this.inspectorService.update(inspector.id, inspector).toPromise().then(() => {
-    //   this.inspectorService.list().subscribe(inspectors => {
-    //     // this.inspectors = inspectors
-    //   })
-    //   this.closeModal()
-    //   this.currentlySubmitting = false
-    // }).catch((err: HttpErrorResponse) => {
-    //   this.errorMessage = err.error
-    //   this.currentlySubmitting = false
-    //   console.log(err)
-    // })
+  public deleteInspector(indexer: Indexer): void {
+    indexer.deleted = true
+    this.indexerService.update(indexer.id, {name:indexer.name,  deleted: true}).toPromise().then(() => {
+      this.reloadIndexers()
+      this.closeModal()
+      this.currentlySubmitting = false
+    }).catch((err: HttpErrorResponse) => {
+      this.errorMessage = err.error
+      this.currentlySubmitting = false
+      console.log(err)
+    })
   }
 
   public editInspector(indexer: Indexer): void {
@@ -126,10 +124,15 @@ export class IndexerComponent implements OnInit {
     this.displayModal = true
   }
 
-  public ngOnInit(): void {
+  private reloadIndexers(): void {
     this.indexerService.list().subscribe(indexers => {
       this.indexers = indexers
     })
+
+  }
+
+  public ngOnInit(): void {
+    this.reloadIndexers()
     this.initForm()
   }
 
@@ -141,7 +144,7 @@ export class IndexerComponent implements OnInit {
 
   private initForm() {
     this.inspectorService.list().subscribe(inspectors => {
-      this.selectorsIdsOptions = inspectors.filter(inspector=>inspector.type !== 'image').map(inspector => {
+      this.selectorsIdsOptions = inspectors.filter(inspector => inspector.type !== 'image').map(inspector => {
         return {
           name: inspector.name,
           id: inspector.id
