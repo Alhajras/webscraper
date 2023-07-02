@@ -129,12 +129,13 @@
             <div class="col-6">
               <app-input-field
                 [isRequired]="true"
-                labelId="version-label-id"
+                labelId="name-id"
                 labelText="Name"
                 helpText=""
               >
                 <input
-                  id="start-time-id"
+                  placeholder="Name"
+                  id="name-id"
                   type="text"
                   pInputText
                   [formControl]="name"
@@ -261,6 +262,7 @@
         id="run-btn"
         type="button"
         pButton
+        [disabled]="form.invalid"
         pRipple
         (click)="submit()"
         class="p-mr-2"

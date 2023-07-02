@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Indexer} from "src/app/models/indexer.model";
 import {IndexerService} from "src/app/services/indexer.service";
@@ -89,7 +89,7 @@ export class IndexerComponent implements OnInit {
 
   public deleteInspector(indexer: Indexer): void {
     indexer.deleted = true
-    this.indexerService.update(indexer.id, {name:indexer.name,  deleted: true}).toPromise().then(() => {
+    this.indexerService.update(indexer.id, {name: indexer.name, deleted: true}).toPromise().then(() => {
       this.reloadIndexers()
       this.closeModal()
       this.currentlySubmitting = false
@@ -102,7 +102,7 @@ export class IndexerComponent implements OnInit {
 
   public editInspector(indexer: Indexer): void {
     this.updatedIndexer = indexer
-    this.name = this.fb.control(indexer.name)
+    this.name = this.fb.control(indexer.name, [Validators.required])
     this.kParameter = this.fb.control(indexer.k_parameter)
     this.bParameter = this.fb.control(indexer.b_parameter)
     this.useSynonym = this.fb.control(indexer.q_gram_use_synonym)
@@ -151,8 +151,8 @@ export class IndexerComponent implements OnInit {
       })
     })
     // this.description = this.fb.control('')
-    this.selectedInspectors = this.fb.control('')
-    this.name = this.fb.control('')
+    this.selectedInspectors = this.fb.control('', [Validators.required])
+    this.name = this.fb.control('', [Validators.required])
     this.skipWordsList = this.fb.control('')
     this.smallWordsThreshold = this.fb.control(0)
     this.kParameter = this.fb.control(1.75)
