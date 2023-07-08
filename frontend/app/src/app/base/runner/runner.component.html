@@ -87,13 +87,22 @@
         <td>
           <div>
             <button
-              [disabled]="runner.status === 'Exit' || runner.status === 'Completed' "
+              *ngIf="runner.status !== 'Exit' && runner.status !== 'Completed'"
               class="ml-1 p-button-outlined p-button-sm no-icon"
               type="button"
               pButton
               pRipple
               label="Stop"
               (click)="stopRunner(runner)"
+            ></button>
+            <button
+              *ngIf="runner.status === 'Exit' || runner.status === 'Completed' "
+              class="ml-1 p-button-outlined p-button-sm no-icon"
+              type="button"
+              pButton
+              pRipple
+              label="Restart"
+              (click)="restartRunner(runner)"
             ></button>
             <button
               class="
@@ -107,6 +116,7 @@
               (click)="editRunner(runner)"
             ></button>
             <button
+              [disabled]="runner.status !== 'Exit' && runner.status !== 'Completed' "
               class="
         ml-1 p-button-danger p-button-outlined p-button-sm
         no-icon

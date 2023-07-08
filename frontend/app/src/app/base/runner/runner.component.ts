@@ -179,4 +179,8 @@ export class RunnerComponent {
       console.log(err)
     })
   }
+
+  public restartRunner(runner:  Partial<Runner>):void {
+    this.runnerService.reStart(runner).toPromise().then().catch()
+  }
 }
