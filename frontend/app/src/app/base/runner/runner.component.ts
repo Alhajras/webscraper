@@ -225,7 +225,17 @@ export class RunnerComponent {
   }
 
   public download(runner: Runner): void {
-    this.runnerService.download(runner.id, runner).toPromise().then().catch()
+    this.runnerService.download(runner.id, runner).toPromise().then(csvData => {
+
+        const blob = new Blob([csvData], {type: 'text/csv'});
+        const downloadLink = document.createElement('a');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = `${runner.id}.runner_output.csv`;
+        downloadLink.click()
+        URL.revokeObjectURL(downloadLink.href)
+
+      }
+    ).catch()
   }
 
   openMenu($event: MouseEvent, menu: Menu, runner: Runner) {

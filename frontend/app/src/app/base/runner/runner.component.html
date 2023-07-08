@@ -62,14 +62,14 @@
         </td>
         <td>
           <div class="timeline-width">
-          <p-timeline [value]="events" layout="horizontal">
-            <ng-template pTemplate="content" let-event>
+            <p-timeline [value]="events" layout="horizontal">
+              <ng-template pTemplate="content" let-event>
             <span
               [ngClass]="event.status.toLocaleLowerCase() === runner.status.toLocaleLowerCase() ? 'successful secondary-text' : 'secondary-text'">
               {{event.status}}</span>
-            </ng-template>
-          </p-timeline>
-            </div>
+              </ng-template>
+            </p-timeline>
+          </div>
         </td>
         <td>#{{runner.crawler}}</td>
         <td>

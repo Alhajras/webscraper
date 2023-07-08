@@ -1,4 +1,5 @@
 import csv
+from io import StringIO
 
 from django.db import transaction
 from django.http import HttpResponse
@@ -230,26 +231,28 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         return Response(status=200)
 
     @action(detail=True, url_path="download", methods=["post"])
-    def download(self, request: Request, pk: int) -> Response:
-        runner_serializer = RunnerSerializer(data=request.data)
-        # TODO: If data are invalid we should throw an error here
-        if not runner_serializer.is_valid():
-            pass
+    def download(self, request: Request, pk: int):
+        # Create a response object using the Response class
+        response = Response(
+            content_type="text/csv",
+            headers={"Content-Disposition": 'attachment; filename="somefilename.csv"'},
+            status=200
+        )
 
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="model_attributes.csv"'
+        # Create a StringIO object to hold the CSV content
+        csv_content = StringIO()
 
-        writer = csv.writer(response)
+        values = InspectorValue.objects.filter(runner=pk).filter(deleted=False)
+        # Use csv.writer with the StringIO object
+        writer = csv.writer(csv_content)
+        writer.writerow(["id", "type", "value", "url", "inspetor name", "document id"])
+        for value in values:
+            writer.writerow([value.id, value.type, value.value, value.url, value.inspector.name, value.document.id])
 
-        instances = InspectorValue.objects.filter(runner=pk)
+        # Set the response content to the CSV content from the StringIO object
+        response.data = csv_content.getvalue()
 
-        header = ['value']  # Replace with actual attribute names
-        writer.writerow(header)
-
-        for instance in instances:
-            row = [getattr(instance, 'value')]
-            writer.writerow(row)
-
+        # Return the response
         return response
 
 
