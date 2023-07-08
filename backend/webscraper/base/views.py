@@ -229,9 +229,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         crawler_utils.start()
         return Response(status=200)
 
-    @action(detail=False, url_path="download-documents", methods=["POST"])
-    def download_documents(self, request: Request):
-        runner_id = request.data["id"]
+    @action(detail=True, url_path="download", methods=["post"])
+    def download(self, request: Request, pk: int) -> Response:
         runner_serializer = RunnerSerializer(data=request.data)
         # TODO: If data are invalid we should throw an error here
         if not runner_serializer.is_valid():
@@ -242,7 +241,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
 
         writer = csv.writer(response)
 
-        instances = InspectorValue.objects.filter(runner=runner_id)
+        instances = InspectorValue.objects.filter(runner=pk)
 
         header = ['value']  # Replace with actual attribute names
         writer.writerow(header)

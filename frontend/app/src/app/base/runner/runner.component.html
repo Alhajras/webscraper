@@ -61,6 +61,7 @@
                 </span>
         </td>
         <td>
+          <div class="timeline-width">
           <p-timeline [value]="events" layout="horizontal">
             <ng-template pTemplate="content" let-event>
             <span
@@ -68,11 +69,12 @@
               {{event.status}}</span>
             </ng-template>
           </p-timeline>
+            </div>
         </td>
         <td>#{{runner.crawler}}</td>
         <td>
           <p>
-            Created at:
+            Started at:
             <app-time-ago [time]="runner.created_at"></app-time-ago>
             / Completed at:
             <app-time-ago [time]="runner.completed_at"></app-time-ago>

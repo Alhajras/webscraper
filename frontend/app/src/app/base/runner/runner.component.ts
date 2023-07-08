@@ -225,7 +225,7 @@ export class RunnerComponent {
   }
 
   public download(runner: Runner): void {
-    this.runnerService.downloadDocuments(runner.id, runner).toPromise().then().catch()
+    this.runnerService.download(runner.id, runner).toPromise().then().catch()
   }
 
   openMenu($event: MouseEvent, menu: Menu, runner: Runner) {

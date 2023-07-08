@@ -44,7 +44,7 @@ export class RunnerService {
     return this.client.getList<Runner>(this.endpointPath, params)
   }
 
-  public downloadDocuments(id: number, runner: Partial<Runner>): Observable<Runner> {
-    return this.client.post<Runner>(`${this.endpointPath}${id}/download-documents/`, runner)
+  public download(id: number, runner: Partial<Runner>): Observable<Runner> {
+    return this.client.post<Runner>(`${this.endpointPath}${id}/download/`, runner)
   }
 }
