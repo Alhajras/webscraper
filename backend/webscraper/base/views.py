@@ -1,5 +1,7 @@
+import csv
 
 from django.db import transaction
+from django.http import HttpResponse
 from django.utils import timezone
 
 from django.contrib.auth.models import User
@@ -226,6 +228,30 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         crawler_utils = CrawlerUtils(runner_id, runner_serializer.data["crawler"])
         crawler_utils.start()
         return Response(status=200)
+
+    @action(detail=False, url_path="download-documents", methods=["POST"])
+    def download_documents(self, request: Request):
+        runner_id = request.data["id"]
+        runner_serializer = RunnerSerializer(data=request.data)
+        # TODO: If data are invalid we should throw an error here
+        if not runner_serializer.is_valid():
+            pass
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="model_attributes.csv"'
+
+        writer = csv.writer(response)
+
+        instances = InspectorValue.objects.filter(runner=runner_id)
+
+        header = ['value']  # Replace with actual attribute names
+        writer.writerow(header)
+
+        for instance in instances:
+            row = [getattr(instance, 'value')]
+            writer.writerow(row)
+
+        return response
 
 
 class UserViewSet(viewsets.ModelViewSet):

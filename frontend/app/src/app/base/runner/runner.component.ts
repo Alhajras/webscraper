@@ -5,6 +5,8 @@ import {Runner} from "src/app/models/runner.model";
 import {RunnerService} from "src/app/services/runner.service";
 import {Crawler} from "src/app/models/crawler.model";
 import {CrawlerService} from "src/app/services/crawler.service";
+import {MenuItem} from "primeng/api";
+import {Menu} from "primeng/menu";
 
 export interface CrawlerDropDown {
   key: string
@@ -17,7 +19,45 @@ export interface CrawlerDropDown {
   styleUrls: ['./runner.component.scss']
 })
 export class RunnerComponent {
+  public saveButton = {
+    label: 'Download CSV',
+    icon: 'pi pi-save',
+    command: () => {
+      this.download(this.runner);
+    }
+  }
+  public stopButton = {
+    label: 'Stop',
+    icon: 'pi pi-times',
+    command: () => {
+      this.stopRunner(this.runner);
+    }
+  }
+  public restartButton = {
+    label: 'Restart',
+    icon: 'pi pi-refresh',
+    command: () => {
+      this.restartRunner(this.runner);
+    }
+  }
+  public editButton = {
+    label: 'Edit',
+    icon: 'pi pi-pencil',
+    command: () => {
+      this.editRunner(this.runner);
+    }
+  }
+  public deleteButton = {
+    label: 'Delete',
+    icon: 'pi pi-trash',
+    command: () => {
+      this.deleteRunner(this.runner);
+    }
+  }
+  public actions: MenuItem[] = []
+
   public runners: Runner[] = []
+  public runner!: Runner
   public updatedRunner: Runner | null = null
   public descriptionForm: FormControl = this.fb.control('')
   public crawlerForm: FormControl = this.fb.control('', [Validators.required])
@@ -180,7 +220,39 @@ export class RunnerComponent {
     })
   }
 
-  public restartRunner(runner:  Partial<Runner>):void {
+  public restartRunner(runner: Partial<Runner>): void {
     this.runnerService.reStart(runner).toPromise().then().catch()
+  }
+
+  public download(runner: Runner): void {
+    this.runnerService.downloadDocuments(runner.id, runner).toPromise().then().catch()
+  }
+
+  openMenu($event: MouseEvent, menu: Menu, runner: Runner) {
+    this.actions = []
+    this.runner = runner
+    if (runner.collected_documents) {
+      this.actions.push(this.saveButton)
+
+    } else {
+      this.actions.push({disabled: true, ...this.saveButton})
+
+    }
+    if (runner.status !== 'Exit' && runner.status !== 'Completed') {
+      this.actions.push(this.stopButton)
+      this.actions.push({disabled: true, ...this.editButton})
+      this.actions.push({disabled: true, ...this.restartButton})
+      this.actions.push({disabled: true, ...this.deleteButton})
+    }
+
+    if (runner.status === 'Exit' || runner.status === 'Completed') {
+      this.actions.push({disabled: true, ...this.stopButton})
+      this.actions.push(this.editButton)
+      this.actions.push(this.restartButton)
+      this.actions.push(this.deleteButton)
+    }
+
+
+    menu.toggle($event)
   }
 }

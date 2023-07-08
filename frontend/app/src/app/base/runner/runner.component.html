@@ -86,47 +86,9 @@
         </td>
         <td>
           <div>
-            <button
-              *ngIf="runner.status !== 'Exit' && runner.status !== 'Completed'"
-              class="ml-1 p-button-outlined p-button-sm no-icon"
-              type="button"
-              pButton
-              pRipple
-              label="Stop"
-              (click)="stopRunner(runner)"
-            ></button>
-            <button
-              *ngIf="runner.status === 'Exit' || runner.status === 'Completed' "
-              class="ml-1 p-button-outlined p-button-sm no-icon"
-              type="button"
-              pButton
-              pRipple
-              label="Restart"
-              (click)="restartRunner(runner)"
-            ></button>
-            <button
-              class="
-        ml-1 p-button-outlined p-button-sm
-        no-icon
-      "
-              type="button"
-              pButton
-              pRipple
-              label="Edit"
-              (click)="editRunner(runner)"
-            ></button>
-            <button
-              [disabled]="runner.status !== 'Exit' && runner.status !== 'Completed' "
-              class="
-        ml-1 p-button-danger p-button-outlined p-button-sm
-        no-icon
-      "
-              type="button"
-              pButton
-              pRipple
-              label="Delete"
-              (click)="deleteRunner(runner)"
-            ></button>
+            <p-menu #menu [model]="actions" [popup]="true"></p-menu>
+            <button pButton type="button" class="ml-1 p-button-outlined p-button-sm no-icon"
+                    (click)="openMenu($event,menu, runner)" icon="pi pi-bars"></button>
           </div>
         </td>
       </tr>
