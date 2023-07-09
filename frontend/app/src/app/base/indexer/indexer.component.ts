@@ -173,7 +173,7 @@ export class IndexerComponent implements OnInit {
   /**
    *  Creates a new indexer
    */
-  public createIndexer() {
+  public createIndexer(): void {
     this.initForm()
     this.updatedIndexer = null
     this.displayModal = true
@@ -183,7 +183,7 @@ export class IndexerComponent implements OnInit {
    * Initializes the form with default values
    * @private
    */
-  private initForm() {
+  private initForm(): void {
     this.inspectorService.list().subscribe(inspectors => {
       this.selectorsIdsOptions = inspectors.filter(inspector => inspector.type !== 'image').map(inspector => {
         return {
@@ -215,7 +215,7 @@ export class IndexerComponent implements OnInit {
     })
   }
 
-  public startIndexing(indexer: Indexer) {
+  public startIndexing(indexer: Indexer): void {
     lastValueFrom(this.indexerService.startIndexing(indexer.id, indexer)).then().catch()
     this.reloadIndexers()
   }
