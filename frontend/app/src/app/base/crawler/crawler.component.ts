@@ -48,10 +48,16 @@ export class CrawlerComponent {
   public readonly columnCount = 6
   public loading = false
 
+  /**
+   * Closes the modal window.
+   */
   public closeModal(): void {
     this.displayModal = false
   }
 
+  /**
+   * Submits the form data.
+   */
   public submit(): void {
     console.log(this.allowMultiElements.value)
     if (!this.form.valid) {
@@ -108,6 +114,10 @@ export class CrawlerComponent {
     })
   }
 
+  /**
+   * Deletes a crawler.
+   * @param crawler The crawler to delete.
+   */
   public deleteCrawler(crawler: Crawler): void {
     crawler.deleted = true
     this.crawlerService.update(crawler.id, crawler).toPromise().then(() => {
@@ -123,6 +133,12 @@ export class CrawlerComponent {
     })
   }
 
+  /**
+   * Initializes the component.
+   * @param fb The form builder instance.
+   * @param crawlerService The crawler service instance.
+   * @param templateService The template service instance.
+   */
   public constructor(
     private readonly fb: FormBuilder,
     private readonly crawlerService: CrawlerService,
@@ -178,6 +194,10 @@ export class CrawlerComponent {
     })
   }
 
+  /**
+   * Editing the crawler data
+   * @param crawler - Crawler to be edited
+   */
   public editCrawler(crawler: Crawler): void {
     this.updatedCrawler = crawler
     this.description = this.fb.control(crawler.description)
