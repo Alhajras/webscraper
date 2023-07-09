@@ -134,11 +134,13 @@ export class IndexerComponent implements OnInit {
   private reloadIndexers(): void {
     this.indexerService.list().subscribe(indexers => {
       this.indexers = indexers
+      this.loading = false
     })
 
   }
 
   public ngOnInit(): void {
+    this.loading = true
     this.initForm()
     this.reloadIndexers()
     setInterval(() => {
