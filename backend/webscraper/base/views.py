@@ -110,15 +110,15 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             print("Creating an index!")
             inverted_index = InvertedIndex()
             inverted_index.create_index(indexer_id)
+            indexer.status = IndexerStatus.COMPLETED
+            indexer.completed_at = timezone.now()
+            indexer.save()
             print("Done creating an index!")
 
         with ThreadPoolExecutor(max_workers=2) as executor:
             futures: Future = executor.submit(thread)
             wait([futures])
 
-        indexer.status = IndexerStatus.COMPLETED
-        indexer.completed_at = timezone.now()
-        indexer.save()
         return Response(status=200)
 
     @action(detail=True, url_path="search", methods=["POST"])
