@@ -8,4 +8,5 @@ export interface Inspector {
   template: number
   type: string
   template_name: string
+  indexer: number
 }

@@ -15,6 +15,7 @@ export interface Indexer {
   q_gram_use_synonym: boolean,
   q_gram_q: number,
   skip_words: string,
+  weight_words: string,
   small_words_threshold: number,
   inspectors: Inspector[],
 }

@@ -161,19 +161,31 @@
                 helpText=""
               >
                 <form [formGroup]="form">
-                  <p-multiSelect [options]="selectorsIdsOptions" formControlName="selectedInspectors"
-                                 defaultLabel="Select an inspector" optionLabel="name"></p-multiSelect>
+                  <p-multiSelect [options]="selectorsIdsOptions" [formControl]="selectedInspectors"
+                                 defaultLabel="Select an inspector">
+                    <ng-template let-inspector pTemplate="item">
+                      <div>{{inspector.template_name}} ({{ inspector.name }})</div>
+                    </ng-template>
+                    <ng-template let-value pTemplate="selectedItems">
+                      <span *ngFor="let option of selectedInspectors.value">
+                          <span>{{ option.name }}</span>,
+                      </span>
+                      <div *ngIf="!selectedInspectors.value || selectedInspectors.value.length === 0">Select an
+                        inspector
+                      </div>
+                    </ng-template>
+                  </p-multiSelect>
                 </form>
               </app-input-field>
             </div>
           </div>
 
           <p-accordion [activeIndex]="0">
-            <p-accordionTab header="Advanced options">
+            <p-accordionTab header="Advanced options (refinements)">
               <div class="grid">
                 <div class="col-6">
                   <app-input-field
-                    [isRequired]="true"
+                    [isRequired]="false"
                     labelId="b-param-label-id"
                     labelText="B parameter"
                     helpText="B parameter for the  BM25 formula."
@@ -194,7 +206,17 @@
                     <p-chips [formControl]="skipWordsList"></p-chips>
                   </app-input-field>
                   <app-input-field
-                    [isRequired]="true"
+                    [isRequired]="false"
+                    labelId="weight-words-list-id"
+                    labelText="Weight words list"
+                    helpText="Boost some words and punish other by giving them weight,
+                    e.g. 'Freiburg=5' will add more 5 points to the score when Freiburg word is found"
+                  >
+                    <p-chips placeholder="e.g. Freiburg=5" [formControl]="weightWordsList"></p-chips>
+                  </app-input-field>
+
+                  <app-input-field
+                    [isRequired]="false"
                     labelId="dictionary-id"
                     labelText="Dictionary file name"
                     helpText="The name of the dictionary file name, this file help the suggestions list by using synonymes."
@@ -219,7 +241,7 @@
                 </div>
                 <div class="col-6">
                   <app-input-field
-                    [isRequired]="true"
+                    [isRequired]="false"
                     labelId="b-param-label-id"
                     labelText="K parameter"
                     helpText="K parameter for the  BM25 formula."
@@ -247,7 +269,7 @@
 
 
                   <app-input-field
-                    [isRequired]="true"
+                    [isRequired]="false"
                     labelId="q-gram-id"
                     labelText="Q-Gram"
                     helpText="How many letters should the word be split to, for example q=3,word=freiburg, will result in { 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg' }."

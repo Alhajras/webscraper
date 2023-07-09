@@ -5,6 +5,7 @@ import {Indexer} from "src/app/models/indexer.model";
 import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorService} from "src/app/services/inspector.service";
 import {lastValueFrom} from "rxjs";
+import {Inspector} from "src/app/models/inspector.model";
 
 @Component({
   selector: 'app-indexer',
@@ -23,13 +24,14 @@ export class IndexerComponent implements OnInit {
 
   public description!: FormControl
   public skipWordsList!: FormControl
+  public weightWordsList!: FormControl
   public smallWordsThreshold!: FormControl
   public dictionary!: FormControl
   public currentlySubmitting = false
   public displayModal = false
   public form!: FormGroup
   public header = 'Indexer form'
-  public selectorsIdsOptions: { name: string, id: number }[] = []
+  public selectorsIdsOptions: Inspector[] = []
   public errorMessage = ''
   public readonly columnCount = 5
   public loading = false
@@ -77,6 +79,7 @@ export class IndexerComponent implements OnInit {
       dictionary: this.dictionary.value,
       small_words_threshold: this.smallWordsThreshold.value,
       skip_words: this.skipWordsList.value.length === 0 ? '' : this.skipWordsList.value.join('";"'),
+      weight_words_list: this.weightWordsList.value.length === 0 ? '' : this.weightWordsList.value.join('";"'),
     }
     if (this.updatedIndexer !== null) {
       this.indexerService.update(this.updatedIndexer.id, indexer).toPromise().then(() => {
@@ -126,6 +129,8 @@ export class IndexerComponent implements OnInit {
   public editInspector(indexer: Indexer): void {
     this.updatedIndexer = indexer
     this.name = this.fb.control(indexer.name, [Validators.required])
+
+    this.selectedInspectors = this.fb.control(indexer.inspectors, [Validators.required])
     this.kParameter = this.fb.control(indexer.k_parameter)
     this.bParameter = this.fb.control(indexer.b_parameter)
     this.useSynonym = this.fb.control(indexer.q_gram_use_synonym)
@@ -133,6 +138,7 @@ export class IndexerComponent implements OnInit {
     this.dictionary = this.fb.control(indexer.dictionary)
     this.smallWordsThreshold = this.fb.control(indexer.small_words_threshold)
     this.skipWordsList = this.fb.control(indexer.skip_words === '' ? '' : indexer.skip_words.split("\";\""))
+    this.weightWordsList = this.fb.control(indexer.weight_words === '' ? '' : indexer.weight_words.split("\";\""))
     this.form = this.fb.group({
       name: this.name,
       kParameter: this.kParameter,
@@ -142,6 +148,7 @@ export class IndexerComponent implements OnInit {
       dictionary: this.dictionary,
       smallWordsThreshold: this.smallWordsThreshold,
       skip_words: this.skipWordsList,
+      weight_words_list: this.weightWordsList,
     })
     this.displayModal = true
   }
@@ -185,17 +192,12 @@ export class IndexerComponent implements OnInit {
    */
   private initForm(): void {
     this.inspectorService.list().subscribe(inspectors => {
-      this.selectorsIdsOptions = inspectors.filter(inspector => inspector.type !== 'image').map(inspector => {
-        return {
-          name: `${inspector.name} (${inspector.template_name}) `,
-          id: inspector.id
-        }
-      })
+      this.selectorsIdsOptions = inspectors.filter(inspector => inspector.type !== 'image')
     })
-    // this.description = this.fb.control('')
     this.selectedInspectors = this.fb.control('', [Validators.required])
     this.name = this.fb.control('', [Validators.required])
     this.skipWordsList = this.fb.control('')
+    this.weightWordsList = this.fb.control('')
     this.smallWordsThreshold = this.fb.control(0)
     this.kParameter = this.fb.control(1.75)
     this.bParameter = this.fb.control(0.75)
@@ -206,6 +208,7 @@ export class IndexerComponent implements OnInit {
       selectedInspectors: this.selectedInspectors,
       name: this.name,
       skipWordsList: this.skipWordsList,
+      weightWordsList: this.weightWordsList,
       smallWordsThreshold: this.smallWordsThreshold,
       bParameter: this.bParameter,
       useSynonym: this.useSynonym,

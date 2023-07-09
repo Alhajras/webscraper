@@ -80,6 +80,7 @@ class IndexerSerializer(serializers.ModelSerializer):
             "q_gram_q",
             "dictionary",
             "skip_words",
+            "weight_words",
             "small_words_threshold",
             "deleted",
             "inspectors_to_be_indexed",

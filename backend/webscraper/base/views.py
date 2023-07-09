@@ -126,6 +126,8 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         query = request.data["q"].lower().strip()
         inverted_index = InvertedIndex()
         result = inverted_index.process_query(query.split(" "), pk)[:25]
+        for r in result:
+            print(r.score)
         # TODO: 25 should be configurable
         docs_ids = [d.document_db_id for d in result]
         values = []

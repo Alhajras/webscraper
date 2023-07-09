@@ -76,9 +76,14 @@ class InvertedIndex:
             value: index for index, value in enumerate(skip_words_list)
         }
 
+        # weight_words_list = indexer.weight_words.split('";"')
+        # weight_words_dictionary = {
+        #     value: index for index, value in enumerate(weight_words_list)
+        # }
+
         # TODO: make this configurable
         words_weights = {}
-        words_weights["john"] = 0
+        words_weights["star"] = 20
         words_weights["movies"] = 0
 
         included_inspectors_ids = Inspector.objects.filter(
@@ -300,6 +305,5 @@ class InvertedIndex:
 
         # Filter all postings with BM25 = 0.
         union = [x for x in union if x.score != 0]
-
         # Sort the postings by BM25 scores, in descending order.
         return sorted(union, key=lambda x: x.score, reverse=True)
