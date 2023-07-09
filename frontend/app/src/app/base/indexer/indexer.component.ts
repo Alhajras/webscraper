@@ -50,10 +50,16 @@ export class IndexerComponent implements OnInit {
 
   }
 
+  /**
+   *  Closes the modal window
+   */
   public closeModal(): void {
     this.displayModal = false
   }
 
+  /**
+   *   Submits the form data
+   */
   public submit(): void {
     if (!this.form.valid) {
       // We should normally never get here since the submit button should be disabled.
@@ -96,6 +102,10 @@ export class IndexerComponent implements OnInit {
     })
   }
 
+  /**
+   * Deletes an inspector from the indexer
+   * @param indexer - Indexer that wants to remove the inspectors from
+   */
   public deleteInspector(indexer: Indexer): void {
     indexer.deleted = true
     this.indexerService.update(indexer.id, {name: indexer.name, deleted: true}).toPromise().then(() => {
@@ -109,6 +119,10 @@ export class IndexerComponent implements OnInit {
     })
   }
 
+  /**
+   * Edits an existing inspector in the indexer
+   * @param indexer - Indexer to be edited
+   */
   public editInspector(indexer: Indexer): void {
     this.updatedIndexer = indexer
     this.name = this.fb.control(indexer.name, [Validators.required])
@@ -132,6 +146,10 @@ export class IndexerComponent implements OnInit {
     this.displayModal = true
   }
 
+  /**
+   * Reloads the list of indexers
+   * @private
+   */
   private reloadIndexers(): void {
     this.indexerService.list().subscribe(indexers => {
       this.indexers = indexers
@@ -140,6 +158,9 @@ export class IndexerComponent implements OnInit {
 
   }
 
+  /**
+   *  Initializes the component
+   */
   public ngOnInit(): void {
     this.loading = true
     this.initForm()
@@ -149,12 +170,19 @@ export class IndexerComponent implements OnInit {
     }, this.pullingTimeSec);
   }
 
+  /**
+   *  Creates a new indexer
+   */
   public createIndexer() {
     this.initForm()
     this.updatedIndexer = null
     this.displayModal = true
   }
 
+  /**
+   * Initializes the form with default values
+   * @private
+   */
   private initForm() {
     this.inspectorService.list().subscribe(inspectors => {
       this.selectorsIdsOptions = inspectors.filter(inspector => inspector.type !== 'image').map(inspector => {
