@@ -1,4 +1,6 @@
-from ..models import Runner, Crawler, RunnerStatus, Inspector, InspectorValue, Document
+from django.db import transaction
+
+from ..models import Runner, Crawler, RunnerStatus, Inspector, InspectorValue, Document, LinkFragment
 import logging
 import logging.handlers
 from django.utils import timezone
@@ -27,6 +29,27 @@ class CrawlerUtils:
     def __init__(self, runner_id: int, crawler_id: int):
         self.runner_id = runner_id
         self.crawler_id = crawler_id
+
+    def save_url_fragments(self, url, runner):
+        parsed_url = urlparse(url)
+        fragments = [parsed_url.netloc] + parsed_url.path.split('/')
+
+        parent = None
+        for fragment in fragments:
+            if not fragment:
+                continue
+
+            try:
+                with transaction.atomic():
+                    link_fragment = LinkFragment.objects.get(fragment=fragment, parent=parent, runner=runner)
+            except:
+                link_fragment = LinkFragment(fragment=fragment, parent=parent, runner=runner)
+                link_fragment.save()
+
+            parent = link_fragment
+
+        return link_fragment
+
 
     def create_logger(self) -> logging:
         """
@@ -122,6 +145,7 @@ class CrawlerUtils:
 
                 # TODO: This should be configurable
                 link: Link = current_active_queue.pop()
+                link_fragment = self.save_url_fragments(link.url, runner)
                 if runner.collected_documents >= max_collected_docs:
                     return
                 logger.info(
@@ -215,6 +239,7 @@ class CrawlerUtils:
                             documents_dict[inspector].append(
                                 InspectorValue(
                                     url=link.url,
+                                    link_fragment=link_fragment,
                                     attribute=attribute,
                                     value=inspector_element.text,
                                     inspector=inspector,
@@ -237,6 +262,7 @@ class CrawlerUtils:
                             inspector_value = documents_dict[inspector][i]
                             InspectorValue.objects.update_or_create(
                                 url=inspector_value.url,
+                                link_fragment=inspector_value.link_fragment,
                                 attribute=inspector_value.attribute,
                                 value=inspector_value.value,
                                 document=doc,

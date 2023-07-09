@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models import Count
 from polymorphic.models import PolymorphicModel
 from solo.models import SingletonModel
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 class RunnerStatus(models.TextChoices):
@@ -236,9 +238,25 @@ class Runner(models.Model):
         return InspectorValue.objects.filter(runner=self).values("url").last()
 
 
+class LinkFragment(models.Model):
+    fragment = models.CharField(max_length=100)
+    parent = models.ForeignKey('self', on_delete=models.PROTECT, null=True)
+    runner = models.ForeignKey(Runner, on_delete=models.PROTECT)
+
+    @property
+    def full_url(self):
+        full_url = self.fragment
+        parent = self.parent
+        while parent is not None:
+            full_url = f"{parent.fragment}/{full_url}"
+            parent = parent.parent
+        return full_url
+
+
 class InspectorValue(models.Model):
     value = models.TextField(blank=True)
     url = models.URLField(default="")
+    link_fragment = models.ForeignKey(LinkFragment, on_delete=models.PROTECT)
     attribute = models.TextField(blank=True, default="")
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
