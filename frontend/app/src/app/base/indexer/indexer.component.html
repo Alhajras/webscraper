@@ -60,11 +60,15 @@
           <div>
           </div>
         </td>
-        <td>{{indexer.selector}}</td>
+        <td>
+          <ul>
+            <li *ngFor="let inspector of indexer.inspectors">{{inspector.name}} ({{inspector.template_name}})</li>
+          </ul>
+        </td>
         <td>
           <div>
             <button
-              [disabled]="indexer.status === 'Running' || currentlySubmitting"
+              [disabled]="indexer.status !== 'Completed' && indexer.status !== 'Exist'"
               class="
         ml-1 p-button-outlined p-button-sm
         no-icon

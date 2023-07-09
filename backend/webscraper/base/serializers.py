@@ -21,10 +21,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["url", "username", "email", "is_staff"]
 
 
-class IndexerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Indexer
-        fields = "__all__"
 
 
 class CrawlerSerializer(serializers.ModelSerializer):
@@ -67,6 +63,30 @@ class InspectorSerializer(serializers.ModelSerializer):
             "template",
             "template_name",
             "indexer"]
+
+
+class IndexerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Indexer
+        fields = [
+            "id",
+            "name",
+            "description",
+            "status",
+            "created_at",
+            "completed_at",
+            "b_parameter",
+            "k_parameter",
+            "q_gram_use_synonym",
+            "q_gram_q",
+            "dictionary",
+            "skip_words",
+            "small_words_threshold",
+            "deleted",
+            "inspectors_to_be_indexed",
+            "inspectors",
+        ]
+    inspectors = InspectorSerializer(many=True, read_only=True)
 
 
 class InspectorValueSerializer(serializers.ModelSerializer):

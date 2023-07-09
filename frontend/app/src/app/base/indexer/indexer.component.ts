@@ -191,4 +191,5 @@ export class IndexerComponent implements OnInit {
     })
     this.reloadIndexers()
   }
+
 }

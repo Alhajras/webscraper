@@ -97,6 +97,10 @@ class Indexer(models.Model):
     def inspectors_to_be_indexed(self):
         return Inspector.objects.filter(indexer=self).values_list("id", flat=True)
 
+    @property
+    def inspectors(self):
+        return Inspector.objects.filter(indexer=self)
+
 
 class Inspector(models.Model):
     class Meta:

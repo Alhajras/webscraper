@@ -1,3 +1,5 @@
+import {Inspector} from "src/app/models/inspector.model";
+
 export interface Indexer {
   created_at: string,
   completed_at: string,
@@ -14,4 +16,5 @@ export interface Indexer {
   q_gram_q: number,
   skip_words: string,
   small_words_threshold: number,
+  inspectors: Inspector[],
 }

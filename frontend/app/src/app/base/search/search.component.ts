@@ -2,7 +2,6 @@ import {Component, ViewChild} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {Template} from "src/app/models/template.model";
 import {IndexerService} from "src/app/services/indexer.service";
-import {InspectorValue} from "src/app/models/inspector-value.model";
 import {Indexer} from "src/app/models/indexer.model";
 import {debounceTime, distinctUntilChanged, Subject, switchMap} from "rxjs";
 import {OverlayPanel} from "primeng/overlaypanel";
