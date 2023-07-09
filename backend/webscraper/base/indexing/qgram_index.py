@@ -10,7 +10,6 @@ Natalie Prange <prange@cs.uni-freiburg.de>
 import itertools
 import os
 import readline  # NOQA
-import sys
 import time
 
 from typing import List, Tuple, Optional

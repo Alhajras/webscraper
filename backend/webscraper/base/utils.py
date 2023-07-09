@@ -6,7 +6,7 @@ from selenium.webdriver import Keys
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-from .dataclasses import *
+from .dataclasses import Link, CrawlerThread
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 

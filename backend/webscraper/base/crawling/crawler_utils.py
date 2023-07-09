@@ -1,6 +1,15 @@
 from django.db import transaction
+from urllib.parse import urlparse
 
-from ..models import Runner, Crawler, RunnerStatus, Inspector, InspectorValue, Document, LinkFragment
+from ..models import (
+    Runner,
+    RunnerStatus,
+    Inspector,
+    InspectorValue,
+    Document,
+    LinkFragment,
+    Crawler
+)
 import logging
 import logging.handlers
 from django.utils import timezone
@@ -9,7 +18,7 @@ import threading
 from concurrent.futures import ThreadPoolExecutor, Future, wait
 import time
 from selenium.webdriver.common.by import By
-from ..dataclasses import *
+from ..dataclasses import Link, CrawlerThread
 from ..utils import (
     extract_disallow_lines_from_url,
     find_the_links_current_level,
@@ -32,7 +41,7 @@ class CrawlerUtils:
 
     def save_url_fragments(self, url, runner):
         parsed_url = urlparse(url)
-        fragments = [parsed_url.netloc] + parsed_url.path.split('/')
+        fragments = [parsed_url.netloc] + parsed_url.path.split("/")
 
         parent = None
         for fragment in fragments:
@@ -41,15 +50,18 @@ class CrawlerUtils:
 
             try:
                 with transaction.atomic():
-                    link_fragment = LinkFragment.objects.get(fragment=fragment, parent=parent, runner=runner)
-            except:
-                link_fragment = LinkFragment(fragment=fragment, parent=parent, runner=runner)
+                    link_fragment = LinkFragment.objects.get(
+                        fragment=fragment, parent=parent, runner=runner
+                    )
+            except Exception:
+                link_fragment = LinkFragment(
+                    fragment=fragment, parent=parent, runner=runner
+                )
                 link_fragment.save()
 
             parent = link_fragment
 
         return link_fragment
-
 
     def create_logger(self) -> logging:
         """
@@ -166,7 +178,7 @@ class CrawlerUtils:
                     for scope_div in scope_divs:
                         try:
                             scoped_elements += driver.find_elements(By.XPATH, scope_div)
-                        except Exception as e:
+                        except Exception:
                             print(
                                 f"Thread id: {crawler_thread.thread_id} had an error, scope not found."
                             )
@@ -187,7 +199,7 @@ class CrawlerUtils:
                                 href = a.get_attribute("href").split("#").pop()
                                 # Respect the Robots.txt file protocol
                                 if disallow_link_patterns != "" and re.match(
-                                    disallow_link_patterns, href
+                                        disallow_link_patterns, href
                                 ):
                                     continue
                                 # Skip unwanted links
@@ -197,9 +209,9 @@ class CrawlerUtils:
                                 if base_url != urlparse(href).hostname:
                                     continue
                                 if (
-                                    link.url != href
-                                    and href not in links
-                                    and len(links) < max_visited_links
+                                        link.url != href
+                                        and href not in links
+                                        and len(links) < max_visited_links
                                 ):
                                     found_link = Link(
                                         url=href, visited=False, level=current_rec_level
@@ -228,12 +240,12 @@ class CrawlerUtils:
                                     inspector.attribute
                                 )
                                 if attribute is None:
-                                    attribute = ''
+                                    attribute = ""
                             if thread_id not in threads_metrics:
                                 threads_metrics[thread_id] = 1
                             else:
                                 threads_metrics[thread_id] = (
-                                    threads_metrics[thread_id] + 1
+                                        threads_metrics[thread_id] + 1
                                 )
                             threads_metrics[thread_id] += 1
                             documents_dict[inspector].append(
@@ -284,7 +296,7 @@ class CrawlerUtils:
             current_active_queue = links_queues[level]
             #  We only stop the thread if one queue is done AND all other threads are also completed
             while len(current_active_queue) != 0 or not all_threads_completed(
-                shared_threads_pool
+                    shared_threads_pool
             ):
                 if len(current_active_queue) != 0:
                     find_links()
@@ -305,7 +317,8 @@ class CrawlerUtils:
             driver.quit()
             shared_threads_pool[thread_id].running = False
             print(
-                f"Thread: {thread_id} completed!. Queue: {shared_threads_pool[thread_id]}. Docs: {threads_metrics[thread_id]}"
+                f"Thread: {thread_id} completed!."
+                f" Queue: {shared_threads_pool[thread_id]}. Docs: {threads_metrics[thread_id]}"
             )
 
         links[crawler.seed_url] = Link(url=crawler.seed_url, visited=False)

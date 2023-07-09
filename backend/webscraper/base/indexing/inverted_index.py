@@ -5,8 +5,6 @@ https://ad-wiki.informatik.uni-freiburg.de/teaching/InformationRetrievalWS2223
 import re
 import math
 
-from django.core.cache import cache
-
 from .qgram_index import SingletonMeta
 from ..models import InspectorValue, Inspector, Indexer
 

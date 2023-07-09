@@ -3,7 +3,6 @@ from concurrent.futures import ThreadPoolExecutor, Future, wait
 from io import StringIO
 
 from django.db import transaction
-from django.http import HttpResponse
 from django.utils import timezone
 
 from django.contrib.auth.models import User
@@ -39,7 +38,6 @@ from .serializers import (
     ActionPolymorphicSerializer,
     InspectorValueSerializer,
 )
-
 
 
 class EverythingButDestroyViewSet(
@@ -134,8 +132,16 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         headers = {}
         documents = {}
         for doc_id in docs_ids:
-            inspector_values = InspectorValue.objects.filter(document__id=doc_id).values(
-                "value", "url", "inspector", "inspector__name", "attribute", "document", "inspector__type"
+            inspector_values = InspectorValue.objects.filter(
+                document__id=doc_id
+            ).values(
+                "value",
+                "url",
+                "inspector",
+                "inspector__name",
+                "attribute",
+                "document",
+                "inspector__type",
             )
             for inspector_value in inspector_values:
                 document = inspector_value["document"]
@@ -207,7 +213,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         if not runner_serializer.is_valid():
             pass
         runner = Runner.objects.filter(name=runner_serializer["name"]).last()
-        if runner_serializer["machine"] != 'localhost':
+        if runner_serializer["machine"] != "localhost":
             # IP address are taken from the docker/.env file
             pbs_head_node = "173.16.38.8"
             pbs_sim_node = "173.16.38.9"
@@ -244,7 +250,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         response = Response(
             content_type="text/csv",
             headers={"Content-Disposition": 'attachment; filename="somefilename.csv"'},
-            status=200
+            status=200,
         )
 
         # Create a StringIO object to hold the CSV content
@@ -255,7 +261,16 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         writer = csv.writer(csv_content)
         writer.writerow(["id", "type", "value", "url", "inspetor name", "document id"])
         for value in values:
-            writer.writerow([value.id, value.type, value.value, value.url, value.inspector.name, value.document.id])
+            writer.writerow(
+                [
+                    value.id,
+                    value.type,
+                    value.value,
+                    value.url,
+                    value.inspector.name,
+                    value.document.id,
+                ]
+            )
 
         # Set the response content to the CSV content from the StringIO object
         response.data = csv_content.getvalue()

@@ -2,8 +2,6 @@ from django.db import models
 from django.db.models import Count
 from polymorphic.models import PolymorphicModel
 from solo.models import SingletonModel
-from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
 
 
 class RunnerStatus(models.TextChoices):
@@ -178,6 +176,9 @@ class Document(models.Model):
 
     template = models.ForeignKey(Template, on_delete=models.PROTECT, null=True)
 
+    def __str__(self) -> str:
+        return str(self.pk)
+
 
 class Crawler(models.Model):
     class Meta:
@@ -244,8 +245,11 @@ class Runner(models.Model):
 
 class LinkFragment(models.Model):
     fragment = models.CharField(max_length=100)
-    parent = models.ForeignKey('self', on_delete=models.PROTECT, null=True)
+    parent = models.ForeignKey("self", on_delete=models.PROTECT, null=True)
     runner = models.ForeignKey(Runner, on_delete=models.PROTECT)
+
+    def __str__(self) -> str:
+        return self.full_url
 
     @property
     def full_url(self):
