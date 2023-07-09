@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {Template} from "src/app/models/template.model";
 import {IndexerService} from "src/app/services/indexer.service";
@@ -22,7 +22,7 @@ export interface Document {
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit{
   @ViewChild('op')
   public suggestionsOverlayPanel!: OverlayPanel
 

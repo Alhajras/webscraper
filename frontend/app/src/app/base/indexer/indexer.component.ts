@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Indexer} from "src/app/models/indexer.model";
 import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorService} from "src/app/services/inspector.service";
+import {lastValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-indexer',
@@ -187,8 +188,7 @@ export class IndexerComponent implements OnInit {
   }
 
   public startIndexing(indexer: Indexer) {
-    this.indexerService.startIndexing(indexer.id, indexer).subscribe(i => {
-    })
+    lastValueFrom(this.indexerService.startIndexing(indexer.id, indexer)).then().catch()
     this.reloadIndexers()
   }
 
