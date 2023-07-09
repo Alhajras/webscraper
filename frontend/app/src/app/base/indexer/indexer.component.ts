@@ -32,6 +32,14 @@ export class IndexerComponent implements OnInit {
   public errorMessage = ''
   public readonly columnCount = 5
   public loading = false
+  private readonly pullingTimeSec = 10000
+  public events = [
+    {status: 'New'},
+    {status: 'Dictionary'},
+    {status: 'Indexing'},
+    {status: 'Exit'},
+    {status: 'Completed'},
+  ];
 
   public constructor(
     private readonly fb: FormBuilder,
@@ -131,8 +139,11 @@ export class IndexerComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.reloadIndexers()
     this.initForm()
+    this.reloadIndexers()
+    setInterval(() => {
+      this.reloadIndexers()
+    }, this.pullingTimeSec);
   }
 
   public createIndexer() {
@@ -174,10 +185,8 @@ export class IndexerComponent implements OnInit {
   }
 
   public startIndexing(indexer: Indexer) {
-    this.currentlySubmitting = true
-
     this.indexerService.startIndexing(indexer.id, indexer).subscribe(i => {
-      this.currentlySubmitting = false
     })
+    this.reloadIndexers()
   }
 }

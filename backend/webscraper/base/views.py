@@ -1,4 +1,5 @@
 import csv
+from concurrent.futures import ThreadPoolExecutor, Future, wait
 from io import StringIO
 
 from django.db import transaction
@@ -91,25 +92,32 @@ class IndexerViewSet(EverythingButDestroyViewSet):
     def start(self, request: Request) -> Response:
         indexer_id = request.data["id"]
         indexer = Indexer.objects.get(id=indexer_id)
-        singleton_cache = SingletonMeta
-        cache_key = f"qGramIndex:{indexer.dictionary}"
-        hit = singleton_cache.suggestions_cache.get(cache_key, None)
-        if hit is None:
-            print("Creating dictionary ....")
-            q_obj = QGramIndex(indexer.q_gram_q, indexer.q_gram_use_synonym)
-            if len(q_obj.names) != 0:
-                return
-            Indexer.objects.filter(id=indexer_id).update(
-                status=IndexerStatus.DICTIONARY
-            )
-            q_obj.build_from_file(indexer.dictionary)
-            singleton_cache.suggestions_cache[cache_key] = q_obj
-            print("Done creating dictionary!")
-        Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.INDEXING)
-        print("Creating an index!")
-        inverted_index = InvertedIndex()
-        inverted_index.create_index(indexer_id)
-        print("Done creating an index!")
+
+        def thread():
+            singleton_cache = SingletonMeta
+            cache_key = f"qGramIndex:{indexer.dictionary}"
+            hit = singleton_cache.suggestions_cache.get(cache_key, None)
+            if hit is None:
+                print("Creating dictionary ....")
+                q_obj = QGramIndex(indexer.q_gram_q, indexer.q_gram_use_synonym)
+                if len(q_obj.names) != 0:
+                    return
+                Indexer.objects.filter(id=indexer_id).update(
+                    status=IndexerStatus.DICTIONARY
+                )
+                q_obj.build_from_file(indexer.dictionary)
+                singleton_cache.suggestions_cache[cache_key] = q_obj
+                print("Done creating dictionary!")
+            Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.INDEXING)
+            print("Creating an index!")
+            inverted_index = InvertedIndex()
+            inverted_index.create_index(indexer_id)
+            print("Done creating an index!")
+
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            futures: Future = executor.submit(thread)
+            wait([futures])
+
         indexer.status = IndexerStatus.COMPLETED
         indexer.completed_at = timezone.now()
         indexer.save()
