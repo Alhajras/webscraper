@@ -26,15 +26,6 @@ class DocumentScore:
         self.score = score
 
 
-# class WordsWeight:
-#     """
-#     Class used to save the words that wanted to be boosted or skipped
-#     """
-#     def __init__(self, word: str, weight: float):
-#         self.word = word
-#         self.weight = weight
-
-
 class InvertedIndex:
     """
     Class used to create the inverted list of the crawled documents.
@@ -76,15 +67,12 @@ class InvertedIndex:
             value: index for index, value in enumerate(skip_words_list)
         }
 
-        # weight_words_list = indexer.weight_words.split('";"')
-        # weight_words_dictionary = {
-        #     value: index for index, value in enumerate(weight_words_list)
-        # }
-
-        # TODO: make this configurable
         words_weights = {}
-        words_weights["star"] = 20
-        words_weights["movies"] = 0
+        if indexer.weight_words != '':
+            weight_words_list = indexer.weight_words.split('";"')
+            for weight in weight_words_list:
+                key_value = weight.split("=")
+                words_weights[key_value[0]] = int(key_value[1])
 
         included_inspectors_ids = Inspector.objects.filter(
             indexer=indexer_id
