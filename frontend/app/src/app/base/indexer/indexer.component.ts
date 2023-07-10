@@ -80,7 +80,7 @@ export class IndexerComponent implements OnInit {
       dictionary: this.dictionary.value,
       small_words_threshold: this.smallWordsThreshold.value,
       skip_words: this.skipWordsList.value.length === 0 ? '' : this.skipWordsList.value.join('";"'),
-      weight_words_list: this.weightWordsList.value.length === 0 ? '' : this.weightWordsList.value.join('";"'),
+      weight_words: this.weightWordsList.value.length === 0 ? '' : this.weightWordsList.value.join('";"'),
     }
     if (this.updatedIndexer !== null) {
       this.indexerService.update(this.updatedIndexer.id, indexer).toPromise().then(() => {
