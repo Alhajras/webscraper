@@ -69,12 +69,13 @@ export class IndexerComponent implements OnInit {
       return
     }
     this.currentlySubmitting = true
+    console.log(this.selectedInspectors.value)
     const indexer = {
       name: this.name.value,
       k_parameter: this.kParameter.value,
       b_parameter: this.bParameter.value,
       q_gram_use_synonym: this.useSynonym.value,
-      inspectors_to_be_indexed: this.selectedInspectors.value.map((inspector: any) => inspector.id),
+      inspectors_to_be_indexed: this.selectedInspectors.value.map((inspector: Inspector) => inspector.id),
       q_gram_q: this.qGram.value,
       dictionary: this.dictionary.value,
       small_words_threshold: this.smallWordsThreshold.value,
@@ -83,6 +84,7 @@ export class IndexerComponent implements OnInit {
     }
     if (this.updatedIndexer !== null) {
       this.indexerService.update(this.updatedIndexer.id, indexer).toPromise().then(() => {
+        this.updateInspectors(this.selectedInspectors.value, this.updatedIndexer as Indexer)
         this.ngOnInit()
         this.closeModal()
         this.currentlySubmitting = false
@@ -106,10 +108,10 @@ export class IndexerComponent implements OnInit {
   }
 
   /**
-   * Deletes an inspector from the indexer
+   * Deletes an indexer
    * @param indexer - Indexer that wants to remove the inspectors from
    */
-  public deleteInspector(indexer: Indexer): void {
+  public deleteIndexer(indexer: Indexer): void {
     indexer.deleted = true
     this.indexerService.update(indexer.id, {name: indexer.name, deleted: true}).toPromise().then(() => {
       this.reloadIndexers()
@@ -123,10 +125,10 @@ export class IndexerComponent implements OnInit {
   }
 
   /**
-   * Edits an existing inspector in the indexer
+   * Edits an existing indexer
    * @param indexer - Indexer to be edited
    */
-  public editInspector(indexer: Indexer): void {
+  public editIndexer(indexer: Indexer): void {
     this.updatedIndexer = indexer
     this.name = this.fb.control(indexer.name, [Validators.required])
 
@@ -218,9 +220,25 @@ export class IndexerComponent implements OnInit {
     })
   }
 
+  /**
+   * Start the indexing process
+   * @param indexer
+   */
   public startIndexing(indexer: Indexer): void {
     lastValueFrom(this.indexerService.startIndexing(indexer.id, indexer)).then().catch()
     this.reloadIndexers()
+  }
+
+  /**
+   * Update inspectors
+   */
+  public updateInspectors(inspectors: Inspector[], indexer: Indexer): void {
+    inspectors.forEach(inspector => {
+      inspector.indexer = indexer.id
+      this.inspectorService.update(inspector.id, inspector).toPromise().then().catch((err: HttpErrorResponse) => {
+        console.log(err)
+      })
+    })
   }
 
 }

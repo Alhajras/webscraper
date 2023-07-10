@@ -83,7 +83,7 @@ class Indexer(models.Model):
     small_words_threshold = models.PositiveSmallIntegerField(default=0)
     completed_at = models.DateTimeField(blank=True, null=True)
     deleted = models.BooleanField(default=False)
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     status = models.CharField(
         max_length=10, choices=IndexerStatus.choices, default=IndexerStatus.NEW

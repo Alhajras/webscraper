@@ -52,6 +52,7 @@ class InspectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inspector
         fields = [
+            "id",
             "name",
             "selector",
             "attribute",
@@ -94,6 +95,7 @@ class InspectorValueSerializer(serializers.ModelSerializer):
     class Meta:
         model = InspectorValue
         fields = [
+            "id",
             "value",
             "url",
             "type",

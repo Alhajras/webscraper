@@ -70,7 +70,7 @@
         <td>
           <div>
             <button
-              [disabled]="indexer.status !== 'Completed' && indexer.status !== 'Exist'"
+              [disabled]="indexer.status !== 'Completed' && indexer.status !== 'Exist' && indexer.status !== 'New'"
               class="
         ml-1 p-button-outlined p-button-sm
         no-icon
@@ -90,7 +90,7 @@
               pButton
               pRipple
               label="Edit"
-              (click)="editInspector(indexer)"
+              (click)="editIndexer(indexer)"
             ></button>
             <button
               class="
@@ -101,7 +101,7 @@
               pButton
               pRipple
               label="Delete"
-              (click)="deleteInspector(indexer)"
+              (click)="deleteIndexer(indexer)"
             ></button>
           </div>
         </td>

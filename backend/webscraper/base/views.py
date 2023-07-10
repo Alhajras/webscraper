@@ -65,6 +65,25 @@ class IndexerViewSet(EverythingButDestroyViewSet):
     serializer_class = IndexerSerializer
 
     @transaction.atomic
+    def update(self, request: Request, *args, **kwargs) -> Response:
+        """
+        Update an index and its inspectors.
+        """
+        new_inspectors_ids = request.data["inspectors_to_be_indexed"]
+        indexer = super().update(request, *args, **kwargs)
+        old_inspectors_ids = indexer.data["inspectors_to_be_indexed"]
+
+        Inspector.objects.filter(id__in=new_inspectors_ids).update(
+            indexer=indexer.data["id"]
+        )
+
+        differences = list(set(old_inspectors_ids) - set(new_inspectors_ids))
+        Inspector.objects.filter(id__in=differences).update(
+            indexer=None
+        )
+        return indexer
+
+    @transaction.atomic
     def create(self, request: Request, *args, **kwargs) -> Response:
         """
         Create an index but without running it.
