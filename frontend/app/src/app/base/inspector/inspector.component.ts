@@ -40,10 +40,16 @@ export class InspectorComponent implements OnInit {
 
   }
 
+  /**
+   * Close the edit dialog
+   */
   public closeModal(): void {
     this.displayModal = false
   }
 
+  /**
+   * Submit request to save/update inspector
+   */
   public submit(): void {
     if (!this.form.valid) {
       // We should normally never get here since the submit button should be disabled.
