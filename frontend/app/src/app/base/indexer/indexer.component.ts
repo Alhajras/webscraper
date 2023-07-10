@@ -84,7 +84,6 @@ export class IndexerComponent implements OnInit {
     }
     if (this.updatedIndexer !== null) {
       this.indexerService.update(this.updatedIndexer.id, indexer).toPromise().then(() => {
-        this.updateInspectors(this.selectedInspectors.value, this.updatedIndexer as Indexer)
         this.ngOnInit()
         this.closeModal()
         this.currentlySubmitting = false
@@ -227,18 +226,6 @@ export class IndexerComponent implements OnInit {
   public startIndexing(indexer: Indexer): void {
     lastValueFrom(this.indexerService.startIndexing(indexer.id, indexer)).then().catch()
     this.reloadIndexers()
-  }
-
-  /**
-   * Update inspectors
-   */
-  public updateInspectors(inspectors: Inspector[], indexer: Indexer): void {
-    inspectors.forEach(inspector => {
-      inspector.indexer = indexer.id
-      this.inspectorService.update(inspector.id, inspector).toPromise().then().catch((err: HttpErrorResponse) => {
-        console.log(err)
-      })
-    })
   }
 
 }
