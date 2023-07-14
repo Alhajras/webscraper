@@ -85,6 +85,7 @@ class Indexer(models.Model):
     deleted = models.BooleanField(default=False)
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
+    boosting_formula = models.TextField(blank=True)
     status = models.CharField(
         max_length=10, choices=IndexerStatus.choices, default=IndexerStatus.NEW
     )
@@ -120,6 +121,9 @@ class Inspector(models.Model):
     deleted = models.BooleanField(default=False)
     template = models.ForeignKey(Template, on_delete=models.PROTECT)
     indexer = models.ForeignKey(Indexer, on_delete=models.PROTECT, null=True)
+    variable_name = models.CharField(
+        max_length=10, unique=True
+    )
 
     def __str__(self) -> str:
         return self.name

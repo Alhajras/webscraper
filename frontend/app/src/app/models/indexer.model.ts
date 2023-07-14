@@ -17,5 +17,6 @@ export interface Indexer {
   skip_words: string,
   weight_words: string,
   small_words_threshold: number,
+  boosting_formula: string,
   inspectors: Inspector[],
 }

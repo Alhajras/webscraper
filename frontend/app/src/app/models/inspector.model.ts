@@ -9,4 +9,5 @@ export interface Inspector {
   type: string
   template_name: string
   indexer: number
+  variable_name: string
 }

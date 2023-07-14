@@ -6,6 +6,7 @@ import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorService} from "src/app/services/inspector.service";
 import {lastValueFrom} from "rxjs";
 import {Inspector} from "src/app/models/inspector.model";
+import {OverlayPanel} from "primeng/overlaypanel";
 
 @Component({
   selector: 'app-indexer',
@@ -21,6 +22,7 @@ export class IndexerComponent implements OnInit {
   public bParameter!: FormControl
   public useSynonym!: FormControl
   public qGram!: FormControl
+  public boostingFormula!: FormControl
 
   public description!: FormControl
   public skipWordsList!: FormControl
@@ -77,6 +79,7 @@ export class IndexerComponent implements OnInit {
       q_gram_use_synonym: this.useSynonym.value,
       inspectors_to_be_indexed: this.selectedInspectors.value.map((inspector: Inspector) => inspector.id),
       q_gram_q: this.qGram.value,
+      boosting_formula: this.boostingFormula.value,
       dictionary: this.dictionary.value,
       small_words_threshold: this.smallWordsThreshold.value,
       skip_words: this.skipWordsList.value.length === 0 ? '' : this.skipWordsList.value.join('";"'),
@@ -136,6 +139,7 @@ export class IndexerComponent implements OnInit {
     this.bParameter = this.fb.control(indexer.b_parameter)
     this.useSynonym = this.fb.control(indexer.q_gram_use_synonym)
     this.qGram = this.fb.control(indexer.q_gram_q)
+    this.boostingFormula = this.fb.control(indexer.boosting_formula)
     this.dictionary = this.fb.control(indexer.dictionary)
     this.smallWordsThreshold = this.fb.control(indexer.small_words_threshold)
     this.skipWordsList = this.fb.control(indexer.skip_words === '' ? '' : indexer.skip_words.split("\";\""))
@@ -146,6 +150,7 @@ export class IndexerComponent implements OnInit {
       bParameter: this.bParameter,
       useSynonym: this.useSynonym,
       qGram: this.qGram,
+      boostingFormula: this.boostingFormula,
       dictionary: this.dictionary,
       smallWordsThreshold: this.smallWordsThreshold,
       skip_words: this.skipWordsList,
@@ -204,6 +209,7 @@ export class IndexerComponent implements OnInit {
     this.bParameter = this.fb.control(0.75)
     this.useSynonym = this.fb.control(true)
     this.qGram = this.fb.control(3)
+    this.boostingFormula = this.fb.control('')
     this.dictionary = this.fb.control('wikidata-entities.tsv')
     this.form = this.fb.group({
       selectedInspectors: this.selectedInspectors,
@@ -214,6 +220,7 @@ export class IndexerComponent implements OnInit {
       bParameter: this.bParameter,
       useSynonym: this.useSynonym,
       qGram: this.qGram,
+      boostingFormula: this.boostingFormula,
       dictionary: this.dictionary,
       kParameter: this.kParameter,
     })
@@ -228,4 +235,7 @@ export class IndexerComponent implements OnInit {
     this.reloadIndexers()
   }
 
+  public openRankingBooster(event: MouseEvent, op: OverlayPanel): void {
+    op.toggle(event)
+  }
 }

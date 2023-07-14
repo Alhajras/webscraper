@@ -61,6 +61,7 @@ class InspectorSerializer(serializers.ModelSerializer):
             "deleted",
             "template",
             "template_name",
+            "variable_name",
             "indexer",
         ]
 
@@ -85,6 +86,7 @@ class IndexerSerializer(serializers.ModelSerializer):
             "small_words_threshold",
             "deleted",
             "inspectors_to_be_indexed",
+            "boosting_formula",
             "inspectors",
         ]
 

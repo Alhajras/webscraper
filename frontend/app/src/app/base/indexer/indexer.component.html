@@ -266,8 +266,6 @@
                       [formControl]="smallWordsThreshold"
                     />
                   </app-input-field>
-
-
                   <app-input-field
                     [isRequired]="false"
                     labelId="q-gram-id"
@@ -279,6 +277,19 @@
                       type="number"
                       pInputText
                       [formControl]="qGram"
+                    />
+                  </app-input-field>
+                  <app-input-field
+                    [isRequired]="false"
+                    labelId="boosting-formula-id"
+                    labelText="Boosting formula"
+                    helpText="This formula result will be added to the final score, it uses inspectors variable."
+                  >
+                    <input
+                      id="boosting-formula-id"
+                      type="text"
+                      pInputText
+                      [formControl]="boostingFormula"
                     />
                   </app-input-field>
 
