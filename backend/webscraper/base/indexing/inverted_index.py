@@ -4,7 +4,7 @@ https://ad-wiki.informatik.uni-freiburg.de/teaching/InformationRetrievalWS2223
 """
 import re
 import math
-
+from sympy import var, sympify
 from .qgram_index import SingletonMeta
 from ..models import InspectorValue, Inspector, Indexer
 
@@ -242,6 +242,29 @@ class InvertedIndex:
             j += 1
 
         return result
+
+    @staticmethod
+    def evaluate_formula(indexer_id: int, variables_names, inspector_values: list) -> int:
+        """
+        Indexers have the `boosted_formula` field this method will evalute the
+        formula output and return the resulting score
+        """
+        indexer = Indexer.objects.get(pk=indexer_id)
+        boosting_formula = indexer.boosting_formula
+        # If the formula field is empty we do not continue
+        if boosting_formula is None or boosting_formula == '' or len(variables_names) == 0:
+            return 0
+
+        variable_value_map = {}
+        for inspector_value in inspector_values:
+            variable_value_map[inspector_value['inspector__variable_name'].strip()] = 5
+
+        from math import log
+
+        expr = sympify(boosting_formula)
+        res = expr.subs(variable_value_map.items())
+
+        return eval(str(res))
 
     def process_query(self, keywords, indexer_id, use_refinements=False):
         """

@@ -149,7 +149,6 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             print(r.score)
         # TODO: 25 should be configurable
         docs_ids = [d.document_db_id for d in result]
-        values = []
         headers = {}
         documents = {}
         for doc_id in docs_ids:
@@ -163,16 +162,26 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                 "attribute",
                 "document",
                 "inspector__type",
+                "inspector__variable_name",
             )
+            variables_names = InspectorValue.objects.filter(
+                document__id=doc_id
+            ).values_list(
+                "inspector__variable_name", flat=True
+            ).distinct()
+            doc_score = inverted_index.evaluate_formula(pk, variables_names, inspector_values)
+            print(variables_names)
             for inspector_value in inspector_values:
+                inspector_value["boosted_score"] = doc_score
                 document = inspector_value["document"]
                 if document not in documents:
                     documents[document] = [inspector_value]
                 else:
                     documents[document].append(inspector_value)
-                values.append(inspector_value)
                 header_name = inspector_value["inspector__name"]
                 headers[header_name] = header_name
+        # Add boosted results
+        # docs = inverted_index.evaluate_formula(pk, documents)
         return Response(data={"headers": headers.keys(), "docs": documents})
 
     @action(detail=False, url_path="suggest", methods=["GET"])

@@ -101,6 +101,10 @@ class Indexer(models.Model):
     def inspectors(self):
         return Inspector.objects.filter(indexer=self)
 
+    @property
+    def variables_names(self):
+        return Inspector.objects.filter(indexer=self).values_list("variable_name", flat=True)
+
 
 class Inspector(models.Model):
     class Meta:
@@ -290,6 +294,10 @@ class InspectorValue(models.Model):
     @property
     def table_header(self):
         return self.inspector.name
+
+    @property
+    def variable_name(self):
+        return self.inspector.verbose_name
 
 
 class ConfigurationModel(SingletonModel):
