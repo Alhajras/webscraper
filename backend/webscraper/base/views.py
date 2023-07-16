@@ -164,7 +164,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                 "inspector__type",
                 "inspector__clean_up_expression",
                 "inspector__variable_name",
-            )
+            ).order_by('inspector__name')
             variables_names = InspectorValue.objects.filter(
                 document__id=doc_id
             ).values_list(
