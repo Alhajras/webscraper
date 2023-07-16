@@ -24,6 +24,7 @@ export class InspectorComponent implements OnInit {
   public type!: FormControl
   public name!: FormControl
   public variableName!: FormControl
+  public cleanUpExpression!: FormControl
   public form!: FormGroup
   public header = 'Inspector form'
   public errorMessage = ''
@@ -62,6 +63,7 @@ export class InspectorComponent implements OnInit {
     const inspector = {
       name: this.name.value,
       variable_name: this.variableName.value,
+      clean_up_expression: this.cleanUpExpression.value.length === 0 ? '' : this.cleanUpExpression.value.join('";"'),
       type: this.type.value.value,
       selector: this.selector.value,
       attribute: this.attribute.value,
@@ -114,6 +116,7 @@ export class InspectorComponent implements OnInit {
     this.updatedInspector = inspector
     this.name = this.fb.control(inspector.name)
     this.variableName = this.fb.control(inspector.variable_name)
+    this.cleanUpExpression = this.fb.control(inspector.clean_up_expression === '' ? '' : inspector.clean_up_expression.split("\";\""))
     this.type = this.fb.control({key: inspector.type, value: inspector.type})
     this.selector = this.fb.control(inspector.selector)
     this.attribute = this.fb.control(inspector.attribute)
@@ -122,6 +125,7 @@ export class InspectorComponent implements OnInit {
       attribute: this.attribute,
       name: this.name,
       variableName: this.variableName,
+      cleanUpExpression: this.cleanUpExpression,
       type: this.type,
     })
     this.displayModal = true
@@ -146,13 +150,14 @@ export class InspectorComponent implements OnInit {
     this.attribute = this.fb.control('')
     this.name = this.fb.control('')
     this.variableName = this.fb.control('')
+    this.cleanUpExpression = this.fb.control([])
     this.type = this.fb.control({key: 'text', value: 'text'})
     this.form = this.fb.group({
       description: this.description,
       url: this.selector,
       attribute: this.attribute,
       name: this.name,
-      variableName: this.variableName,
+      cleanUpExpression: this.cleanUpExpression,
       type: this.type,
     })
   }

@@ -112,6 +112,7 @@ class Inspector(models.Model):
 
     name = models.CharField(max_length=100)
     selector = models.TextField()
+    clean_up_expression = models.TextField(blank=True, default="")
     attribute = models.CharField(
         max_length=25, choices=InspectorAttributes.choices, blank=True, default=""
     )
@@ -126,7 +127,7 @@ class Inspector(models.Model):
     template = models.ForeignKey(Template, on_delete=models.PROTECT)
     indexer = models.ForeignKey(Indexer, on_delete=models.PROTECT, null=True)
     variable_name = models.CharField(
-        max_length=10, unique=True
+        max_length=10, blank=True, default=''
     )
 
     def __str__(self) -> str:

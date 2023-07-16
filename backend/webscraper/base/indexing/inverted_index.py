@@ -257,7 +257,14 @@ class InvertedIndex:
 
         variable_value_map = {}
         for inspector_value in inspector_values:
-            variable_value_map[inspector_value['inspector__variable_name'].strip()] = 5
+            variable_name = inspector_value['inspector__variable_name'].strip()
+            if variable_name != '':
+                value = inspector_value['value'].strip()
+                # Applying the clean-up expressions
+                for reg_expression in inspector_value['inspector__clean_up_expression'].split('";"'):
+                    k, v = reg_expression.split('=')
+                    value = re.sub(k, v, value)
+                variable_value_map[variable_name] = float(value)
 
         from math import log
 

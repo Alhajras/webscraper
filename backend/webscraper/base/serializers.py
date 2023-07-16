@@ -62,6 +62,7 @@ class InspectorSerializer(serializers.ModelSerializer):
             "template",
             "template_name",
             "variable_name",
+            "clean_up_expression",
             "indexer",
         ]
 

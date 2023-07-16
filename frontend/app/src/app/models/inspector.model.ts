@@ -10,4 +10,5 @@ export interface Inspector {
   template_name: string
   indexer: number
   variable_name: string
+  clean_up_expression: string
 }

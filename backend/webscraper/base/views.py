@@ -162,6 +162,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                 "attribute",
                 "document",
                 "inspector__type",
+                "inspector__clean_up_expression",
                 "inspector__variable_name",
             )
             variables_names = InspectorValue.objects.filter(

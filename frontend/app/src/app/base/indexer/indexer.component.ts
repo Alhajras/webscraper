@@ -71,7 +71,6 @@ export class IndexerComponent implements OnInit {
       return
     }
     this.currentlySubmitting = true
-    console.log(this.selectedInspectors.value)
     const indexer = {
       name: this.name.value,
       k_parameter: this.kParameter.value,

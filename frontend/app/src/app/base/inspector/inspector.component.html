@@ -39,7 +39,9 @@
   </ng-template>
   <ng-template pTemplate="body" let-inspector>
     <tr>
-      <td>{{inspector.name}} ({{inspector.variable_name}})</td>
+      <td>{{inspector.name}}
+        <span pTooltip="Variable name" *ngIf="inspector.variable_name">({{inspector.variable_name}})</span>
+      </td>
       <td>{{inspector.type}}</td>
       <td>{{inspector.selector}}</td>
       <td>
@@ -172,6 +174,14 @@
                 optionLabel="key"
                 [filter]="true"
               ></p-dropdown>
+            </app-input-field>
+            <app-input-field
+              [isRequired]="false"
+              labelId="clean-up-expression-id"
+              labelText="Clean up expression list"
+              helpText="This is a regular expression used to clean-up the crawled inspector value, this is useful to remove noise."
+            >
+              <p-chips [formControl]="cleanUpExpression"></p-chips>
             </app-input-field>
           </div>
         </div>
