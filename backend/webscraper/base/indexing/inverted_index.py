@@ -254,23 +254,25 @@ class InvertedIndex:
         # If the formula field is empty we do not continue
         if boosting_formula is None or boosting_formula == '' or len(variables_names) == 0:
             return 0
+        res = 0
+        try:
+            variable_value_map = {}
+            for inspector_value in inspector_values:
+                variable_name = inspector_value['inspector__variable_name'].strip()
+                if variable_name != '':
+                    value = inspector_value['value'].strip()
+                    # Applying the clean-up expressions
+                    for reg_expression in inspector_value['inspector__clean_up_expression'].split('";"'):
+                        k, v = reg_expression.split('=')
+                        value = re.sub(k, v, value)
+                    variable_value_map[variable_name] = float(value)
 
-        variable_value_map = {}
-        for inspector_value in inspector_values:
-            variable_name = inspector_value['inspector__variable_name'].strip()
-            if variable_name != '':
-                value = inspector_value['value'].strip()
-                # Applying the clean-up expressions
-                for reg_expression in inspector_value['inspector__clean_up_expression'].split('";"'):
-                    k, v = reg_expression.split('=')
-                    value = re.sub(k, v, value)
-                variable_value_map[variable_name] = float(value)
+            from math import log
 
-        from math import log
-
-        expr = sympify(boosting_formula)
-        res = expr.subs(variable_value_map.items())
-
+            expr = sympify(boosting_formula)
+            res = expr.subs(variable_value_map.items())
+        except Exception as e:
+            print(f"Error while evaluating score: {e}")
         return eval(str(res))
 
     def process_query(self, keywords, indexer_id, use_refinements=False):

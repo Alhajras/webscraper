@@ -5,4 +5,5 @@ export interface InspectorValue {
   inspector: number
   attribute: string
   type: string
+  boosted_score: number
 }

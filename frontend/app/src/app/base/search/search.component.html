@@ -37,7 +37,7 @@
   </div>
   <div class="card">
     <p-table [loading]="loading"
-             [value]="documents | keyvalue" [tableStyle]="{ 'min-width': '50rem' }">
+             [value]="documents" [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template pTemplate="header">
         <tr>
           <th *ngFor="let header of headers">{{ header }}</th>
@@ -45,7 +45,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-document>
         <tr>
-          <td *ngFor="let value of document.value">
+          <td *ngFor="let value of document.inspector_values">
             <p>
               <container-element [ngSwitch]="value.inspector__type">
                 <img
@@ -63,7 +63,7 @@
       <ng-template pTemplate="emptymessage">
         <tr>
           <td
-            *ngIf="(documents | keyvalue).keys.length === 0"
+            *ngIf="documents.length === 0"
           >
             <p>
               There are no documents found!

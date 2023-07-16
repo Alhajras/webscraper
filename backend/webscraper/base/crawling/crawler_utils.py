@@ -39,7 +39,18 @@ class CrawlerUtils:
         self.runner_id = runner_id
         self.crawler_id = crawler_id
 
-    def save_url_fragments(self, url, runner):
+    @staticmethod
+    def clean_up_value(value: str, expressions: str) -> str:
+        if value == '' or expressions == '':
+            return value
+
+        for reg_expression in expressions.split('";"'):
+            k, v = reg_expression.split('=')
+            value = re.sub(k, v, value)
+        return value
+
+    @staticmethod
+    def save_url_fragments(url, runner):
         parsed_url = urlparse(url)
         fragments = [parsed_url.netloc] + parsed_url.path.split("/")
 
@@ -253,7 +264,7 @@ class CrawlerUtils:
                                     url=link.url,
                                     link_fragment=link_fragment,
                                     attribute=attribute,
-                                    value=inspector_element.text,
+                                    value=self.clean_up_value(inspector_element.text, inspector.clean_up_expression),
                                     inspector=inspector,
                                     runner=runner,
                                 )

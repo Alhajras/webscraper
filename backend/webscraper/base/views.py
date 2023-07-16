@@ -171,7 +171,6 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                 "inspector__variable_name", flat=True
             ).distinct()
             doc_score = inverted_index.evaluate_formula(pk, variables_names, inspector_values)
-            print(variables_names)
             for inspector_value in inspector_values:
                 inspector_value["boosted_score"] = doc_score
                 document = inspector_value["document"]
@@ -181,8 +180,6 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                     documents[document].append(inspector_value)
                 header_name = inspector_value["inspector__name"]
                 headers[header_name] = header_name
-        # Add boosted results
-        # docs = inverted_index.evaluate_formula(pk, documents)
         return Response(data={"headers": headers.keys(), "docs": documents})
 
     @action(detail=False, url_path="suggest", methods=["GET"])

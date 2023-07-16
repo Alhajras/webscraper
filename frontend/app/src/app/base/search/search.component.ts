@@ -6,6 +6,7 @@ import {Indexer} from "src/app/models/indexer.model";
 import {debounceTime, distinctUntilChanged, Subject, switchMap} from "rxjs";
 import {OverlayPanel} from "primeng/overlaypanel";
 import {MenuItem} from "primeng/api";
+import {InspectorValue} from "src/app/models/inspector-value.model";
 
 export interface TemplateDropDown {
   key: string
@@ -14,7 +15,8 @@ export interface TemplateDropDown {
 
 export interface Document {
   id: number;
-  inspector_values: any[];
+  inspector_values: InspectorValue[];
+  score: number
 }
 
 @Component({
@@ -22,7 +24,7 @@ export interface Document {
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit{
+export class SearchComponent implements OnInit {
   @ViewChild('op')
   public suggestionsOverlayPanel!: OverlayPanel
 
@@ -32,7 +34,7 @@ export class SearchComponent implements OnInit{
   public errorMessage = ''
   public readonly columnCount = 8
   public loading = false
-  public documents: Record<number, Document[]> = {}
+  public documents: Document[] = []
 
   public searchText = ''
   public cached_indexers = []
@@ -78,17 +80,22 @@ export class SearchComponent implements OnInit{
     })
   }
 
-  public searchProducts() {
+  public searchProducts(): void {
     this.suggestionsOverlayPanel.hide()
     this.loading = true
     this.documents = []
     // TODO this is bad and must be dynamic
     this.indexerService.search(this.selectedIndexerForm.id, this.searchText).subscribe((values: {
       headers: string[],
-      docs: Record<number, Document[]>
+      docs: Record<number, any[]>
     }) => {
       this.headers = values.headers
-      this.documents = values.docs
+      this.documents = Object.keys(values.docs).map((key) => {
+        const  inspectorValue= values.docs[+key][0] as InspectorValue
+        const doc:Document = {id: +key, score: inspectorValue.boosted_score, inspector_values: values.docs[+key]}
+        return doc;
+      });
+      this.documents=this.documents.sort((a, b) => a.score - b.score);
       this.loading = false
     })
   }
