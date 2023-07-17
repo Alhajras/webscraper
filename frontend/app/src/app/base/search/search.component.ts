@@ -1,17 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {debounceTime, distinctUntilChanged, Subject, switchMap} from "rxjs";
 import {FormGroup} from "@angular/forms";
-import {Template} from "src/app/models/template.model";
 import {IndexerService} from "src/app/services/indexer.service";
 import {Indexer} from "src/app/models/indexer.model";
-import {debounceTime, distinctUntilChanged, Subject, switchMap} from "rxjs";
-import {OverlayPanel} from "primeng/overlaypanel";
-import {MenuItem} from "primeng/api";
 import {InspectorValue} from "src/app/models/inspector-value.model";
-
-export interface TemplateDropDown {
-  key: string
-  template: Template
-}
+import {MenuItem} from "primeng/api";
+import {OverlayPanel} from "primeng/overlaypanel";
 
 export interface Document {
   id: number;
