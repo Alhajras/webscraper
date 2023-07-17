@@ -271,6 +271,16 @@ class LinkFragment(models.Model):
         return full_url
 
 
+class Statistics(models.Model):
+    runner = models.ForeignKey(Runner, on_delete=models.PROTECT)
+    visited_pages = models.PositiveIntegerField(default=0)
+    avg_loading_time = models.FloatField(default=0)
+    average_processing_time = models.FloatField(default=0)
+    avg_page_size = models.FloatField(default=0)
+    http_codes = models.JSONField(default='')
+    average_docs_per_page = models.PositiveIntegerField(default=0)
+
+
 class InspectorValue(models.Model):
     value = models.TextField(blank=True)
     url = models.URLField(default="")

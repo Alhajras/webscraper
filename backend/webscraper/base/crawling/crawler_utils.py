@@ -1,3 +1,4 @@
+import requests
 from django.db import transaction
 from urllib.parse import urlparse
 
@@ -8,7 +9,7 @@ from ..models import (
     InspectorValue,
     Document,
     LinkFragment,
-    Crawler
+    Crawler, Statistics
 )
 import logging
 import logging.handlers
@@ -134,6 +135,12 @@ class CrawlerUtils:
         max_visited_links = crawler.max_pages
         max_rec_level = crawler.max_depth
 
+        runner = Runner.objects.get(id=self.runner_id)
+        # Statistics variables
+        statistics = Statistics.objects.create(runner=runner)
+        visited_pages = 0
+        http_codes = {}
+
         def crawl_seed(seed: str) -> None:
             """
             This is the starting point where the crawling process start
@@ -179,7 +186,33 @@ class CrawlerUtils:
                 if links[link.url].visited:
                     logger.info(f"Thread: {thread_id} - {link.url} already visited.")
                     return
+
+                start_time = time.time()
                 driver.get(link.url)
+                # Calculate the download time
+                end_time = time.time()
+                download_time = end_time - start_time
+                statistics.avg_loading_time = download_time if statistics.avg_loading_time == 0 else (download_time + statistics.avg_loading_time) / 2
+                print(statistics.avg_loading_time)
+                # Get the page source
+                page_source = driver.page_source
+
+                # Calculate the page size in mega-bytes
+                page_size = len(page_source.encode("utf-8")) / 1048576
+                statistics.avg_page_size = page_size if statistics.avg_page_size == 0 else (page_size + statistics.avg_page_size) / 2
+                print(statistics.avg_page_size)
+
+                # Get the current URL from Selenium
+                current_url = driver.current_url
+                # Send a separate HTTP request using requests library to retrieve the status code
+                response = requests.get(current_url)
+                status_code = response.status_code
+                if status_code in http_codes:
+                    http_codes[status_code] = http_codes[status_code] + 1
+                else:
+                    http_codes[status_code] = 1
+                statistics.http_codes = http_codes
+
                 links[link.url].visited = True
                 # We execute all the 'before actions' before we start crawling
                 execute_all_before_actions(crawler.template, driver)
@@ -292,6 +325,12 @@ class CrawlerUtils:
                                 inspector=inspector_value.inspector,
                                 runner=inspector_value.runner,
                             )
+                    statistics.average_docs_per_page = documents_number if statistics.average_docs_per_page == 0 else (documents_number + statistics.average_docs_per_page) / 2
+                    end_time = time.time()
+                    average_processing_time = end_time - start_time
+                    statistics.average_processing_time = average_processing_time if statistics.average_processing_time == 0 else (average_processing_time + statistics.average_processing_time) / 2
+                    print(statistics.avg_loading_time)
+                    statistics.save()
                 except Exception as e:
                     print(f"{thread_id} encountered an error:")
                     print(e)
@@ -340,18 +379,16 @@ class CrawlerUtils:
                 futures.append(executor.submit(crawl_seed, crawler.seed_url))
             wait(futures)
 
-        runner = Runner.objects.get(id=self.runner_id)
         print(f"Docs: {runner.collected_documents}")
-        total_visited_links = 0
         total_non_useful_links = 0
         for key, link in links.items():
             if link.visited:
-                total_visited_links += 1
+                visited_pages += 1
             if not InspectorValue.objects.filter(url=link.url).exists():
-                print(link.url)
                 total_non_useful_links += 1
-
-        print(f"Visited Links: {total_visited_links}")
+        statistics.visited_pages = visited_pages
+        statistics.save()
+        print(f"Visited Links: {visited_pages}")
         print(f"total_non_useful_links: {total_non_useful_links}")
         end = time.time()
         print(end - start)

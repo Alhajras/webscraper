@@ -178,6 +178,6 @@ def execute_all_before_actions(template: Template, driver: WebDriver) -> None:
                     body = driver.find_element(By.CSS_SELECTOR, "body")
                     body.send_keys(Keys.SPACE)
                     # We give time for the loading before scrolling again
-                    time.sleep(2)
+                    time.sleep(1)
         except NoSuchElementException:
             print("Action button was not found")
