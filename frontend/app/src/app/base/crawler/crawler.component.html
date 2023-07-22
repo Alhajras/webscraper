@@ -43,7 +43,7 @@
     <ng-template pTemplate="body" let-crawler>
       <tr>
         <td>{{crawler.name}}</td>
-        <td><a [href]="crawler.seed_url">{{crawler.seed_url}}</a></td>
+        <td><a [href]="crawler.seed_url">{{crawler.seed_url | shortLink}}</a></td>
         <td>{{crawler.template}}</td>
         <td>
           <p>
