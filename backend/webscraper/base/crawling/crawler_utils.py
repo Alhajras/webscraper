@@ -189,6 +189,7 @@ class CrawlerUtils:
 
                 start_time = time.time()
                 driver.get(link.url)
+                statistics.visited_pages = statistics.visited_pages + 1
                 # Calculate the download time
                 end_time = time.time()
                 download_time = end_time - start_time
@@ -380,16 +381,8 @@ class CrawlerUtils:
             wait(futures)
 
         print(f"Docs: {runner.collected_documents}")
-        total_non_useful_links = 0
-        for key, link in links.items():
-            if link.visited:
-                visited_pages += 1
-            if not InspectorValue.objects.filter(url=link.url).exists():
-                total_non_useful_links += 1
-        statistics.visited_pages = visited_pages
         statistics.save()
         print(f"Visited Links: {visited_pages}")
-        print(f"total_non_useful_links: {total_non_useful_links}")
         end = time.time()
         print(end - start)
         print(threads_metrics)
