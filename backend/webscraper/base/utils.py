@@ -1,4 +1,6 @@
 import time
+from urllib.parse import urlparse
+from urllib.robotparser import RobotFileParser
 
 import requests
 from selenium.common import NoSuchElementException
@@ -22,29 +24,39 @@ from .models import (
 )
 
 
-def extract_disallow_lines_from_url(url):
+def fetch_robots_txt(link) -> str:
     """
-    Used to extract the Disallow urls from the Robots.txt file
+    Find and parse ROBOTS.txt file
+    :param link: Base link that will be used as a source of truth to find the ROBOTS.txt
+    :return:
     """
-    if url == "" or url is None:
-        return []
-    disallow_lines = []
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            file_content = response.text
+    # Parse the base URL from the provided link
+    base_url = urlparse(link)._replace(path='').geturl()
 
-            for line in file_content.split("\n"):
-                if "Disallow" in line:
-                    disallow_lines.append(line.replace("Disallow:", "").strip())
+    # Fetch the robots.txt file
+    robots_url = base_url + '/robots.txt'
+    response = requests.get(robots_url)
 
-        else:
-            print(f"Failed to retrieve file. Status code: {response.status_code}")
+    if response.status_code == 200:
+        return response.text
+    else:
+        return None
 
-    except requests.exceptions.RequestException as e:
-        print(f"Error occurred: {str(e)}")
 
-    return disallow_lines
+def check_crawl_permission(robots_txt_content, user_agent, link) -> bool:
+    """
+    Checks if the crawler allowed to crawl a link
+    :param robots_txt_content: ROBOTS.txt file content
+    :param user_agent: User used to crawl
+    :param link: The link wanted to be crawled
+    :return:
+    """
+    robot_parser = RobotFileParser()
+    robot_parser.parse(robots_txt_content.splitlines())
+    robot_parser.set_url(link)  # Set the URL to check permissions
+
+    # Check if the link is allowed to be crawled
+    return robot_parser.can_fetch(user_agent, link)
 
 
 def find_the_links_current_level(

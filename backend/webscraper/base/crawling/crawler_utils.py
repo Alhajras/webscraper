@@ -21,13 +21,12 @@ import time
 from selenium.webdriver.common.by import By
 from ..dataclasses import Link, CrawlerThread
 from ..utils import (
-    extract_disallow_lines_from_url,
     find_the_links_current_level,
     add_link_to_level,
     split_work_between_threads,
     create_chrome_driver,
     all_threads_completed,
-    execute_all_before_actions,
+    execute_all_before_actions, fetch_robots_txt, check_crawl_permission,
 )
 
 
@@ -115,14 +114,8 @@ class CrawlerUtils:
         # TODO: Use a better splitter
         # Urls that may crawler navigate by mistake
         excluded_urls = crawler.excluded_urls.split('";"')
-        robot_disallow_links = [
-            re.escape(bad_link)
-            for bad_link in extract_disallow_lines_from_url(crawler.robot_file_url)
-        ]
-        # Make a regex that matches if any of our regexes match.
-        disallow_link_patterns = ""
-        if len(robot_disallow_links) != 0:
-            disallow_link_patterns = "(" + ")|(".join(robot_disallow_links) + ")"
+        robots_file_link = crawler.robot_file_url if crawler.robot_file_url != '' else crawler.seed_url
+        robots_txt_content = fetch_robots_txt(robots_file_link)
 
         scope_divs = []
         # We read the scopes from the user input if it is not empty otherwise we get all elements from the DOM body
@@ -242,16 +235,17 @@ class CrawlerUtils:
                                     continue
                                 # We skip the fragments as they do not add any product, that why we split by #
                                 href = a.get_attribute("href").split("#").pop()
-                                # Respect the Robots.txt file protocol
-                                if disallow_link_patterns != "" and re.match(
-                                        disallow_link_patterns, href
-                                ):
+                                # Check if the link is allowed to be crawled
+                                if not check_crawl_permission(robots_txt_content, "testing-agent", href):
+                                    statistics.http_codes[f"Disallow link: {href}"] = 1
                                     continue
                                 # Skip unwanted links
                                 if href in excluded_urls:
+                                    statistics.http_codes[f"Excluded link: {href}"] = 1
                                     continue
                                 # Links from outside the main host are skipped
                                 if base_url != urlparse(href).hostname:
+                                    statistics.http_codes[f"Cross site link: {href}"] = 1
                                     continue
                                 if (
                                         link.url != href
