@@ -2,6 +2,11 @@ import requests
 from django.db import transaction
 from urllib.parse import urlparse
 
+from selenium.common import UnexpectedAlertPresentException, WebDriverException
+from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.webdriver.support.wait import WebDriverWait
+
 from ..models import (
     Runner,
     RunnerStatus,
@@ -141,6 +146,8 @@ class CrawlerUtils:
             """
             thread_id = threading.get_native_id()
             driver = create_chrome_driver(crawler.show_browser)
+            # Set the maximum time to wait (in seconds)
+            wait = WebDriverWait(driver, 10)
 
             # This will hold all the queues for all the links different levels
             links_queues: dict[int, list] = {}
@@ -170,6 +177,7 @@ class CrawlerUtils:
                 link: Link = current_active_queue.pop()
                 link_fragment = self.save_url_fragments(link.url, runner)
                 if runner.collected_documents >= max_collected_docs:
+                    statistics.http_codes[f"Stopped because reached {max_collected_docs} docs"] = max_collected_docs
                     return
                 logger.info(
                     f"Thread: {thread_id} - {link.url} out of {len(current_active_queue)}"
@@ -179,9 +187,11 @@ class CrawlerUtils:
                 if links[link.url].visited:
                     logger.info(f"Thread: {thread_id} - {link.url} already visited.")
                     return
-
                 start_time = time.time()
                 driver.get(link.url)
+                # wait = WebDriverWait(driver, 10)
+                # wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "body")))
+
                 statistics.visited_pages = statistics.visited_pages + 1
                 # Calculate the download time
                 end_time = time.time()
@@ -189,23 +199,34 @@ class CrawlerUtils:
                 statistics.avg_loading_time = download_time if statistics.avg_loading_time == 0 else (download_time + statistics.avg_loading_time) / 2
                 print(statistics.avg_loading_time)
                 # Get the page source
-                page_source = driver.page_source
+                try:
+                    page_source = driver.page_source
+                    page_size = len(page_source.encode("utf-8")) / 1048576
+                    statistics.avg_page_size = page_size if statistics.avg_page_size == 0 else (page_size + statistics.avg_page_size) / 2
+                except (UnexpectedAlertPresentException) as e:
+                    logger.error(f"The link {link.url} thrown an error: {e}")
 
                 # Calculate the page size in mega-bytes
-                page_size = len(page_source.encode("utf-8")) / 1048576
-                statistics.avg_page_size = page_size if statistics.avg_page_size == 0 else (page_size + statistics.avg_page_size) / 2
                 print(statistics.avg_page_size)
 
                 # Get the current URL from Selenium
-                current_url = driver.current_url
-                # Send a separate HTTP request using requests library to retrieve the status code
-                response = requests.get(current_url)
-                status_code = response.status_code
-                if status_code in http_codes:
-                    http_codes[status_code] = http_codes[status_code] + 1
-                else:
-                    http_codes[status_code] = 1
-                statistics.http_codes = http_codes
+                # Send a separate HTTP request using requests library to retrieve the status code\
+                try:
+                    current_url = driver.current_url
+                    response = requests.get(current_url)
+                    status_code = response.status_code
+                    print(status_code)
+                    if status_code in http_codes:
+                        http_codes[status_code] = http_codes[status_code] + 1
+                    else:
+                        http_codes[status_code] = 1
+                        http_codes[status_code] = 1
+                    statistics.http_codes = http_codes
+                except (requests.exceptions.ConnectionError) as e:
+                    logger.error(f"The link {link.url} thrown an error: {e}")
+                except WebDriverException as e:
+                    logger.error(f"The link {link.url} thrown an error: {e}")
+                    return
 
                 links[link.url].visited = True
                 # We execute all the 'before actions' before we start crawling
@@ -236,9 +257,9 @@ class CrawlerUtils:
                                 # We skip the fragments as they do not add any product, that why we split by #
                                 href = a.get_attribute("href").split("#").pop()
                                 # Check if the link is allowed to be crawled
-                                if not check_crawl_permission(robots_txt_content, "testing-agent", href):
-                                    statistics.http_codes[f"Disallow link: {href}"] = 1
-                                    continue
+                                # if not check_crawl_permission(robots_txt_content, "testing-agent", href):
+                                #     statistics.http_codes[f"Disallow link: {href}"] = 1
+                                #     continue
                                 # Skip unwanted links
                                 if href in excluded_urls:
                                     statistics.http_codes[f"Excluded link: {href}"] = 1
@@ -257,6 +278,8 @@ class CrawlerUtils:
                                     )
                                     links[href] = found_link
                                     add_link_to_level(links_queues, found_link)
+                    else:
+                        statistics.http_codes[f"Reached max recursion level reached {max_rec_level}"] = max_rec_level
 
                     # We start looking up for the elements we would like to collect inside the page/document
                     inspectors_list = Inspector.objects.filter(
@@ -377,6 +400,28 @@ class CrawlerUtils:
         print(f"Docs: {runner.collected_documents}")
         statistics.save()
         print(f"Visited Links: {visited_pages}")
+
+        total_visited_links = 0
+        total_non_useful_links = 0
+        visitied = []
+        visitied_not_saved = []
+        not_visited = []
+        for key, link in links.items():
+            if link.visited:
+                visitied.append(key)
+            else:
+                not_visited.append(key)
+            if not InspectorValue.objects.filter(url=link.url).exists():
+                visitied_not_saved.append(key)
+
+        print("--------------------- visited -----------------------")
+        print(len(visitied))
+
+        print("--------------------- not_visited -----------------------")
+        print(len(not_visited))
+
+        print("--------------------- visitied_not_saved -----------------------")
+        print(len(visitied_not_saved))
         end = time.time()
         print(end - start)
         print(threads_metrics)
