@@ -222,9 +222,7 @@ class CrawlerUtils:
                         http_codes[status_code] = 1
                         http_codes[status_code] = 1
                     statistics.http_codes = http_codes
-                except (requests.exceptions.ConnectionError) as e:
-                    logger.error(f"The link {link.url} thrown an error: {e}")
-                except WebDriverException as e:
+                except (WebDriverException, requests.exceptions.ConnectionError, requests.exceptions.TooManyRedirects) as e:
                     logger.error(f"The link {link.url} thrown an error: {e}")
                     return
 
