@@ -136,7 +136,7 @@ class CrawlerUtils:
         # Statistics variables
         statistics = Statistics.objects.create(runner=runner)
         visited_pages = 0
-        http_codes = {}
+        http_codes = {"Already visited": 0, "Duplicated content": 0}
 
         def crawl_seed(seed: str) -> None:
             """
@@ -184,6 +184,7 @@ class CrawlerUtils:
                 # Run the Webdriver, save page an quit browser
                 # TODO: I should use `retry` here
                 if links[link.url].visited:
+                    http_codes["Already visited"] = http_codes["Already visited"] + 1
                     logger.info(f"Thread: {thread_id} - {link.url} already visited.")
                     return
                 start_time = time.time()
@@ -343,6 +344,7 @@ class CrawlerUtils:
                                     runner=inspector_value.runner,
                                 )
                         else:
+                            http_codes["Duplicated content"] = http_codes["Duplicated content"] + 1
                             print(f"Found duplicated contents with hashcode: {document_hash_code}")
                     statistics.average_docs_per_page = documents_number if statistics.average_docs_per_page == 0 else (documents_number + statistics.average_docs_per_page) / 2
                     end_time = time.time()
