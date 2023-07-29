@@ -1,3 +1,4 @@
+from django.contrib.postgres.indexes import HashIndex
 from django.db import models
 from django.db.models import Count
 from polymorphic.models import PolymorphicModel
@@ -185,6 +186,7 @@ class Document(models.Model):
     """
 
     template = models.ForeignKey(Template, on_delete=models.PROTECT, null=True)
+    hash_code = models.CharField(max_length=40, default='')
 
     def __str__(self) -> str:
         return str(self.pk)

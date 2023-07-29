@@ -1,3 +1,4 @@
+import hashlib
 import time
 from urllib.parse import urlparse
 from urllib.robotparser import RobotFileParser
@@ -194,3 +195,13 @@ def execute_all_before_actions(template: Template, driver: WebDriver) -> None:
                     time.sleep(1)
         except NoSuchElementException:
             print("Action button was not found")
+
+
+def evaluate_document_hash_code(inspector_values: list) -> str:
+    input_string = ''
+    for value in inspector_values:
+        input_string += f"{value.value}{value.attribute}"
+
+    # Generate the SHA1 hash
+    sha1_hash = hashlib.sha1(input_string.encode()).hexdigest()
+    return sha1_hash

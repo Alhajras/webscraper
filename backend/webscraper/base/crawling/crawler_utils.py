@@ -3,7 +3,6 @@ from django.db import transaction
 from urllib.parse import urlparse
 
 from selenium.common import UnexpectedAlertPresentException, WebDriverException
-from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -31,7 +30,7 @@ from ..utils import (
     split_work_between_threads,
     create_chrome_driver,
     all_threads_completed,
-    execute_all_before_actions, fetch_robots_txt, check_crawl_permission,
+    execute_all_before_actions, fetch_robots_txt, check_crawl_permission, evaluate_document_hash_code,
 )
 
 
@@ -328,19 +327,23 @@ class CrawlerUtils:
                     documents_number = lengths[0]
                     # We start saving documents
                     for i in range(documents_number):
-                        Document.objects.create(template=crawler.template)
-                        doc = Document.objects.last()
-                        for inspector in documents_dict.keys():
-                            inspector_value = documents_dict[inspector][i]
-                            InspectorValue.objects.update_or_create(
-                                url=inspector_value.url,
-                                link_fragment=inspector_value.link_fragment,
-                                attribute=inspector_value.attribute,
-                                value=inspector_value.value,
-                                document=doc,
-                                inspector=inspector_value.inspector,
-                                runner=inspector_value.runner,
-                            )
+                        inspector_values = [documents_dict[inspector][i] for inspector in documents_dict.keys()]
+                        document_hash_code = evaluate_document_hash_code(inspector_values)
+                        if not Document.objects.filter(hash_code=document_hash_code).exists():
+                            Document.objects.create(template=crawler.template, hash_code=document_hash_code)
+                            doc = Document.objects.last()
+                            for inspector_value in inspector_values:
+                                InspectorValue.objects.update_or_create(
+                                    url=inspector_value.url,
+                                    link_fragment=inspector_value.link_fragment,
+                                    attribute=inspector_value.attribute,
+                                    value=inspector_value.value,
+                                    document=doc,
+                                    inspector=inspector_value.inspector,
+                                    runner=inspector_value.runner,
+                                )
+                        else:
+                            print(f"Found duplicated contents with hashcode: {document_hash_code}")
                     statistics.average_docs_per_page = documents_number if statistics.average_docs_per_page == 0 else (documents_number + statistics.average_docs_per_page) / 2
                     end_time = time.time()
                     average_processing_time = end_time - start_time
