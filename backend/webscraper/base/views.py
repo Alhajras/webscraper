@@ -126,12 +126,15 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                 singleton_cache.suggestions_cache[cache_key] = q_obj
                 print("Done creating dictionary!")
             Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.INDEXING)
+            import time
+            start_time = time.time()
             print("Creating an index!")
             inverted_index = InvertedIndex()
             inverted_index.create_index(indexer_id)
             indexer.status = IndexerStatus.COMPLETED
             indexer.completed_at = timezone.now()
             indexer.save()
+            print(start_time - time.time())
             print("Done creating an index!")
 
         with ThreadPoolExecutor(max_workers=2) as executor:
@@ -146,9 +149,9 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         inverted_index = InvertedIndex()
         result = inverted_index.process_query(query.split(" "), pk)[:25]
         for r in result:
-            print(r.score)
+            print(r[2])
         # TODO: 25 should be configurable
-        docs_ids = [d.document_db_id for d in result]
+        docs_ids = [d[3] for d in result]
         headers = {}
         documents = {}
         for doc_id in docs_ids:
