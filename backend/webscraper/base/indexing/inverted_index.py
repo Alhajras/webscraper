@@ -4,6 +4,8 @@ https://ad-wiki.informatik.uni-freiburg.de/teaching/InformationRetrievalWS2223
 """
 import re
 import math
+from concurrent.futures import ThreadPoolExecutor, Future, wait
+
 from sympy import var, sympify
 from .qgram_index import SingletonMeta
 from ..models import InspectorValue, Inspector, Indexer
@@ -69,39 +71,53 @@ class InvertedIndex:
         if len(inspector_values) == 0:
             print("No documents are found to be indexed!")
             return
-        doc_lengths = []
-        doc_id = 0
-        for inspector_value in inspector_values:
-            dl = 0  # Compute the document length (number of words).
-            doc_id += 1
-            # TODO: I think the regular expression for tokenization should be configured by the GUI
-            for word in re.split("[^A-Za-z]+", inspector_value.value):
-                # Neglect capital differences
-                word = word.lower()
 
-                # Ignore the word if it is empty or small, or it is in the skip list.
-                if len(word) <= small_words_threshold or word in skip_words_dictionary:
-                    continue
+        # Init all lengths to zero
+        doc_lengths = [0] * len(inspector_values)
+        def collect_words(inspector_values, doc_id) -> None:
+            for inspector_value in inspector_values:
+                dl = 0  # Compute the document length (number of words).
+                doc_id += 1
+                # TODO: I think the regular expression for tokenization should be configured by the GUI
+                for word in re.split("[^A-Za-z]+", inspector_value.value):
+                    # Neglect capital differences
+                    word = word.lower()
 
-                dl += 1
-                # Skip empty spaces
-                if word not in self.inverted_lists:
-                    # The word is seen for first time, create new list.
-                    # counter: int, inspector_db_id: int, score: int, document_db_id: int
-                    self.inverted_lists[word] = [(doc_id, inspector_value.id, 1, inspector_value.document.id)]
-                    continue
+                    # Ignore the word if it is empty or small, or it is in the skip list.
+                    if len(word) <= small_words_threshold or word in skip_words_dictionary:
+                        continue
 
-                # Get last posting to check if the doc was already seen.
-                last = self.inverted_lists[word][-1]
-                if last[0] == doc_id:
-                    # The doc was already seen, increment tf by 1.
-                    self.inverted_lists[word][-1] =(doc_id, inspector_value.id, last[2] + 1 , inspector_value.document.id)
-                else:
-                    # The doc was not already seen, set tf to 1.
-                    self.inverted_lists[word].append((doc_id, inspector_value.id, 1, inspector_value.document.id))
-            # Register the document length.
-            doc_lengths.append(dl)
+                    dl += 1
+                    # Skip empty spaces
+                    if word not in self.inverted_lists:
+                        # The word is seen for first time, create new list.
+                        # counter: int, inspector_db_id: int, score: int, document_db_id: int
+                        self.inverted_lists[word] = [(doc_id, inspector_value.id, 1, inspector_value.document.id)]
+                        continue
 
+                    # Get last posting to check if the doc was already seen.
+                    last = self.inverted_lists[word][-1]
+                    if last[0] == doc_id:
+                        # The doc was already seen, increment tf by 1.
+                        self.inverted_lists[word][-1] = (
+                        doc_id, inspector_value.id, last[2] + 1, inspector_value.document.id)
+                    else:
+                        # The doc was not already seen, set tf to 1.
+                        self.inverted_lists[word].append((doc_id, inspector_value.id, 1, inspector_value.document.id))
+                # Register the document length.
+                doc_lengths[doc_id] = dl
+
+        threads = 2
+        # Step 1: Calculate the size of each partition
+        partition_size = len(inspector_values) // threads
+
+        # Step 2: Create the partitions
+        partitions = [inspector_values[i:i + partition_size] for i in range(0, len(inspector_values), partition_size)]
+
+        with ThreadPoolExecutor(max_workers=threads) as executor:
+            thread_1: Future = executor.submit(collect_words, partitions[0], 0)
+            thread_2: Future = executor.submit(collect_words, partitions[1], len(partitions[0]) - 1)
+            wait([thread_1, thread_2])
         # Compute N (the total number of documents).
         n = inspector_values.count()
         # Compute AVDL (the average document length).
