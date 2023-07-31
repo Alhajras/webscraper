@@ -271,8 +271,4 @@ export class IndexerComponent implements OnInit {
     }).catch()
     this.reloadIndexers()
   }
-
-  public openRankingBooster(event: MouseEvent, op: OverlayPanel): void {
-    op.toggle(event)
-  }
 }

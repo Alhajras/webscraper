@@ -5,7 +5,7 @@ import {Runner} from "src/app/models/runner.model";
 import {RunnerService} from "src/app/services/runner.service";
 import {Crawler} from "src/app/models/crawler.model";
 import {CrawlerService} from "src/app/services/crawler.service";
-import {MenuItem} from "primeng/api";
+import {MenuItem, MessageService} from "primeng/api";
 import {Menu} from "primeng/menu";
 
 export interface CrawlerDropDown {
@@ -83,6 +83,7 @@ export class RunnerComponent {
     private readonly fb: FormBuilder,
     private readonly runnerService: RunnerService,
     private readonly crawlerService: CrawlerService,
+    private messageService: MessageService
   ) {
     this.loading = true
     this.init()
@@ -124,6 +125,11 @@ export class RunnerComponent {
     }
     this.runnerService.start(runner).toPromise().then(() => {
       this.displayModal = false
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Runner ${this.name.value} started!`
+      });
     })
   }
 
@@ -155,11 +161,21 @@ export class RunnerComponent {
           this.runners = runners
         })
         this.closeModal()
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `Runner ${this.name.value} is updated!`
+        });
         this.currentlySubmitting = false
         this.updatedRunner = null
       }).catch((err: HttpErrorResponse) => {
         this.errorMessage = err.error
         this.currentlySubmitting = false
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `Runner ${this.name.value} failed to update!`
+        });
         console.log(err)
       })
       return;
@@ -173,6 +189,11 @@ export class RunnerComponent {
         this.runners = runners
       })
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Runner ${runner.name} is deleted!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
@@ -186,6 +207,11 @@ export class RunnerComponent {
     this.runnerService.stop(runner.id, runner).toPromise().then(() => {
       this.closeModal()
       this.currentlySubmitting = false
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Runner ${runner.name} is stopped!`
+      });
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
       this.currentlySubmitting = false
@@ -212,6 +238,11 @@ export class RunnerComponent {
         this.runners = runners
       })
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Runner ${runner.name} is created!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
@@ -232,11 +263,16 @@ export class RunnerComponent {
         downloadLink.download = `${runner.id}.runner_output.csv`;
         downloadLink.click()
         URL.revokeObjectURL(downloadLink.href)
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `Starting to download ${runner.id}.runner_output.csv `
+        });
       }
     ).catch()
   }
 
-  openMenu($event: MouseEvent, menu: Menu, runner: Runner) {
+  public openMenu($event: MouseEvent, menu: Menu, runner: Runner): void {
     this.actions = []
     this.runner = runner
     if (runner.collected_documents) {
