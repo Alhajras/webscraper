@@ -101,7 +101,6 @@
             text="The crawler could not be created:"
             class="p-mr-2"
           ></p-message>
-
           <div class="grid">
             <div class="col-6">
               <app-input-field
@@ -144,6 +143,9 @@
 
               </app-input-field>
 
+            </div>
+            <div class="col-6">
+
               <app-input-field
                 [isRequired]="true"
                 labelText="Max pages"
@@ -170,19 +172,6 @@
               </app-input-field>
 
               <app-input-field
-                [isRequired]="false"
-                labelText="Parsing algorithm"
-                helpText="Two algorithms are supported currently Breadth-First Search (Bottom-Up and Top-down)."
-              >
-                <p-dropdown
-                  id="parsing_algorithm-id"
-                  [formControl]="parsingAlgorithm"
-                  placeholder="Select an algorithm"
-                  [options]="parsingAlgorithmsList"
-                  [filter]="false"
-                ></p-dropdown>
-              </app-input-field>
-              <app-input-field
                 [isRequired]="true"
                 labelText="Allow multi elements crawling"
                 helpText="If the documents are listed as a list in a page this can be set to true."
@@ -195,117 +184,137 @@
                   [filter]="false"
                 ></p-dropdown>
               </app-input-field>
-              <app-input-field
-                [isRequired]="false"
-                labelText="Threads"
-                helpText="How many threads will be used in crawling process."
-              >
-                <input
-                  type="number"
-                  id="threads-id"
-                  pInputText
-                  [formControl]="threads"
-                />
-              </app-input-field>
-              <app-input-field
-                [isRequired]="false"
-                labelId="exclude-urls-id"
-                labelText="Excluded URLs"
-                helpText="The URLs that the crawler should avoid and never visit."
-              >
-                <p-chips [formControl]="excludedUrls"></p-chips>
-              </app-input-field>
 
             </div>
-            <div class="col-6">
-              <app-input-field
-                [isRequired]="false"
-                labelText="Robots file URL"
-                helpText="The URL where the robots.txt URL can be found."
-              >
-                <input
-                  id="robot-file-url-id"
-                  type="text"
-                  pInputText
-                  [formControl]="robotFileUrl"
-                />
-              </app-input-field>
-              <app-input-field
-                [isRequired]="false"
-                labelId="scope-divs-id"
-                labelText="Links Scope (Pagination)"
-                helpText="The divs where the crawler should only focus on. Usually you do not want the crawler to collect links from the header and footer for example. Example: //*[contains(@class, 'product-overview')]"
-              >
-                <p-chips [formControl]="scopeDivs"></p-chips>
-              </app-input-field>
-              <app-input-field
-                [isRequired]="false"
-                labelText="Retry"
-                helpText="When the crawler fails to crawl from a page how many times should it retry again."
-              >
-                <input
-                  type="number"
-                  id="retry-id"
-                  pInputText
-                  [formControl]="retry"
-                />
-              </app-input-field>
+          </div>
 
-              <app-input-field
-                [isRequired]="false"
-                labelText="Sleep in ms"
-                helpText="How many millisecond should and crawler wait until the next request."
-              >
-                <input
-                  id="sleep-id"
-                  type="number"
-                  pInputText
-                  [formControl]="sleep"
-                />
-              </app-input-field>
 
-              <app-input-field
-                [isRequired]="false"
-                labelText="Timeout in minutes"
-                helpText="For how long should the crawler be crawling."
-              >
-                <input
-                  id="timeout-id"
-                  type="number"
-                  pInputText
-                  [formControl]="timeout"
-                />
-              </app-input-field>
+          <p-accordion>
+            <p-accordionTab header="Advanced options">
+              <div class="grid">
+                <div class="col-6">
+                  <app-input-field
+                    [isRequired]="false"
+                    labelText="Parsing algorithm"
+                    helpText="Two algorithms are supported currently Breadth-First Search (Bottom-Up and Top-down)."
+                  >
+                    <p-dropdown
+                      id="parsing_algorithm-id"
+                      [formControl]="parsingAlgorithm"
+                      placeholder="Select an algorithm"
+                      [options]="parsingAlgorithmsList"
+                      [filter]="false"
+                    ></p-dropdown>
+                  </app-input-field>
+                  <app-input-field
+                    [isRequired]="false"
+                    labelText="Threads"
+                    helpText="How many threads will be used in crawling process."
+                  >
+                    <input
+                      type="number"
+                      id="threads-id"
+                      pInputText
+                      [formControl]="threads"
+                    />
+                  </app-input-field>
+                  <app-input-field
+                    [isRequired]="false"
+                    labelId="exclude-urls-id"
+                    labelText="Excluded URLs"
+                    helpText="The URLs that the crawler should avoid and never visit."
+                  >
+                    <p-chips [formControl]="excludedUrls"></p-chips>
+                  </app-input-field>
+                  <app-input-field
+                    [isRequired]="false"
+                    labelText="Retry"
+                    helpText="When the crawler fails to crawl from a page how many times should it retry again."
+                  >
+                    <input
+                      type="number"
+                      id="retry-id"
+                      pInputText
+                      [formControl]="retry"
+                    />
+                  </app-input-field>
+                  <app-input-field
+                    [isRequired]="false"
+                    labelText="Sleep in ms"
+                    helpText="How many millisecond should and crawler wait until the next request."
+                  >
+                    <input
+                      id="sleep-id"
+                      type="number"
+                      pInputText
+                      [formControl]="sleep"
+                    />
+                  </app-input-field>
 
-              <app-input-field
-                [isRequired]="false"
-                labelText="Max depth"
-                helpText="How deep should the crawler navigate through pages."
-              >
-                <input
-                  id="max-depth-id"
-                  type="number"
-                  pInputText
-                  [formControl]="maxDepth"
-                />
-              </app-input-field>
-              <app-input-field
-                [isRequired]="false"
-                labelId="show-browser-id"
-                labelText="Show browser"
-                helpText="This option will show the browser while crawling. This is usefull for debugging."
-              >
-                <div>
-                  <p-inputSwitch [formControl]="showBrowser"></p-inputSwitch>
                 </div>
-              </app-input-field>
+                <div class="col-6">
+                  <app-input-field
+                    [isRequired]="false"
+                    labelText="Robots file URL"
+                    helpText="The URL where the robots.txt URL can be found."
+                  >
+                    <input
+                      id="robot-file-url-id"
+                      type="text"
+                      pInputText
+                      [formControl]="robotFileUrl"
+                    />
+                  </app-input-field>
+                  <app-input-field
+                    [isRequired]="false"
+                    labelId="scope-divs-id"
+                    labelText="Links Scope (Pagination)"
+                    helpText="The divs where the crawler should only focus on. Usually you do not want the crawler to collect links from the header and footer for example. Example: //*[contains(@class, 'product-overview')]"
+                  >
+                    <p-chips [formControl]="scopeDivs"></p-chips>
+                  </app-input-field>
+                  <app-input-field
+                    [isRequired]="false"
+                    labelText="Timeout in minutes"
+                    helpText="For how long should the crawler be crawling."
+                  >
+                    <input
+                      id="timeout-id"
+                      type="number"
+                      pInputText
+                      [formControl]="timeout"
+                    />
+                  </app-input-field>
 
-              <app-input-field
-                [isRequired]="false"
-                labelId="description-id"
-                labelText="Description"
-                helpText=""
-              >
+                  <app-input-field
+                    [isRequired]="false"
+                    labelText="Max depth"
+                    helpText="How deep should the crawler navigate through pages."
+                  >
+                    <input
+                      id="max-depth-id"
+                      type="number"
+                      pInputText
+                      [formControl]="maxDepth"
+                    />
+                  </app-input-field>
+                  <app-input-field
+                    [isRequired]="false"
+                    labelId="show-browser-id"
+                    labelText="Show browser"
+                    helpText="This option will show the browser while crawling. This is usefull for debugging."
+                  >
+                    <div>
+                      <p-inputSwitch [formControl]="showBrowser"></p-inputSwitch>
+                    </div>
+                  </app-input-field>
+
+                  <app-input-field
+                    [isRequired]="false"
+                    labelId="description-id"
+                    labelText="Description"
+                    helpText=""
+                  >
             <textarea
               [rows]="5"
               [cols]="100"
@@ -313,22 +322,17 @@
               [formControl]="description"
               ngDefaultControl
             ></textarea>
-              </app-input-field>
-
-
-            </div>
-          </div>
-
+                  </app-input-field>
+                </div>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
           <div>
-
           </div>
         </form>
       </p-card>
     </div>
     <ng-template pTemplate="footer">
-      <!--    <span *ngIf="currentlySubmitting" class="p-mr-2">-->
-      <!--      <loading msg="Submitting ..."></loading>-->
-      <!--    </span>-->
       <button
         id="run-btn"
         type="button"
