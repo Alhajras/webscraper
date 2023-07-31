@@ -48,12 +48,12 @@
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-inspector>
+      <ng-template pTemplate="body" let-action>
         <tr>
           <td></td>
-          <td>{{inspector.name}}</td>
-          <td>{{inspector.type}}</td>
-          <td>{{inspector.order}}</td>
+          <td>{{action.name}}</td>
+          <td>{{action.type}}</td>
+          <td>{{action.order}}</td>
           <td>
             <div>
               <button
@@ -62,7 +62,7 @@
                 pButton
                 pRipple
                 label="Edit"
-                (click)="editAction(inspector)"
+                (click)="editAction(action)"
               ></button>
               <button
                 class="ml-1 mt-1 mb-1 p-button-danger p-button-outlined p-button-sm no-icon"
@@ -70,7 +70,7 @@
                 pButton
                 pRipple
                 label="Delete"
-                (click)="deleteAction(inspector)"
+                (click)="deleteAction(action)"
               ></button>
             </div>
           </td>
@@ -124,11 +124,11 @@
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-inspector>
+      <ng-template pTemplate="body" let-action>
         <tr>
-          <td>{{inspector.name}}</td>
-          <td>{{inspector.type}}</td>
-          <td>{{inspector.order}}</td>
+          <td>{{action.name}}</td>
+          <td>{{action.type}}</td>
+          <td>{{action.order}}</td>
           <td>
             <div>
               <button
@@ -137,7 +137,7 @@
                 pButton
                 pRipple
                 label="Edit"
-                (click)="editAction(inspector)"
+                (click)="editAction(action)"
               ></button>
               <button
                 class="ml-1 mt-1 mb-1 p-button-danger p-button-outlined p-button-sm no-icon"
@@ -145,7 +145,7 @@
                 pButton
                 pRipple
                 label="Delete"
-                (click)="deleteAction(inspector)"
+                (click)="deleteAction(action)"
               ></button>
             </div>
           </td>

@@ -69,12 +69,13 @@ export class ActionComponent implements OnInit {
       order: this.order.value,
       disabled: this.disableActions.value,
       type: this.type.value.value,
+      action_chain: this.template.action_chain,
     }
     if (this.updatedAction !== null) {
-    this.addActionTypeAttributes(action)
+      this.addActionTypeAttributes(action)
       this.actionService.update(this.updatedAction.id, action).toPromise().then(() => {
-        this.actionService.list({template: this.template.id}).subscribe(action => {
-          this.beforeActions = action
+        this.actionService.list({template: this.template.id}).subscribe(actions => {
+          this.beforeActions = actions.filter(ac => ac.action_chain === this.template.action_chain)
         })
         this.closeModal()
         this.currentlySubmitting = false
@@ -88,8 +89,8 @@ export class ActionComponent implements OnInit {
     }
     this.addActionTypeAttributes(action)
     this.actionService.post(action).toPromise().then(() => {
-      this.actionService.list({template: this.template.id}).subscribe(action => {
-        this.beforeActions = action
+      this.actionService.list({template: this.template.id}).subscribe(actions => {
+        this.beforeActions = actions.filter(ac => ac.action_chain === this.template.action_chain)
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -104,7 +105,7 @@ export class ActionComponent implements OnInit {
     action.deleted = true
     this.actionService.update(action.id, action).toPromise().then(() => {
       this.actionService.list().subscribe(actions => {
-        this.beforeActions = actions
+        this.beforeActions = actions.filter(ac => ac.action_chain === this.template.action_chain)
       })
       this.closeModal()
       this.currentlySubmitting = false
@@ -136,7 +137,7 @@ export class ActionComponent implements OnInit {
 
   public ngOnInit(): void {
     this.actionService.list({template: this.template.id}).subscribe(actions => {
-      this.beforeActions = actions
+      this.beforeActions = actions.filter(ac => ac.action_chain === this.template.action_chain)
     })
     this.initForm()
   }
@@ -185,7 +186,7 @@ export class ActionComponent implements OnInit {
         break;
     }
     action = this.evaluateType(action)
-    action.action_chain = 2
+    action.action_chain = this.template.action_chain
     return action
   }
 

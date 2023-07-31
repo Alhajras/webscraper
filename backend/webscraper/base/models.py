@@ -70,6 +70,10 @@ class Template(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    @property
+    def action_chain(self):
+        return ActionChain.objects.get(template=self).id
+
 
 class Indexer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)

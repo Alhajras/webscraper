@@ -132,7 +132,7 @@ class RunnerSerializer(serializers.ModelSerializer):
 class TemplateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Template
-        fields = "__all__"
+        fields = ["id", "name", "created_at", "deleted", "inspectors", "action_chain"]
 
     inspectors = InspectorSerializer(many=True, read_only=True)
 

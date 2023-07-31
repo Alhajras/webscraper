@@ -25,7 +25,7 @@ from .models import (
     RunnerStatus,
     Indexer,
     IndexerStatus,
-    Action,
+    Action, ActionChain,
 )
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
@@ -58,6 +58,16 @@ class CrawlerViewSet(EverythingButDestroyViewSet):
 class TemplateViewSet(EverythingButDestroyViewSet):
     queryset = Template.objects.filter(deleted=False)
     serializer_class = TemplateSerializer
+
+    @transaction.atomic
+    def create(self, request: Request, *args, **kwargs) -> Response:
+        """
+        Create a template and its actions chain.
+        """
+        template = super().create(request, *args, **kwargs)
+        template_object = Template.objects.get(name=request.data["name"])
+        ActionChain.objects.create(template=template_object, name=request.data["name"])
+        return template
 
 
 class IndexerViewSet(EverythingButDestroyViewSet):
