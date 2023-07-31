@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Action, ActionChain} from "src/app/models/action.model";
 import {ActionService} from "src/app/services/action.service";
+import {MessageService} from "primeng/api";
 
 
 export interface TypeDropDown {
@@ -45,13 +46,21 @@ export class ActionComponent implements OnInit {
   public constructor(
     private readonly fb: FormBuilder,
     private readonly actionService: ActionService,
+    private readonly messageService: MessageService
   ) {
 
   }
 
   public disableActionsChain(): void {
-    this.actionService.disableActionsChain(this.template.action_chain).subscribe()
+    this.actionService.disableActionsChain(this.template.action_chain).subscribe(() => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Actions status is changed!`
+      });
+    })
   }
+
   public closeModal(): void {
     this.displayModal = false
   }
@@ -78,11 +87,21 @@ export class ActionComponent implements OnInit {
           this.beforeActions = actions.filter(ac => ac.action_chain === this.template.action_chain)
         })
         this.closeModal()
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `Action ${this.name.value} is edited!`
+        });
         this.currentlySubmitting = false
         this.updatedAction = null
       }).catch((err: HttpErrorResponse) => {
         this.errorMessage = err.error
         this.currentlySubmitting = false
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `Action ${this.name.value} failed to be edited!`
+        });
         console.log(err)
       })
       return;
@@ -93,10 +112,20 @@ export class ActionComponent implements OnInit {
         this.beforeActions = actions.filter(ac => ac.action_chain === this.template.action_chain)
       })
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Action ${this.name.value} is created!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
       this.currentlySubmitting = false
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Action ${this.name.value} failed to be created!`
+      });
       console.log(err)
     })
   }
@@ -108,6 +137,11 @@ export class ActionComponent implements OnInit {
         this.beforeActions = actions.filter(ac => ac.action_chain === this.template.action_chain)
       })
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Action ${action.name} is deleted!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
