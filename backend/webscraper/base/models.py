@@ -74,6 +74,10 @@ class Template(models.Model):
     def action_chain(self):
         return ActionChain.objects.get(template=self).id
 
+    @property
+    def action_chain_disabled(self):
+        return ActionChain.objects.get(template=self).disabled
+
 
 class Indexer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)

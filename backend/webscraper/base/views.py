@@ -326,3 +326,10 @@ class UserViewSet(viewsets.ModelViewSet):
 class ActionViewSet(EverythingButDestroyViewSet):
     queryset = Action.objects.all().filter(deleted=False)
     serializer_class = ActionPolymorphicSerializer
+
+    @action(detail=True, url_path="disable-actions-chain", methods=["post"])
+    def disable_actions_chain(self, request: Request, pk: int):
+        chain = ActionChain.objects.get(id=pk)
+        chain.disabled = not chain.disabled
+        chain.save()
+        return Response(status=200)

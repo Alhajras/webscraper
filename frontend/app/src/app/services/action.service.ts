@@ -31,4 +31,8 @@ export class ActionService {
     const params = new HttpParams({fromObject: additionalParams})
     return this.client.getList<Action>(this.endpointPath, params)
   }
+
+    public disableActionsChain(id: number): any {
+    return this.client.post<Action>(`${this.endpointPath}${id}/disable-actions-chain/`, {id})
+  }
 }

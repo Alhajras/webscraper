@@ -25,14 +25,16 @@
           <th>
             <app-input-field
               [isRequired]="false"
-              labelId="show-browser-id"
+              labelId="disabler-id"
               labelText="Disable"
             >
               <div>
-              <p-inputSwitch
-              pTooltip="Disable all actions and don't apply them."
-                [formControl]="disableActions"></p-inputSwitch>
-            </div></app-input-field>
+                <p-inputSwitch
+                  pTooltip="Disable all actions and don't apply them."
+                  (onChange)="disableActionsChain()"
+                  [formControl]="disableActions"></p-inputSwitch>
+              </div>
+            </app-input-field>
 
           </th>
           <th pSortableColumn="name">Name

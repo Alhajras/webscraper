@@ -19,11 +19,8 @@ export interface TypeDropDown {
 export class ActionComponent implements OnInit {
   @Input()
   public template!: Template
-  public beforeActionChain!: ActionChain
   public beforeActions: Action[] = []
-  public afterActionChain!: ActionChain
   public afterActions: Action[] = []
-  // public actions: Action[] = []
   public updatedAction: Action | null = null
   public type!: FormControl
   public typesList: TypeDropDown[] = [{key: 'click', value: 'click'}, {key: 'scroll', value: 'scroll'}, {
@@ -52,6 +49,9 @@ export class ActionComponent implements OnInit {
 
   }
 
+  public disableActionsChain(): void {
+    this.actionService.disableActionsChain(this.template.action_chain).subscribe()
+  }
   public closeModal(): void {
     this.displayModal = false
   }
@@ -150,7 +150,7 @@ export class ActionComponent implements OnInit {
 
   private initForm(): void {
     this.order = this.fb.control('')
-    this.disableActions = this.fb.control(false)
+    this.disableActions = this.fb.control(this.template.action_chain_disabled)
     this.name = this.fb.control('')
     this.type = this.fb.control('')
     this.selector = this.fb.control('')
