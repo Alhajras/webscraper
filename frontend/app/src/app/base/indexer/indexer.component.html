@@ -182,121 +182,130 @@
 
           <p-accordion [activeIndex]="0">
             <p-accordionTab header="Advanced options (refinements)">
-              <div class="grid">
-                <div class="col-6">
-                  <app-input-field
-                    [isRequired]="false"
-                    labelId="b-param-label-id"
-                    labelText="B parameter"
-                    helpText="B parameter for the  BM25 formula."
-                  >
-                    <input
-                      id="b-param-id"
-                      type="number"
-                      pInputText
-                      [formControl]="bParameter"
-                    />
-                  </app-input-field>
-                  <app-input-field
-                    [isRequired]="false"
-                    labelId="skip-words-list-id"
-                    labelText="Stop words list"
-                    helpText="List of words that should be excluded during indexing process."
-                  >
-                    <p-chips [formControl]="skipWordsList"></p-chips>
-                  </app-input-field>
-                  <app-input-field
-                    [isRequired]="false"
-                    labelId="weight-words-list-id"
-                    labelText="Weight words list"
-                    helpText="Boost some words and punish other by giving them weight,
+              <p-card header="Indexing options">
+                <div class="grid">
+                  <div class="col-6">
+                    <app-input-field
+                      [isRequired]="false"
+                      labelId="b-param-label-id"
+                      labelText="B parameter"
+                      helpText="B parameter for the  BM25 formula."
+                    >
+                      <input
+                        id="b-param-id"
+                        type="number"
+                        pInputText
+                        [formControl]="bParameter"
+                      />
+                    </app-input-field>
+                    <app-input-field
+                      [isRequired]="false"
+                      labelId="skip-words-list-id"
+                      labelText="Stop words list"
+                      helpText="List of words that should be excluded during indexing process."
+                    >
+                      <p-chips [formControl]="skipWordsList"></p-chips>
+                    </app-input-field>
+                    <app-input-field
+                      [isRequired]="false"
+                      labelId="weight-words-list-id"
+                      labelText="Weight words list"
+                      helpText="Boost some words and punish other by giving them weight,
                     e.g. 'Freiburg=5' will add more 5 points to the score when Freiburg word is found"
-                  >
-                    <p-chips placeholder="e.g. Freiburg=5" [formControl]="weightWordsList"></p-chips>
-                  </app-input-field>
-
-                  <app-input-field
-                    [isRequired]="false"
-                    labelId="dictionary-id"
-                    labelText="Dictionary file name"
-                    helpText="The name of the dictionary file name, this file help the suggestions list by using synonymes."
-                  >
-                    <input
-                      id="dictionary-id"
-                      type="text"
-                      pInputText
-                      [formControl]="dictionary"
-                    />
-                  </app-input-field>
-                  <app-input-field
-                    [isRequired]="false"
-                    labelId="use-synonym-id"
-                    labelText="Use Synonyms"
-                    helpText="Enable using synonyms in the suggestions list, for example, typing 'USA' will result on 'United States of America'."
-                  >
-                    <div>
-                      <p-inputSwitch [formControl]="useSynonym"></p-inputSwitch>
-                    </div>
-                  </app-input-field>
+                    >
+                      <p-chips placeholder="e.g. Freiburg=5" [formControl]="weightWordsList"></p-chips>
+                    </app-input-field>
+                  </div>
+                  <div class="col-6">
+                    <app-input-field
+                      [isRequired]="false"
+                      labelId="b-param-label-id"
+                      labelText="K parameter"
+                      helpText="K parameter for the  BM25 formula."
+                    >
+                      <input
+                        id="k-param-id"
+                        type="number"
+                        pInputText
+                        [formControl]="kParameter"
+                      />
+                    </app-input-field>
+                    <app-input-field
+                      [isRequired]="false"
+                      labelId="small-words-threshold-id"
+                      labelText="Small Words Threshold"
+                      helpText="The threshold of which the word can be considered small and will be skipped, by default 0 meaning empty spaces will be skipped from indexing process."
+                    >
+                      <input
+                        id="small-words-threshold-id"
+                        type="number"
+                        pInputText
+                        [formControl]="smallWordsThreshold"
+                      />
+                    </app-input-field>
+                    <app-input-field
+                      [isRequired]="false"
+                      labelId="boosting-formula-id"
+                      labelText="Boosting formula"
+                      helpText="This formula result will be added to the final score, it uses inspectors variable."
+                    >
+                      <input
+                        id="boosting-formula-id"
+                        type="text"
+                        pInputText
+                        [formControl]="boostingFormula"
+                      />
+                    </app-input-field>
+                  </div>
                 </div>
-                <div class="col-6">
-                  <app-input-field
-                    [isRequired]="false"
-                    labelId="b-param-label-id"
-                    labelText="K parameter"
-                    helpText="K parameter for the  BM25 formula."
-                  >
-                    <input
-                      id="k-param-id"
-                      type="number"
-                      pInputText
-                      [formControl]="kParameter"
-                    />
-                  </app-input-field>
-                  <app-input-field
-                    [isRequired]="false"
-                    labelId="small-words-threshold-id"
-                    labelText="Small Words Threshold"
-                    helpText="The threshold of which the word can be considered small and will be skipped, by default 0 meaning empty spaces will be skipped from indexing process."
-                  >
-                    <input
-                      id="small-words-threshold-id"
-                      type="number"
-                      pInputText
-                      [formControl]="smallWordsThreshold"
-                    />
-                  </app-input-field>
-                  <app-input-field
-                    [isRequired]="false"
-                    labelId="q-gram-id"
-                    labelText="Q-Gram"
-                    helpText="How many letters should the word be split to, for example q=3,word=freiburg, will result in { 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg' }."
-                  >
-                    <input
-                      id="q-gram-id"
-                      type="number"
-                      pInputText
-                      [formControl]="qGram"
-                    />
-                  </app-input-field>
-                  <app-input-field
-                    [isRequired]="false"
-                    labelId="boosting-formula-id"
-                    labelText="Boosting formula"
-                    helpText="This formula result will be added to the final score, it uses inspectors variable."
-                  >
-                    <input
-                      id="boosting-formula-id"
-                      type="text"
-                      pInputText
-                      [formControl]="boostingFormula"
-                    />
-                  </app-input-field>
+              </p-card>
+              <p-card header="Suggestions options">
+                <div class="grid">
+                  <div class="col-6">
+                    <app-input-field
+                      [isRequired]="false"
+                      labelId="dictionary-id"
+                      labelText="Dictionary file name"
+                      helpText="The name of the dictionary file name, this file help the suggestions list by using synonymes."
+                    >
+                      <input
+                        id="dictionary-id"
+                        type="text"
+                        pInputText
+                        [formControl]="dictionary"
+                      />
+                    </app-input-field>
+                    <app-input-field
+                      [isRequired]="false"
+                      labelId="q-gram-id"
+                      labelText="Q-Gram"
+                      helpText="How many letters should the word be split to, for example q=3,word=freiburg, will result in { 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg' }."
+                    >
+                      <input
+                        id="q-gram-id"
+                        type="number"
+                        pInputText
+                        [formControl]="qGram"
+                      />
+                    </app-input-field>
 
+                  </div>
+                  <div class="col-6">
+                    <app-input-field
+                      [isRequired]="false"
+                      labelId="use-synonym-id"
+                      labelText="Use Synonyms"
+                      helpText="Enable using synonyms in the suggestions list, for example, typing 'USA' will result on 'United States of America'."
+                    >
+                      <div>
+                        <p-inputSwitch [formControl]="useSynonym"></p-inputSwitch>
+                      </div>
+                    </app-input-field>
+
+                  </div>
                 </div>
-              </div>
+              </p-card>
             </p-accordionTab>
-
           </p-accordion>
         </form>
       </p-card>

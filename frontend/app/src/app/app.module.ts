@@ -48,6 +48,7 @@ import {ShortTextPipe} from "src/app/shared/pipes/short-text.pipe";
 import {SpinnerModule} from "primeng/spinner";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {InputSwitchModule} from "primeng/inputswitch";
+import {FieldsetModule} from "primeng/fieldset";
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import {InputSwitchModule} from "primeng/inputswitch";
         CheckboxModule,
         SpinnerModule,
         ProgressSpinnerModule,
-        InputSwitchModule
+        InputSwitchModule,
+        FieldsetModule
     ],
   providers: [],
   bootstrap: [AppComponent]
