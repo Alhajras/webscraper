@@ -66,7 +66,6 @@ export class TemplateComponent {
           this.templates = templates
         })
         this.closeModal()
-        console.log("sdf")
         this.messageService.add({
           severity: 'success',
           summary: 'Success',

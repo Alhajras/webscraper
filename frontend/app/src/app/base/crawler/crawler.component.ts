@@ -5,6 +5,7 @@ import {Crawler} from "src/app/models/crawler.model";
 import {Template} from "src/app/models/template.model";
 import {TemplateService} from "src/app/services/template.service";
 import {CrawlerService} from "src/app/services/crawler.service";
+import {MessageService} from "primeng/api";
 
 export interface TemplateDropDown {
   key: string
@@ -92,11 +93,20 @@ export class CrawlerComponent {
           this.crawlers = crawlers
         })
         this.closeModal()
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `Crawler ${this.name.value} is updated!`
+        });
         this.currentlySubmitting = false
         this.updatedCrawler = null
       }).catch((err: HttpErrorResponse) => {
         this.errorMessage = err.error
-        this.currentlySubmitting = false
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `Crawler ${this.name.value} failed to be updated!`
+        });
         console.log(err)
       })
       return;
@@ -106,10 +116,20 @@ export class CrawlerComponent {
         this.crawlers = crawlers
       })
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Crawler ${this.name.value} is created!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
       this.currentlySubmitting = false
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Crawler ${this.name.value} failed to be created!`
+      });
       console.log(err)
     })
   }
@@ -124,11 +144,21 @@ export class CrawlerComponent {
       this.crawlerService.list().subscribe(crawlers => {
         this.crawlers = crawlers
       })
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Crawler ${this.name.value} is deleted!`
+      });
       this.closeModal()
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
       this.currentlySubmitting = false
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Crawler ${this.name.value} failed to be deleted!`
+      });
       console.log(err)
     })
   }
@@ -143,6 +173,7 @@ export class CrawlerComponent {
     private readonly fb: FormBuilder,
     private readonly crawlerService: CrawlerService,
     private readonly templateService: TemplateService,
+    private readonly messageService: MessageService
   ) {
     this.loading = true
     crawlerService.list().subscribe(crawlers => {
@@ -160,20 +191,20 @@ export class CrawlerComponent {
     this.template = this.fb.control('', [Validators.required])
     this.parsingAlgorithm = this.fb.control('BFS_TOP_DOWN')
     this.description = this.fb.control('')
-    this.seedUrl = this.fb.control('' , [Validators.required, Validators.pattern(urlReg)])
+    this.seedUrl = this.fb.control('', [Validators.required, Validators.pattern(urlReg)])
     this.name = this.fb.control('', [Validators.required])
-    this.threads= this.fb.control(1)
-    this.retry= this.fb.control(0)
-    this.showBrowser= this.fb.control(false)
-    this.sleep= this.fb.control(0)
-    this.timeout= this.fb.control(60)
-    this.maxPages= this.fb.control(100)
-    this.maxCollectedDocs= this.fb.control(100)
-    this.allowMultiElements= this.fb.control(false)
-    this.maxDepth= this.fb.control(2)
-    this.robotFileUrl= this.fb.control('', Validators.pattern(urlReg))
-    this.excludedUrls= this.fb.control('')
-    this.scopeDivs= this.fb.control('')
+    this.threads = this.fb.control(1)
+    this.retry = this.fb.control(0)
+    this.showBrowser = this.fb.control(false)
+    this.sleep = this.fb.control(0)
+    this.timeout = this.fb.control(60)
+    this.maxPages = this.fb.control(100)
+    this.maxCollectedDocs = this.fb.control(100)
+    this.allowMultiElements = this.fb.control(false)
+    this.maxDepth = this.fb.control(2)
+    this.robotFileUrl = this.fb.control('', Validators.pattern(urlReg))
+    this.excludedUrls = this.fb.control('')
+    this.scopeDivs = this.fb.control('')
 
     this.form = this.fb.group({
       description: this.description,
@@ -204,7 +235,7 @@ export class CrawlerComponent {
     this.description = this.fb.control(crawler.description)
     this.seedUrl = this.fb.control(crawler.seed_url)
     this.name = this.fb.control(crawler.name)
-    const template = this.templatesList.find(t=>t.template.id ===crawler.template)
+    const template = this.templatesList.find(t => t.template.id === crawler.template)
     this.template = this.fb.control(template)
     this.threads = this.fb.control(crawler.threads)
     this.parsingAlgorithm = this.fb.control(crawler.parsing_algorithm)
