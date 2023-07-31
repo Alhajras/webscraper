@@ -33,7 +33,7 @@ export class SearchComponent implements OnInit {
   public searchText = ''
   public cached_indexers = []
   public selectedIndexerForm!: Indexer
-  public headers: string[] = ['Image', 'Title', 'Description', 'Source', 'Price']
+  public headers: string[] = ['Result']
   public suggestions: MenuItem[] = []
   private searchText$ = new Subject<string>();
   public event!: KeyboardEvent
