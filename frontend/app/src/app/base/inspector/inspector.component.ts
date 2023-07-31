@@ -5,6 +5,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Inspector} from "src/app/models/inspector.model";
 import {InspectorService} from "src/app/services/inspector.service";
 import {TypeDropDown} from "src/app/base/actions/action.component";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-inspector',
@@ -38,6 +39,7 @@ export class InspectorComponent implements OnInit {
   public constructor(
     private readonly fb: FormBuilder,
     private readonly inspectorService: InspectorService,
+    private messageService: MessageService
   ) {
 
   }
@@ -75,11 +77,21 @@ export class InspectorComponent implements OnInit {
           this.inspectors = inspectors
         })
         this.closeModal()
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `Inspector ${this.name.value} is updated!`
+        });
         this.currentlySubmitting = false
         this.updatedInspector = null
       }).catch((err: HttpErrorResponse) => {
         this.errorMessage = err.error
         this.currentlySubmitting = false
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `Inspector ${this.name.value} failed to update!`
+        });
         console.log(err)
       })
       return;
@@ -89,10 +101,20 @@ export class InspectorComponent implements OnInit {
         this.inspectors = inspectors
       })
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Inspector ${this.name.value} is created!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
       this.currentlySubmitting = false
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Inspector ${this.name.value} failed to be create!`
+      });
       console.log(err)
     })
   }
@@ -104,10 +126,20 @@ export class InspectorComponent implements OnInit {
         this.inspectors = inspectors.filter(inspect => inspect.template === this.template.id)
       })
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Inspector ${inspector.name} is deleted!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
       this.currentlySubmitting = false
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Inspector ${inspector.name} failed to be deleted!`
+      });
       console.log(err)
     })
   }
