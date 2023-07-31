@@ -49,6 +49,8 @@ import {SpinnerModule} from "primeng/spinner";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {InputSwitchModule} from "primeng/inputswitch";
 import {FieldsetModule} from "primeng/fieldset";
+import { MessageService } from 'primeng/api'
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
   declarations: [
@@ -70,43 +72,44 @@ import {FieldsetModule} from "primeng/fieldset";
     ShortTextPipe,
     DocumentationComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MenuModule,
-        BrowserAnimationsModule,
-        TableModule,
-        HttpClientModule,
-        DialogModule,
-        CardModule,
-        DropdownModule,
-        MessageModule,
-        ReactiveFormsModule,
-        InputTextareaModule,
-        InputTextModule,
-        ButtonModule,
-        RippleModule,
-        TreeTableModule,
-        StepsModule,
-        TimelineModule,
-        ChipsModule,
-        OverlayPanelModule,
-        MenubarModule,
-        MultiSelectModule,
-        DataViewModule,
-        RatingModule,
-        TagModule,
-        FormsModule,
-        SearchModule,
-        AccordionModule,
-        TabViewModule,
-        CheckboxModule,
-        SpinnerModule,
-        ProgressSpinnerModule,
-        InputSwitchModule,
-        FieldsetModule
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MenuModule,
+    BrowserAnimationsModule,
+    TableModule,
+    HttpClientModule,
+    DialogModule,
+    CardModule,
+    DropdownModule,
+    MessageModule,
+    ReactiveFormsModule,
+    InputTextareaModule,
+    InputTextModule,
+    ButtonModule,
+    RippleModule,
+    TreeTableModule,
+    StepsModule,
+    TimelineModule,
+    ChipsModule,
+    OverlayPanelModule,
+    MenubarModule,
+    MultiSelectModule,
+    DataViewModule,
+    RatingModule,
+    TagModule,
+    FormsModule,
+    SearchModule,
+    AccordionModule,
+    TabViewModule,
+    CheckboxModule,
+    SpinnerModule,
+    ProgressSpinnerModule,
+    InputSwitchModule,
+    FieldsetModule,
+    ToastModule
+  ],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

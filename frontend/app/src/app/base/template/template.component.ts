@@ -3,18 +3,13 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Template} from "src/app/models/template.model";
 import {TemplateService} from "src/app/services/template.service";
-
-export interface TreeNode {
-  data?: any;
-  children?: TreeNode[];
-  leaf?: boolean;
-  expanded?: boolean;
-}
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-template',
   templateUrl: './template.component.html',
-  styleUrls: ['./template.component.scss']
+  styleUrls: ['./template.component.scss'],
+  providers: [MessageService]
 })
 export class TemplateComponent {
   public templates: Template[] = []
@@ -37,6 +32,7 @@ export class TemplateComponent {
   public constructor(
     private readonly fb: FormBuilder,
     private readonly templateService: TemplateService,
+    private messageService: MessageService
   ) {
     this.loading = true
     templateService.list().subscribe(templates => {
@@ -70,11 +66,22 @@ export class TemplateComponent {
           this.templates = templates
         })
         this.closeModal()
+        console.log("sdf")
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `Template ${this.name.value} is updated!`
+        });
         this.currentlySubmitting = false
         this.updatedTemplate = null
       }).catch((err: HttpErrorResponse) => {
         this.errorMessage = err.error
         this.currentlySubmitting = false
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `Template ${this.name.value} failed to update!`
+        });
         console.log(err)
       })
       return;
@@ -84,19 +91,22 @@ export class TemplateComponent {
         this.templates = templates
       })
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Template ${this.name.value} is created!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
       this.currentlySubmitting = false
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Template ${this.name.value} failed to be create!`
+      });
       console.log(err)
     })
-  }
-
-  private createTemplateNode(data: Template, expanded = false): TreeNode {
-    return {
-      data,
-      expanded,
-    }
   }
 
   public deleteTemplate(template: Template): void {
@@ -106,10 +116,20 @@ export class TemplateComponent {
         this.templates = templates
       })
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Template ${template.name} is deleted!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
       this.currentlySubmitting = false
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Template ${template.name} failed to be deleted!`
+      });
       console.log(err)
     })
   }
