@@ -171,9 +171,7 @@ def execute_all_before_actions(template: Template, driver: WebDriver) -> None:
     :param driver:
     :return:
     """
-    # TODO Change this to use the template
-    # actions_chain = ActionChain.objects.get(template=template)
-    actions_chain = ActionChain.objects.all()[0]
+    actions_chain = ActionChain.objects.get(template=template)
     if actions_chain.disabled:
         return
     all_actions = (
