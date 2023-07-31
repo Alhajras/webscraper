@@ -32,10 +32,10 @@ def fetch_robots_txt(link) -> str:
     :return:
     """
     # Parse the base URL from the provided link
-    base_url = urlparse(link)._replace(path='').geturl()
+    base_url = urlparse(link)._replace(path="").geturl()
 
     # Fetch the robots.txt file
-    robots_url = base_url + '/robots.txt'
+    robots_url = base_url + "/robots.txt"
     response = requests.get(robots_url)
 
     if response.status_code == 200:
@@ -198,7 +198,7 @@ def execute_all_before_actions(template: Template, driver: WebDriver) -> None:
 
 
 def evaluate_document_hash_code(inspector_values: list) -> str:
-    input_string = ''
+    input_string = ""
     for value in inspector_values:
         input_string += f"{value.value}{value.attribute}"
 

@@ -1,4 +1,3 @@
-from django.contrib.postgres.indexes import HashIndex
 from django.db import models
 from django.db.models import Count
 from polymorphic.models import PolymorphicModel
@@ -104,7 +103,9 @@ class Indexer(models.Model):
 
     @property
     def variables_names(self):
-        return Inspector.objects.filter(indexer=self).values_list("variable_name", flat=True)
+        return Inspector.objects.filter(indexer=self).values_list(
+            "variable_name", flat=True
+        )
 
 
 class Inspector(models.Model):
@@ -127,9 +128,7 @@ class Inspector(models.Model):
     deleted = models.BooleanField(default=False)
     template = models.ForeignKey(Template, on_delete=models.PROTECT)
     indexer = models.ForeignKey(Indexer, on_delete=models.PROTECT, null=True)
-    variable_name = models.CharField(
-        max_length=10, blank=True, default=''
-    )
+    variable_name = models.CharField(max_length=10, blank=True, default="")
 
     def __str__(self) -> str:
         return self.name
@@ -186,7 +185,7 @@ class Document(models.Model):
     """
 
     template = models.ForeignKey(Template, on_delete=models.PROTECT, null=True)
-    hash_code = models.CharField(max_length=40, default='')
+    hash_code = models.CharField(max_length=40, default="")
 
     def __str__(self) -> str:
         return str(self.pk)
@@ -279,8 +278,11 @@ class Statistics(models.Model):
     avg_loading_time = models.FloatField(default=0)
     average_processing_time = models.FloatField(default=0)
     avg_page_size = models.FloatField(default=0)
-    http_codes = models.JSONField(default='')
+    http_codes = models.JSONField(default="")
     average_docs_per_page = models.PositiveIntegerField(default=0)
+
+    def __str__(self) -> str:
+        return f"Runner: {self.runner}," f" visited_pages: ({self.visited_pages})"
 
 
 class InspectorValue(models.Model):

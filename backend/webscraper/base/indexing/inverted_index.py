@@ -6,12 +6,13 @@ import re
 import math
 from concurrent.futures import ThreadPoolExecutor, Future, wait
 
-from sympy import var, sympify
+from sympy import sympify
 from .qgram_index import SingletonMeta
 from ..models import InspectorValue, Inspector, Indexer
 
 DEFAULT_B = 0.75
 DEFAULT_K = 1.75
+
 
 class InvertedIndex:
     """
@@ -55,7 +56,7 @@ class InvertedIndex:
         }
 
         words_weights = {}
-        if indexer.weight_words != '':
+        if indexer.weight_words != "":
             weight_words_list = indexer.weight_words.split('";"')
             for weight in weight_words_list:
                 key_value = weight.split("=")
@@ -74,6 +75,7 @@ class InvertedIndex:
 
         # Init all lengths to zero
         doc_lengths = [0] * len(inspector_values)
+
         def collect_words(inspector_values, doc_id) -> None:
             for inspector_value in inspector_values:
                 dl = 0  # Compute the document length (number of words).
@@ -84,7 +86,10 @@ class InvertedIndex:
                     word = word.lower()
 
                     # Ignore the word if it is empty or small, or it is in the skip list.
-                    if len(word) <= small_words_threshold or word in skip_words_dictionary:
+                    if (
+                        len(word) <= small_words_threshold
+                        or word in skip_words_dictionary
+                    ):
                         continue
 
                     dl += 1
@@ -92,7 +97,9 @@ class InvertedIndex:
                     if word not in self.inverted_lists:
                         # The word is seen for first time, create new list.
                         # counter: int, inspector_db_id: int, score: int, document_db_id: int
-                        self.inverted_lists[word] = [(doc_id, inspector_value.id, 1, inspector_value.document.id)]
+                        self.inverted_lists[word] = [
+                            (doc_id, inspector_value.id, 1, inspector_value.document.id)
+                        ]
                         continue
 
                     # Get last posting to check if the doc was already seen.
@@ -100,10 +107,16 @@ class InvertedIndex:
                     if last[0] == doc_id:
                         # The doc was already seen, increment tf by 1.
                         self.inverted_lists[word][-1] = (
-                        doc_id, inspector_value.id, last[2] + 1, inspector_value.document.id)
+                            doc_id,
+                            inspector_value.id,
+                            last[2] + 1,
+                            inspector_value.document.id,
+                        )
                     else:
                         # The doc was not already seen, set tf to 1.
-                        self.inverted_lists[word].append((doc_id, inspector_value.id, 1, inspector_value.document.id))
+                        self.inverted_lists[word].append(
+                            (doc_id, inspector_value.id, 1, inspector_value.document.id)
+                        )
                 # Register the document length.
                 doc_lengths[doc_id] = dl
 
@@ -112,11 +125,16 @@ class InvertedIndex:
         partition_size = len(inspector_values) // threads
 
         # Step 2: Create the partitions
-        partitions = [inspector_values[i:i + partition_size] for i in range(0, len(inspector_values), partition_size)]
+        partitions = [
+            inspector_values[i : i + partition_size]
+            for i in range(0, len(inspector_values), partition_size)
+        ]
 
         with ThreadPoolExecutor(max_workers=threads) as executor:
             thread_1: Future = executor.submit(collect_words, partitions[0], 0)
-            thread_2: Future = executor.submit(collect_words, partitions[1], len(partitions[0]) - 1)
+            thread_2: Future = executor.submit(
+                collect_words, partitions[1], len(partitions[0]) - 1
+            )
             wait([thread_1, thread_2])
         # Compute N (the total number of documents).
         n = inspector_values.count()
@@ -192,10 +210,14 @@ class InvertedIndex:
         # Iterate the lists in an interleaving order and aggregate the scores.
         while i < len(list1) and j < len(list2):
             if i < list1[i].counter == list2[j].counter:
-                result.append((list1[i].counter,
-                               list1[i].inspector_db_id,
-                               list1[i].score + list2[j].score,
-                               list1[i].document_db_id,))
+                result.append(
+                    (
+                        list1[i].counter,
+                        list1[i].inspector_db_id,
+                        list1[i].score + list2[j].score,
+                        list1[i].document_db_id,
+                    )
+                )
                 i += 1
                 j += 1
             elif list1[i].counter < list2[j].counter:
@@ -218,7 +240,9 @@ class InvertedIndex:
         return result
 
     @staticmethod
-    def evaluate_formula(indexer_id: int, variables_names, inspector_values: list) -> int:
+    def evaluate_formula(
+        indexer_id: int, variables_names, inspector_values: list
+    ) -> int:
         """
         Indexers have the `boosted_formula` field this method will evalute the
         formula output and return the resulting score
@@ -226,18 +250,24 @@ class InvertedIndex:
         indexer = Indexer.objects.get(pk=indexer_id)
         boosting_formula = indexer.boosting_formula
         # If the formula field is empty we do not continue
-        if boosting_formula is None or boosting_formula == '' or len(variables_names) == 0:
+        if (
+            boosting_formula is None
+            or boosting_formula == ""
+            or len(variables_names) == 0
+        ):
             return 0
         res = 0
         try:
             variable_value_map = {}
             for inspector_value in inspector_values:
-                variable_name = inspector_value['inspector__variable_name'].strip()
-                if variable_name != '':
-                    value = inspector_value['value'].strip()
+                variable_name = inspector_value["inspector__variable_name"].strip()
+                if variable_name != "":
+                    value = inspector_value["value"].strip()
                     # Applying the clean-up expressions
-                    for reg_expression in inspector_value['inspector__clean_up_expression'].split('";"'):
-                        k, v = reg_expression.split('=')
+                    for reg_expression in inspector_value[
+                        "inspector__clean_up_expression"
+                    ].split('";"'):
+                        k, v = reg_expression.split("=")
                         value = re.sub(k, v, value)
                     variable_value_map[variable_name] = float(value)
 

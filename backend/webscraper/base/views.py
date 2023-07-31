@@ -78,9 +78,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         )
 
         differences = list(set(old_inspectors_ids) - set(new_inspectors_ids))
-        Inspector.objects.filter(id__in=differences).update(
-            indexer=None
-        )
+        Inspector.objects.filter(id__in=differences).update(indexer=None)
         return indexer
 
     @transaction.atomic
@@ -127,6 +125,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                 print("Done creating dictionary!")
             Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.INDEXING)
             import time
+
             start_time = time.time()
             print("Creating an index!")
             inverted_index = InvertedIndex()
@@ -155,25 +154,29 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         headers = {}
         documents = {}
         for doc_id in docs_ids:
-            inspector_values = InspectorValue.objects.filter(
-                document__id=doc_id
-            ).values(
-                "value",
-                "url",
-                "inspector",
-                "inspector__name",
-                "attribute",
-                "document",
-                "inspector__type",
-                "inspector__clean_up_expression",
-                "inspector__variable_name",
-            ).order_by('inspector__name')
-            variables_names = InspectorValue.objects.filter(
-                document__id=doc_id
-            ).values_list(
-                "inspector__variable_name", flat=True
-            ).distinct()
-            doc_score = inverted_index.evaluate_formula(pk, variables_names, inspector_values)
+            inspector_values = (
+                InspectorValue.objects.filter(document__id=doc_id)
+                .values(
+                    "value",
+                    "url",
+                    "inspector",
+                    "inspector__name",
+                    "attribute",
+                    "document",
+                    "inspector__type",
+                    "inspector__clean_up_expression",
+                    "inspector__variable_name",
+                )
+                .order_by("inspector__name")
+            )
+            variables_names = (
+                InspectorValue.objects.filter(document__id=doc_id)
+                .values_list("inspector__variable_name", flat=True)
+                .distinct()
+            )
+            doc_score = inverted_index.evaluate_formula(
+                pk, variables_names, inspector_values
+            )
             for inspector_value in inspector_values:
                 inspector_value["boosted_score"] = doc_score
                 document = inspector_value["document"]
@@ -203,11 +206,6 @@ class IndexerViewSet(EverythingButDestroyViewSet):
         r = []
         for p in q.rank_matches(postings)[:5]:
             entity_name = q.entities[p[0] - 1][0]
-            entity_synonyms = q.names[p[3] - 1]
-            entity_desc = q.entities[p[0] - 1][2]
-            entity_img = q.entities[p[0] - 1][6].strip()
-            if not entity_img:
-                entity_img = "noimage.png"
             r.append(entity_name)
         return Response(data={"suggestions": r})
 

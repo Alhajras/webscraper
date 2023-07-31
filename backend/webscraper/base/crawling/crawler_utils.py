@@ -4,7 +4,6 @@ from urllib.parse import urlparse
 
 from selenium.common import UnexpectedAlertPresentException, WebDriverException
 
-from selenium.webdriver.support.wait import WebDriverWait
 
 from ..models import (
     Runner,
@@ -13,7 +12,8 @@ from ..models import (
     InspectorValue,
     Document,
     LinkFragment,
-    Crawler, Statistics
+    Crawler,
+    Statistics,
 )
 import logging
 import logging.handlers
@@ -30,7 +30,10 @@ from ..utils import (
     split_work_between_threads,
     create_chrome_driver,
     all_threads_completed,
-    execute_all_before_actions, fetch_robots_txt, check_crawl_permission, evaluate_document_hash_code,
+    execute_all_before_actions,
+    fetch_robots_txt,
+    check_crawl_permission,
+    evaluate_document_hash_code,
 )
 
 
@@ -45,11 +48,11 @@ class CrawlerUtils:
 
     @staticmethod
     def clean_up_value(value: str, expressions: str) -> str:
-        if value == '' or expressions == '':
+        if value == "" or expressions == "":
             return value
 
         for reg_expression in expressions.split('";"'):
-            k, v = reg_expression.split('=')
+            k, v = reg_expression.split("=")
             value = re.sub(k, v, value)
         return value
 
@@ -118,7 +121,9 @@ class CrawlerUtils:
         # TODO: Use a better splitter
         # Urls that may crawler navigate by mistake
         excluded_urls = crawler.excluded_urls.split('";"')
-        robots_file_link = crawler.robot_file_url if crawler.robot_file_url != '' else crawler.seed_url
+        robots_file_link = (
+            crawler.robot_file_url if crawler.robot_file_url != "" else crawler.seed_url
+        )
         robots_txt_content = fetch_robots_txt(robots_file_link)
 
         scope_divs = []
@@ -145,8 +150,6 @@ class CrawlerUtils:
             """
             thread_id = threading.get_native_id()
             driver = create_chrome_driver(crawler.show_browser)
-            # Set the maximum time to wait (in seconds)
-            wait = WebDriverWait(driver, 10)
 
             # This will hold all the queues for all the links different levels
             links_queues: dict[int, list] = {}
@@ -176,7 +179,9 @@ class CrawlerUtils:
                 link: Link = current_active_queue.pop()
                 link_fragment = self.save_url_fragments(link.url, runner)
                 if runner.collected_documents >= max_collected_docs:
-                    statistics.http_codes[f"Stopped because reached {max_collected_docs} docs"] = max_collected_docs
+                    statistics.http_codes[
+                        f"Stopped because reached {max_collected_docs} docs"
+                    ] = max_collected_docs
                     return
                 logger.info(
                     f"Thread: {thread_id} - {link.url} out of {len(current_active_queue)}"
@@ -196,13 +201,21 @@ class CrawlerUtils:
                 # Calculate the download time
                 end_time = time.time()
                 download_time = end_time - start_time
-                statistics.avg_loading_time = download_time if statistics.avg_loading_time == 0 else (download_time + statistics.avg_loading_time) / 2
+                statistics.avg_loading_time = (
+                    download_time
+                    if statistics.avg_loading_time == 0
+                    else (download_time + statistics.avg_loading_time) / 2
+                )
                 print(statistics.avg_loading_time)
                 # Get the page source
                 try:
                     page_source = driver.page_source
                     page_size = len(page_source.encode("utf-8")) / 1048576
-                    statistics.avg_page_size = page_size if statistics.avg_page_size == 0 else (page_size + statistics.avg_page_size) / 2
+                    statistics.avg_page_size = (
+                        page_size
+                        if statistics.avg_page_size == 0
+                        else (page_size + statistics.avg_page_size) / 2
+                    )
                 except (UnexpectedAlertPresentException) as e:
                     logger.error(f"The link {link.url} thrown an error: {e}")
 
@@ -222,7 +235,11 @@ class CrawlerUtils:
                         http_codes[status_code] = 1
                         http_codes[status_code] = 1
                     statistics.http_codes = http_codes
-                except (WebDriverException, requests.exceptions.ConnectionError, requests.exceptions.TooManyRedirects) as e:
+                except (
+                    WebDriverException,
+                    requests.exceptions.ConnectionError,
+                    requests.exceptions.TooManyRedirects,
+                ) as e:
                     logger.error(f"The link {link.url} thrown an error: {e}")
                     return
 
@@ -255,21 +272,25 @@ class CrawlerUtils:
                                 # We skip the fragments as they do not add any product, that why we split by #
                                 href = a.get_attribute("href").split("#").pop()
                                 # Check if the link is allowed to be crawled
-                                # if not check_crawl_permission(robots_txt_content, "testing-agent", href):
-                                #     statistics.http_codes[f"Disallow link: {href}"] = 1
-                                #     continue
+                                if not check_crawl_permission(
+                                    robots_txt_content, "testing-agent", href
+                                ):
+                                    statistics.http_codes[f"Disallow link: {href}"] = 1
+                                    continue
                                 # Skip unwanted links
                                 if href in excluded_urls:
                                     statistics.http_codes[f"Excluded link: {href}"] = 1
                                     continue
                                 # Links from outside the main host are skipped
                                 if base_url != urlparse(href).hostname:
-                                    statistics.http_codes[f"Cross site link: {href}"] = 1
+                                    statistics.http_codes[
+                                        f"Cross site link: {href}"
+                                    ] = 1
                                     continue
                                 if (
-                                        link.url != href
-                                        and href not in links
-                                        and len(links) < max_visited_links
+                                    link.url != href
+                                    and href not in links
+                                    and len(links) < max_visited_links
                                 ):
                                     found_link = Link(
                                         url=href, visited=False, level=current_rec_level
@@ -277,7 +298,9 @@ class CrawlerUtils:
                                     links[href] = found_link
                                     add_link_to_level(links_queues, found_link)
                     else:
-                        statistics.http_codes[f"Reached max recursion level reached {max_rec_level}"] = max_rec_level
+                        statistics.http_codes[
+                            f"Reached max recursion level reached {max_rec_level}"
+                        ] = max_rec_level
 
                     # We start looking up for the elements we would like to collect inside the page/document
                     inspectors_list = Inspector.objects.filter(
@@ -305,7 +328,7 @@ class CrawlerUtils:
                                 threads_metrics[thread_id] = 1
                             else:
                                 threads_metrics[thread_id] = (
-                                        threads_metrics[thread_id] + 1
+                                    threads_metrics[thread_id] + 1
                                 )
                             threads_metrics[thread_id] += 1
                             documents_dict[inspector].append(
@@ -313,7 +336,10 @@ class CrawlerUtils:
                                     url=link.url,
                                     link_fragment=link_fragment,
                                     attribute=attribute,
-                                    value=self.clean_up_value(inspector_element.text, inspector.clean_up_expression),
+                                    value=self.clean_up_value(
+                                        inspector_element.text,
+                                        inspector.clean_up_expression,
+                                    ),
                                     inspector=inspector,
                                     runner=runner,
                                 )
@@ -328,10 +354,19 @@ class CrawlerUtils:
                     documents_number = lengths[0]
                     # We start saving documents
                     for i in range(documents_number):
-                        inspector_values = [documents_dict[inspector][i] for inspector in documents_dict.keys()]
-                        document_hash_code = evaluate_document_hash_code(inspector_values)
-                        if not Document.objects.filter(hash_code=document_hash_code).exists():
-                            Document.objects.create(template=crawler.template, hash_code=document_hash_code)
+                        inspector_values = [
+                            documents_dict[inspector][i]
+                            for inspector in documents_dict.keys()
+                        ]
+                        document_hash_code = evaluate_document_hash_code(
+                            inspector_values
+                        )
+                        if not Document.objects.filter(
+                            hash_code=document_hash_code
+                        ).exists():
+                            Document.objects.create(
+                                template=crawler.template, hash_code=document_hash_code
+                            )
                             doc = Document.objects.last()
                             for inspector_value in inspector_values:
                                 InspectorValue.objects.update_or_create(
@@ -344,12 +379,27 @@ class CrawlerUtils:
                                     runner=inspector_value.runner,
                                 )
                         else:
-                            http_codes["Duplicated content"] = http_codes["Duplicated content"] + 1
-                            print(f"Found duplicated contents with hashcode: {document_hash_code}")
-                    statistics.average_docs_per_page = documents_number if statistics.average_docs_per_page == 0 else (documents_number + statistics.average_docs_per_page) / 2
+                            http_codes["Duplicated content"] = (
+                                http_codes["Duplicated content"] + 1
+                            )
+                            print(
+                                f"Found duplicated contents with hashcode: {document_hash_code}"
+                            )
+                    statistics.average_docs_per_page = (
+                        documents_number
+                        if statistics.average_docs_per_page == 0
+                        else (documents_number + statistics.average_docs_per_page) / 2
+                    )
                     end_time = time.time()
                     average_processing_time = end_time - start_time
-                    statistics.average_processing_time = average_processing_time if statistics.average_processing_time == 0 else (average_processing_time + statistics.average_processing_time) / 2
+                    statistics.average_processing_time = (
+                        average_processing_time
+                        if statistics.average_processing_time == 0
+                        else (
+                            average_processing_time + statistics.average_processing_time
+                        )
+                        / 2
+                    )
                     print(statistics.avg_loading_time)
                     statistics.save()
                 except Exception as e:
@@ -367,7 +417,7 @@ class CrawlerUtils:
             current_active_queue = links_queues[level]
             #  We only stop the thread if one queue is done AND all other threads are also completed
             while len(current_active_queue) != 0 or not all_threads_completed(
-                    shared_threads_pool
+                shared_threads_pool
             ):
                 if len(current_active_queue) != 0:
                     find_links()
@@ -404,21 +454,19 @@ class CrawlerUtils:
         statistics.save()
         print(f"Visited Links: {visited_pages}")
 
-        total_visited_links = 0
-        total_non_useful_links = 0
-        visitied = []
+        visited = []
         visitied_not_saved = []
         not_visited = []
         for key, link in links.items():
             if link.visited:
-                visitied.append(key)
+                visited.append(key)
             else:
                 not_visited.append(key)
             if not InspectorValue.objects.filter(url=link.url).exists():
                 visitied_not_saved.append(key)
 
         print("--------------------- visited -----------------------")
-        print(len(visitied))
+        print(len(visited))
 
         print("--------------------- not_visited -----------------------")
         print(len(not_visited))
