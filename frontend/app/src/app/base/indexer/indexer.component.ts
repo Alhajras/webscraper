@@ -7,6 +7,7 @@ import {InspectorService} from "src/app/services/inspector.service";
 import {lastValueFrom} from "rxjs";
 import {Inspector} from "src/app/models/inspector.model";
 import {OverlayPanel} from "primeng/overlaypanel";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-indexer',
@@ -50,6 +51,7 @@ export class IndexerComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly indexerService: IndexerService,
     private readonly inspectorService: InspectorService,
+    private readonly messageService: MessageService
   ) {
 
   }
@@ -88,11 +90,21 @@ export class IndexerComponent implements OnInit {
       this.indexerService.update(this.updatedIndexer.id, indexer).toPromise().then(() => {
         this.ngOnInit()
         this.closeModal()
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `Indexer ${indexer.name} is updated!`
+        });
         this.currentlySubmitting = false
         this.updatedIndexer = null
       }).catch((err: HttpErrorResponse) => {
         this.errorMessage = err.error
         this.currentlySubmitting = false
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: `Indexer ${indexer.name} failed to update!`
+        });
         console.log(err)
       })
       return;
@@ -100,10 +112,20 @@ export class IndexerComponent implements OnInit {
     this.indexerService.post(indexer).toPromise().then(() => {
       this.reloadIndexers()
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Indexer ${this.name.value} is created!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
       this.currentlySubmitting = false
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Indexer ${this.name.value} failed to be create!`
+      });
       console.log(err)
     })
   }
@@ -117,10 +139,20 @@ export class IndexerComponent implements OnInit {
     this.indexerService.update(indexer.id, {name: indexer.name, deleted: true}).toPromise().then(() => {
       this.reloadIndexers()
       this.closeModal()
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Indexer ${indexer.name} is deleted!`
+      });
       this.currentlySubmitting = false
     }).catch((err: HttpErrorResponse) => {
       this.errorMessage = err.error
       this.currentlySubmitting = false
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Indexer ${indexer.name} failed to be deleted!`
+      });
       console.log(err)
     })
   }
@@ -230,7 +262,13 @@ export class IndexerComponent implements OnInit {
    * @param indexer
    */
   public startIndexing(indexer: Indexer): void {
-    lastValueFrom(this.indexerService.startIndexing(indexer.id, indexer)).then().catch()
+    lastValueFrom(this.indexerService.startIndexing(indexer.id, indexer)).then(i => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: `Indexer ${indexer.name} started!`
+      });
+    }).catch()
     this.reloadIndexers()
   }
 
