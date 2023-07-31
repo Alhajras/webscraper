@@ -170,21 +170,16 @@
                   [formControl]="maxCollectedDocs"
                 />
               </app-input-field>
-
               <app-input-field
                 [isRequired]="true"
+                labelId="show-browser-id"
                 labelText="Allow multi elements crawling"
-                helpText="If the documents are listed as a list in a page this can be set to true."
+                helpText="If the target page caontains more than one document this should be set to true."
               >
-                <p-dropdown
-                  id="multi-elements-id"
-                  [formControl]="allowMultiElements"
-                  placeholder="Select a parsing selector"
-                  [options]="multiElementsOptions"
-                  [filter]="false"
-                ></p-dropdown>
+                <div>
+                  <p-inputSwitch [formControl]="allowMultiElements"></p-inputSwitch>
+                </div>
               </app-input-field>
-
             </div>
           </div>
 

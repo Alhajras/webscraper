@@ -41,7 +41,6 @@ export class CrawlerComponent {
   public form!: FormGroup
   public templatesList: TemplateDropDown[] = []
   public parsingAlgorithmsList = ['BFS_BOTTOM_UP', 'BFS_TOP_DOWN']
-  public multiElementsOptions = ['Allow multi documentations', 'Single documentation per page']
   public currentlySubmitting = false
   public displayModal = false
   public header = 'Crawler form'
@@ -60,7 +59,6 @@ export class CrawlerComponent {
    * Submits the form data.
    */
   public submit(): void {
-    console.log(this.allowMultiElements.value)
     if (!this.form.valid) {
       // We should normally never get here since the submit button should be disabled.
       console.warn('Form not valid.')
@@ -81,7 +79,7 @@ export class CrawlerComponent {
       timeout: this.timeout.value,
       max_pages: this.maxPages.value,
       max_collected_docs: this.maxCollectedDocs.value,
-      allow_multi_elements: this.allowMultiElements.value === 'Allow multi documentations',
+      allow_multi_elements: this.allowMultiElements.value,
       max_depth: this.maxDepth.value,
       robot_file_url: this.robotFileUrl.value,
       excluded_urls: this.excludedUrls.value.length === 0 ? '' : this.excludedUrls.value.join('";"'),
