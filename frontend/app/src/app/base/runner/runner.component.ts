@@ -128,7 +128,7 @@ export class RunnerComponent {
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
-        detail: `Runner ${this.name.value} started!`
+        detail: `Runner ${this.name.value} created!`
       });
     })
   }
@@ -252,7 +252,13 @@ export class RunnerComponent {
   }
 
   public restartRunner(runner: Partial<Runner>): void {
-    this.runnerService.reStart(runner).toPromise().then().catch()
+    this.runnerService.reStart(runner).toPromise().then(() => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `Runner ${this.name.value} started!`
+      });
+    }).catch()
   }
 
   public download(runner: Runner): void {
