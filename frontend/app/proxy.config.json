@@ -1,12 +1,12 @@
 {
   "/api/": {
-    "target": "http://localhost:8000",
+    "target": "http://173.16.38.5:8000",
     "secure": false,
     "changeOrigin": true,
     "disableHostCheck": true
   },
   "/static/": {
-    "target": "http://localhost:8000",
+    "target": "http://173.16.38.5:8000",
     "secure": false,
     "changeOrigin": true,
     "disableHostCheck": true

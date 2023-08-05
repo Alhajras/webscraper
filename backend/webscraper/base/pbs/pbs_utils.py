@@ -108,11 +108,14 @@ class PBSTestsUtils:
 
     def run_job(self, runner_serializer) -> None:
         crawler_id = str(runner_serializer["crawler"])
-        qsub_command = f"cp start_script.sh {crawler_id}.start_script.sh"
+        runner_id = str(runner_serializer["id"])
+        qsub_command = f"cp start_script.sh {runner_id}.start_script.sh"
         self.remote_job_runner(self.pbs_head_node, qsub_command)
-        qsub_command = f"sed -i 's/crawler_placeholder/{crawler_id}/g' {crawler_id}.start_script.sh"
+        qsub_command = f"sed -i 's/crawler_placeholder/{crawler_id}/g' {runner_id}.start_script.sh"
         self.remote_job_runner(self.pbs_head_node, qsub_command)
-        qsub_command = f"qsub  {crawler_id}.start_script.sh"
+        qsub_command = f"sed -i 's/runner_placeholder/{runner_id}/g' {runner_id}.start_script.sh"
+        self.remote_job_runner(self.pbs_head_node, qsub_command)
+        qsub_command = f"qsub  {runner_id}.start_script.sh"
         self.remote_job_runner(self.pbs_head_node, qsub_command)
 
     def set_up_pbs(self) -> None:

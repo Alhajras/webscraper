@@ -15,6 +15,8 @@ import time
 from typing import List, Tuple, Optional
 
 from array import array
+
+
 def ped(x, y, delta):
     '''
     Computes the prefix edit distance PED(x,y) for the two given strings x and
