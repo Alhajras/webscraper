@@ -110,6 +110,7 @@ export class RunnerComponent {
       description: this.descriptionForm,
       name: this.name,
       crawler: this.crawlerForm,
+      machine: this.machine,
     })
   }
 
@@ -122,6 +123,7 @@ export class RunnerComponent {
       description: this.descriptionForm.value,
       name: this.name.value,
       crawler: this.crawlerForm.value.crawler.id,
+      machine: this.machine.value,
     }
     this.runnerService.start(runner).toPromise().then(() => {
       this.displayModal = false
@@ -145,6 +147,7 @@ export class RunnerComponent {
       description: this.descriptionForm.value,
       name: this.name.value,
       crawler: this.crawlerForm.value.id,
+      machine: this.machine.value,
     }
 
     if (this.updatedRunner !== null) {
