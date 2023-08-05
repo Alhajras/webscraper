@@ -264,18 +264,29 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         if not runner_serializer.is_valid():
             pass
 
-        runner = Runner.objects.filter(name=runner_serializer["name"]).last()
+        runner = Runner.objects.get(id=runner_id)
         if runner_serializer["machine"].value != "localhost":
             # IP address are taken from the docker/.env file
             pbs_head_node = "173.16.38.8"
             pbs_sim_node = "173.16.38.9"
             pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_node=pbs_sim_node)
             pbs.set_up_pbs()
-            pbs.run_job(runner_serializer.data)
+            pbs.run_job(runner)
         else:
             crawler_utils = CrawlerUtils(runner_id, runner_serializer.data["crawler"])
             crawler_utils.start()
 
+        return Response(status=200)
+
+    @action(detail=False, url_path="start-docker", methods=["post"])
+    def start_docker(self, request: Request) -> Response:
+        runner_id = request.data["id"]
+        runner_serializer = RunnerSerializer(data=request.data)
+        # TODO: If data are invalid we should throw an error here
+        if not runner_serializer.is_valid():
+            pass
+        crawler_utils = CrawlerUtils(runner_id, runner_serializer.data["crawler"])
+        crawler_utils.start()
         return Response(status=200)
 
     @action(detail=True, url_path="download", methods=["post"])
