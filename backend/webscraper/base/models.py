@@ -261,6 +261,10 @@ class Runner(models.Model):
     def current_crawled_url(self) -> int:
         return InspectorValue.objects.filter(runner=self).values("url").last()
 
+    @property
+    def crawler_name(self) -> int:
+        return self.crawler.name
+
 
 class LinkFragment(models.Model):
     fragment = models.CharField(max_length=100)

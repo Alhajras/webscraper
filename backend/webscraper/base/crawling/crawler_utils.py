@@ -124,6 +124,8 @@ class CrawlerUtils:
         robots_file_link = (
             crawler.robot_file_url if crawler.robot_file_url != "" else crawler.seed_url
         )
+        import pdb
+        pdb.set_trace()
         robots_txt_content = fetch_robots_txt(robots_file_link)
 
         scope_divs = []

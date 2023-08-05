@@ -14,13 +14,22 @@ RUN ssh-keygen -q -t rsa -N '' <<< ""$'\n'"y" 2>&1 >/dev/null
 RUN cat /home/${user}/.ssh/id_rsa.pub >> /home/${user}/.ssh/authorized_keys
 
 
-# Upgrrade python to 3.10 to run crawlerNode
-RUN sudo add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get update
-RUN sudo apt list | grep python3.10
-RUN sudo apt-get install -y python3.10
-RUN sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
-RUN sudo apt install -y python3.10-venv
+# Step 3: Download and install Python 3.10
+RUN wget https://www.python.org/ftp/python/3.10.0/Python-3.10.0.tgz && \
+    tar -xzf Python-3.10.0.tgz && \
+    cd Python-3.10.0 && \
+    ./configure && \
+    make && \
+    make install && \
+    cd .. && \
+    rm -rf Python-3.10.0*
+
+# Step 4: Create a virtual environment and set its location
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3.10 -m venv $VIRTUAL_ENV
+
+# Step 5: Add the virtual environment's binary directory to PATH
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Install crawlNode
 WORKDIR /home/${user}
@@ -31,8 +40,7 @@ RUN rm main.zip
 WORKDIR webscraper-main
 RUN rm -r frontend/ pbs/ Report/
 WORKDIR backend/webscraper/
-RUN python3 -m venv venv
-RUN /bin/bash -c "source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
+RUN /bin/bash -c "source /opt/venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
 
 # Install chromedriver
 RUN sudo apt update

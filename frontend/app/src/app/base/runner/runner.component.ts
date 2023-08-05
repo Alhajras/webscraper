@@ -290,14 +290,12 @@ export class RunnerComponent {
     }
     if (runner.status !== 'Exit' && runner.status !== 'Completed' && runner.status !== 'New') {
       this.actions.push(this.stopButton)
-      this.actions.push({disabled: true, ...this.editButton})
       this.actions.push({disabled: true, ...this.startButton})
       this.actions.push({disabled: true, ...this.deleteButton})
     }
 
     if (runner.status === 'Exit' || runner.status === 'Completed' || runner.status === 'New') {
       this.actions.push({disabled: true, ...this.stopButton})
-      this.actions.push(this.editButton)
       this.actions.push(this.startButton)
       this.actions.push(this.deleteButton)
     }

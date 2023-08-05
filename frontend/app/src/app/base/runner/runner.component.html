@@ -71,7 +71,7 @@
             </p-timeline>
           </div>
         </td>
-        <td>#{{runner.crawler}}</td>
+        <td>{{runner.crawler_name}} #{{runner.crawler}}</td>
         <td>
           <p>
             Started at:
@@ -194,7 +194,7 @@
         type="button"
         pButton
         pRipple
-        (click)="start()"
+        (click)="updatedRunner !== null ? submit() : start()"
         class="p-mr-2"
       >
         <span>{{ updatedRunner !== null ? 'Update' : 'Create'}}</span>

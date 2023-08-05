@@ -31,6 +31,8 @@ def fetch_robots_txt(link) -> str:
     :param link: Base link that will be used as a source of truth to find the ROBOTS.txt
     :return:
     """
+    import pdb
+    pdb.set_trace()
     # Parse the base URL from the provided link
     base_url = urlparse(link)._replace(path="").geturl()
 

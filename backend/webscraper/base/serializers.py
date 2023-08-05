@@ -126,6 +126,7 @@ class RunnerSerializer(serializers.ModelSerializer):
             "current_crawled_url",
             "name",
             "machine",
+            "crawler_name",
         ]
 
 
