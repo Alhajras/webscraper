@@ -40,7 +40,8 @@ RUN rm main.zip
 WORKDIR webscraper-main
 RUN rm -r frontend/ pbs/ Report/
 WORKDIR backend/webscraper/
-RUN /bin/bash -c "source /opt/venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
+RUN python3 -m venv venv
+RUN /bin/bash -c "source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
 
 # Install chromedriver
 RUN sudo apt update
