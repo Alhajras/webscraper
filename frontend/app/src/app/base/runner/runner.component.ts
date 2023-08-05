@@ -33,9 +33,9 @@ export class RunnerComponent {
       this.stopRunner(this.runner);
     }
   }
-  public restartButton = {
-    label: 'Restart',
-    icon: 'pi pi-refresh',
+  public startButton = {
+    label: 'Start',
+    icon: 'pi pi-play',
     command: () => {
       this.restartRunner(this.runner);
     }
@@ -282,17 +282,17 @@ export class RunnerComponent {
       this.actions.push({disabled: true, ...this.saveButton})
 
     }
-    if (runner.status !== 'Exit' && runner.status !== 'Completed') {
+    if (runner.status !== 'Exit' && runner.status !== 'Completed' && runner.status !== 'New') {
       this.actions.push(this.stopButton)
       this.actions.push({disabled: true, ...this.editButton})
-      this.actions.push({disabled: true, ...this.restartButton})
+      this.actions.push({disabled: true, ...this.startButton})
       this.actions.push({disabled: true, ...this.deleteButton})
     }
 
-    if (runner.status === 'Exit' || runner.status === 'Completed') {
+    if (runner.status === 'Exit' || runner.status === 'Completed' || runner.status === 'New') {
       this.actions.push({disabled: true, ...this.stopButton})
       this.actions.push(this.editButton)
-      this.actions.push(this.restartButton)
+      this.actions.push(this.startButton)
       this.actions.push(this.deleteButton)
     }
 
