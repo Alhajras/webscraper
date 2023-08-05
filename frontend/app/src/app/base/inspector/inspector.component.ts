@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Template} from "src/app/models/template.model";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Inspector} from "src/app/models/inspector.model";
 import {InspectorService} from "src/app/services/inspector.service";
@@ -146,11 +146,11 @@ export class InspectorComponent implements OnInit {
 
   public editInspector(inspector: Inspector): void {
     this.updatedInspector = inspector
-    this.name = this.fb.control(inspector.name)
+    this.name = this.fb.control(inspector.name, [Validators.required])
     this.variableName = this.fb.control(inspector.variable_name)
     this.cleanUpExpression = this.fb.control(inspector.clean_up_expression === '' ? '' : inspector.clean_up_expression.split("\";\""))
-    this.type = this.fb.control({key: inspector.type, value: inspector.type})
-    this.selector = this.fb.control(inspector.selector)
+    this.type = this.fb.control({key: inspector.type, value: inspector.type}, [Validators.required])
+    this.selector = this.fb.control(inspector.selector, [Validators.required])
     this.attribute = this.fb.control(inspector.attribute)
     this.form = this.fb.group({
       selector: this.selector,
@@ -178,12 +178,12 @@ export class InspectorComponent implements OnInit {
 
   private initForm(): void {
     this.description = this.fb.control('')
-    this.selector = this.fb.control('')
+    this.selector = this.fb.control('', [Validators.required])
     this.attribute = this.fb.control('')
-    this.name = this.fb.control('')
+    this.name = this.fb.control('', [Validators.required])
     this.variableName = this.fb.control('')
     this.cleanUpExpression = this.fb.control([])
-    this.type = this.fb.control({key: 'text', value: 'text'})
+    this.type = this.fb.control({key: 'text', value: 'text'}, [Validators.required])
     this.form = this.fb.group({
       description: this.description,
       url: this.selector,
