@@ -182,119 +182,131 @@
           text="The action could not be created:"
           class="p-mr-2"
         ></p-message>
-        <div>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Name"
-            helpText=""
-          >
+        <div class="grid">
+          <div class="col-6">
 
-            <input
-              id="start-time-id"
-              type="text"
-              pInputText
-              [formControl]="name"
-            />
-          </app-input-field>
-          <app-input-field
-            [isRequired]="true"
-            labelId="version-label-id"
-            labelText="Order"
-            helpText="The order of the action in which it will be executed."
-          >
-            <input
-              id="end-time-id"
-              type="number"
-              pInputText
-              [formControl]="order"
-            />
-          </app-input-field>
+            <div>
+              <app-input-field
+                [isRequired]="true"
+                labelId="version-label-id"
+                labelText="Name"
+                helpText=""
+              >
+
+                <input
+                  id="start-time-id"
+                  type="text"
+                  pInputText
+                  [formControl]="name"
+                />
+              </app-input-field>
+              <app-input-field
+                [isRequired]="true"
+                labelId="version-label-id"
+                labelText="Order"
+                helpText="The order of the action in which it will be executed."
+              >
+                <input
+                  id="end-time-id"
+                  type="number"
+                  pInputText
+                  min="0"
+                  [formControl]="order"
+                />
+              </app-input-field>
+            </div>
+          </div>
+          <div class="col-6">
+            <app-input-field
+              [isRequired]="true"
+              labelId="version-label-id"
+              labelText="Type"
+              helpText=""
+            >
+              <p-dropdown
+                id="version-id"
+                [formControl]="type"
+                placeholder="Select a type"
+                [options]="typesList"
+                optionLabel="key"
+                [filter]="true"
+              ></p-dropdown>
+            </app-input-field>
+
+            <container-element *ngIf="type.value" [ngSwitch]="type.value.value">
+              <div *ngSwitchCase="'click'">
+                <app-input-field
+                  [isRequired]="true"
+                  labelId="selector-label-id"
+                  labelText="Selector"
+                  helpText="The element XPath to be clicked."
+                >
+                  <input
+                    id="selector-id"
+                    type="text"
+                    pInputText
+                    [formControl]="selector"
+                  />
+                </app-input-field>
+              </div>
+              <div *ngSwitchCase="'scroll'">
+                <app-input-field
+                  [isRequired]="true"
+                  labelId="times-label-id"
+                  labelText="Times"
+                  helpText="How many times the scrolling should be repeated."
+                >
+                  <input
+                    id="times-id"
+                    type="number"
+                    min="0"
+                    pInputText
+                    [formControl]="times"
+                  />
+                </app-input-field>
+                <app-input-field
+                  [isRequired]="true"
+                  labelId="direction-label-id"
+                  labelText="Direction"
+                  helpText="The direction of scrolling 'up' or 'down'."
+                >
+                  <input
+                    id="direction-id"
+                    type="text"
+                    pInputText
+                    [formControl]="direction"
+                  />
+                </app-input-field>
+
+              </div>
+
+              <div *ngSwitchCase="'wait'">
+                <app-input-field
+                  [isRequired]="true"
+                  labelId="times-label-id"
+                  labelText="Time"
+                  helpText="How many seconds should the crawler wait."
+                >
+                  <input
+                    id="time-id"
+                    type="number"
+                    min="0"
+                    pInputText
+                    [formControl]="time"
+                  />
+                </app-input-field>
+              </div>
+
+            </container-element>
+
+          </div>
         </div>
-        <app-input-field
-          [isRequired]="true"
-          labelId="version-label-id"
-          labelText="Type"
-          helpText=""
-        >
-          <p-dropdown
-            id="version-id"
-            [formControl]="type"
-            placeholder="Select a type"
-            [options]="typesList"
-            optionLabel="key"
-            [filter]="true"
-          ></p-dropdown>
-        </app-input-field>
-        <container-element *ngIf="type.value" [ngSwitch]="type.value.value">
-          <div *ngSwitchCase="'click'">
-            <app-input-field
-              [isRequired]="true"
-              labelId="selector-label-id"
-              labelText="Selector"
-              helpText="The element XPath to be clicked."
-            >
-              <input
-                id="selector-id"
-                type="text"
-                pInputText
-                [formControl]="selector"
-              />
-            </app-input-field>
-          </div>
-          <div *ngSwitchCase="'scroll'">
-            <app-input-field
-              [isRequired]="true"
-              labelId="times-label-id"
-              labelText="Times"
-              helpText="How many times the scrolling should be repeated."
-            >
-              <input
-                id="times-id"
-                type="number"
-                pInputText
-                [formControl]="times"
-              />
-            </app-input-field>
-            <app-input-field
-              [isRequired]="true"
-              labelId="direction-label-id"
-              labelText="Direction"
-              helpText="The direction of scrolling 'up' or 'down'."
-            >
-              <input
-                id="direction-id"
-                type="text"
-                pInputText
-                [formControl]="direction"
-              />
-            </app-input-field>
-
-          </div>
-
-          <div *ngSwitchCase="'wait'">
-            <app-input-field
-              [isRequired]="true"
-              labelId="times-label-id"
-              labelText="Time"
-              helpText="How many seconds should the crawler wait."
-            >
-              <input
-                id="time-id"
-                type="number"
-                pInputText
-                [formControl]="time"
-              />
-            </app-input-field>
-          </div>
-
-        </container-element>
-
       </form>
     </p-card>
   </div>
   <ng-template pTemplate="footer">
     <button
+      [disabled]=" form.invalid"
       id="run-btn"
       type="button"
       pButton

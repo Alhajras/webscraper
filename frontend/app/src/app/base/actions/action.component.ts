@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Template} from "src/app/models/template.model";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Action, ActionChain} from "src/app/models/action.model";
 import {ActionService} from "src/app/services/action.service";
@@ -152,10 +152,10 @@ export class ActionComponent implements OnInit {
 
   public editAction(action: any): void {
     this.updatedAction = this.evaluateType(action)
-    this.name = this.fb.control(action.name)
-    this.order = this.fb.control(action.order)
+    this.name = this.fb.control(action.name, [Validators.required])
+    this.order = this.fb.control(action.order, [Validators.required])
     this.disableActions = this.fb.control(action.disabled)
-    this.type = this.fb.control({key: action.type, value: action.type})
+    this.type = this.fb.control({key: action.type, value: action.type}, [Validators.required])
     this.selector = this.fb.control(action.selector ?? '')
     this.times = this.fb.control(action.times ?? 1)
     this.direction = this.fb.control(action.direction ?? 'down')
@@ -183,10 +183,10 @@ export class ActionComponent implements OnInit {
   }
 
   private initForm(): void {
-    this.order = this.fb.control('')
+    this.order = this.fb.control('', [Validators.required])
     this.disableActions = this.fb.control(this.template.action_chain_disabled)
-    this.name = this.fb.control('')
-    this.type = this.fb.control('')
+    this.name = this.fb.control('', [Validators.required])
+    this.type = this.fb.control('', [Validators.required])
     this.selector = this.fb.control('')
     this.times = this.fb.control('')
     this.direction = this.fb.control('')
