@@ -185,43 +185,8 @@ export class CrawlerComponent {
         template: t,
       }))
     })
-    const urlReg = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-z]{2,}(:[0-9]+)?(\/.*)?$/;
-    this.template = this.fb.control('', [Validators.required])
-    this.parsingAlgorithm = this.fb.control('BFS_TOP_DOWN')
-    this.description = this.fb.control('')
-    this.seedUrl = this.fb.control('', [Validators.required, Validators.pattern(urlReg)])
-    this.name = this.fb.control('', [Validators.required])
-    this.threads = this.fb.control(1)
-    this.retry = this.fb.control(0)
-    this.showBrowser = this.fb.control(false)
-    this.sleep = this.fb.control(0)
-    this.timeout = this.fb.control(60)
-    this.maxPages = this.fb.control(100)
-    this.maxCollectedDocs = this.fb.control(100)
-    this.allowMultiElements = this.fb.control(false)
-    this.maxDepth = this.fb.control(2)
-    this.robotFileUrl = this.fb.control('', Validators.pattern(urlReg))
-    this.excludedUrls = this.fb.control('')
-    this.scopeDivs = this.fb.control('')
 
-    this.form = this.fb.group({
-      description: this.description,
-      url: this.seedUrl,
-      name: this.name,
-      threads: this.threads,
-      parsing_algorithm: this.parsingAlgorithm,
-      retry: this.retry,
-      show_browser: this.showBrowser,
-      sleep: this.sleep,
-      timeout: this.timeout,
-      max_pages: this.maxPages,
-      max_collected_docs: this.maxCollectedDocs,
-      allow_multi_elements: this.allowMultiElements,
-      max_depth: this.maxDepth,
-      robot_file_url: this.robotFileUrl,
-      excluded_urls: this.excludedUrls,
-      scope_divs: this.scopeDivs
-    })
+    this.initForm()
   }
 
   /**
@@ -271,4 +236,50 @@ export class CrawlerComponent {
     this.displayModal = true
   }
 
+  public openDialog(): void {
+    this.updatedCrawler = null
+    this.initForm()
+    this.displayModal = true
+  }
+
+  private initForm(): void {
+    const urlReg = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-z]{2,}(:[0-9]+)?(\/.*)?$/;
+    this.template = this.fb.control('', [Validators.required])
+    this.parsingAlgorithm = this.fb.control('BFS_TOP_DOWN')
+    this.description = this.fb.control('')
+    this.seedUrl = this.fb.control('', [Validators.required, Validators.pattern(urlReg)])
+    this.name = this.fb.control('', [Validators.required])
+    this.threads = this.fb.control(1)
+    this.retry = this.fb.control(0)
+    this.showBrowser = this.fb.control(false)
+    this.sleep = this.fb.control(0)
+    this.timeout = this.fb.control(60)
+    this.maxPages = this.fb.control(100)
+    this.maxCollectedDocs = this.fb.control(100)
+    this.allowMultiElements = this.fb.control(false)
+    this.maxDepth = this.fb.control(2)
+    this.robotFileUrl = this.fb.control('', Validators.pattern(urlReg))
+    this.excludedUrls = this.fb.control('')
+    this.scopeDivs = this.fb.control('')
+
+    this.form = this.fb.group({
+      description: this.description,
+      url: this.seedUrl,
+      name: this.name,
+      threads: this.threads,
+      parsing_algorithm: this.parsingAlgorithm,
+      retry: this.retry,
+      show_browser: this.showBrowser,
+      sleep: this.sleep,
+      timeout: this.timeout,
+      max_pages: this.maxPages,
+      max_collected_docs: this.maxCollectedDocs,
+      allow_multi_elements: this.allowMultiElements,
+      max_depth: this.maxDepth,
+      robot_file_url: this.robotFileUrl,
+      excluded_urls: this.excludedUrls,
+      scope_divs: this.scopeDivs
+    })
+
+  }
 }

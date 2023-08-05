@@ -13,7 +13,7 @@
             pRipple
             class="p-button-outlined"
             label="Create a crawler"
-            (click)="displayModal = true"
+            (click)="openDialog()"
           ></button>
         </div>
       </div>
@@ -335,6 +335,7 @@
     </div>
     <ng-template pTemplate="footer">
       <button
+        [disabled]="form.invalid"
         id="run-btn"
         type="button"
         pButton
