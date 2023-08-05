@@ -107,8 +107,9 @@ class PBSTestsUtils:
             f.write(f"{key.get_name()} {key.get_base64()}")
 
     def run_job(self, runner) -> None:
-        crawler_id = str(runner.crawler)
+        crawler_id = str(runner.crawler.id)
         runner_id = str(runner.id)
+
         qsub_command = f"cp start_script.sh {runner_id}.start_script.sh"
         self.remote_job_runner(self.pbs_head_node, qsub_command)
         qsub_command = f"sed -i 's/crawler_placeholder/{crawler_id}/g' {runner_id}.start_script.sh"
