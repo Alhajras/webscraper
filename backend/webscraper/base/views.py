@@ -268,8 +268,8 @@ class RunnerViewSet(EverythingButDestroyViewSet):
         if runner_serializer["machine"].value != "localhost":
             # IP address are taken from the docker/.env file
             pbs_head_node = "173.16.38.8"
-            pbs_sim_node = "173.16.38.9"
-            pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_nodes=[pbs_sim_node, "173.16.38.11"])
+            # TODO: This can be dynamically added by using django models
+            pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_nodes=["173.16.38.9", "173.16.38.11"])
             pbs.set_up_pbs()
             pbs.run_job(runner)
         else:
