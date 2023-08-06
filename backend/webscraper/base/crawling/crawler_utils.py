@@ -170,6 +170,7 @@ class CrawlerUtils:
                 runner = Runner.objects.get(id=self.runner_id)
 
                 if runner.status == str(RunnerStatus.EXIT):
+                    driver.quit()
                     return
 
                 if len(current_active_queue) == 0:
@@ -384,6 +385,7 @@ class CrawlerUtils:
                             )
                             print(
                                 f"Found duplicated contents with hashcode: {document_hash_code}"
+                                f"Values are {inspector_values}"
                             )
                     statistics.average_docs_per_page = (
                         documents_number
@@ -419,6 +421,10 @@ class CrawlerUtils:
             while len(current_active_queue) != 0 or not all_threads_completed(
                 shared_threads_pool
             ):
+                runner = Runner.objects.get(id=self.runner_id)
+                if runner.status == str(RunnerStatus.EXIT):
+                    break
+
                 if len(current_active_queue) != 0:
                     find_links()
                 else:

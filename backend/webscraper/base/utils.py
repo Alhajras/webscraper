@@ -52,6 +52,8 @@ def check_crawl_permission(robots_txt_content, user_agent, link) -> bool:
     :param link: The link wanted to be crawled
     :return:
     """
+    if not robots_txt_content or not link:
+        return True
     robot_parser = RobotFileParser()
     robot_parser.parse(robots_txt_content.splitlines())
     robot_parser.set_url(link)  # Set the URL to check permissions

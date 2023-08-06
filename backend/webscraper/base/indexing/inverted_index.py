@@ -209,18 +209,18 @@ class InvertedIndex:
 
         # Iterate the lists in an interleaving order and aggregate the scores.
         while i < len(list1) and j < len(list2):
-            if i < list1[i].counter == list2[j].counter:
+            if i < list1[i][0] == list2[j][0]:
                 result.append(
                     (
-                        list1[i].counter,
-                        list1[i].inspector_db_id,
-                        list1[i].score + list2[j].score,
-                        list1[i].document_db_id,
+                        list1[i][0],
+                        list1[i][1],
+                        list1[i][2] + list2[j][2],
+                        list1[i][3],
                     )
                 )
                 i += 1
                 j += 1
-            elif list1[i].counter < list2[j].counter:
+            elif list1[i][0] < list2[j][0]:
                 result.append(list1[i])
                 i += 1
             else:
