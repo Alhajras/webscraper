@@ -9,7 +9,7 @@ Natalie Prange <prange@cs.uni-freiburg.de>
 
 import itertools
 import os
-import readline  # NOQA
+# import readline  # NOQA
 import time
 
 from typing import List, Tuple, Optional
@@ -148,7 +148,7 @@ class QGramIndex:
         ) as f:
             ent_id = 0
             name_id = 0
-            f.readline()  # skip first line
+            # f.readline()  # skip first line
 
             for line in f:
                 ent_id += 1
