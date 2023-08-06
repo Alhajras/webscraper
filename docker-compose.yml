@@ -71,6 +71,30 @@ services:
           # This is static so it can be reached if the dev server is running
         ipv4_address: 173.16.38.9
 
+  pbs-sim-node2:
+    image: pbs-sim-node2
+    depends_on:
+      - pbs-head-node
+      - db
+    tty: true
+    build:
+      context: pbs/pbs-sim-node
+    shm_size: '2gb'
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - "/dev/fuse:/dev/fuse"
+    privileged: true
+    security_opt:
+      - apparmor:unconfined
+    hostname: pbs-sim-node2
+    networks:
+      webcrawler_network:
+        aliases:
+          - db
+          # This is static so it can be reached if the dev server is running
+        ipv4_address: 173.16.38.11
+
   db:
     image: postgres:12.1
     environment:

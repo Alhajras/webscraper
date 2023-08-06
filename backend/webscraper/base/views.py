@@ -269,7 +269,7 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             # IP address are taken from the docker/.env file
             pbs_head_node = "173.16.38.8"
             pbs_sim_node = "173.16.38.9"
-            pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_node=pbs_sim_node)
+            pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_nodes=[pbs_sim_node])
             pbs.set_up_pbs()
             pbs.run_job(runner)
         else:

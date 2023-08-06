@@ -11,12 +11,12 @@ class PBSTestsUtils:
     def __init__(
         self,
         pbs_head_node: str,
-        pbs_sim_node: str,
+        pbs_sim_nodes: list[str],
         pbs_username: str = "mpiuser",
         pbs_password: str = "mpiuser",
     ) -> None:
         self.pbs_head_node = pbs_head_node
-        self.pbs_sim_node = pbs_sim_node
+        self.pbs_sim_nodes = pbs_sim_nodes
         self.pbs_username = pbs_username
         self.pbs_password = pbs_password
         # This is used, so we do not have to reconfigure the PBS in each test if it is already configured by any test.
@@ -55,12 +55,12 @@ class PBSTestsUtils:
         )
         self.remote_job_runner(self.pbs_head_node, create_tmp_directory)
 
-    def register_sim_node(self) -> None:
+    def register_sim_node(self, node) -> None:
         """
         Register the simulation node to the head node
         """
         register_command = (
-            f"sudo /opt/pbs/bin/qmgr -c 'create node {shlex.quote(self.pbs_sim_node)}'"
+            f"sudo /opt/pbs/bin/qmgr -c 'create node {shlex.quote(node)}'"
         )
         self.remote_job_runner(self.pbs_head_node, register_command)
 
@@ -74,19 +74,20 @@ class PBSTestsUtils:
             public_key = f.read()
         add_pub_key_cmd = f"echo {shlex.quote(public_key)} >> ~/.ssh/authorized_keys"
         self.remote_job_runner(self.pbs_head_node, add_pub_key_cmd)
-        self.remote_job_runner(self.pbs_sim_node, add_pub_key_cmd)
+        for pbs_sim_node in self.pbs_sim_nodes:
+            self.remote_job_runner(pbs_sim_node, add_pub_key_cmd)
 
-    def add_both_nodes_ip_address(self) -> None:
+    def add_both_nodes_ip_address(self, node) -> None:
         """
         This method will publish the IP address of bother head and sim nodes to each other,
          without it the nodes can not communicate.
         """
         ip_command = 'hostname -I | awk "{print \\$1}"'
         head_node_ip = self.remote_job_runner(self.pbs_head_node, ip_command)
-        sim_node_ip = self.remote_job_runner(self.pbs_sim_node, ip_command)
+        sim_node_ip = self.remote_job_runner(node, ip_command)
         sim_command = f"echo '{shlex.quote(head_node_ip)} {shlex.quote(self.pbs_head_node)}' >> /etc/hosts"
-        self.remote_job_runner(self.pbs_sim_node, sim_command)
-        head_command = f"echo '{shlex.quote(sim_node_ip)} {shlex.quote(self.pbs_sim_node)}' >> /etc/hosts"
+        self.remote_job_runner(node, sim_command)
+        head_command = f"echo '{shlex.quote(sim_node_ip)} {shlex.quote(node)}' >> /etc/hosts"
         self.remote_job_runner(self.pbs_head_node, head_command)
 
     def create_ssh_key(self) -> None:
@@ -130,6 +131,7 @@ class PBSTestsUtils:
             pass
         self.create_ssh_key()
         self.add_pub_key_to_nodes()
-        self.add_both_nodes_ip_address()
-        self.register_sim_node()
+        for node in self.pbs_sim_nodes:
+            self.add_both_nodes_ip_address(node)
+            self.register_sim_node(node)
         self.is_configured = True
