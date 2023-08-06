@@ -87,7 +87,9 @@ class PBSTestsUtils:
         sim_node_ip = self.remote_job_runner(node, ip_command)
         sim_command = f"echo '{shlex.quote(head_node_ip)} {shlex.quote(self.pbs_head_node)}' >> /etc/hosts"
         self.remote_job_runner(node, sim_command)
-        head_command = f"echo '{shlex.quote(sim_node_ip)} {shlex.quote(node)}' >> /etc/hosts"
+        head_command = (
+            f"echo '{shlex.quote(sim_node_ip)} {shlex.quote(node)}' >> /etc/hosts"
+        )
         self.remote_job_runner(self.pbs_head_node, head_command)
 
     def create_ssh_key(self) -> None:
@@ -113,9 +115,13 @@ class PBSTestsUtils:
 
         qsub_command = f"cp start_script.sh {runner_id}.start_script.sh"
         self.remote_job_runner(self.pbs_head_node, qsub_command)
-        qsub_command = f"sed -i 's/crawler_placeholder/{crawler_id}/g' {runner_id}.start_script.sh"
+        qsub_command = (
+            f"sed -i 's/crawler_placeholder/{crawler_id}/g' {runner_id}.start_script.sh"
+        )
         self.remote_job_runner(self.pbs_head_node, qsub_command)
-        qsub_command = f"sed -i 's/runner_placeholder/{runner_id}/g' {runner_id}.start_script.sh"
+        qsub_command = (
+            f"sed -i 's/runner_placeholder/{runner_id}/g' {runner_id}.start_script.sh"
+        )
         self.remote_job_runner(self.pbs_head_node, qsub_command)
         qsub_command = f"sed -i 's/pbs_sim_node_placeholder/{runner.machine}/g' {runner_id}.start_script.sh"
         self.remote_job_runner(self.pbs_head_node, qsub_command)

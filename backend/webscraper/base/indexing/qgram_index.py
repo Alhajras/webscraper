@@ -9,6 +9,7 @@ Natalie Prange <prange@cs.uni-freiburg.de>
 
 import itertools
 import os
+
 # import readline  # NOQA
 import time
 
@@ -18,7 +19,7 @@ from array import array
 
 
 def ped(x, y, delta):
-    '''
+    """
     Computes the prefix edit distance PED(x,y) for the two given strings x and
     y. Returns PED(x,y) if it is smaller or equal to the given delta; delta + 1
     otherwise.
@@ -36,7 +37,7 @@ def ped(x, y, delta):
     0
     >>> ped("", "", 10)
     0
-    '''
+    """
 
     # Compute the dimensions of the matrix.
     n = len(x) + 1
@@ -73,6 +74,7 @@ def ped(x, y, delta):
             delta_min = matrix[m * (n - 1) + col]
 
     return delta_min
+
 
 class SingletonMeta(type):
     """

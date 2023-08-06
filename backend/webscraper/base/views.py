@@ -25,7 +25,8 @@ from .models import (
     RunnerStatus,
     Indexer,
     IndexerStatus,
-    Action, ActionChain,
+    Action,
+    ActionChain,
 )
 from .pbs.pbs_utils import PBSTestsUtils
 from .serializers import (
@@ -269,7 +270,10 @@ class RunnerViewSet(EverythingButDestroyViewSet):
             # IP address are taken from the docker/.env file
             pbs_head_node = "173.16.38.8"
             # TODO: This can be dynamically added by using django models
-            pbs = PBSTestsUtils(pbs_head_node=pbs_head_node, pbs_sim_nodes=["173.16.38.9", "173.16.38.11"])
+            pbs = PBSTestsUtils(
+                pbs_head_node=pbs_head_node,
+                pbs_sim_nodes=["173.16.38.9", "173.16.38.11"],
+            )
             pbs.set_up_pbs()
             pbs.run_job(runner)
         else:
