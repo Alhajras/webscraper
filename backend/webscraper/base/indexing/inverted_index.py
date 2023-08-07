@@ -328,6 +328,6 @@ class InvertedIndex:
             union = self.merge(union, lists[i])
 
         # Filter all postings with BM25 = 0.
-        union = [x for x in union if x[3] != 0]
+        union = [x for x in union if x[2] != 0]
         # Sort the postings by BM25 scores, in descending order.
-        return sorted(union, key=lambda x: x[3], reverse=True)
+        return sorted(union, key=lambda x: x[2], reverse=True)
