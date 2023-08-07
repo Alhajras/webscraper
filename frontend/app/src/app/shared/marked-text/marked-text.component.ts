@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import {Component, Input, OnInit} from '@angular/core'
 
 @Component({
   selector: 'app-marked-text',
@@ -14,13 +14,18 @@ export class MarkedTextComponent implements OnInit {
 
   public innerHtml!: string
 
-  public ngOnInit (): void {
+  public ngOnInit(): void {
     if (this.searchString === '') {
       this.innerHtml = this.text
       return
     }
-    const regex = new RegExp(this.searchString, 'gi')
-    this.innerHtml = this.text
-      .replace(regex, matchStr => '<mark>' + matchStr + '</mark>')
+    let result = this.text
+    this.searchString.split(' ').forEach(w => {
+      const regex = new RegExp(w, 'gi')
+      result = result
+        .replace(regex, matchStr => '<mark>' + matchStr + '</mark>')
+
+    })
+    this.innerHtml = result
   }
 }
