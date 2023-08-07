@@ -178,7 +178,8 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                     "inspector__clean_up_expression",
                     "inspector__variable_name",
                 )
-                .order_by("inspector__name")
+                .order_by("document__id", "inspector__name")  # Match the expressions here
+                .distinct("document__id", "inspector__name")  # Match the expressions here
             )
             variables_names = (
                 InspectorValue.objects.filter(document__id=doc_id)

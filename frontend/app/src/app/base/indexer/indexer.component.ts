@@ -264,8 +264,8 @@ export class IndexerComponent implements OnInit {
   public startIndexing(indexer: Indexer): void {
     lastValueFrom(this.indexerService.startIndexing(indexer.id, indexer)).then(() => {
       this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
+        severity: 'success',
+        summary: 'Success',
         detail: `Indexer ${indexer.name} started!`
       });
     }).catch()
