@@ -221,8 +221,6 @@ class CrawlerUtils:
                 except (UnexpectedAlertPresentException) as e:
                     logger.error(f"The link {link.url} thrown an error: {e}")
 
-                # Calculate the page size in mega-bytes
-                print(statistics.avg_page_size)
 
                 # Get the current URL from Selenium
                 # Send a separate HTTP request using requests library to retrieve the status code\
@@ -289,6 +287,9 @@ class CrawlerUtils:
                                         f"Cross site link: {href}"
                                     ] = 1
                                     continue
+
+                                if not len(links) < max_visited_links:
+                                    statistics.http_codes[f"Max visited links reached"] = max_rec_level
                                 if (
                                         link.url != href
                                         and href not in links
