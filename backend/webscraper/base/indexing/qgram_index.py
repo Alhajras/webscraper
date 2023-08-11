@@ -128,26 +128,12 @@ class QGramIndex:
         Builds the index from the given file (one line per entity, see ES5).
 
         The entity IDs are one-based (starting with one).
-
-        >>> q = QGramIndex(3, False)
-        >>> q.build_from_file("test.tsv")
-        >>> sorted(q.inverted_lists.items())
-        ... # doctest: +NORMALIZE_WHITESPACE
-        [('$$b', [(2, 1)]), ('$$f', [(1, 1)]), ('$br', [(2, 1)]),
-         ('$fr', [(1, 1)]), ('bre', [(2, 1)]), ('fre', [(1, 1)]),
-         ('rei', [(1, 1), (2, 1)])]
         """
-        import pathlib
 
-        pathlib.Path().resolve()
-
-        with open(
-            os.path.join(
-                f"{pathlib.Path().resolve()}/base/indexing/dictionaries", file_name
-            ),
-            "r",
-            encoding="utf-8",
-        ) as f:
+        with open(file_name,
+                  "r",
+                  encoding="utf-8",
+                  ) as f:
             ent_id = 0
             name_id = 0
             f.readline()  # skip first line

@@ -1,6 +1,8 @@
 import csv
+import os
 from concurrent.futures import ThreadPoolExecutor, Future, wait
 from io import StringIO
+import pathlib
 
 from django.db import transaction
 from django.utils import timezone
@@ -131,7 +133,10 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                 Indexer.objects.filter(id=indexer_id).update(
                     status=IndexerStatus.DICTIONARY
                 )
-                q_obj.build_from_file(indexer.dictionary)
+                pathlib.Path().resolve()
+                file_path = os.path.join(
+                    f"{pathlib.Path().resolve()}/base/indexing/dictionaries", indexer.dictionary)
+                q_obj.build_from_file(file_path)
                 singleton_cache.suggestions_cache[cache_key] = q_obj
                 print("Done creating dictionary!")
             Indexer.objects.filter(id=indexer_id).update(status=IndexerStatus.INDEXING)
