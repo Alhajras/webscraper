@@ -229,7 +229,7 @@
 
 >
   <div>
-    <p-card styleClass="f2-console-container">
+    <p-card styleClass="f2-console-container" *ngIf="outputRunner.statistics">
       <pre class="f2-log-content">Visited pages: {{outputRunner.statistics.visited_pages }}</pre>
       <pre
         class="f2-log-content">Average documents number per page: {{outputRunner.statistics.average_docs_per_page }}</pre>
@@ -239,5 +239,8 @@
       <pre class="f2-log-content"
            *ngFor="let code  of outputRunner.statistics.http_codes | keyvalue">{{code.key}}: {{code.value }}</pre>
     </p-card>
+    <div class="p-mt-2" *ngIf="!outputRunner.statistics">
+      No collected statistics found.
+    </div>
   </div>
 </p-dialog>
