@@ -174,10 +174,6 @@ class QGramIndex:
     def compute_qgrams(self, word: str) -> List[str]:
         """
         Compute q-grams for padded version of given string.
-
-        >>> q = QGramIndex(3, False)
-        >>> q.compute_qgrams("freiburg")
-        ['$$f', '$fr', 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg']
         """
         ret = []
         padded = self.padding + word
@@ -188,14 +184,6 @@ class QGramIndex:
     def merge_lists(self, lists: List[List[Tuple[int, int]]]) -> List[Tuple[int, int]]:
         """
         Merges the given inverted lists.
-
-        >>> q = QGramIndex(3, False)
-        >>> q.merge_lists([[(1, 2), (3, 1), (5, 1)], [(2, 1), (3, 2), (9, 2)]])
-        [(1, 2), (2, 1), (3, 3), (5, 1), (9, 2)]
-        >>> q.merge_lists([[(1, 2), (3, 1), (5, 1)], []])
-        [(1, 2), (3, 1), (5, 1)]
-        >>> q.merge_lists([[], []])
-        []
         """
         start = time.monotonic()
         merged = []

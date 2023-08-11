@@ -6,6 +6,19 @@ from backend.webscraper.base.indexing.qgram_index import QGramIndex
 
 
 class QGramIndexTest(unittest.TestCase):
+    def test_merge_lists(self):
+        q = QGramIndex(3, False)
+        result = q.merge_lists([[(1, 2), (3, 1), (5, 1)], [(2, 1), (3, 2), (9, 2)]])
+        expected_result = [(1, 2), (2, 1), (3, 3), (5, 1), (9, 2)]
+        self.assertEqual(result, expected_result)  # add assertion here
+        result = q.merge_lists([[(1, 2), (3, 1), (5, 1)], []])
+        expected_result = [(1, 2), (3, 1), (5, 1)]
+        self.assertEqual(result, expected_result)  # add assertion here
+        result = q.merge_lists([[], []])
+        expected_result = []
+        self.assertEqual(result, expected_result)  # add assertion here
+
+
     def test_compute_qgrams(self):
         q = QGramIndex(3, False)
         self.assertEqual(q.compute_qgrams("freiburg"), ['$$f', '$fr', 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg'])  # add assertion here
