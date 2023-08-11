@@ -6,6 +6,22 @@ from backend.webscraper.base.indexing.qgram_index import QGramIndex
 
 
 class QGramIndexTest(unittest.TestCase):
+    def test_find_matches(self):
+        pathlib.Path().resolve()
+        file_path = os.path.join(
+            f"{pathlib.Path().resolve()}/dictionaries/test.tsv")
+        q = QGramIndex(3, False)
+        q.build_from_file(file_path)
+        result = q.find_matches("frei", 0)
+        expected_result = ([(1, 0, 3, 1)], 1)
+        self.assertEqual(result, expected_result)  # add assertion here
+        result = q.find_matches("frei", 2)
+        expected_result = ([(1, 0, 3, 1), (2, 1, 2, 2)], 2)
+        self.assertEqual(result, expected_result)  # add assertion here
+        result = q.find_matches("freibu", 2)
+        expected_result = ([(1, 2, 3, 1)], 2)
+        self.assertEqual(result, expected_result)  # add assertion here
+
     def test_merge_lists(self):
         q = QGramIndex(3, False)
         result = q.merge_lists([[(1, 2), (3, 1), (5, 1)], [(2, 1), (3, 2), (9, 2)]])
@@ -18,10 +34,10 @@ class QGramIndexTest(unittest.TestCase):
         expected_result = []
         self.assertEqual(result, expected_result)  # add assertion here
 
-
     def test_compute_qgrams(self):
         q = QGramIndex(3, False)
-        self.assertEqual(q.compute_qgrams("freiburg"), ['$$f', '$fr', 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg'])  # add assertion here
+        self.assertEqual(q.compute_qgrams("freiburg"),
+                         ['$$f', '$fr', 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg'])  # add assertion here
 
     def test_build_from_file(self):
         pathlib.Path().resolve()

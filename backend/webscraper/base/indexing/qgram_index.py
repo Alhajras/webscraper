@@ -213,15 +213,6 @@ class QGramIndex:
         ([(entity id, PED, score), ...], #ped calculations)
 
         The entity IDs are one-based (starting with 1).
-
-        >>> q = QGramIndex(3, False)
-        >>> q.build_from_file("test.tsv")
-        >>> q.find_matches("frei", 0)
-        ([(1, 0, 3, 1)], 1)
-        >>> q.find_matches("frei", 2)
-        ([(1, 0, 3, 1), (2, 1, 2, 2)], 2)
-        >>> q.find_matches("freibu", 2)
-        ([(1, 2, 3, 1)], 2)
         """
         threshold = len(prefix) - (self.q * delta)
         matches = []
