@@ -11,3 +11,17 @@
   width: 20rem;
 }
 
+
+:host ::ng-deep {
+  .f2-console-container {
+    background-color: black;
+  }
+
+  .f2-log-content {
+    white-space: pre-wrap;
+  }
+}
+
+.f2-sim-output-title {
+  white-space: pre-wrap;
+}

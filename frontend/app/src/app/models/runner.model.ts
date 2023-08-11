@@ -11,4 +11,14 @@ export interface Runner {
   status: string,
   name: string,
   machine: string,
+  statistics: Statistics
+}
+
+export interface Statistics {
+  visited_pages: number
+  average_docs_per_page: number
+  average_processing_time: number
+  avg_loading_time: number
+  avg_page_size: number
+  http_codes: Record<any, any>
 }

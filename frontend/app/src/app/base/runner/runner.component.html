@@ -89,8 +89,12 @@
         <td>
           <div>
             <p-menu #menu [model]="actions" [popup]="true"></p-menu>
-            <button pButton type="button" class="ml-1 p-button-outlined p-button-sm no-icon"
+            <button tooltipPosition="bottom" pTooltip="Show actions" pButton type="button"
+                    class="ml-1 p-button-outlined p-button-sm no-icon"
                     (click)="openMenu($event,menu, runner)" icon="pi pi-bars"></button>
+            <button tooltipPosition="bottom" pTooltip="Show output log" pButton type="button"
+                    class="ml-1 p-button-outlined p-button-sm no-icon"
+                    (click)="openOutput(runner)" icon="pi pi-book"></button>
           </div>
         </td>
       </tr>
@@ -212,3 +216,28 @@
     </ng-template>
   </p-dialog>
 </div>
+
+
+<p-dialog
+  [(visible)]="displayOutputLog"
+  (onHide)="closeOutputLogModal()"
+  [modal]="true"
+  header="Output statistics of runner: {{outputRunner.name}}"
+  *ngIf="outputRunner"
+  [resizable]="true"
+  [maximizable]="true"
+
+>
+  <div>
+    <p-card styleClass="f2-console-container">
+      <pre class="f2-log-content">Visited pages: {{outputRunner.statistics.visited_pages }}</pre>
+      <pre
+        class="f2-log-content">Average documents number per page: {{outputRunner.statistics.average_docs_per_page }}</pre>
+      <pre class="f2-log-content">Average processing time: {{outputRunner.statistics.average_processing_time }}</pre>
+      <pre class="f2-log-content">Average page loading time: {{outputRunner.statistics.avg_loading_time }}</pre>
+      <pre class="f2-log-content">Average page size: {{outputRunner.statistics.avg_page_size }}</pre>
+      <pre class="f2-log-content"
+           *ngFor="let code  of outputRunner.statistics.http_codes | keyvalue">{{code.key}}: {{code.value }}</pre>
+    </p-card>
+  </div>
+</p-dialog>

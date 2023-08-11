@@ -55,7 +55,7 @@ export class RunnerComponent {
     }
   }
   public actions: MenuItem[] = []
-
+  public outputRunner : Runner | null = null
   public runners: Runner[] = []
   public runner!: Runner
   public updatedRunner: Runner | null = null
@@ -78,6 +78,7 @@ export class RunnerComponent {
     {status: 'Exit'},
     {status: 'Completed'},
   ];
+  public displayOutputLog = false
 
   public constructor(
     private readonly fb: FormBuilder,
@@ -305,5 +306,15 @@ export class RunnerComponent {
 
 
     menu.toggle($event)
+  }
+
+  public closeOutputLogModal(): void {
+    this.displayOutputLog = false
+
+  }
+
+  public openOutput(runner: Runner): void {
+    this.displayOutputLog = true
+    this.outputRunner = runner
   }
 }

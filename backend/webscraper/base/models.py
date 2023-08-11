@@ -262,6 +262,10 @@ class Runner(models.Model):
         return InspectorValue.objects.filter(runner=self).values("url").last()
 
     @property
+    def statistics(self):
+        return Statistics.objects.filter(runner=self).last()
+
+    @property
     def crawler_name(self) -> int:
         return self.crawler.name
 

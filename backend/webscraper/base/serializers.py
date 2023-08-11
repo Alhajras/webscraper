@@ -11,7 +11,7 @@ from .models import (
     InspectorValue,
     ClickAction,
     ScrollAction,
-    WaitAction,
+    WaitAction, Statistics,
 )
 
 
@@ -45,6 +45,19 @@ class CrawlerSerializer(serializers.ModelSerializer):
             "show_browser",
             "parsing_algorithm",
             "allow_multi_elements",
+        ]
+
+
+class StatisticsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Statistics
+        fields = [
+            "visited_pages",
+            "average_docs_per_page",
+            "average_processing_time",
+            "avg_loading_time",
+            "avg_page_size",
+            "http_codes",
         ]
 
 
@@ -127,7 +140,9 @@ class RunnerSerializer(serializers.ModelSerializer):
             "name",
             "machine",
             "crawler_name",
+            "statistics",
         ]
+    statistics = StatisticsSerializer(read_only=True)
 
 
 class TemplateSerializer(serializers.ModelSerializer):
