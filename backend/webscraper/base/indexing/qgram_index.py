@@ -25,18 +25,6 @@ def ped(x, y, delta):
     otherwise.
     This is the Python version. To use the (much faster) C version, install
     the provided cped module and uncomment the ped_c import above.
-    >>> ped("frei", "frei", 0)
-    0
-    >>> ped("frei", "freiburg", 0)
-    0
-    >>> ped("frei", "breifurg", 4)
-    1
-    >>> ped("freiburg", "stuttgart", 2)
-    3
-    >>> ped("", "freiburg", 10)
-    0
-    >>> ped("", "", 10)
-    0
     """
 
     # Compute the dimensions of the matrix.

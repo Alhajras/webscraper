@@ -2,10 +2,24 @@ import os
 import pathlib
 import unittest
 
-from backend.webscraper.base.indexing.qgram_index import QGramIndex
+from backend.webscraper.base.indexing.qgram_index import QGramIndex, ped
 
 
 class QGramIndexTest(unittest.TestCase):
+
+    def test_ped(self) -> None:
+        result = ped("frei", "frei", 0)
+        self.assertEqual(result, 0)  # add assertion here
+        result = ped("frei", "freiburg", 0)
+        self.assertEqual(result, 0)  # add assertion here
+        result = ped("frei", "breifurg", 4)
+        self.assertEqual(result, 1)  # add assertion here
+        result = ped("freiburg", "stuttgart", 2)
+        self.assertEqual(result, 3)  # add assertion here
+        result = ped("", "freiburg", 10)
+        self.assertEqual(result, 0)  # add assertion here
+        result = ped("", "", 10)
+        self.assertEqual(result, 0)  # add assertion here
 
     def test_normalize(self) -> None:
         q = QGramIndex(3, False)
