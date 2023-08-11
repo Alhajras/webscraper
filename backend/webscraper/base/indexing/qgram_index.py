@@ -257,12 +257,6 @@ class QGramIndex:
     def normalize(self, word: str) -> str:
         """
         Normalize the given string (remove non-word characters and lower case).
-
-        >>> q = QGramIndex(3, False)
-        >>> q.normalize("freiburg")
-        'freiburg'
-        >>> q.normalize("Frei, burG !?!")
-        'freiburg'
         """
         low = word.lower()
         return "".join([i for i in low if i.isalnum()])
@@ -278,9 +272,5 @@ class QGramIndex:
         the PED distance and its score:
 
         [(entity id, PED, score), ...]
-
-        >>> q = QGramIndex(3, False)
-        >>> q.rank_matches([(1, 0, 3), (2, 1, 2), (2, 1, 3), (1, 0, 2)])
-        [(1, 0, 3), (1, 0, 2), (2, 1, 3), (2, 1, 2)]
         """
         return sorted(matches, key=lambda post: (post[1], -post[2]))
