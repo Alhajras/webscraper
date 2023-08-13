@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  12 AUG 2023 18:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  13 AUG 2023 17:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1169,18 +1169,8 @@ chapter 1.
 
 
 ] [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 35--36
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 37--38
-
- []
-
-[4]
 ! You can't use `macro parameter character #' in horizontal mode.
-l.48 ...statistics/871513/worldwide-data-created/#
+l.40 ...statistics/871513/worldwide-data-created/#
                                                   :~:text=The%20total%20amou...
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -1188,17 +1178,17 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 
-Overfull \hbox (56.87108pt too wide) in paragraph at lines 44--49
+Overfull \hbox (56.87108pt too wide) in paragraph at lines 36--41
 \T1/cmr/m/n/10.95 Pub-lished by Petroc Tay-lor , Sep 8, 2022 https://www.statis
 ta.com/statistics/871513/worldwide-
  []
 
-) (./chapters/2-background.tex [5] [6]
-chapter 2.
-[7
+[4]) (./chapters/2-background.tex [5] [6
 
 
 ]
+chapter 2.
+[7]
 <images/engine_components.png, id=145, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
@@ -1405,9 +1395,9 @@ texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.te
 xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texl
 ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texliv
 e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
-Output written on thesis_main.pdf (39 pages, 904962 bytes).
+Output written on thesis_main.pdf (39 pages, 903811 bytes).
 PDF statistics:
- 680 PDF objects out of 1000 (max. 8388607)
+ 679 PDF objects out of 1000 (max. 8388607)
  297 compressed objects within 3 object streams
  59 named destinations out of 1000 (max. 500000)
  191 words of extra memory for PDF output out of 10000 (max. 10000000)
