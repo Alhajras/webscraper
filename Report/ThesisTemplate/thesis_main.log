@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  14 AUG 2023 17:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  14 AUG 2023 21:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1189,23 +1189,24 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7] [8]
-<images/google_arch.png, id=157, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=159, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 35.
 (pdftex.def)             Requested size: 284.52756pt x 228.42273pt.
- [9 <./images/google_arch.png (PNG copy)>]) (./chapters/3-background.tex [10]
+ [9 <./images/google_arch.png (PNG copy)>] [10] [11])
+(./chapters/3-background.tex [12]
 chapter 3.
-[11
+[13
 
 
 ]
-<images/engine_components.png, id=172, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=182, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 15.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
- [12 <./images/engine_components.png (PNG copy)>]
+ [14 <./images/engine_components.png (PNG copy)>]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1219,32 +1220,32 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[13]) (./chapters/4-approach.tex [14]
+[15]) (./chapters/4-approach.tex [16]
 chapter 4.
-) (./chapters/5-datasets.tex [15
+) (./chapters/5-datasets.tex [17
 
 
-] [16
+] [18
 
 
 ]
 chapter 5.
-) (./chapters/6-experiments.tex [17] [18
+) (./chapters/6-experiments.tex [19] [20
 
 
 ]
 chapter 6.
-) (./chapters/7-summary.tex [19] [20
+) (./chapters/7-summary.tex [21] [22
 
 
 ]
 chapter 7.
-) (./chapters/8-conclusions.tex [21] [22
+) (./chapters/8-conclusions.tex [23] [24
 
 
 ]
 chapter 8.
-(./thesis_main.bbl [23] [24
+(./thesis_main.bbl [25] [26
 
 
 ]
@@ -1375,18 +1376,18 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [25] [26
+)) [27] [28
 
 
-] [27] (./thesis_main.aux)
+] [29] (./thesis_main.aux)
 Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 32839 strings out of 480129
- 666440 string characters out of 5893410
+ 32843 strings out of 480129
+ 666471 string characters out of 5893410
  1124046 words of memory out of 5000000
- 50126 multiletter control sequences out of 15000+600000
+ 50127 multiletter control sequences out of 15000+600000
  490523 words of font info for 88 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,9n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1401,10 +1402,10 @@ texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.te
 xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texl
 ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texliv
 e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
-Output written on thesis_main.pdf (41 pages, 1011977 bytes).
+Output written on thesis_main.pdf (43 pages, 1015658 bytes).
 PDF statistics:
- 716 PDF objects out of 1000 (max. 8388607)
- 321 compressed objects within 4 object streams
- 65 named destinations out of 1000 (max. 500000)
- 220 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 732 PDF objects out of 1000 (max. 8388607)
+ 334 compressed objects within 4 object streams
+ 68 named destinations out of 1000 (max. 500000)
+ 228 words of extra memory for PDF output out of 10000 (max. 10000000)
 
