@@ -9,13 +9,41 @@ One of the major innovations of WebCrawler was its full-text searchability. This
 
 Modern web crawlers face many challenges and complexities, such as dynamic content, user interaction, authentication, robots.txt files, and ethical issues. Some examples of modern web crawlers are Googlebot, Bingbot, and Internet Archive
 
-\section{High-Level-Google-Architecture}
+\section{Web crawlers list}
+Web crawlers have evolved during the last few decades, with different designs and implementations to crawl and index the internet. Below is an enumeration of some of the architectural designs utilized in the development of all-encompassing web crawlers [3]:
 
-- Talk about google solution here
 
-The Google search engine's structure comprises distinct elements, depicted in Figure 1. Google's services operate across multiple Server Farms, employing the Linux operating system and utilizing programming languages such as C, C++, and Python for server-side coding [9, 10]. In 2006, it was approximated that Google possessed over 450,000 servers across the globe [6]. Google acquires web pages through a program named Web Crawler (Web Spider or Web Robot), which traverses the Internet, expanding the list of web pages. Alternatively, web pages can be directly added through Google's site. Google employs the "Googlebot" as its web crawler program. The URL Server transmits a roster of Uniform Resource Locators (URLs) to the Googlebot, each assigned a unique identifier known as a "docID" for reference. Subsequently, these web pages are directed to the "Store Server," where compression occurs before storage in a "Repository." The "Indexer" and "Sorter" collaborate during the indexing process. Documents within the "Repository" are accessed by the "Indexer," which decompresses, parses, and transforms them into a series of word occurrences termed "hits." These hits are categorized and dispatched to storage units referred to as "Barrels." The "Indexer" also identifies keywords within the web pages. Managing the storage of document IDs, locations within the "Repositories," statuses, content, and URL titles is the responsibility of the "Doc Index" component. The "Lexicon" element houses an extensive compilation of words and associated pointers. Google employs the "PageRank" algorithm to assess and rank pages based on relevance. This algorithm evaluates pages by considering hits within the pages and their positions, including hits within the title and body sections, among other factors [9].
+\begin{itemize}
+  \item RBSE [Eic94] Considered as one of the first Web crawlers to be published. Made of two components: the first component,
+“spider”, uses a queue in a database. The second component, “mite”, is a modified browser that downloads the pages from the Web.
+  \item WebCrawler [Pin94]  The initial publicly accessible full-text index of a specific portion of the World Wide Web was established. The approach involved leveraging lib-WWW for page downloads and employing an additional tool to parse and arrange URLs, ensuring a breadth-first approach to navigating the web graph.
+  \item World Wide Web Worm [McB94] was a crawler designed to construct a basic index comprising document titles and corresponding URLs. This index could be queried by utilising the grep command in the UNIX operating system.
+  \item Google Crawler [BP98] Google has been the market's dominant search engine for the last few decades. In March 2023, Google’s global market share was 85.53% [4].
+The crawler was integrated with the indexing, and since this thesis has some similarity with the Google search engine design, we will explain this in-depth in the ext subsection [Google architecture]
+  \item Ubicrawler [BCSV04] Is a Java-based distributed crawler with no central process and several identical “agents”. The crawler is implemented to provide high scalability and be tolerant of failures.
+\end{itemize}
 
-The Anatomy of a Large-Scale Hypertextual Web Search Engine (google paper) 
+
+
+\section{High Level Google Architecture}
+
+The Google search engine's design gives a good overview of the essential components to create a scalable search engine. Hence, it is a great starting point for any search engine research; we will explain it in this section. Most code written in the Google search engine was implemented in C or C++ for efficiency and because it can run on either Solaris or Linux [2]. Google uses distributed crawlers to download internet web pages. The URLserver keeps a list of the available found URLs that need to be crawled by the crawlers. URLserver acts as a load balancer that sends the URLs to the following free crawler. Afterwards, the crawlers download the documents needed from the page, associate a unique ID for this page called docID, and then the page's content are stored in Soreservers. Storeservers then compress the pages and save them on a repository. The indexer component then uncompresses the pages and parses them. Each document is then converted into a set of words called hits. The hits represent the word and its position in the document. Afterwards, the indexer distributes those hits into barrels. Moreover, the indexer collects links found in the crawled page and stores them in the anchor's file. The anchors' file contains the links and their relationship with each other [2].
+
+
+\begin{figure}[h]	
+     \centering
+     \includegraphics[width=10cm]{images/google_arch.png}
+     \caption{High level view of Google web crawlers archeticture.}
+     \label{fig:google-arch}
+\end{figure}
+
+The URLresolver reads the links from the anchors' file and converts the relative URLs into absolute URLs. The URLs are then assigned to their docID. The links database saves pairs of docIDs that will be used to compute PageRanks for all the documents. 
+
+Initially organized by docID, the barrels are then rearranged by the sorter based on wordID. This process generates an inverted index. Moreover, the sorter generates a list of wordIDs and corresponding offsets within the inverted index. 
+
+
+\section{Performance Evaluation}
+Evaluating a web crawler can be challenging as it is usually made of different components, like the web crawler and the indexer. However, in this section, one crucial aspect of the evaluation is evaluating the overall design and architecture. As introduced in the conference of [6], the following issues made the distributed parallel crawlers challenging:   
 
 "Effective web crawling"
 
