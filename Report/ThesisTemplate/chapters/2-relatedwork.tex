@@ -1,0 +1,22 @@
+\chapter{Related Work}
+\label{chap:relatedwork}
+\numberwithin{equation}{chapter}
+The concept of web crawling dates back to the early 1990s when the World Wide Web was still in its infancy.
+
+WebCrawler, created by Brian Pinkerton in 1994, is considered the first true web crawler-powered search engine. While some may claim that title for Wandex is due to its potential, it was never designed to be used in this way. Wandex lacked some critical features to make it a general-purpose search engine.
+
+One of the major innovations of WebCrawler was its full-text searchability. This ability made it popular and highly functional. It continues to operate as a search engine, although not as popular as Google, Yahoo, Bing, Yandex, or Baidu.
+
+Modern web crawlers face many challenges and complexities, such as dynamic content, user interaction, authentication, robots.txt files, and ethical issues. Some examples of modern web crawlers are Googlebot, Bingbot, and Internet Archive
+
+\section{High-Level-Google-Architecture}
+
+- Talk about google solution here
+
+The Google search engine's structure comprises distinct elements, depicted in Figure 1. Google's services operate across multiple Server Farms, employing the Linux operating system and utilizing programming languages such as C, C++, and Python for server-side coding [9, 10]. In 2006, it was approximated that Google possessed over 450,000 servers across the globe [6]. Google acquires web pages through a program named Web Crawler (Web Spider or Web Robot), which traverses the Internet, expanding the list of web pages. Alternatively, web pages can be directly added through Google's site. Google employs the "Googlebot" as its web crawler program. The URL Server transmits a roster of Uniform Resource Locators (URLs) to the Googlebot, each assigned a unique identifier known as a "docID" for reference. Subsequently, these web pages are directed to the "Store Server," where compression occurs before storage in a "Repository." The "Indexer" and "Sorter" collaborate during the indexing process. Documents within the "Repository" are accessed by the "Indexer," which decompresses, parses, and transforms them into a series of word occurrences termed "hits." These hits are categorized and dispatched to storage units referred to as "Barrels." The "Indexer" also identifies keywords within the web pages. Managing the storage of document IDs, locations within the "Repositories," statuses, content, and URL titles is the responsibility of the "Doc Index" component. The "Lexicon" element houses an extensive compilation of words and associated pointers. Google employs the "PageRank" algorithm to assess and rank pages based on relevance. This algorithm evaluates pages by considering hits within the pages and their positions, including hits within the title and body sections, among other factors [9].
+
+The Anatomy of a Large-Scale Hypertextual Web Search Engine (google paper) 
+
+"Effective web crawling"
+
+"Introduction to Information retrievel"
