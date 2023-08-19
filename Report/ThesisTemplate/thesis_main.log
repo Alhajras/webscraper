@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  19 AUG 2023 15:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  19 AUG 2023 18:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -994,7 +994,11 @@ Package: romannum 2009/09/03 v1.0b roman numerals
 (/usr/share/texlive/texmf-dist/tex/latex/stdclsdv/stdclsdv.sty
 Package: stdclsdv 2009/09/04 v1.1a Sectional divisions
 )))
-(./thesis_main.aux)
+(./thesis_main.aux
+
+LaTeX Warning: Label `eq:depth' multiply defined.
+
+)
 \openout1 = `thesis_main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
@@ -1189,7 +1193,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7] [8]
-<images/google_arch.png, id=159, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=161, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 35.
@@ -1200,13 +1204,38 @@ chapter 3.
 [13
 
 
-]
-<images/engine_components.png, id=182, 670.75594pt x 439.6425pt>
+] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-3.def
+File: uni-3.def 2013/05/13 UCS: Unicode data U+0300..U+03FF
+)
+! Undefined control sequence.
+\u-default-955 #1->\textlambda 
+                               
+l.27 The parameter λ
+                     p signifies the rate of modifications occurring on page...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\u-default-955 #1->\textlambda 
+                               
+l.27 ...a derived this estimation technique for λ
+                                                  p [8].
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[14] [15]
+<images/engine_components.png, id=202, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
-Package pdftex.def Info: images/engine_components.png  used on input line 24.
+Package pdftex.def Info: images/engine_components.png  used on input line 55.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
- [14] [15 <./images/engine_components.png (PNG copy)>]
+ [16 <./images/engine_components.png (PNG copy)>]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1214,18 +1243,18 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.45 
+l.76 
      
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-) (./chapters/4-approach.tex [16] [17] [18
-
-
-]
+[17]) (./chapters/4-approach.tex [18]
 chapter 4.
-) (./chapters/5-datasets.tex [19] [20
+) (./chapters/5-datasets.tex [19
+
+
+] [20
 
 
 ]
@@ -1381,16 +1410,16 @@ and I'll forget about whatever was undefined.
 
 ] [31] (./thesis_main.aux)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 32847 strings out of 480129
- 666502 string characters out of 5893410
+ 33231 strings out of 480129
+ 670529 string characters out of 5893410
  1124046 words of memory out of 5000000
- 50128 multiletter control sequences out of 15000+600000
+ 50506 multiletter control sequences out of 15000+600000
  490523 words of font info for 88 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,9n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1404,11 +1433,18 @@ oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/oc
 texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.te
 xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texl
 ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texliv
-e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk>
-Output written on thesis_main.pdf (45 pages, 1017665 bytes).
+e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy8.pfb>
+Output written on thesis_main.pdf (45 pages, 1083056 bytes).
 PDF statistics:
- 746 PDF objects out of 1000 (max. 8388607)
- 344 compressed objects within 4 object streams
- 71 named destinations out of 1000 (max. 500000)
+ 787 PDF objects out of 1000 (max. 8388607)
+ 371 compressed objects within 4 object streams
+ 74 named destinations out of 1000 (max. 500000)
  236 words of extra memory for PDF output out of 10000 (max. 10000000)
 
