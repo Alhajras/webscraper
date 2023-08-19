@@ -47,13 +47,25 @@ downloaded copies at two different times and using the following equation. Where
 \end{equation}
 
 \section{Web Search Engine}
-Web Search Engine is a software that collect information from the web and index them effecianly to obtimipze the searching process by the user. Users enter their queries to ask for information, the engine carries out the queries and lookup the pre built orginized index and return a relevant results. The returned result is presented by Search Enngine Results Pages as known as SERPs. The result then ranked based on predefined cretieria. 
+Web Search Engine is software that collects information from the web and indexes them efficiently to optimize the searching process by the user. Users enter their queries to ask for information. The engine performs queries, looks up the pre-built organized index, and returns relevant results. The returned result is presented by Search Engine Results Pages as known as SERPs. The result is then ranked based on predefined criteria. 
 
-Web search engines use web crawler or spider to collect and harvest the intenret jumping from one page to another. Each page can contain several links, the crawler task is to find the links and to visit them and harvest them also. Followed by crawlers, indexing is the next process where information are orginized and optimized for search. 
+Web search engines use web crawlers or spiders to collect and harvest the internet jumping from one page to another. Each page can contain several links. The crawler's task is to find the links, visit them, and harvest them. Followed by crawlers, indexing is the next process where information is organized and optimized for search. 
+
 \begin{figure}[h]	
      \centering
          \includegraphics[width=10cm]{images/engine_components.png}
 \end{figure}
+
+\subsection{Requierments and Features}
+Search engines, regardless of their imp[lmentation and design there, are some features and requirements that make a good one; following is a list of the most fundamentals features:  
+
+\begin{itemize}
+  \item Web Crawling and Indexing: Each search engine needs two main big components, Crawler and Indexer. The Crawler is the component responsible for collecting pages and downloading them from the web. An indexer is used to create an index to facilitate efficient searching.
+  \item Ranking and Relevancy: The algorithm determines the order in which search results are presented to users based on relevance.
+  \item User Interface: The user interface where users enter their search queries and view results.
+  \item Scalability and Performance: Distributed Architecture: A distributed system helps handle the vast amount of data and traffic. This needs a Load balancer to distribute the cralwing tasks betrween the nodes and threads. 
+  \item Data Storage and Management: A robust database system is necessary for storing indexed data and metadata.
+\end{itemize}
 
 \section{Cralwer}
 Web crawler or spidedr is a software which gather pages information from the web, to prived the neccasary datat to the indexer to build a searhc engine. The essintial role of crawlers is to effecitnalt and reliably collect as much infromation from the web. 
