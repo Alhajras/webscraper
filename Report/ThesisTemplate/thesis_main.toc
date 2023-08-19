@@ -15,15 +15,16 @@
 \contentsline {section}{\numberline {3.3}Web Search Engine}{15}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Requierments and Features}{16}{subsection.3.3.1}%
 \contentsline {section}{\numberline {3.4}Cralwer}{17}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Cralwer Specifications}{17}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Indexing}{18}{section.3.6}%
-\contentsline {chapter}{\numberline {4}Approach}{19}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Problem Definition}{19}{section.4.1}%
-\contentsline {section}{\numberline {4.2}First Part of the Approach}{19}{section.4.2}%
-\contentsline {section}{\numberline {4.3}N-th Part of the Approach}{19}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Datasets}{21}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Experimental Evaluation}{23}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Summary of Results}{25}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{27}{chapter.8}%
-\contentsline {chapter}{Bibliography}{31}{section*.11}%
+\contentsline {subsection}{\numberline {3.4.1}Cralwer Specifications}{17}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Crawler architecture}{18}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}Indexing}{18}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Approach}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Problem Definition}{21}{section.4.1}%
+\contentsline {section}{\numberline {4.2}First Part of the Approach}{21}{section.4.2}%
+\contentsline {section}{\numberline {4.3}N-th Part of the Approach}{21}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Datasets}{23}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Experimental Evaluation}{25}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Summary of Results}{27}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{29}{chapter.8}%
+\contentsline {chapter}{Bibliography}{33}{section*.12}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
