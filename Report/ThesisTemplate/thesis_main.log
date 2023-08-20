@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  20 AUG 2023 17:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  20 AUG 2023 19:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1199,7 +1199,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7] [8]
-<images/google_arch.png, id=168, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=172, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 35.
@@ -1236,19 +1236,19 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [14] [15]
-<images/engine_components.png, id=208, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=212, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
  [16 <./images/engine_components.png (PNG copy)>] [17] [18]
-<images/crawler_architecture.png, id=224, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=228, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
 0.
 (pdftex.def)             Requested size: 284.52756pt x 115.46068pt.
- [19 <./images/crawler_architecture.png>] [20]
+ [19 <./images/crawler_architecture.png>] [20] [21]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1256,18 +1256,18 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.116 
+l.138 
       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-) (./chapters/4-approach.tex [21] [22
-
-
-]
+) (./chapters/4-approach.tex [22]
 chapter 4.
-) (./chapters/5-datasets.tex [23] [24
+) (./chapters/5-datasets.tex [23
+
+
+] [24
 
 
 ]
@@ -1429,10 +1429,10 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 33264 strings out of 480129
- 671385 string characters out of 5893410
- 1124046 words of memory out of 5000000
- 50529 multiletter control sequences out of 15000+600000
+ 33266 strings out of 480129
+ 671407 string characters out of 5893410
+ 1125046 words of memory out of 5000000
+ 50530 multiletter control sequences out of 15000+600000
  491294 words of font info for 89 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,9n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1455,10 +1455,10 @@ s/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 msy8.pfb>
-Output written on thesis_main.pdf (49 pages, 1113693 bytes).
+Output written on thesis_main.pdf (49 pages, 1116094 bytes).
 PDF statistics:
- 859 PDF objects out of 1000 (max. 8388607)
- 405 compressed objects within 5 object streams
- 82 named destinations out of 1000 (max. 500000)
- 265 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 866 PDF objects out of 1000 (max. 8388607)
+ 411 compressed objects within 5 object streams
+ 83 named destinations out of 1000 (max. 500000)
+ 273 words of extra memory for PDF output out of 10000 (max. 10000000)
 

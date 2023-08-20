@@ -111,6 +111,28 @@ After finding the future links and content by the parser, filtering both found l
 \subsection{Web Crawler Types}
 It is essential to understand that although all web crawlers' main goal is to crawl pages from the internet, however, there are different types and categories that some crawlers fall to. The first category is  Universal or Broad crawler. This category of web crawlers doesn't confine itself to webpages of a specific topic or domain; instead, they continuously traverse links without limitations, collecting all encountered webpages. The most significant search engines use this type of crawler, such as Google and Bing, this is understandable as these search engines' main aim is to make the entire web searchable, and they try to fetch all kinds of pages and contents. The second category is called Preferential crawler (Focused crawler). Focused crawlers target specific topics, themes, or domains. They are designed to gather information from a particular niche or subject area, providing specialized search results. In this thesis, a Focused crawler has been implemented and used. The last category is Hidden Web crawlers (Deep Web Crawlers). Deep web crawlers target databases and content hidden behind web forms. They can interact with online databases and retrieve information that general search engines might miss [11].
 
+\subsection{Challenges and issues}
+Researchers encounter a variety of challenges when working with different crawlers implementation. A compilation of these challenges is presented below.
+
+
+\begin{itemize}
+\item The scale of the web: The web is vast and virtually infinite, so crawlers must prioritize which pages to crawl and which to skip to use resources efficiently.
+
+\item Content Changes: Webpages can change frequently, requiring crawlers to revisit and reindex content to ensure freshness and accuracy.
+
+\item Blocking and IP Bans: Some websites may block or ban crawlers' IP addresses if they perceive them as causing too much traffic or disruption. Crawlers need to manage IP addresses to avoid being blocked.
+
+\item Nonuniform structures: The Web is dynamic
+and uses inconsistent data structures, as there is
+no universal norm to build a website. Due to lack of uniformity, collecting data becomes difficult. The problem is amplified when crawler has to deal with semistructured and unstructured data.
+
+\item Error handling: Crawlers may encounter broken links, leading to errors and incomplete indexing. Handling broken links requires additional processing. Moreover, the internet connection may disconnect, and the crawler may stop crawling. 
+
+\item Crawlers traps: Some websites intentionally create spider/crawlers traps to make crawlers go into an infinite loop or redirect them in different directions. Calendar Traps and Infinite URL Parameters are examples of spider traps.
+
+\item Politeness and Ethical Concerns: Crawlers must be programmed to be polite and respectful to websites' server resources. Aggressive crawling can overload servers, leading to ethical concerns and potential website blocking. This might be simple, but the main challenge is that each domain uses different Firewall settings. One server might allow the crawler to make five requests per second; the other will block the crawler. There are no hardcoded rules to follow; however, following the robots.txt file might help improve the  Politeness of the crawler.
+\end{itemize}
+
 
 \\
 
