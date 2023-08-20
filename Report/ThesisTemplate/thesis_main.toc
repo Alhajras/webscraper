@@ -17,14 +17,15 @@
 \contentsline {section}{\numberline {3.4}Cralwer}{17}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Cralwer Specifications}{17}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}Crawler architecture}{18}{subsection.3.4.2}%
-\contentsline {section}{\numberline {3.5}Indexing}{20}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Approach}{21}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Problem Definition}{21}{section.4.1}%
-\contentsline {section}{\numberline {4.2}First Part of the Approach}{21}{section.4.2}%
-\contentsline {section}{\numberline {4.3}N-th Part of the Approach}{21}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Datasets}{23}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Experimental Evaluation}{25}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Summary of Results}{27}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{29}{chapter.8}%
-\contentsline {chapter}{Bibliography}{33}{section*.12}%
+\contentsline {subsection}{\numberline {3.4.3}Web Crawler Types}{20}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}Indexing}{21}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Approach}{23}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Problem Definition}{23}{section.4.1}%
+\contentsline {section}{\numberline {4.2}First Part of the Approach}{23}{section.4.2}%
+\contentsline {section}{\numberline {4.3}N-th Part of the Approach}{23}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Datasets}{25}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Experimental Evaluation}{27}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Summary of Results}{29}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{31}{chapter.8}%
+\contentsline {chapter}{Bibliography}{35}{section*.12}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

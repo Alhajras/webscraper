@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  20 AUG 2023 15:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  20 AUG 2023 17:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1248,7 +1248,7 @@ File: images/crawler_architecture.png Graphic file (type png)
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
 0.
 (pdftex.def)             Requested size: 284.52756pt x 115.46068pt.
- [19 <./images/crawler_architecture.png>]
+ [19 <./images/crawler_architecture.png>] [20]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1256,38 +1256,38 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.112 
+l.116 
       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-) (./chapters/4-approach.tex [20]
+) (./chapters/4-approach.tex [21] [22
+
+
+]
 chapter 4.
-) (./chapters/5-datasets.tex [21
-
-
-] [22
+) (./chapters/5-datasets.tex [23] [24
 
 
 ]
 chapter 5.
-) (./chapters/6-experiments.tex [23] [24
+) (./chapters/6-experiments.tex [25] [26
 
 
 ]
 chapter 6.
-) (./chapters/7-summary.tex [25] [26
+) (./chapters/7-summary.tex [27] [28
 
 
 ]
 chapter 7.
-) (./chapters/8-conclusions.tex [27] [28
+) (./chapters/8-conclusions.tex [29] [30
 
 
 ]
 chapter 8.
-(./thesis_main.bbl [29] [30
+(./thesis_main.bbl [31] [32
 
 
 ]
@@ -1418,10 +1418,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [31] [32
+)) [33] [34
 
 
-] [33] (./thesis_main.aux)
+] [35] (./thesis_main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1429,10 +1429,10 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 33260 strings out of 480129
- 671349 string characters out of 5893410
+ 33264 strings out of 480129
+ 671385 string characters out of 5893410
  1124046 words of memory out of 5000000
- 50528 multiletter control sequences out of 15000+600000
+ 50529 multiletter control sequences out of 15000+600000
  491294 words of font info for 89 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,9n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1455,10 +1455,10 @@ s/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 msy8.pfb>
-Output written on thesis_main.pdf (47 pages, 1110560 bytes).
+Output written on thesis_main.pdf (49 pages, 1113693 bytes).
 PDF statistics:
- 841 PDF objects out of 1000 (max. 8388607)
- 394 compressed objects within 4 object streams
- 79 named destinations out of 1000 (max. 500000)
- 257 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 859 PDF objects out of 1000 (max. 8388607)
+ 405 compressed objects within 5 object streams
+ 82 named destinations out of 1000 (max. 500000)
+ 265 words of extra memory for PDF output out of 10000 (max. 10000000)
 
