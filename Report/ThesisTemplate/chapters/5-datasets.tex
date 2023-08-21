@@ -1,2 +1,11 @@
-\chapter{Datasets}
-\label{chap:dataset}
+\chapter{Evaluation}
+\label{chap:evaluation}
+Evaluating a web crawler can be challenging as it is usually made of different components, like the web crawler and the indexer. However, in this section, one crucial aspect of the evaluation is evaluating the overall design and architecture. As introduced in the conference of [6], the following issues made the distributed parallel crawlers challenging:   
+
+\begin{itemize}
+  \item Overlap: Overlap happens when numerous simultaneous processes engage in downloading pages, potentially resulting in multiple instances of the same page being fetched by different processes. This situation arises because one process might not detect if another process has already visited the page. This results in redundant downloaded pages that should conserve network bandwidth and enhance the overall efficiency of the crawler. The question then arises: how can we effectively orchestrate these processes to mitigate overlap?
+  \item Quality: A crawler frequently prioritizes downloading "important" pages to optimize the overall quality of the gathered content. However, within a parallel crawling environment, individual processes might need a comprehensive overview of the results of the other processes. Consequently, each process could base its crawling choices solely on its limited web perspective, potentially leading to suboptimal decisions.
+  \item Communication bandwidth: As already explained that the crawlers try to increase their quality. They must communicate with each other. However, for a large number of processes, the communication overhead can be problematic. One should reduce the communication to only the critical information that can increase the quality with minimizing the communication overhead. 
+  \item Scalability: Those targets can contain millions of pages, even focused crawlers that only crawl one site, like Reddit, Amazon or StackOverflow. As mentioned, in certain cases, a single-process crawler cannot achieve the required download rate for huge sites. Hence scalability is necessary to overcome this challenge.
+  \item Coverage: denoted as c/u, is represented by the ratio of pages crawled (c) to the overall pages (u) explored by the entire crawler. In an error-free scenario, an optimal coverage would be 1. No duplicated pages will be stored and visited, increasing efficiency [5].
+\end{itemize}
