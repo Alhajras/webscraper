@@ -19,6 +19,7 @@
 \contentsline {subsection}{\numberline {3.4.4}Challenges and issues}{21}{subsection.3.4.4}%
 \contentsline {section}{\numberline {3.5}Indexing}{22}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}Inverted index}{23}{subsection.3.5.1}%
+\contentsline {section}{\numberline {3.6}Ranking}{23}{section.3.6}%
 \contentsline {chapter}{\numberline {4}Approach}{25}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Problem Definition}{25}{section.4.1}%
 \contentsline {section}{\numberline {4.2}First Part of the Approach}{25}{section.4.2}%

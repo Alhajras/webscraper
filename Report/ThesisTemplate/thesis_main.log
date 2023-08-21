@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  21 AUG 2023 20:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  21 AUG 2023 22:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1004,6 +1004,12 @@ LaTeX Warning: Label `eq:depth' multiply defined.
 
 LaTeX Warning: Label `fig:google-arch' multiply defined.
 
+
+LaTeX Warning: Label `fig:google-arch' multiply defined.
+
+
+LaTeX Warning: Label `eq:depth' multiply defined.
+
 )
 \openout1 = `thesis_main.aux'.
 
@@ -1199,7 +1205,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7]
-<images/google_arch.png, id=159, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=169, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 15.
@@ -1240,13 +1246,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [14] [15]
-<images/engine_components.png, id=204, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=213, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
  [16 <./images/engine_components.png (PNG copy)>] [17] [18]
-<images/crawler_architecture.png, id=220, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=229, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
@@ -1270,14 +1276,16 @@ or  <return>  to continue without it.
 Underfull \vbox (badness 6001) has occurred while \output is active []
 
  [22]
-<images/inverted_index.png, id=238, 608.2725pt x 233.37187pt>
+<images/inverted_index.png, id=247, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
 (pdftex.def)             Requested size: 284.52756pt x 109.16489pt.
-)
-(./chapters/4-approach.tex [23 <./images/inverted_index.png (PNG copy)>]
-[24]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[23]) (./chapters/4-approach.tex [24 <./images/inverted_index.png (PNG copy)>]
 chapter 4.
 ) (./chapters/5-datasets.tex [25
 
@@ -1434,39 +1442,36 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 33253 strings out of 480129
- 671243 string characters out of 5893410
- 1124015 words of memory out of 5000000
- 50525 multiletter control sequences out of 15000+600000
- 491294 words of font info for 89 fonts, out of 8000000 for 9000
+ 33259 strings out of 480129
+ 671301 string characters out of 5893410
+ 1125015 words of memory out of 5000000
+ 50528 multiletter control sequences out of 15000+600000
+ 492824 words of font info for 91 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,9n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{section*.12} has been referenced but does not exi
-st, replaced by a fixed one
-
- </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> <
-/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </h
-ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </hom
-e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </home/
-oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oc
-/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/oc/.
-texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/oc/.te
-xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/oc/.texl
-ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.texliv
-e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texlive2
-021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texlive202
-1/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y8.pfb>
-Output written on thesis_main.pdf (47 pages, 1189195 bytes).
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk>
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> <
+/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </h
+ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </hom
+e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/
+oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/oc
+/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/oc/.
+texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/oc/.te
+xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.texl
+ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texliv
+e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texlive2
+021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy8.pfb>
+Output written on thesis_main.pdf (47 pages, 1195014 bytes).
 PDF statistics:
- 857 PDF objects out of 1000 (max. 8388607)
- 390 compressed objects within 4 object streams
- 80 named destinations out of 1000 (max. 500000)
- 254 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 872 PDF objects out of 1000 (max. 8388607)
+ 400 compressed objects within 4 object streams
+ 81 named destinations out of 1000 (max. 500000)
+ 262 words of extra memory for PDF output out of 10000 (max. 10000000)
 
