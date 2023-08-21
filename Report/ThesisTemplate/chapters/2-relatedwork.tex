@@ -1,27 +1,7 @@
 \chapter{Related Work}
 \label{chap:relatedwork}
 \numberwithin{equation}{chapter}
-The concept of web crawling dates back to the early 1990s when the World Wide Web was still in its infancy.
-
-WebCrawler, created by Brian Pinkerton in 1994, is considered the first true web crawler-powered search engine. While some may claim that title for Wandex is due to its potential, it was never designed to be used in this way. Wandex lacked some critical features to make it a general-purpose search engine.
-
-One of the major innovations of WebCrawler was its full-text searchability. This ability made it popular and highly functional. It continues to operate as a search engine, although not as popular as Google, Yahoo, Bing, Yandex, or Baidu.
-
-Modern web crawlers face many challenges and complexities, such as dynamic content, user interaction, authentication, robots.txt files, and ethical issues. Some examples of modern web crawlers are Googlebot, Bingbot, and Internet Archive
-
-\section{Web crawlers list}
-Web crawlers have evolved during the last few decades, with different designs and implementations to crawl and index the internet. Below is an enumeration of some of the architectural designs utilized in the development of all-encompassing web crawlers [3]:
-
-
-\begin{itemize}
-  \item RBSE [Eic94] Considered as one of the first Web crawlers to be published. Made of two components: the first component,
-“spider”, uses a queue in a database. The second component, “mite”, is a modified browser that downloads the pages from the Web.
-  \item WebCrawler [Pin94]  The initial publicly accessible full-text index of a specific portion of the World Wide Web was established. The approach involved leveraging lib-WWW for page downloads and employing an additional tool to parse and arrange URLs, ensuring a breadth-first approach to navigating the web graph.
-  \item World Wide Web Worm [McB94] was a crawler designed to construct a basic index comprising document titles and corresponding URLs. This index could be queried by utilising the grep command in the UNIX operating system.
-  \item Google Crawler [BP98] Google has been the market's dominant search engine for the last few decades. In March 2023, Google’s global market share was 85.53% [4].
-The crawler was integrated with the indexing, and since this thesis has some similarity with the Google search engine design, we will explain this in-depth in the ext subsection [Google architecture]
-  \item Ubicrawler [BCSV04] Is a Java-based distributed crawler with no central process and several identical “agents”. The crawler is implemented to provide high scalability and be tolerant of failures.
-\end{itemize}
+Creating a generic configurable search engine that includes a simple user interface will require research on how the current search engine works and what are the existing commercial or open-source solutions that offer a similar feature that allows the search engine to be configured via user interface reactions. This chapter will explain an overview of the Google search engine architecture since the basic architecture concepts will be reused with some modifications in this thesis. Then a list of the existing solutions used to crawl the web will be discussed.  
 
 
 
@@ -41,7 +21,39 @@ The URLresolver reads the links from the anchors' file and converts the relative
 
 Initially organized by docID, the barrels are then rearranged by the sorter based on wordID. This process generates an inverted index. Moreover, the sorter generates a list of wordIDs and corresponding offsets within the inverted index. 
 
-\section{User Friendly Crawlers}
-Since this thesis also focuses on providing a friendly user interface to configure the search engine, it is advisable to look at the existing tools in the market. Although there are plenty of tools to parse the content of the internet without programming knowledge, two of the most well-known software are Octoparse and ParseHub. Since ParseHub has a free tier to test it and it supports Linux, I decided to go with it to evaluate my crawler and collect some ideas on how they approach the different challenges with configuring how to use the crawler for various websites. 
+\section{Web Crawlers}
+The concept of web crawling dates back to the early 1990s when the World Wide Web was still in its infancy.
 
-ParseHub is a user-friendly option well suited for users who want a straightforward User Interface tool to parse information from a specific website on the internet. It operates as a desktop application, catering to multiple platforms, including Linux, Windows and Mac OS X. Comparable to Octoparse, ParseHub adeptly handles intricate web scraping tasks outlined earlier. Despite its aspiration for simplicity in web scraping, users with particular technical understanding may need to delve into its more advanced features and grasp their intricacies [7].
+WebCrawler, created by Brian Pinkerton in 1994, is considered the first true web crawler-powered search engine. While some may claim that title for Wandex is due to its potential, it was never designed to be used in this way. Wandex lacked some critical features to make it a general-purpose search engine.
+
+One of the major innovations of WebCrawler was its full-text searchability. This ability made it popular and highly functional. It continues to operate as a search engine, although not as popular as Google, Yahoo, Bing, Yandex, or Baidu.
+
+Modern web crawlers face many challenges and complexities, such as dynamic content, user interaction, authentication, robots.txt files, and ethical issues. Some examples of modern web crawlers are Googlebot, Bingbot, and Internet Archive
+
+Web crawlers have evolved during the last few decades, with different designs and implementations to crawl and index the internet. Below is an enumeration of some of the architectural designs utilized in the development of all-encompassing web crawlers [3]:
+
+
+\begin{itemize}
+  \item \textbf{RBSE [Eic94]} Considered as one of the first Web crawlers to be published. Made of two components: the first component,
+“spider”, uses a queue in a database. The second component, “mite”, is a modified browser that downloads the pages from the Web.
+  \item \textbf{WebCrawler [Pin94]}  The initial publicly accessible full-text index of a specific portion of the World Wide Web was established. The approach involved leveraging lib-WWW for page downloads and employing an additional tool to parse and arrange URLs, ensuring a breadth-first approach to navigating the web graph.
+  \item \textbf{World Wide Web Worm [McB94]} was a crawler designed to construct a basic index comprising document titles and corresponding URLs. This index could be queried by utilising the grep command in the UNIX operating system.
+  \item \textbf{Google Crawler [BP98]} Google has been the market's dominant search engine for the last few decades. In March 2023, Google’s global market share was 85.53% [4].
+The crawler was integrated with the indexing, and since this thesis has some similarity with the Google search engine design, we will explain this in-depth in the ext subsection [Google architecture]
+  \item \textbf{Ubicrawler [BCSV04]} Is a Java-based distributed crawler with no central process and several identical “agents”. The crawler is implemented to provide high scalability and be tolerant of failures.
+\end{itemize}
+
+Although the previously mentioned crawlers offer a wide range of features and are great to be used as generic crawlers to fetch all web pages, they need to provide a simple user interface to configure them based on user needs. This is what this thesis tries to tackle and investigate. 
+
+Nowadays, data scientist uses different tools to crawl and parse internet content. Each tool has its pros and cons and serves a different use case than the other. The following list goes through some of the most well know crawlers and explains how the proposed solution in this thesis differs.  
+
+
+\begin{itemize}
+  \item \textbf{Beautiful Soup:} Beautiful Soup is an open-source library that stands out as a widely used web scraping library that simplifies retrieving data from HTML and XML documents. Beautiful Soup demonstrates exceptional proficiency in parsing HTML documents, streamlining the task of retrieving particular components like headings, paragraphs, tables, and links. Beautiful Soup is not a search engine. It lacks the most fundamental search engine components; hence, it requires programming skills and can only be used to implement a search engine. Beautiful Soup can only parse the first seen page HTML version. Meaning it does not include the Javascript code. This is bad as most modern web pages use Javascript heavily to improve the page's latency. For example, pagination will be an issue for Beautiful Soup.
+
+  \item \textbf{Scrapy:} It is an open-source, powerful and flexible tool that easily crawls and parses different websites. It allows the creation of custom spiders to crawl multiple pages. Easy to scale makes it suitable for large projects. This tool is perfect for programmers but not for non-technical users, as it requires good knowledge of Python programming.
+
+  \item \textbf{Selenium:} It is an open-source, robust and adaptable solution for web scraping, enabling the automation of browser actions, interaction with web pages, and data extraction from online sources. It shares some features with the Beautiful Soupe as it is an excellent tool for parsing the HTML DOM. Still, it also overcomes the issue previously mentioned about rendering Javascript and supporting dynamic contents as paginations. Interactive browser automation makes it easy to mimic the user's behaviour which makes it easier to navigate towards hidden content that requires events and human interactions. Selenium alone can be used as a search engine; however, it will be used in this thesis as a fundamental tool for the search engine implemented.    
+
+  \item \textbf{ParseHub:} A web crawler tool with a friendly User Interface requiring no programming skills. It is one of the top choices of most data scientists. The massive advantage of ParseHub is the point-and-click interface provided. It makes data extraction extremely easy. ParseHub offers both free and paid plans. The free plan allows users to scrape up to 200 pages per run, which, as we will see, is too slow for a crawler. Moreover, it is not possible to configure the crawling algorithms with this tool, and the indexing component does not exist. Since this tool is the most similar tool to the solution implemented by this thesis, it will be used as a comparison in the evaluation chapter. 
+\end{itemize}
