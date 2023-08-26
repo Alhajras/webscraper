@@ -164,5 +164,15 @@ As discussed indexing process prepares a map that can be looked up to find relev
 BM25\_score = tf^*.\log_2(\frac{N}{df})
 \label{eq:depth}
 \end{equation}
+\begin{equation}
+tf^* = \frac{tf.(k+1)}{k.\alpha+tf}
+\label{eq:depth}
+\end{equation}
+\begin{equation}
+\alpha = \frac{1-b+b.DL}{AVDL}
+\label{eq:depth}
+\end{equation}
 
-2.4 Web crawling issues page 27 book Effective Web Crawling by Carlos Castillo
+\textit{N} = Total number of docuemnts, \textit{tf} = term frequency, the number of times a word occurs in a document, \textit{df} = docuemnt frequency, The number of documents containing a particular word, \textit{DL} = document length, \textit{AVDL} =
+average document length (measured in number of words)
+Standard setting for BM25: \textit{k} = 1.75 and \textit{b} = 0.75
