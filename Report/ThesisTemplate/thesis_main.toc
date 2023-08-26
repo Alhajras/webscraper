@@ -20,11 +20,12 @@
 \contentsline {section}{\numberline {3.5}Indexing}{22}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}Inverted index}{23}{subsection.3.5.1}%
 \contentsline {section}{\numberline {3.6}Ranking}{23}{section.3.6}%
-\contentsline {chapter}{\numberline {4}Approach}{25}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Problem Definition}{25}{section.4.1}%
-\contentsline {section}{\numberline {4.2}First Part of the Approach}{25}{section.4.2}%
-\contentsline {section}{\numberline {4.3}N-th Part of the Approach}{25}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Evaluation}{27}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{29}{chapter.6}%
-\contentsline {chapter}{Bibliography}{33}{section*.13}%
+\contentsline {subsection}{\numberline {3.6.1}Ranking Refinements}{26}{subsection.3.6.1}%
+\contentsline {chapter}{\numberline {4}Approach}{29}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Problem Definition}{29}{section.4.1}%
+\contentsline {section}{\numberline {4.2}First Part of the Approach}{29}{section.4.2}%
+\contentsline {section}{\numberline {4.3}N-th Part of the Approach}{29}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Evaluation}{31}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{33}{chapter.6}%
+\contentsline {chapter}{Bibliography}{37}{section*.15}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

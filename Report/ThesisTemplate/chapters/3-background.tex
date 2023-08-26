@@ -175,4 +175,94 @@ tf^* = \frac{tf.(k+1)}{k.\alpha+tf}
 
 \textit{N} = Total number of docuemnts, \textit{tf} = term frequency, the number of times a word occurs in a document, \textit{df} = docuemnt frequency, The number of documents containing a particular word, \textit{DL} = document length, \textit{AVDL} =
 average document length (measured in number of words)
-Standard setting for BM25: \textit{k} = 1.75 and \textit{b} = 0.75
+Standard setting for BM25: \textit{k} = 1.75 and \textit{b} = 0.75.
+
+The following example dives into the details of the BM25 equation and how it impacts ranking.  Table [] shows a list of documents as an example of an input to be indexed and ranked against different search queries. We start by calculating the variables needed to find the BM25 scores for each term in a document.    
+
+Since we have three documents, the N variable will equal 3. The second step is to find document length DF for each document {1: 26, 2: 21, 3: 49}. AVDL will equal 32. Plugging those values into the equation, we get an inverted list as follows: 
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{2.5cm} ||P{11.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+Document ID & Document content\T\B 
+\\ 
+\hline
+1 & The University of Freiburg, officially the Albert Ludwig University of Freiburg, is a public research university located in Freiburg im Breisgau, Baden-Württemberg, Germany. \T\B 
+\\ 
+\hline
+2 & Freiburg im Breisgau, usually called simply Freiburg, is an independent city in the state of Baden-Württemberg in Germany. \T\B 
+\\ 
+\hline
+3 & A university from Latin universitas 'a whole' is an institution of higher (or tertiary) education and research which awards academic degrees in several academic disciplines. Universities typically offer both undergraduate and postgraduate programs. In the United States, the designation is reserved for colleges that have a graduate school. \T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Documents sample}
+\end{table}
+
+Examining Table [], we can note that the tokens that appear in all three documents, like 'the', 'of' and 'is' have scores of 0. If the term searched for is common, we should give less weight or value to the search query. For example, users often search for queries such as 'What is ...', 'who is ..' , and 'Where is ...'. Those queries contain common words that are not informative in documents like 'What', 'Who', 'Where' and 'is', the term coming after those sentences should be more valuable and have more weight. Unique words like 'albert' and 'ludwig' have high scores as they only occur in one document. Words like 'freiburg' and 'university' have different scores for each document depending on the word's appearance relative to the document's length. 
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{2.5cm} ||P{11.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+Token & (Doc. ID, BM25 Score)\T\B 
+\\ 
+\hline
+the & [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B 
+\\ 
+\hline
+university &  [(1, 1.0715011288144682), (3, 0.46664430652429906)] \T\B 
+\\ 
+\hline
+of  &  [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B 
+\\
+\hline
+freiburg  &  [(1, 1.0715011288144682), (2, 0.975283837792052)] \T\B 
+\\ 
+\hline
+officially  &  [(1, 1.7407388463458566)] \T\B 
+\\ 
+\hline
+albert  & [(1, 1.7407388463458566)]\T\B 
+\\ 
+\hline
+ludwig  &  [(1, 1.7407388463458566)] \T\B 
+\\ 
+\hline
+is  & [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B 
+\\ 
+\hline
+a  & [(1, 0.6424549149886022), (3, 0.8859381868218585)] \T\B 
+\\ 
+\hline
+public  &  [(1, 1.7407388463458566)] \T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{The first 10 tokens of the result inverted index and the scores of the docuemnts. }
+\end{table}
+
+User search for 'university of freiburg' will return the next result: (1, 2.14), (2, 0.97), (0.46). The first document with id 1 has the highest score as it contains both words. This is the correct result, as the first document talks about the university of freiburg. The second document 2, which talks about the city Freiburg, is higher than the third because freiburg is mentioned twice in the same document, and the content is shorter. The next section will examplin how can one refine the ranking of documents.
+
+\subsection{Ranking Refinements}
+Some methods can be implemented to boost the document's ranking. The first step is to focus on tokenization of the documents. 
+
+In the previous example, we can note that the univerisy term has appeared in documnet 3 only once; however, the term universities appeared twice. In the ranking, the relation between the two words is not achieved because the inverted index will include university and universities separately. This will reduce the score of document 3 when the user searches for university, although both terms are associated and linked and should be accumulated. Stemming and lemmatization, Both stemming and lemmatization aim to simplify inflectional forms and occasionally derivationally related forms of a word, bringing them down to a shared foundational form. As an example:
+
+am, are, is ⇒ be \\
+car, cars, car’s, cars’ ⇒ car
+
+Stemming typically involves employing a simple rule-based approach to truncate word endings, aiming to achieve accurate results in most cases. This approach often involves eliminating derivational affixes. In contrast, lemmatization follows a more meticulous process that involves utilizing vocabulary and morphological analysis of words. The primary objective is to exclusively remove inflectional endings and to restore words to their fundamental or dictionary forms, which are referred to as lemmas [5].
+
+We observed that small or frequently occurring tokens such as 'the' and 'of' possess scores of 0, contributing no significance to the overall outcome of the query. Eliminating these terms via stop words can lead to the exclusion of certain frequently used words from the indexing process. A stop words list is a list that holds words that can be excluded from the indexing process. The selection of stop words is language-dependent; each language has its own set of prevalent words. For instance, in English, the subsequent list provides an example of such stop words that could be omitted from the indexing procedure:
+
+a an and are as at be by for from
+has he in is it its of on that the
+to was were will with
+
