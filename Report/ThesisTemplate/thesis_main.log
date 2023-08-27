@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  26 AUG 2023 20:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  27 AUG 2023 14:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1211,7 +1211,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7]
-<images/google_arch.png, id=176, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=178, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 15.
@@ -1252,13 +1252,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [14] [15]
-<images/engine_components.png, id=220, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=222, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
  [16 <./images/engine_components.png (PNG copy)>] [17] [18]
-<images/crawler_architecture.png, id=236, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=238, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
@@ -1282,7 +1282,7 @@ or  <return>  to continue without it.
 Underfull \vbox (badness 6001) has occurred while \output is active []
 
  [22]
-<images/inverted_index.png, id=254, 608.2725pt x 233.37187pt>
+<images/inverted_index.png, id=256, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
@@ -1592,23 +1592,26 @@ Underfull \vbox (badness 4569) has occurred while \output is active []
  [25]
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-33.def
 File: uni-33.def 2013/05/13 UCS: Unicode data U+2100..U+21FF
-) [26])
-(./chapters/4-approach.tex [27] [28
+) [26] [27]
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
+File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
+) [28])
+(./chapters/4-approach.tex [29] [30
 
 
 ]
 chapter 4.
-) (./chapters/5-datasets.tex [29] [30
+) (./chapters/5-datasets.tex [31] [32
 
 
 ]
 chapter 5.
-[31]) (./chapters/8-conclusions.tex [32]
+[33]) (./chapters/8-conclusions.tex [34]
 chapter 6.
-(./thesis_main.bbl [33
+(./thesis_main.bbl [35
 
 
-] [34
+] [36
 
 
 ]
@@ -1739,10 +1742,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [35] [36
+)) [37] [38
 
 
-] [37] (./thesis_main.aux)
+] [39] (./thesis_main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1750,10 +1753,10 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 33995 strings out of 480129
- 679165 string characters out of 5893410
+ 34558 strings out of 480129
+ 685458 string characters out of 5893410
  1130015 words of memory out of 5000000
- 51235 multiletter control sequences out of 15000+600000
+ 51792 multiletter control sequences out of 15000+600000
  498305 words of font info for 108 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,10n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1778,10 +1781,10 @@ lic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
 .pfb>
-Output written on thesis_main.pdf (51 pages, 1223119 bytes).
+Output written on thesis_main.pdf (53 pages, 1228678 bytes).
 PDF statistics:
- 979 PDF objects out of 1000 (max. 8388607)
- 434 compressed objects within 5 object streams
- 90 named destinations out of 1000 (max. 500000)
- 270 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 996 PDF objects out of 1000 (max. 8388607)
+ 446 compressed objects within 5 object streams
+ 93 named destinations out of 1000 (max. 500000)
+ 278 words of extra memory for PDF output out of 10000 (max. 10000000)
 
