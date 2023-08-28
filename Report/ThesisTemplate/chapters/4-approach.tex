@@ -7,15 +7,6 @@ Furthermore, the chapter delves into the user interface, clarifying how it enhan
 
 Figure 4 provides an overview of the software architecture employed by the search engine. Microservices architecture was used to make scalability easier and also to split the responsibilities of each component. Docker is used to enforce this architectural pattern where the Ubuntu:18.04 image is used for each component. Below is a compilation of the utilized technology stack:
 
-
-\begin{itemize}
-  \item \textbf{Frontend (Angular & PrimeNG)}: Positioned closest to the user, this component encompasses all pages and views. Angular is leveraged in conjunction with the contemporary CSS library, PrimeNG. To communicate with the backend, it employs the REST API.
-  \item \textbf{Backend (Django)}: Serving as the core intelligence of the search engine, the backend houses both the crawler and indexer modules. It facilitates interaction with the Head node to initiate crawling based on user-defined configurations. Moreover, it establishes a connection with PostgreSQL for the storage of crawler and indexer configurations, along with job-related information.
-  \item \textbf{Head Node (PBS)}: Operating as the central hub, this node orchestrates job management and determines the allocation of tasks to Crawler nodes, which are responsible for traversing the specified websites.
-  \item \textbf{Crawler Node (PBS)}: These instances are designated to execute the crawling process and store the resulting data in the PostgreSQL database.
-\end{itemize}
-
-
 \begin{figure}[h]	
      \centering
      \includegraphics[width=10cm]{images/software_arch.png}
@@ -23,5 +14,32 @@ Figure 4 provides an overview of the software architecture employed by the searc
      \label{fig:software-arch}
 \end{figure}
 
+\begin{itemize}
+  \item \textbf{Frontend (Angular \& PrimeNG)}: Positioned closest to the user, this component encompasses all pages and views. Angular is leveraged in conjunction with the contemporary CSS library, PrimeNG. To communicate with the backend, it employs the REST API.
+  \item \textbf{Backend (Django)}: Serving as the core intelligence of the search engine, the backend houses both the crawler and indexer modules. It facilitates interaction with the Head node to initiate crawling based on user-defined configurations. Moreover, it establishes a connection with PostgreSQL for the storage of crawler and indexer configurations, along with job-related information.
+  \item \textbf{Head Node (PBS)}: Operating as the central hub, this node orchestrates job management and determines the allocation of tasks to Crawler nodes, which are responsible for traversing the specified websites.
+  \item \textbf{Crawler Node (PBS)}: These instances are designated to execute the crawling process and store the resulting data in the PostgreSQL database.
+\end{itemize}
 
-\section{N-th Part of the Approach}
+
+\subsection{Crawler Implmentation}
+\begin{algorithm}[H]
+	\caption{$Start Crawling$}\label{alg:alg1}
+	\begin{algorithmic}
+	    \State $seed\_url$ $\gets$ $get\_seed\_url()$
+	    \State $robot\_file$ $\gets$ $get\_robot\_file\_content()$
+	    \State $thread$ $\gets$ $create\_threads\_pool()$
+	    \State $urls\_queue$ $\gets$ $get\_thread\_urls\_queue(thread)$
+	    \While {$urls\_queue$ not empty and All threads not done}
+	    	\EndIf
+		\If{$urls\_queue$ is empty}
+		    \State $urls\_queue$ $\gets$ $get\_thread\_urls\_queue(thread)$
+		\Else
+			\State $load_crawler_configurations()$
+		\EndIf
+		\EndWhile
+
+	\end{algorithmic}
+\end{algorithm}
+
+\subsection{Indexer Implmentation}
