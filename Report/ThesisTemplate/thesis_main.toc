@@ -23,10 +23,9 @@
 \contentsline {subsection}{\numberline {3.6.1}Ranking Refinements}{26}{subsection.3.6.1}%
 \contentsline {subsection}{\numberline {3.6.2}Fuzzy search}{27}{subsection.3.6.2}%
 \contentsline {chapter}{\numberline {4}Approach}{31}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Problem Definition}{31}{section.4.1}%
-\contentsline {section}{\numberline {4.2}First Part of the Approach}{31}{section.4.2}%
-\contentsline {section}{\numberline {4.3}N-th Part of the Approach}{31}{section.4.3}%
+\contentsline {section}{\numberline {4.1}Software Architecture}{31}{section.4.1}%
+\contentsline {section}{\numberline {4.2}N-th Part of the Approach}{32}{section.4.2}%
 \contentsline {chapter}{\numberline {5}Evaluation}{33}{chapter.5}%
 \contentsline {chapter}{\numberline {6}Conclusions and Future Work}{35}{chapter.6}%
-\contentsline {chapter}{Bibliography}{39}{section*.15}%
+\contentsline {chapter}{Bibliography}{39}{section*.16}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

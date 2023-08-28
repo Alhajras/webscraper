@@ -1,14 +1,27 @@
 \chapter{Approach}
 \label{chap:approach}
-The approach usually starts with the problem definition and continues with what you
-have done. Try to give an intuition first and describe everything with words and then
-be more formal like ‘Let g be ...’.
+This chapter introduces the distinctive concept of a configurable search engine and outlines the comprehensive software architecture. It thoroughly explores and showcases all the required components for constructing the search engine, along with discussing implementation specifics. This encompasses the pivotal models and classes employed for the components and algorithms.
+Furthermore, the chapter delves into the user interface, clarifying how it enhances user experience and facilitates configuring the search engine.
 
-\section{Problem Definition}
+\section{Software Architecture}
 
-Start with a very short motivation why this is important. Then, as stated above,
-describe the problem with words before getting formal.
+Figure 4 provides an overview of the software architecture employed by the search engine. Microservices architecture was used to make scalability easier and also to split the responsibilities of each component. Docker is used to enforce this architectural pattern where the Ubuntu:18.04 image is used for each component. Below is a compilation of the utilized technology stack:
 
-\section{First Part of the Approach}
+
+\begin{itemize}
+  \item \textbf{Frontend (Angular & PrimeNG)}: Positioned closest to the user, this component encompasses all pages and views. Angular is leveraged in conjunction with the contemporary CSS library, PrimeNG. To communicate with the backend, it employs the REST API.
+  \item \textbf{Backend (Django)}: Serving as the core intelligence of the search engine, the backend houses both the crawler and indexer modules. It facilitates interaction with the Head node to initiate crawling based on user-defined configurations. Moreover, it establishes a connection with PostgreSQL for the storage of crawler and indexer configurations, along with job-related information.
+  \item \textbf{Head Node (PBS)}: Operating as the central hub, this node orchestrates job management and determines the allocation of tasks to Crawler nodes, which are responsible for traversing the specified websites.
+  \item \textbf{Crawler Node (PBS)}: These instances are designated to execute the crawling process and store the resulting data in the PostgreSQL database.
+\end{itemize}
+
+
+\begin{figure}[h]	
+     \centering
+     \includegraphics[width=10cm]{images/software_arch.png}
+     \caption{High-level view of the software archtiticture.}
+     \label{fig:software-arch}
+\end{figure}
+
 
 \section{N-th Part of the Approach}

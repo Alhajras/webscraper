@@ -6,6 +6,7 @@
 \contentsline {figure}{\numberline {2}{\ignorespaces The basic crawler architecture.\relax }}{19}{figure.caption.10}%
 \contentsline {figure}{\numberline {3}{\ignorespaces An illustration of an inverted index featuring three documents. All tokens are included in this example, and the sole text normalization applied is converting all tokens to lowercase. Queries that involve multiple keywords are resolved using set operations. [3]\relax }}{24}{figure.caption.11}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4}{\ignorespaces High-level view of the software archtiticture.\relax }}{32}{figure.caption.14}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
