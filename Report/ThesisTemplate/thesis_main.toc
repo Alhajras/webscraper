@@ -24,9 +24,11 @@
 \contentsline {subsection}{\numberline {3.6.2}Fuzzy search}{27}{subsection.3.6.2}%
 \contentsline {chapter}{\numberline {4}Approach}{31}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Software Architecture}{31}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Crawler Implmentation}{33}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Indexer Implmentation}{34}{subsection.4.1.2}%
-\contentsline {chapter}{\numberline {5}Evaluation}{35}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{37}{chapter.6}%
-\contentsline {chapter}{Bibliography}{41}{section*.16}%
+\contentsline {section}{\numberline {4.2}Crawler Implmentation}{33}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Indexer Implmentation}{35}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Storage Handling}{35}{section.4.4}%
+\contentsline {section}{\numberline {4.5}User Interface Design}{35}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Evaluation}{37}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{39}{chapter.6}%
+\contentsline {chapter}{Bibliography}{43}{section*.16}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

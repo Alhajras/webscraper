@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  1 SEP 2023 22:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  1 SEP 2023 22:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1211,7 +1211,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7]
-<images/google_arch.png, id=180, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=184, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 15.
@@ -1252,13 +1252,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [14] [15]
-<images/engine_components.png, id=224, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=228, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
  [16 <./images/engine_components.png (PNG copy)>] [17] [18]
-<images/crawler_architecture.png, id=240, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=244, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
@@ -1282,7 +1282,7 @@ or  <return>  to continue without it.
 Underfull \vbox (badness 6001) has occurred while \output is active []
 
  [22]
-<images/inverted_index.png, id=258, 608.2725pt x 233.37187pt>
+<images/inverted_index.png, id=262, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
@@ -1601,7 +1601,7 @@ File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
 
 ]
 chapter 4.
-<images/software_arch.png, id=299, 1252.52943pt x 871.75688pt>
+<images/software_arch.png, id=303, 1252.52943pt x 871.75688pt>
 File: images/software_arch.png Graphic file (type png)
 <use images/software_arch.png>
 Package pdftex.def Info: images/software_arch.png  used on input line 12.
@@ -1613,17 +1613,20 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 41.
 ) (./chapters/5-datasets.tex
-[34]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [34]
+[35] [36
+
+
+]
 chapter 5.
-[35
-
-
-]) (./chapters/8-conclusions.tex [36]
+[37]) (./chapters/8-conclusions.tex [38]
 chapter 6.
-(./thesis_main.bbl [37
+(./thesis_main.bbl [39
 
 
-] [38
+] [40
 
 
 ]
@@ -1754,10 +1757,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [39] [40
+)) [41] [42
 
 
-] [41] (./thesis_main.aux)
+] [43] (./thesis_main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1765,38 +1768,50 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 34597 strings out of 480129
- 686153 string characters out of 5893410
+ 34607 strings out of 480129
+ 686255 string characters out of 5893410
  1130015 words of memory out of 5000000
- 51826 multiletter control sequences out of 15000+600000
+ 51828 multiletter control sequences out of 15000+600000
  498305 words of font info for 108 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,10n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk>
- </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> <
-/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </h
-ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </hom
-e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/
-oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </home/oc
-/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oc/.
-texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/oc/.te
-xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/oc/.texl
-ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/oc/.texliv
-e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.texlive2
-021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texlive202
-1/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texlive2021/
-texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
-.pfb>
-Output written on thesis_main.pdf (55 pages, 1400480 bytes).
+pdfTeX warning (dest): name{subsection.4.1.4} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.4.1.3} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.4.1.2} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.4.1.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> <
+/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </h
+ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </hom
+e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </home/
+oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/oc
+/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </home/oc/.
+texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oc/.te
+xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/oc/.texl
+ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/oc/.texliv
+e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/oc/.texlive2
+021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.texlive202
+1/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texlive2021/
+texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texlive2021/te
+xmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.p
+fb>
+Output written on thesis_main.pdf (57 pages, 1402028 bytes).
 PDF statistics:
- 1014 PDF objects out of 1200 (max. 8388607)
- 457 compressed objects within 5 object streams
- 97 named destinations out of 1000 (max. 500000)
- 283 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1039 PDF objects out of 1200 (max. 8388607)
+ 478 compressed objects within 5 object streams
+ 105 named destinations out of 1000 (max. 500000)
+ 299 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -26,7 +26,7 @@ The application setup initiates with a minimal requirement of four microservices
 The workflow begins with a user-friendly interface presented by Angular and PrimeNG, encompassing all the configurations and tools enabling users to crawl quickly and index various websites. Users can modify configurations and submit a crawling job to the Head Node. The Head Node, in response, identifies an available Crawler Node to execute the task. It's worth noting that the PBS cluster can be bypassed, and the crawling process can be run locally on a localhost server. Users can monitor the progress of the running job from the browser. Once crawling is completed and the user is happy with the result, the user can start indexing. The indexing job also does not support a distributed architecture and will be executed locally and not on the PBS cluster.
 
 
-\subsection{Crawler Implmentation}
+\section{Crawler Implmentation}
 
 PBS Crawler Node runs the crawling job or can also run locally. The job supports multithreading. As illustrated by the pseudo-code shown in Algorithm [1], the crawler starts by loading the configuration submitted by the user from the Database. More details about the configuration are in the user interface section. Based on the configuration of a thread pool, the number of threads is read by the configuration. The thread pool contains all the threads crawling the site, where each thread contains a queue of URLs that it crawls from. The thread pool makes sure that if one thread has no URLs anymore, it can ask other threads to help. Algorithm [2] explains how this sharing URLs mechanism works. 
 
@@ -63,4 +63,6 @@ After the page is rendered and the automated actions are executed, the next step
 	\end{algorithmic}
 \end{algorithm}
 
-\subsection{Indexer Implmentation}
+\section{Indexer Implmentation}
+\section{Storage Handling}
+\section{User Interface Design}
