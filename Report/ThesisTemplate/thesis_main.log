@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  1 SEP 2023 14:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  1 SEP 2023 22:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1609,18 +1609,16 @@ Package pdftex.def Info: images/software_arch.png  used on input line 12.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[31]
+[31] [32 <./images/software_arch.png>] [33]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 27.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [32 <./images/software_arch.png>]) (./chapters/5-datasets.tex [33] [34
-
-
-]
+put line 41.
+) (./chapters/5-datasets.tex
+[34]
 chapter 5.
-[35]) (./chapters/8-conclusions.tex [36]
+[35
+
+
+]) (./chapters/8-conclusions.tex [36]
 chapter 6.
 (./thesis_main.bbl [37
 
@@ -1795,9 +1793,9 @@ lic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
 .pfb>
-Output written on thesis_main.pdf (55 pages, 1396874 bytes).
+Output written on thesis_main.pdf (55 pages, 1400480 bytes).
 PDF statistics:
- 1012 PDF objects out of 1200 (max. 8388607)
+ 1014 PDF objects out of 1200 (max. 8388607)
  457 compressed objects within 5 object streams
  97 named destinations out of 1000 (max. 500000)
  283 words of extra memory for PDF output out of 10000 (max. 10000000)
