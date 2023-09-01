@@ -26,16 +26,22 @@ Figure 4 provides an overview of the software architecture employed by the searc
 \begin{algorithm}[H]
 	\caption{$Start Crawling$}\label{alg:alg1}
 	\begin{algorithmic}
+		\State $thread$ $\gets$ $create\_threads\_pool()$
+	    \State $urls\_queue$ $\gets$ $get\_thread\_urls\_queue(thread)$
+	    \State $load\_crawler\_configurations()$
 	    \State $seed\_url$ $\gets$ $get\_seed\_url()$
 	    \State $robot\_file$ $\gets$ $get\_robot\_file\_content()$
-	    \State $thread$ $\gets$ $create\_threads\_pool()$
-	    \State $urls\_queue$ $\gets$ $get\_thread\_urls\_queue(thread)$
-	    \While {$urls\_queue$ not empty and All threads not done}
-	    	\EndIf
+	    \State $sdd\_ulr\_to\_queue(urls\_queue, seed\_url)$
+	    \While {$urls\_queue$ not empty or All threads not done}
 		\If{$urls\_queue$ is empty}
 		    \State $urls\_queue$ $\gets$ $get\_thread\_urls\_queue(thread)$
 		\Else
-			\State $load_crawler_configurations()$
+			\State $current\_url$ $\gets$ $urls\_queue.pop()$
+			\State $filter\_unwanted\_urls(current\_url)$
+			\State $content$ $\gets$ $request\_page(current\_url)$
+			\State $find\_next\_urls\_and\_add\_them\_to\_urls\_queue()$
+			\State $docs$ $\gets$ $find\_and\_download\_targeted\_documents()$
+			\State $filter\_unwanted\_documents(docs)$
 		\EndIf
 		\EndWhile
 

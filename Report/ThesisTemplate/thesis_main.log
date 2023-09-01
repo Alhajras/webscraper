@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  28 AUG 2023 21:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  1 SEP 2023 14:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1767,10 +1767,10 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 34584 strings out of 480129
- 685957 string characters out of 5893410
+ 34597 strings out of 480129
+ 686153 string characters out of 5893410
  1130015 words of memory out of 5000000
- 51813 multiletter control sequences out of 15000+600000
+ 51826 multiletter control sequences out of 15000+600000
  498305 words of font info for 108 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,10n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1795,7 +1795,7 @@ lic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
 .pfb>
-Output written on thesis_main.pdf (55 pages, 1395706 bytes).
+Output written on thesis_main.pdf (55 pages, 1396874 bytes).
 PDF statistics:
  1012 PDF objects out of 1200 (max. 8388607)
  457 compressed objects within 5 object streams
