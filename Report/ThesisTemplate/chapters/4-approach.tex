@@ -38,31 +38,50 @@ After the page is rendered and the automated actions are executed, the next step
 
 
 \begin{algorithm}[h]
-	\caption{$Start Crawling$}\label{alg:alg1}
+	\caption{Start Crawling}\label{alg:alg1}
 	\begin{algorithmic}[1]
-		\State $load\_crawler\_configurations()$
-		\State $thread$ $\gets$ $create\_threads\_pool()$
-	    \State $urls\_queue$ $\gets$ $get\_thread\_urls\_queue(thread)$
-	    \State $seed\_url$ $\gets$ $get\_seed\_url()$
-	    \State $sdd\_ulr\_to\_queue(urls\_queue, seed\_url)$
-	    \State $robot\_file$ $\gets$ $get\_robot\_file\_content()$
-	    \While {$urls\_queue$ not empty or All threads not done}
+		\State load\_crawler\_configurations()
+		\State $thread$ $\gets$ create\_threads\_pool()
+	    \State $urls\_queue$ $\gets$ get\_thread\_urls\_queue($thread)$)
+	    \State $seed\_url$ $\gets$ get\_seed\_url()
+	    \State add\_url\_to\_queue($urls\_queue$, $seed\_url$)
+	    \State $robot\_file$ $\gets$ get\_robot\_file\_content()
+	    \While {$urls\_queue$ not empty or all threads not done}
 		\If{$urls\_queue$ is empty}
-		    \State $urls\_queue$ $\gets$ $get\_thread\_urls\_queue(thread)$
+		    \State $urls\_queue$ $\gets$ get\_thread\_urls\_queue($thread$)
 		\Else
-			\State $current\_url$ $\gets$ $urls\_queue.pop()$
-			\State $filter\_unwanted\_urls(current\_url)$
-			\State $request\_page(current\_url)$
-            \State $execute\_automated\_actions()$
-			\State $find\_next\_urls\_and\_add\_them\_to\_urls\_queue()$
-			\State $docs$ $\gets$ $find\_and\_download\_targeted\_documents()$
-			\State $filter\_unwanted\_documents(docs)$
+			\State $current\_url$ $\gets$ urls\_queue\_next\_url()
+			\State filter\_unwanted\_urls($current\_url$)
+			\State request\_page($current\_url$)
+            \State execute\_automated\_actions()
+			\State find\_next\_urls\_and\_add\_them\_to\_urls\_queue()
+			\State $docs$ $\gets$ find\_and\_download\_targeted\_documents()
+			\State filter\_unwanted\_documents($docs$)
 		\EndIf
 		\EndWhile
 
 	\end{algorithmic}
 \end{algorithm}
 
+\subsection{Links Data Structure}
+The website's page navigation algorithm can be likened to a Level Order Traversal. The tree structure is established in the following manner: the seed URL acts as the tree's root node, representing level 0. After you explore the root page's content and gather its URLs, these URLs are assigned to the next level, level 1. Each page within level 1 is then visited, its contained URLs are collected, and these newly collected URLs are assigned to level 2. This process continues as you move deeper into the website until a maximum depth is reached, which is pre-defined by the user.
+This algorithm offers an advantage in that it makes it straightforward to prioritize pages based on their respective levels. For instance, in some scenarios, pages closer to the initial seed URL may receive higher priority, potentially yielding better outcomes. In other cases, deeper pages within the structure may hold more significance than those closer to the seed URL. Choosing the proper algorithm is possible in the UI.
+
+\subsection{Practical Challenges}
+\begin{itemize}
+  \item \textbf{Avoiding Loops}: Looping is when a web crawler repeatedly visits and requests the same web pages or URLs in a never-ending cycle, often resulting in excessive traffic to the same content. This is problematic as it wastes resources can also be inefficient, and can prevent the crawler from continuing. The first method to prevent looping is to record all the URLs visited and crawled. Before making a new request, we check if the URL is in this list. If it is, skip crawling it again to prevent loops. The second method is to use URL normalization. Normalize URLs by removing unnecessary components such as query parameters, fragments, or trailing slashes. This helps ensure that URLs with different representations (e.g., with and without a trailing slash) are treated as the same URL.
+
+
+\item  \textbf{Duplicated Content}: While the same web crawler avoids revisiting identical URLs to prevent content duplication, it's important to note that identical content may exist in different URLs paths within the same website. For instance, a men's shoe might be accessible via various links like "/winter/shoes/", "/men/shoes/", or "/sales/shoes/". Relying solely on the URL as a unique identifier to prevent content duplication is not foolproof.
+A more effective approach involves comparing the content itself with the database after parsing. Instead of a straightforward content check against the database, which can pose performance challenges, we employ a more efficient method. We generate a unique hash code using the SHA-1 hashing algorithm based on the content string intended for storage. This hash code is then stored in the database.
+Before saving any new content, we can verify if the hash code already exists in the database. This method ensures content uniqueness, even when it appears under different URLs on the same site, without the computational overhead of directly comparing lengthy content strings in the database.
+
+\item  \textbf{Dynamic Content}:Crawling dynamic websites presents a distinct set of challenges compared to static websites. Dynamic sites generate content on the client side through technologies like JavaScript, adding complexity to the task of accessing and extracting data. A primary concern lies in uncovering concealed content that necessitates user interaction. For instance, certain websites hide lengthy content portions, revealing them only upon clicking a "read more" button. Additionally, most websites implement lazy loading, fetching content on-demand via AJAX requests.
+To address these challenges, Selenium establishes a genuine session and fully renders the webpage. This approach allows for emulating user interactions using action chains, which simulate actions such as waiting, scrolling, and clicking. More details regarding this can be found in the User Interface section.
+
+\item  \textbf{Termination Conditions}: Crawlers can be brought to a halt by establishing specific criteria to ensure termination. The initial criterion involves defining a maximum depth, which restricts the number of page transitions to a single level. Additionally, monitoring and restricting the total count of visited pages and collected documents is possible. Another method is to employ a wall time measurement to monitor the crawler's runtime duration and trigger an abort if the crawler exceeds the expected time frame.
+
+\item  \textbf{Avoiding DOS}:
 \section{Indexer Implmentation}
 \section{Storage Handling}
 \section{User Interface Design}
