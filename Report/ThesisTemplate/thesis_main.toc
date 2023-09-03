@@ -28,9 +28,9 @@
 \contentsline {subsection}{\numberline {4.2.1}Links Data Structure}{35}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Practical Challenges}{35}{subsection.4.2.2}%
 \contentsline {section}{\numberline {4.3}Indexer Implmentation}{37}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Storage Handling}{37}{section.4.4}%
-\contentsline {section}{\numberline {4.5}User Interface Design}{37}{section.4.5}%
-\contentsline {chapter}{\numberline {5}Evaluation}{39}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{41}{chapter.6}%
-\contentsline {chapter}{Bibliography}{45}{section*.16}%
+\contentsline {section}{\numberline {4.4}Storage Handling}{38}{section.4.4}%
+\contentsline {section}{\numberline {4.5}User Interface Design}{38}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Evaluation}{41}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{43}{chapter.6}%
+\contentsline {chapter}{Bibliography}{47}{section*.16}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

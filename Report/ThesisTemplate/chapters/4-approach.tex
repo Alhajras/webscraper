@@ -85,5 +85,41 @@ To address these challenges, Selenium establishes a genuine session and fully re
 To mitigate this risk, it's crucial to introduce a waiting period between each request made by the same crawler. Additionally, when using Selenium, a deliberate delay of at least one second or more is already integrated to allow for the complete rendering of web pages. Nevertheless, these precautions alone may not prevent users from adding more nodes and executing DDoS attacks. Consequently, it is strongly advisable to exercise cautious management by monitoring and regulating the number of threads and nodes. This approach demonstrates respect for the targeted servers and helps prevent overloading them.
 
 \section{Indexer Implmentation}
+The indexing phase follows the crawling step, as it necessitates the downloading of documents. Unlike crawling, which can be computationally intensive, indexing is relatively lightweight. Hence, it is carried out on the localhost with multithreading support.
+Algorithm [2] clarifies the indexing process. Firstly, the algorithm loads the user-defined indexing configurations. You can find more details about these configurations in the User Interface Design section. Subsequently, an empty inverted list is initialized. An inverted list is a data structure used to associate words or terms with the documents in which they appear. In Python, it can be implemented as a dictionary (Dict[str, list[int]]), where each word serves as a key, and the corresponding value is a list of document IDs containing that word.
+The user specifies three variables: "threshold" and "stop\_list," which are retrieved from the database. The "threshold" represents the minimum word length required for tokenization from a document. The "stop\_list" is a predefined list of terms that should be omitted from the indexing process.
+The algorithm then iterates through all the documents, performing the following steps for each one:
+Initializes the document length as a counter, initially set to zero.
+Tokenizes the document to obtain a list of words.
+Iterates through the word list, checking each word's length against the threshold and verifying if it is not in the stop\_list. If these conditions are met, the word is added to the inverted list, and the document length counter is incremented by one.
+
+Once the inverted list is constructed, we calculate the MB25 score based on equation 3.4. Afterwards, it is saved into a cache for future retrieval and use.
+
+\begin{algorithm}[h]
+	\caption{Create Inverted List}\label{alg:alg1}
+	\begin{algorithmic}[1]
+	    \Require $documents$ not empty
+		\State $config$ $\gets$ load\_indexer\_configurations()
+		\State $inverted\_list$ $\gets$ init\_inverted\_list()
+		\State $threshold$ $\gets$ get\_small\_words\_threshold($config$)
+	    \State $stop\_list$ $\gets$ stop\_words\_list($config$)
+        \For{$doc$ in $documents$}
+          \State $doc\_length$ $\gets$ 0}
+          \State $words$ $\gets$ tokenize($doc$)}
+          \For{$word$ in $words$}
+          	\State $doc\_length$ $\gets$ 0}
+          	\If{$word$ > threshold and $word$ not in $stop\_list$}
+		    	\State add\_word\_and\_doc\_id\_to\_inverted\_list($word$, $doc.id$)
+		    	\State $doc\_length$ $\mathrel{+}=$ 1}
+			\EndIf
+          \EndFor
+          \State add\_to\_doc\_lengths\_list($doc\_length$)
+        \EndFor
+        \State calculate\_bm25\_score($inverted\_list$)
+        \State cache($inverted\_list$)
+
+	\end{algorithmic}
+\end{algorithm}
+
 \section{Storage Handling}
 \section{User Interface Design}

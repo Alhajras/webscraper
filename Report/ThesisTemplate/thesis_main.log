@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  2 SEP 2023 22:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  3 SEP 2023 19:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1016,6 +1016,9 @@ LaTeX Warning: Label `eq:depth' multiply defined.
 
 LaTeX Warning: Label `eq:depth' multiply defined.
 
+
+LaTeX Warning: Label `alg:alg1' multiply defined.
+
 )
 \openout1 = `thesis_main.aux'.
 
@@ -1616,17 +1619,57 @@ put line 41.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [34]
-[35] [36]) (./chapters/5-datasets.tex [37] [38
+[35] [36] [37]
+! Extra }, or forgotten \endgroup.
+l.107           \State $doc\_length$ $\gets$ 0}
+                                               
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten \endgroup.
+l.108 ...  \State $words$ $\gets$ tokenize($doc$)}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten \endgroup.
+l.110           	\State $doc\_length$ $\gets$ 0}
+                                                
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten \endgroup.
+l.113 ...  	\State $doc\_length$ $\mathrel{+}=$ 1}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (./chapters/5-datasets.tex [38] [39] [40
 
 
 ]
 chapter 5.
-[39]) (./chapters/8-conclusions.tex [40]
+[41]) (./chapters/8-conclusions.tex [42]
 chapter 6.
-(./thesis_main.bbl [41
+(./thesis_main.bbl [43
 
 
-] [42
+] [44
 
 
 ]
@@ -1757,10 +1800,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [43] [44
+)) [45] [46
 
 
-] [45]
+] [47]
 
 ! LaTeX Error: \begin{itemize} on input line 71 ended by \end{document}.
 
@@ -1786,10 +1829,10 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 ### semi simple group (level 1) entered at line 71 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 34609 strings out of 480129
- 686249 string characters out of 5893410
+ 34622 strings out of 480129
+ 686419 string characters out of 5893410
  1130015 words of memory out of 5000000
- 51830 multiletter control sequences out of 15000+600000
+ 51840 multiletter control sequences out of 15000+600000
  498305 words of font info for 108 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,10n,106p,10753b,1003s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1814,10 +1857,10 @@ onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy8.pfb>
-Output written on thesis_main.pdf (59 pages, 1407735 bytes).
+Output written on thesis_main.pdf (61 pages, 1412356 bytes).
 PDF statistics:
- 1060 PDF objects out of 1200 (max. 8388607)
- 491 compressed objects within 5 object streams
- 105 named destinations out of 1000 (max. 500000)
+ 1071 PDF objects out of 1200 (max. 8388607)
+ 499 compressed objects within 5 object streams
+ 108 named destinations out of 1000 (max. 500000)
  315 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -28,7 +28,7 @@ class InvertedIndex:
     def create_index(self, indexer_id):
         """
         Generate an inverted index from the given runner.
-        :param indexer_id: The id of the INdewxer instance that crawled the documents to be indexed.
+        :param indexer_id: The id of the Indexer instance that crawled the documents to be indexed.
         :return:
         """
         # The list which contains the ids of the
