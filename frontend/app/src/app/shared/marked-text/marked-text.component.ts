@@ -20,7 +20,7 @@ export class MarkedTextComponent implements OnInit {
       return
     }
     let result = this.text
-    this.searchString.split(' ').forEach(w => {
+    this.searchString.trim().split(' ').forEach(w => {
       const regex = new RegExp(w, 'gi')
       result = result
         .replace(regex, matchStr => '<mark>' + matchStr + '</mark>')

@@ -19,18 +19,19 @@
 \contentsline {subsection}{\numberline {3.4.4}Challenges and issues}{21}{subsection.3.4.4}%
 \contentsline {section}{\numberline {3.5}Indexing}{22}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}Inverted index}{23}{subsection.3.5.1}%
-\contentsline {section}{\numberline {3.6}Ranking}{23}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Ranking Refinements}{26}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Fuzzy search}{27}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.5.2}Document Unit}{23}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Tokenization}{24}{subsection.3.5.3}%
+\contentsline {section}{\numberline {3.6}Ranking}{25}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Ranking Refinements}{27}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Fuzzy search}{28}{subsection.3.6.2}%
 \contentsline {chapter}{\numberline {4}Approach}{31}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Software Architecture}{31}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Crawler Implmentation}{33}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Links Data Structure}{35}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Practical Challenges}{35}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Indexer Implmentation}{37}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Storage Handling}{38}{section.4.4}%
-\contentsline {section}{\numberline {4.5}User Interface Design}{38}{section.4.5}%
-\contentsline {chapter}{\numberline {5}Evaluation}{41}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{43}{chapter.6}%
-\contentsline {chapter}{Bibliography}{47}{section*.16}%
+\contentsline {section}{\numberline {4.3}Indexer Implmentation}{38}{section.4.3}%
+\contentsline {section}{\numberline {4.4}User Interface Design}{40}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Evaluation}{51}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{53}{chapter.6}%
+\contentsline {chapter}{Bibliography}{57}{section*.28}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  3 SEP 2023 19:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.6)  4 SEP 2023 13:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1019,6 +1019,42 @@ LaTeX Warning: Label `eq:depth' multiply defined.
 
 LaTeX Warning: Label `alg:alg1' multiply defined.
 
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
+
+LaTeX Warning: Label `fig:software-arch' multiply defined.
+
 )
 \openout1 = `thesis_main.aux'.
 
@@ -1214,7 +1250,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7]
-<images/google_arch.png, id=188, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=214, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 15.
@@ -1255,13 +1291,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [14] [15]
-<images/engine_components.png, id=232, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=258, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
  [16 <./images/engine_components.png (PNG copy)>] [17] [18]
-<images/crawler_architecture.png, id=248, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=274, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
@@ -1281,11 +1317,8 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-
-Underfull \vbox (badness 6001) has occurred while \output is active []
-
- [22]
-<images/inverted_index.png, id=266, 608.2725pt x 233.37187pt>
+[22]
+<images/inverted_index.png, id=292, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
@@ -1295,8 +1328,13 @@ Package pdftex.def Info: images/inverted_index.png  used on input line 154.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [23]
+Underfull \hbox (badness 10000) in paragraph at lines 169--169
+\T1/cmr/m/n/10.95 Out-put: The Uni-ver-sity of
+ []
+
+[24 <./images/inverted_index.png (PNG copy)>]
 ! Undefined control sequence.
-l.188 Document ID & Document content\T
+l.199 Document ID & Document content\T
                                       \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1305,7 +1343,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.188 Document ID & Document content\T\B
+l.199 Document ID & Document content\T\B
                                         
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1317,7 +1355,7 @@ and I'll forget about whatever was undefined.
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
 ! Undefined control sequence.
-l.191 ...Breisgau, Baden-Württemberg, Germany. \T
+l.202 ...Breisgau, Baden-Württemberg, Germany. \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1326,7 +1364,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.191 ...eisgau, Baden-Württemberg, Germany. \T\B
+l.202 ...eisgau, Baden-Württemberg, Germany. \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1335,7 +1373,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.194 ...tate of Baden-Württemberg in Germany. \T
+l.205 ...tate of Baden-Württemberg in Germany. \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1344,7 +1382,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.194 ...te of Baden-Württemberg in Germany. \T\B
+l.205 ...te of Baden-Württemberg in Germany. \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1353,7 +1391,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.197 ... colleges that have a graduate school. \T
+l.208 ... colleges that have a graduate school. \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1362,7 +1400,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.197 ...olleges that have a graduate school. \T\B
+l.208 ...olleges that have a graduate school. \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1371,18 +1409,18 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (15.41899pt too wide) in paragraph at lines 186--203
+Overfull \hbox (15.41899pt too wide) in paragraph at lines 197--214
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--203
+Underfull \hbox (badness 10000) in paragraph at lines 197--214
 
  []
 
-[24 <./images/inverted_index.png (PNG copy)>]
+[25]
 ! Undefined control sequence.
-l.212 Token & (Doc. ID, BM25 Score)\T
+l.223 Token & (Doc. ID, BM25 Score)\T
                                      \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1391,7 +1429,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.212 Token & (Doc. ID, BM25 Score)\T\B
+l.223 Token & (Doc. ID, BM25 Score)\T\B
                                        
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1400,7 +1438,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.215 the & [(1, 0.0), (2, 0.0), (3, 0.0)] \T
+l.226 the & [(1, 0.0), (2, 0.0), (3, 0.0)] \T
                                              \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1409,7 +1447,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.215 the & [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B
+l.226 the & [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B
                                                
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1418,7 +1456,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.218 ...1288144682), (3, 0.46664430652429906)] \T
+l.229 ...1288144682), (3, 0.46664430652429906)] \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1427,7 +1465,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.218 ...88144682), (3, 0.46664430652429906)] \T\B
+l.229 ...88144682), (3, 0.46664430652429906)] \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1436,7 +1474,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.221 of  &  [(1, 0.0), (2, 0.0), (3, 0.0)] \T
+l.232 of  &  [(1, 0.0), (2, 0.0), (3, 0.0)] \T
                                               \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1445,7 +1483,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.221 of  &  [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B
+l.232 of  &  [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B
                                                 
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1454,7 +1492,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.224 ...011288144682), (2, 0.975283837792052)] \T
+l.235 ...011288144682), (2, 0.975283837792052)] \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1463,7 +1501,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.224 ...1288144682), (2, 0.975283837792052)] \T\B
+l.235 ...1288144682), (2, 0.975283837792052)] \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1472,7 +1510,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.227 officially  &  [(1, 1.7407388463458566)] \T
+l.238 officially  &  [(1, 1.7407388463458566)] \T
                                                  \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1481,7 +1519,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.227 ...cially  &  [(1, 1.7407388463458566)] \T\B
+l.238 ...cially  &  [(1, 1.7407388463458566)] \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1490,7 +1528,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.230 albert  & [(1, 1.7407388463458566)]\T
+l.241 albert  & [(1, 1.7407388463458566)]\T
                                            \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1499,7 +1537,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.230 albert  & [(1, 1.7407388463458566)]\T\B
+l.241 albert  & [(1, 1.7407388463458566)]\T\B
                                              
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1508,7 +1546,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.233 ludwig  &  [(1, 1.7407388463458566)] \T
+l.244 ludwig  &  [(1, 1.7407388463458566)] \T
                                              \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1517,7 +1555,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.233 ludwig  &  [(1, 1.7407388463458566)] \T\B
+l.244 ludwig  &  [(1, 1.7407388463458566)] \T\B
                                                
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1526,7 +1564,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.236 is  & [(1, 0.0), (2, 0.0), (3, 0.0)] \T
+l.247 is  & [(1, 0.0), (2, 0.0), (3, 0.0)] \T
                                              \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1535,7 +1573,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.236 is  & [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B
+l.247 is  & [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B
                                                
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1544,7 +1582,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.239 ...49149886022), (3, 0.8859381868218585)] \T
+l.250 ...49149886022), (3, 0.8859381868218585)] \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1553,7 +1591,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.239 ...149886022), (3, 0.8859381868218585)] \T\B
+l.250 ...149886022), (3, 0.8859381868218585)] \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1562,7 +1600,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.242 public  &  [(1, 1.7407388463458566)] \T
+l.253 public  &  [(1, 1.7407388463458566)] \T
                                              \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1571,7 +1609,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.242 public  &  [(1, 1.7407388463458566)] \T\B
+l.253 public  &  [(1, 1.7407388463458566)] \T\B
                                                
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1580,31 +1618,28 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (15.41899pt too wide) in paragraph at lines 210--248
+Overfull \hbox (15.41899pt too wide) in paragraph at lines 221--259
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 210--248
+Underfull \hbox (badness 10000) in paragraph at lines 221--259
 
  []
 
 
-Underfull \vbox (badness 4569) has occurred while \output is active []
+Underfull \vbox (badness 1755) has occurred while \output is active []
 
- [25]
+ [26]
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-33.def
 File: uni-33.def 2013/05/13 UCS: Unicode data U+2100..U+21FF
-) [26] [27]
+) [27] [28]
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
 File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
-) [28])
-(./chapters/4-approach.tex [29] [30
-
-
-]
+) [29])
+(./chapters/4-approach.tex [30]
 chapter 4.
-<images/software_arch.png, id=307, 1252.52943pt x 871.75688pt>
+<images/software_arch.png, id=333, 1252.52943pt x 871.75688pt>
 File: images/software_arch.png Graphic file (type png)
 <use images/software_arch.png>
 Package pdftex.def Info: images/software_arch.png  used on input line 12.
@@ -1612,14 +1647,30 @@ Package pdftex.def Info: images/software_arch.png  used on input line 12.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[31] [32 <./images/software_arch.png>] [33]
+[31
+
+
+] [32 <./images/software_arch.png>]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 41.
+put line 35.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34]
-[35] [36] [37]
+ [33]
+[34] [35] [36] [37]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.91 
+     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
 ! Extra }, or forgotten \endgroup.
 l.107           \State $doc\_length$ $\gets$ 0}
                                                
@@ -1657,19 +1708,119 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38]
+[39] [40]
+<images/demo-1.png, id=378, 824.32968pt x 627.09282pt>
+File: images/demo-1.png Graphic file (type png)
+<use images/demo-1.png>
+Package pdftex.def Info: images/demo-1.png  used on input line 155.
+(pdftex.def)             Requested size: 369.88582pt x 281.38539pt.
+<images/demo-2.png, id=379, 824.32968pt x 624.83438pt>
+File: images/demo-2.png Graphic file (type png)
+<use images/demo-2.png>
+Package pdftex.def Info: images/demo-2.png  used on input line 162.
+(pdftex.def)             Requested size: 369.88582pt x 280.372pt.
+
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./chapters/5-datasets.tex [38] [39] [40
+[41 <./images/demo-1.png (PNG copy)>] [42 <./images/demo-2.png (PNG copy)>]
+<images/demo-3.png, id=390, 851.43094pt x 511.15968pt>
+File: images/demo-3.png Graphic file (type png)
+<use images/demo-3.png>
+Package pdftex.def Info: images/demo-3.png  used on input line 188.
+(pdftex.def)             Requested size: 369.88582pt x 222.06407pt.
+<images/demo-4.png, id=391, 641.39626pt x 542.77782pt>
+File: images/demo-4.png Graphic file (type png)
+<use images/demo-4.png>
+Package pdftex.def Info: images/demo-4.png  used on input line 195.
+(pdftex.def)             Requested size: 369.88582pt x 313.02242pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/demo-5.png, id=392, 561.59813pt x 273.27094pt>
+File: images/demo-5.png Graphic file (type png)
+<use images/demo-5.png>
+Package pdftex.def Info: images/demo-5.png  used on input line 202.
+(pdftex.def)             Requested size: 369.88582pt x 179.98409pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/demo-6.png, id=393, 916.92563pt x 550.30594pt>
+File: images/demo-6.png Graphic file (type png)
+<use images/demo-6.png>
+Package pdftex.def Info: images/demo-6.png  used on input line 209.
+(pdftex.def)             Requested size: 369.88582pt x 221.991pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/demo-7.png, id=394, 719.68875pt x 439.6425pt>
+File: images/demo-7.png Graphic file (type png)
+<use images/demo-7.png>
+Package pdftex.def Info: images/demo-7.png  used on input line 216.
+(pdftex.def)             Requested size: 369.88582pt x 225.95888pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/demo-8.png, id=395, 1082.54437pt x 620.3175pt>
+File: images/demo-8.png Graphic file (type png)
+<use images/demo-8.png>
+Package pdftex.def Info: images/demo-8.png  used on input line 223.
+(pdftex.def)             Requested size: 369.88582pt x 211.94633pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/demo-9.png, id=396, 810.77907pt x 523.9575pt>
+File: images/demo-9.png Graphic file (type png)
+<use images/demo-9.png>
+Package pdftex.def Info: images/demo-9.png  used on input line 230.
+(pdftex.def)             Requested size: 369.88582pt x 239.04063pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/demo-10.png, id=397, 1013.28563pt x 511.9125pt>
+File: images/demo-10.png Graphic file (type png)
+<use images/demo-10.png>
+Package pdftex.def Info: images/demo-10.png  used on input line 237.
+(pdftex.def)             Requested size: 369.88582pt x 186.86603pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/demo-11.png, id=398, 545.03625pt x 606.01407pt>
+File: images/demo-11.png Graphic file (type png)
+<use images/demo-11.png>
+Package pdftex.def Info: images/demo-11.png  used on input line 244.
+(pdftex.def)             Requested size: 369.88582pt x 411.27037pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/demo-12.png, id=399, 1017.04968pt x 411.03563pt>
+File: images/demo-12.png Graphic file (type png)
+<use images/demo-12.png>
+Package pdftex.def Info: images/demo-12.png  used on input line 251.
+(pdftex.def)             Requested size: 369.88582pt x 149.48424pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (./chapters/5-datasets.tex [43 <./images/demo-3.png (PNG copy)>] [44 <./image
+s/demo-4.png (PNG copy)> <./images/demo-5.png (PNG copy)>] [45 <./images/demo-6
+.png (PNG copy)> <./images/demo-7.png (PNG copy)>] [46 <./images/demo-8.png (PN
+G copy)> <./images/demo-9.png (PNG copy)>] [47 <./images/demo-10.png (PNG copy)
+>] [48 <./images/demo-11.png (PNG copy)>] [49 <./images/demo-12.png (PNG copy)>
+] [50
 
 
 ]
 chapter 5.
-[41]) (./chapters/8-conclusions.tex [42]
+[51]) (./chapters/8-conclusions.tex [52]
 chapter 6.
-(./thesis_main.bbl [43
+(./thesis_main.bbl [53
 
 
-] [44
+] [54
 
 
 ]
@@ -1800,67 +1951,50 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [45] [46
+)) [55] [56
 
 
-] [47]
-
-! LaTeX Error: \begin{itemize} on input line 71 ended by \end{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.111 \end{document}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-(./thesis_main.aux)
+] [57] (./thesis_main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
- )
-(\end occurred inside a group at level 1)
-
-### semi simple group (level 1) entered at line 71 (\begingroup)
-### bottom level 
+ ) 
 Here is how much of TeX's memory you used:
- 34622 strings out of 480129
- 686419 string characters out of 5893410
+ 34732 strings out of 480129
+ 688483 string characters out of 5893410
  1130015 words of memory out of 5000000
- 51840 multiletter control sequences out of 15000+600000
- 498305 words of font info for 108 fonts, out of 8000000 for 9000
+ 51914 multiletter control sequences out of 15000+600000
+ 499006 words of font info for 109 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
- 108i,10n,106p,10753b,1003s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/e
-ctt1095.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecr
-m0900.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1
-095.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx120
-0.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.
-600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.60
-0pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600p
-k> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk>
- </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> <
-/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </h
-ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </hom
-e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/
-oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc
-/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy8.pfb>
-Output written on thesis_main.pdf (61 pages, 1412356 bytes).
+ 108i,10n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk>
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1095.600pk> <
+/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </h
+ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </hom
+e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </home/
+oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/oc
+/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </home/oc/.
+texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oc/.te
+xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/oc/.texl
+ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/oc/.texliv
+e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/oc/.texlive2
+021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.texlive202
+1/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texlive2021/
+texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texlive2021/te
+xmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.p
+fb>
+Output written on thesis_main.pdf (71 pages, 2303937 bytes).
 PDF statistics:
- 1071 PDF objects out of 1200 (max. 8388607)
- 499 compressed objects within 5 object streams
- 108 named destinations out of 1000 (max. 500000)
- 315 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1176 PDF objects out of 1200 (max. 8388607)
+ 567 compressed objects within 6 object streams
+ 131 named destinations out of 1000 (max. 500000)
+ 383 words of extra memory for PDF output out of 10000 (max. 10000000)
 
