@@ -31,8 +31,8 @@
 - [Getting Started](#getting-started) 
   - [Installation](#installation)
 - [Usage](#usage) 
-  - [Uni Ranking](#use-case-1:-world-university-rankings-2023)
-  - [Comparing Prices](#comparing-prices)
+  - [Uni Ranking](#Use-Case---1-World-University-Rankings-2023)
+  - [Comparing Prices](#Use-Case---2:-Comparing-Products-Prices)
 - [Contact](#contact)
 
 
