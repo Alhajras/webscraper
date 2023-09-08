@@ -32,7 +32,7 @@
   - [Installation](#installation)
 - [Usage](#usage) 
   - [Uni Ranking](#Use-Case---1-World-University-Rankings-2023)
-  - [Comparing Prices](#Use-Case---2:-Comparing-Products-Prices)
+  - [Comparing Prices](#Use-Case---2-Comparing-Products-Prices)
 - [Contact](#contact)
 
 
