@@ -25,40 +25,15 @@
 
 # Contents
 
-- [Title](#about-the-project)
-- [Big Title](#big-title)
-- [Medium Title](#medium-title) 
-- [Small Title](#small-title) 
-- 
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-        <li><a href="###screenshots">Screenshots</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-<li>
-      <a href="#usage">Usage</a>
-      <ul>
-        <li><a href="#uni-ranking">Uni Ranking</a></li>
-        <li><a href="#compairing-prices">Comparing Prices</a></li>
-      </ul>
-    </li>
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</details>
-
+- [About The Project](#about-the-project)
+  - [Built With](#built-With)
+  - [Screenshots](#screenshots) 
+- [Getting Started](#getting-started) 
+  - [Installation](#installation)
+- [Usage](#usage) 
+  - [Uni Ranking](#uni-ranking)
+  - [Comparing Prices](#comparing-prices)
+- [Contact](#contact)
 
 
 <!-- ABOUT THE PROJECT -->
