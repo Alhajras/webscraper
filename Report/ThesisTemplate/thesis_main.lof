@@ -7,18 +7,16 @@
 \contentsline {figure}{\numberline {3}{\ignorespaces An illustration of an inverted index featuring three documents. All tokens are included in this example, and the sole text normalization applied is converting all tokens to lowercase. Queries that involve multiple keywords are resolved using set operations. [3]\relax }}{24}{figure.caption.11}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4}{\ignorespaces High-level view of the software archtiticture.\relax }}{32}{figure.caption.14}%
-\contentsline {figure}{\numberline {5}{\ignorespaces High-level view of the software archtiticture.\relax }}{41}{figure.caption.15}%
-\contentsline {figure}{\numberline {6}{\ignorespaces High-level view of the software archtiticture.\relax }}{42}{figure.caption.16}%
-\contentsline {figure}{\numberline {7}{\ignorespaces High-level view of the software archtiticture.\relax }}{43}{figure.caption.17}%
-\contentsline {figure}{\numberline {8}{\ignorespaces High-level view of the software archtiticture.\relax }}{44}{figure.caption.18}%
-\contentsline {figure}{\numberline {9}{\ignorespaces High-level view of the software archtiticture.\relax }}{44}{figure.caption.19}%
-\contentsline {figure}{\numberline {10}{\ignorespaces High-level view of the software archtiticture.\relax }}{45}{figure.caption.20}%
-\contentsline {figure}{\numberline {11}{\ignorespaces High-level view of the software archtiticture.\relax }}{45}{figure.caption.21}%
-\contentsline {figure}{\numberline {12}{\ignorespaces High-level view of the software archtiticture.\relax }}{46}{figure.caption.22}%
-\contentsline {figure}{\numberline {13}{\ignorespaces High-level view of the software archtiticture.\relax }}{46}{figure.caption.23}%
-\contentsline {figure}{\numberline {14}{\ignorespaces High-level view of the software archtiticture.\relax }}{47}{figure.caption.24}%
-\contentsline {figure}{\numberline {15}{\ignorespaces High-level view of the software archtiticture.\relax }}{48}{figure.caption.25}%
-\contentsline {figure}{\numberline {16}{\ignorespaces High-level view of the software archtiticture.\relax }}{49}{figure.caption.26}%
+\contentsline {figure}{\numberline {5}{\ignorespaces High-level view of the software archtiticture.\relax }}{43}{figure.caption.16}%
+\contentsline {figure}{\numberline {6}{\ignorespaces High-level view of the software archtiticture.\relax }}{43}{figure.caption.17}%
+\contentsline {figure}{\numberline {7}{\ignorespaces High-level view of the software archtiticture.\relax }}{44}{figure.caption.18}%
+\contentsline {figure}{\numberline {8}{\ignorespaces High-level view of the software archtiticture.\relax }}{44}{figure.caption.19}%
+\contentsline {figure}{\numberline {9}{\ignorespaces High-level view of the software archtiticture.\relax }}{45}{figure.caption.20}%
+\contentsline {figure}{\numberline {10}{\ignorespaces High-level view of the software archtiticture.\relax }}{45}{figure.caption.21}%
+\contentsline {figure}{\numberline {11}{\ignorespaces High-level view of the software archtiticture.\relax }}{46}{figure.caption.22}%
+\contentsline {figure}{\numberline {12}{\ignorespaces High-level view of the software archtiticture.\relax }}{46}{figure.caption.23}%
+\contentsline {figure}{\numberline {13}{\ignorespaces High-level view of the software archtiticture.\relax }}{47}{figure.caption.24}%
+\contentsline {figure}{\numberline {14}{\ignorespaces High-level view of the software archtiticture.\relax }}{48}{figure.caption.25}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

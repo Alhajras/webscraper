@@ -150,38 +150,68 @@ The user begins their journey on the homepage, where they can access documentati
 \end{itemize}
 
 
-\begin{figure}[h]	
-     \centering
-     \includegraphics[width=13cm]{images/demo-1.png}
-     \caption{High-level view of the software archtiticture.}
-     \label{fig:software-arch}
-\end{figure}
-
-\begin{figure}[h]	
-     \centering
-     \includegraphics[width=13cm]{images/demo-2.png}
-     \caption{High-level view of the software archtiticture.}
-     \label{fig:software-arch}
-\end{figure}
-
 The following phase is contingent upon the specific characteristics of the website being targeted, referred to as the "Actions Chain" tab. An "Actions Chain" constitutes an array of sequenced actions that replicate user interactions. This functionality proves valuable for tasks such as acknowledging cookies, scrolling to load additional content, or patiently waiting for the website to finish rendering in cases where the process may exceed the expected duration.
 
 Once the Template is created, the subsequent step is to access the Crawlers page and initiate the creation of a new Crawler. A Crawler comprises various essential configurations, including:
-Name: A user-defined identifier for the crawler.
-Template: The template utilized by the crawler to recognize HTML elements for crawling and storage.
-Max pages: The upper limit for the number of pages to be visited during the crawling process.
-Max collected docs: The maximum number of documents to be collected.
-Seed URL: The initial URL from which the crawler will commence the crawling process. Ensure that the URL includes the protocol (e.g., https://).
-Parsing algorithm: Currently supporting two algorithms: Breadth-First Search (Bottom-Up and Top-Down).
-Robots file URL: The URL where the robots.txt file can be located.
-Threads: Specifies the number of threads to be employed in the crawling process.
-Links Scope (Pagination): Defines the specific divs on which the crawler should concentrate. Typically, you'd want the crawler to avoid collecting links from areas like headers and footers. Example: //*[contains(@class, 'product-overview')]
-Excluded URLs: Identifies URLs that the crawler must steer clear of and refrain from visiting.
-Timeout in minutes: Sets the duration for which the crawler should continue crawling.
-Retry: Determines how many retry attempts should be made if the crawler encounters difficulties while crawling a page.
-Max depth: Establishes the depth to which the crawler should navigate through pages.
-Sleep in ms: Specifies the number of milliseconds the crawler should wait before making the next request.
-Show browser: This option, when enabled, displays the browser interface during crawling, which is beneficial for debugging purposes.
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{2.5cm} ||P{11.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Attribute} & \textbf{Description}\T\B 
+\\ 
+\hline
+\textbf{Name} & A user-defined identifier for the crawler \T\B 
+\\ 
+\hline
+\textbf{Template} & The template utilized by the crawler to recognize HTML elements for crawling and storage \T\B 
+\\ 
+\hline
+\textbf{Max pages} & The upper limit for the number of pages to be visited during the crawling process \T\B 
+\\ 
+\hline
+\textbf{Max collected docs} & The maximum number of documents to be collected \T\B 
+\\ 
+\hline
+\textbf{Max pages} & The upper limit for the number of pages to be visited during the crawling process \T\B 
+\\ 
+\hline
+\textbf{Seed URL} & The initial URL from which the crawler will commence the crawling process. Ensure that the URL includes the protocol (e.g., https://) \T\B 
+\\ 
+\hline
+\textbf{Robots file URL} & The URL where the robots.txt file can be located \T\B 
+\\ 
+\hline
+\textbf{Threads} & Specifies the number of threads to be employed in the crawling process. \T\B 
+\\ 
+\hline
+\textbf{Links Scope (Pagination)} & Defines the specific divs on which the crawler should concentrate. Typically, you'd want the crawler to avoid collecting links from areas like headers and footers. Example: //*[contains(@class, 'product-overview')] \T\B 
+\\ 
+\hline
+\textbf{Excluded URLs} & Identifies URLs that the crawler must steer clear of and refrain from visiting. \T\B 
+\\ 
+\hline
+\textbf{Timeout in minutes} & Sets the duration for which the crawler should continue crawling.\\ 
+\hline
+\textbf{Retry} & Determines how many retry attempts should be made if the crawler encounters difficulties while crawling a page. \T\B 
+\\ 
+\hline
+\textbf{Max depth} & Establishes the depth to which the crawler should navigate through pages. \T\B 
+\\ 
+\hline
+\textbf{Sleep} in ms & Specifies the number of milliseconds the crawler should wait before making the next request. \T\B 
+\\ 
+\hline
+\textbf{Show browser} & This option, when enabled, displays the browser interface during crawling, which is beneficial for debugging purposes. \T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configurations options}
+\end{table}
+
+
 
 \begin{figure}[h]	
      \centering
