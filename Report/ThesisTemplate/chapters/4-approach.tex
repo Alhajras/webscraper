@@ -222,29 +222,74 @@ Once you've set up the crawler with the appropriate configurations tailored to t
 
 \begin{figure}[h]	
      \centering
-     \includegraphics[width=13cm]{images/demo-5.png}
-     \caption{High-level view of the software archtiticture.}
-     \label{fig:software-arch}
-\end{figure}
-
-
-It's crucial to keep a close eye on the crawler runner to monitor its performance and configuration effectiveness before finalizing it. This proactive approach helps save time and guarantees that the crawler is collecting the accurate data. The "runners" table provides a straightforward and informative progress overview through four primary status indicators. The initial status is "New," representing the runner's initialization before the crawling process begins. "Running" signifies that the crawling process is currently underway. "Exit" indicates a status change that occurs when an error occurs, leading to the termination of the crawling process. Finally, "Completed" marks the last status, indicating that the runner has finished its task and exited. During the crawling process, various statistics about the runner are gathered, including information such as the total number of visited pages, the average number of documents discovered per page, and the various HTTP status codes encountered.
-
-
-\begin{figure}[h]	
-     \centering
      \includegraphics[width=13cm]{images/demo-8.png}
-     \caption{High-level view of the software archtiticture.}
+     \caption{An overview of the runners table, showing the runners status and progress.}
      \label{fig:software-arch}
 \end{figure}
+
+
+It's crucial to keep a close eye on the crawler runner to monitor its performance and configuration effectiveness before finalizing it. This proactive approach helps save time and guarantees that the crawler is collecting the accurate data. The "runners" table provides a straightforward and informative progress overview through four primary status indicators. The initial status is "New," representing the runner's initialization before the crawling process begins. "Running" signifies that the crawling process is currently underway. "Exit" indicates a status change that occurs when an error occurs, leading to the termination of the crawling process. Finally, "Completed" marks the last status, indicating that the runner has finished its task and exited. During the crawling process, various statistics about the runner are gathered, including information such as the total number of visited pages, the average number of documents discovered per page, and the various HTTP status codes encountered. One can retrieve the documents collected by the runner by selecting the "Download CSV" option from the actions dropdown menu.
+
 
 
 \begin{figure}[h]	
      \centering
      \includegraphics[width=13cm]{images/demo-10.png}
-     \caption{High-level view of the software archtiticture.}
+     \caption{An overview of the indwxwea table, showing the their status and progress.}
      \label{fig:software-arch}
 \end{figure}
+
+Once the runner has finished its task and the user is satisfied with the results, the collected documents can be indexed and prepared for future searches. To access this feature, you can navigate to the Indexers page, where you'll find a table displaying the current indexers and their respective statuses.
+
+As previously mentioned, indexers are responsible for handling documents, each of which contains a string field suitable for indexing. In this context, inspectors come into play. These inspectors are responsible for mapping the fields extracted from the document, such as Name, Title, Price, and Image. Users have the option to select which inspectors or fields to index from a dropdown menu, with the choice limited to only text fields, images and links are excluded from this selection.
+
+For instance, if you are gathering product information, you can opt to index fields like the Title and description. Additionally, cross-indexing is also possible, allowing the indexing of documents from two different crawlers. This capability proves valuable in scenarios where two distinct crawlers are fetching different products from the same website.
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{2.5cm} ||P{11.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Attribute} & \textbf{Description}\T\B 
+\\ 
+\hline
+\textbf{Name} & A user-defined identifier for the indexer \T\B 
+\\ 
+\hline
+\textbf{Inspectors} & Checklist of all the available inspectors used by the crawlers. \T\B 
+\\ 
+\hline
+\textbf{B parameter} & B parameter for the BM25 formula. \T\B 
+\\ 
+\hline
+\textbf{K parameter} & K parameter for the BM25 formula. \T\B 
+\\ 
+\hline
+\textbf{Stop words list} & List of words that should be excluded during indexing process. \T\B 
+\\ 
+\hline
+\textbf{Small Words Threshold} & The threshold of which the word can be considered small and will be skipped, by default 0 meaning empty spaces will be skipped from indexing process. \T\B 
+\\ 
+\hline
+\textbf{Weight words list} & Boost some words and punish other by giving them weight, e.g. 'Freiburg=5' will add more 5 points to the score when Freiburg word is found. \T\B 
+\\ 
+\hline
+\textbf{Boosting formula} & This formula result will be added to the final score, it uses inspectors variable. \T\B 
+\\ 
+\hline
+\textbf{Dictionary file name} & The name of the dictionary file name, this file help the suggestions list by using synonymes. \T\B 
+\\ 
+\hline
+\textbf{Use Synonyms} & Enable using synonyms in the suggestions list, for example, typing 'USA' will result on 'United States of America'. \T\B 
+\\ 
+\hline
+\textbf{Q-Gram} & How many letters should the word be split to, for example q=3,word=freiburg, will result in { 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg' }. \T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Indexer configurations options}
+\end{table}
 
 
 \begin{figure}[h]	
