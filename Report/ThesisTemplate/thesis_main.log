@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  9 SEP 2023 15:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  9 SEP 2023 17:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1034,21 +1034,6 @@ LaTeX Warning: Label `fig:software-arch' multiply defined.
 
 LaTeX Warning: Label `fig:software-arch' multiply defined.
 
-
-LaTeX Warning: Label `fig:software-arch' multiply defined.
-
-
-LaTeX Warning: Label `fig:software-arch' multiply defined.
-
-
-LaTeX Warning: Label `fig:software-arch' multiply defined.
-
-
-LaTeX Warning: Label `fig:software-arch' multiply defined.
-
-
-LaTeX Warning: Label `fig:software-arch' multiply defined.
-
 )
 \openout1 = `thesis_main.aux'.
 
@@ -1244,7 +1229,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7]
-<images/google_arch.png, id=212, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=203, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 15.
@@ -1285,13 +1270,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [14] [15]
-<images/engine_components.png, id=256, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=247, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
  [16 <./images/engine_components.png (PNG copy)>] [17] [18]
-<images/crawler_architecture.png, id=272, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=263, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
@@ -1312,7 +1297,7 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 [22]
-<images/inverted_index.png, id=290, 608.2725pt x 233.37187pt>
+<images/inverted_index.png, id=281, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
@@ -1633,7 +1618,7 @@ File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
 ) [29])
 (./chapters/4-approach.tex [30]
 chapter 4.
-<images/software_arch.png, id=331, 1252.52943pt x 871.75688pt>
+<images/software_arch.png, id=322, 1252.52943pt x 871.75688pt>
 File: images/software_arch.png Graphic file (type png)
 <use images/software_arch.png>
 Package pdftex.def Info: images/software_arch.png  used on input line 12.
@@ -1706,10 +1691,19 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [38]
 [39] [40]
+<images/demo-3.png, id=367, 851.43094pt x 511.15968pt>
+File: images/demo-3.png Graphic file (type png)
+<use images/demo-3.png>
+Package pdftex.def Info: images/demo-3.png  used on input line 157.
+(pdftex.def)             Requested size: 369.88582pt x 222.06407pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 ! Undefined control sequence.
 <recently read> \T 
                    
-l.161 \textbf{Attribute} & \textbf{Description}\T
+l.168 \textbf{Attribute} & \textbf{Description}\T
                                                  \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1718,7 +1712,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.161 ...tbf{Attribute} & \textbf{Description}\T\B
+l.168 ...tbf{Attribute} & \textbf{Description}\T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1727,7 +1721,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.164 ...ser-defined identifier for the crawler \T
+l.171 ...ser-defined identifier for the crawler \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1736,7 +1730,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.164 ...r-defined identifier for the crawler \T\B
+l.171 ...r-defined identifier for the crawler \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1745,7 +1739,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.167 ...HTML elements for crawling and storage \T
+l.174 ...HTML elements for crawling and storage \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1754,7 +1748,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.167 ...ML elements for crawling and storage \T\B
+l.174 ...ML elements for crawling and storage \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1763,7 +1757,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.170 ...be visited during the crawling process \T
+l.177 ...be visited during the crawling process \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1772,7 +1766,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.170 ... visited during the crawling process \T\B
+l.177 ... visited during the crawling process \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1781,7 +1775,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.173 ...um number of documents to be collected \T
+l.180 ...um number of documents to be collected \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1790,7 +1784,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.173 ... number of documents to be collected \T\B
+l.180 ... number of documents to be collected \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1799,7 +1793,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.176 ...be visited during the crawling process \T
+l.183 ...be visited during the crawling process \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1808,7 +1802,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.176 ... visited during the crawling process \T\B
+l.183 ... visited during the crawling process \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1817,7 +1811,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.179 ...includes the protocol (e.g., https://) \T
+l.186 ...includes the protocol (e.g., https://) \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1826,7 +1820,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.179 ...cludes the protocol (e.g., https://) \T\B
+l.186 ...cludes the protocol (e.g., https://) \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1835,7 +1829,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.182 ...ere the robots.txt file can be located \T
+l.189 ...ere the robots.txt file can be located \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1844,7 +1838,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.182 ...e the robots.txt file can be located \T\B
+l.189 ...e the robots.txt file can be located \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1853,7 +1847,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.185 ...o be employed in the crawling process. \T
+l.192 ...o be employed in the crawling process. \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1862,7 +1856,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.185 ...be employed in the crawling process. \T\B
+l.192 ...be employed in the crawling process. \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1871,7 +1865,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.188 ...[contains(@class, 'product-overview')] \T
+l.195 ...[contains(@class, 'product-overview')] \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1880,7 +1874,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.188 ...ontains(@class, 'product-overview')] \T\B
+l.195 ...ontains(@class, 'product-overview')] \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1889,7 +1883,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.191 ...er clear of and refrain from visiting. \T
+l.198 ...er clear of and refrain from visiting. \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1898,7 +1892,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.191 ... clear of and refrain from visiting. \T\B
+l.198 ... clear of and refrain from visiting. \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1907,7 +1901,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.196 ...rs difficulties while crawling a page. \T
+l.203 ...rs difficulties while crawling a page. \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1916,7 +1910,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.196 ... difficulties while crawling a page. \T\B
+l.203 ... difficulties while crawling a page. \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1925,7 +1919,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.199 ...crawler should navigate through pages. \T
+l.206 ...crawler should navigate through pages. \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1934,7 +1928,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.199 ...awler should navigate through pages. \T\B
+l.206 ...awler should navigate through pages. \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1943,7 +1937,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.202 ...d wait before making the next request. \T
+l.209 ...d wait before making the next request. \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1952,7 +1946,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.202 ...wait before making the next request. \T\B
+l.209 ...wait before making the next request. \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1961,7 +1955,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.205 ... is beneficial for debugging purposes. \T
+l.212 ... is beneficial for debugging purposes. \T
                                                   \B
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1970,7 +1964,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.205 ...s beneficial for debugging purposes. \T\B
+l.212 ...s beneficial for debugging purposes. \T\B
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1979,111 +1973,62 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (15.41899pt too wide) in paragraph at lines 159--211
+Overfull \hbox (15.41899pt too wide) in paragraph at lines 166--218
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--211
+Underfull \hbox (badness 10000) in paragraph at lines 166--218
 
  []
 
-<images/demo-3.png, id=376, 851.43094pt x 511.15968pt>
-File: images/demo-3.png Graphic file (type png)
-<use images/demo-3.png>
-Package pdftex.def Info: images/demo-3.png  used on input line 218.
-(pdftex.def)             Requested size: 369.88582pt x 222.06407pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/demo-4.png, id=377, 641.39626pt x 542.77782pt>
-File: images/demo-4.png Graphic file (type png)
-<use images/demo-4.png>
-Package pdftex.def Info: images/demo-4.png  used on input line 225.
-(pdftex.def)             Requested size: 369.88582pt x 313.02242pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/demo-5.png, id=378, 561.59813pt x 273.27094pt>
+[41]
+<images/demo-5.png, id=374, 561.59813pt x 273.27094pt>
 File: images/demo-5.png Graphic file (type png)
 <use images/demo-5.png>
-Package pdftex.def Info: images/demo-5.png  used on input line 232.
+Package pdftex.def Info: images/demo-5.png  used on input line 225.
 (pdftex.def)             Requested size: 369.88582pt x 179.98409pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/demo-6.png, id=379, 916.92563pt x 550.30594pt>
-File: images/demo-6.png Graphic file (type png)
-<use images/demo-6.png>
-Package pdftex.def Info: images/demo-6.png  used on input line 239.
-(pdftex.def)             Requested size: 369.88582pt x 221.991pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/demo-7.png, id=380, 719.68875pt x 439.6425pt>
-File: images/demo-7.png Graphic file (type png)
-<use images/demo-7.png>
-Package pdftex.def Info: images/demo-7.png  used on input line 246.
-(pdftex.def)             Requested size: 369.88582pt x 225.95888pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/demo-8.png, id=381, 1082.54437pt x 620.3175pt>
+<images/demo-8.png, id=375, 1082.54437pt x 620.3175pt>
 File: images/demo-8.png Graphic file (type png)
 <use images/demo-8.png>
-Package pdftex.def Info: images/demo-8.png  used on input line 253.
+Package pdftex.def Info: images/demo-8.png  used on input line 236.
 (pdftex.def)             Requested size: 369.88582pt x 211.94633pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/demo-9.png, id=382, 810.77907pt x 523.9575pt>
-File: images/demo-9.png Graphic file (type png)
-<use images/demo-9.png>
-Package pdftex.def Info: images/demo-9.png  used on input line 260.
-(pdftex.def)             Requested size: 369.88582pt x 239.04063pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/demo-10.png, id=383, 1013.28563pt x 511.9125pt>
+<images/demo-10.png, id=376, 1013.28563pt x 511.9125pt>
 File: images/demo-10.png Graphic file (type png)
 <use images/demo-10.png>
-Package pdftex.def Info: images/demo-10.png  used on input line 267.
+Package pdftex.def Info: images/demo-10.png  used on input line 244.
 (pdftex.def)             Requested size: 369.88582pt x 186.86603pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/demo-11.png, id=384, 545.03625pt x 606.01407pt>
-File: images/demo-11.png Graphic file (type png)
-<use images/demo-11.png>
-Package pdftex.def Info: images/demo-11.png  used on input line 274.
-(pdftex.def)             Requested size: 369.88582pt x 411.27037pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/demo-12.png, id=385, 1017.04968pt x 411.03563pt>
+<images/demo-12.png, id=377, 1017.04968pt x 411.03563pt>
 File: images/demo-12.png Graphic file (type png)
 <use images/demo-12.png>
-Package pdftex.def Info: images/demo-12.png  used on input line 281.
+Package pdftex.def Info: images/demo-12.png  used on input line 252.
 (pdftex.def)             Requested size: 369.88582pt x 149.48424pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./chapters/5-datasets.tex [41] [42] [43 <./images/demo-3.png (PNG copy)> <./
-images/demo-4.png (PNG copy)>] [44 <./images/demo-5.png (PNG copy)> <./images/d
-emo-6.png (PNG copy)>] [45 <./images/demo-7.png (PNG copy)> <./images/demo-8.pn
-g (PNG copy)>] [46 <./images/demo-9.png (PNG copy)> <./images/demo-10.png (PNG 
-copy)>] [47 <./images/demo-11.png (PNG copy)>] [48 <./images/demo-12.png (PNG c
-opy)>]
+) (./chapters/5-datasets.tex [42 <./images/demo-3.png (PNG copy)>] [43 <./image
+s/demo-5.png (PNG copy)>] [44 <./images/demo-8.png (PNG copy)> <./images/demo-1
+0.png (PNG copy)>] [45 <./images/demo-12.png (PNG copy)>] [46
+
+
+]
 chapter 5.
-[49
-
-
-]) (./chapters/8-conclusions.tex [50]
+[47]) (./chapters/8-conclusions.tex [48]
 chapter 6.
-(./thesis_main.bbl [51
+(./thesis_main.bbl [49
 
 
-] [52
+] [50
 
 
 ]
@@ -2214,10 +2159,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [53] [54
+)) [51] [52
 
 
-] [55] (./thesis_main.aux)
+] [53] (./thesis_main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -2225,10 +2170,10 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 34717 strings out of 480129
- 688186 string characters out of 5893410
- 1133015 words of memory out of 5000000
- 51903 multiletter control sequences out of 15000+600000
+ 34675 strings out of 480129
+ 687365 string characters out of 5893410
+ 1131015 words of memory out of 5000000
+ 51873 multiletter control sequences out of 15000+600000
  499782 words of font info for 110 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,10n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2255,10 +2200,10 @@ amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 >
-Output written on thesis_main.pdf (69 pages, 2183753 bytes).
+Output written on thesis_main.pdf (67 pages, 1860571 bytes).
 PDF statistics:
- 1214 PDF objects out of 1440 (max. 8388607)
- 563 compressed objects within 6 object streams
- 128 named destinations out of 1000 (max. 500000)
- 373 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1191 PDF objects out of 1200 (max. 8388607)
+ 547 compressed objects within 6 object streams
+ 121 named destinations out of 1000 (max. 500000)
+ 348 words of extra memory for PDF output out of 10000 (max. 10000000)
 

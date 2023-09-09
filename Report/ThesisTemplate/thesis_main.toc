@@ -31,7 +31,7 @@
 \contentsline {subsection}{\numberline {4.2.2}Practical Challenges}{35}{subsection.4.2.2}%
 \contentsline {section}{\numberline {4.3}Indexer Implmentation}{38}{section.4.3}%
 \contentsline {section}{\numberline {4.4}User Interface Design}{40}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Evaluation}{49}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{51}{chapter.6}%
-\contentsline {chapter}{Bibliography}{55}{section*.27}%
+\contentsline {chapter}{\numberline {5}Evaluation}{47}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{49}{chapter.6}%
+\contentsline {chapter}{Bibliography}{53}{section*.22}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

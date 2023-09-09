@@ -152,6 +152,13 @@ The user begins their journey on the homepage, where they can access documentati
 
 The following phase is contingent upon the specific characteristics of the website being targeted, referred to as the "Actions Chain" tab. An "Actions Chain" constitutes an array of sequenced actions that replicate user interactions. This functionality proves valuable for tasks such as acknowledging cookies, scrolling to load additional content, or patiently waiting for the website to finish rendering in cases where the process may exceed the expected duration.
 
+\begin{figure}[h]	
+     \centering
+     \includegraphics[width=13cm]{images/demo-3.png}
+     \caption{An overview of the Templates table containing inspectors list projecting the targeted feilds in a document}
+     \label{fig:software-arch}
+\end{figure}
+
 Once the Template is created, the subsequent step is to access the Crawlers page and initiate the creation of a new Crawler. A Crawler comprises various essential configurations, including:
 
 \begin{table}[ht] 
@@ -211,21 +218,7 @@ Once the Template is created, the subsequent step is to access the Crawlers page
   \caption{Crawler configurations options}
 \end{table}
 
-
-
-\begin{figure}[h]	
-     \centering
-     \includegraphics[width=13cm]{images/demo-3.png}
-     \caption{High-level view of the software archtiticture.}
-     \label{fig:software-arch}
-\end{figure}
-
-\begin{figure}[h]	
-     \centering
-     \includegraphics[width=13cm]{images/demo-4.png}
-     \caption{High-level view of the software archtiticture.}
-     \label{fig:software-arch}
-\end{figure}
+Once you've set up the crawler with the appropriate configurations tailored to the specific website you're targeting, the next step is to create a job referred to as a "runner." Multiple runners can be associated with each crawler, allowing them to run on different days or machines. It's important to note that each runner can utilize multithreading based on the crawler's configurations and employ distinct crawler settings. This approach provides an effective means to assess the crawler's performance until the desired outcome is achieved. Every runner instance necessitates the presence of the crawler and a designated machine IP where it will execute. The chosen machine must be registered within the PBS Head Node and must be online. By default, "localhost" is set as the value, which can be employed for testing purposes and for circumventing the PBS cluster.
 
 \begin{figure}[h]	
      \centering
@@ -234,19 +227,9 @@ Once the Template is created, the subsequent step is to access the Crawlers page
      \label{fig:software-arch}
 \end{figure}
 
-\begin{figure}[h]	
-     \centering
-     \includegraphics[width=13cm]{images/demo-6.png}
-     \caption{High-level view of the software archtiticture.}
-     \label{fig:software-arch}
-\end{figure}
 
-\begin{figure}[h]	
-     \centering
-     \includegraphics[width=13cm]{images/demo-7.png}
-     \caption{High-level view of the software archtiticture.}
-     \label{fig:software-arch}
-\end{figure}
+It's crucial to keep a close eye on the crawler runner to monitor its performance and configuration effectiveness before finalizing it. This proactive approach helps save time and guarantees that the crawler is collecting the accurate data. The "runners" table provides a straightforward and informative progress overview through four primary status indicators. The initial status is "New," representing the runner's initialization before the crawling process begins. "Running" signifies that the crawling process is currently underway. "Exit" indicates a status change that occurs when an error occurs, leading to the termination of the crawling process. Finally, "Completed" marks the last status, indicating that the runner has finished its task and exited. During the crawling process, various statistics about the runner are gathered, including information such as the total number of visited pages, the average number of documents discovered per page, and the various HTTP status codes encountered.
+
 
 \begin{figure}[h]	
      \centering
@@ -255,12 +238,6 @@ Once the Template is created, the subsequent step is to access the Crawlers page
      \label{fig:software-arch}
 \end{figure}
 
-\begin{figure}[h]	
-     \centering
-     \includegraphics[width=13cm]{images/demo-9.png}
-     \caption{High-level view of the software archtiticture.}
-     \label{fig:software-arch}
-\end{figure}
 
 \begin{figure}[h]	
      \centering
@@ -269,12 +246,6 @@ Once the Template is created, the subsequent step is to access the Crawlers page
      \label{fig:software-arch}
 \end{figure}
 
-\begin{figure}[h]	
-     \centering
-     \includegraphics[width=13cm]{images/demo-11.png}
-     \caption{High-level view of the software archtiticture.}
-     \label{fig:software-arch}
-\end{figure}
 
 \begin{figure}[h]	
      \centering
