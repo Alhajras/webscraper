@@ -282,7 +282,7 @@ For instance, if you are gathering product information, you can opt to index fie
 \textbf{Use Synonyms} & Enable using synonyms in the suggestions list, for example, typing 'USA' will result on 'United States of America'. \T\B 
 \\ 
 \hline
-\textbf{Q-Gram} & How many letters should the word be split to, for example q=3,word=freiburg, will result in { 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg' }. \T\B 
+\textbf{Q-Gram} & How many letters should the word be split to, for example q=3,word=freiburg, will result in the next grams { 'fre', 'rei', 'eib', 'ibu', 'bur', 'urg' }. \T\B 
 \\ 
 \hline \hline
     \end{tabular}
@@ -291,6 +291,9 @@ For instance, if you are gathering product information, you can opt to index fie
   \caption{Indexer configurations options}
 \end{table}
 
+In Table [4], you can find the configurations related to the indexer. While some of these configurations are already explained within the table, others may benefit from further clarification. The 'Weight words list' refers to a list of words along with their associated weights. If a term containing one of these words is present in a query, its score will be augmented and contribute to the overall query score.
+
+The 'Boosting formula' is a feature that can be employed in conjunction with inspector variables to influence the ranking process. For example, if you want to rank products based not only on text relevance but also consider factors like reviews or prices (which are numeric values rather than text), you can utilize the 'Boosting formula.' To do this, you can assign a variable name to an inspector, such as 'review.' Then, in the 'Boosting formula' field, you can input an expression like 'log(review),' which will convert the numeric value in the inspector field 'review' into a numerical score. This score is then incorporated into the ranking formula, contributing to the final ranking score.
 
 \begin{figure}[h]	
      \centering
@@ -298,3 +301,7 @@ For instance, if you are gathering product information, you can opt to index fie
      \caption{High-level view of the software archtiticture.}
      \label{fig:software-arch}
 \end{figure}
+
+In the end, all the indexed documents can be easily located on the search page, which consists of three primary components. First, there's the search bar, which leverages the suggestions list dictionary configured during the indexing phase. The second component is a dropdown menu containing all the cached indexers that have previously been indexed. The last component is the result table, which boasts a dynamic layout depending on the inspectors used for each document.
+
+For example, a product with inspectors like Image, Title, Name, and Price will have four columns displaying the relevant data. The data accommodates various inspector types, including text, links, and images. It's worth noting that, at present, only the top 25 results are displayed, and this limit is not customizable.
