@@ -25,6 +25,14 @@ class InvertedIndex:
         """
         self.inverted_lists = {}
 
+    def tokenize(self, sentence: str):
+        # Split the sentence into words based on spaces
+        words = sentence.split()
+        # Remove special characters using a regular expression pattern
+        # This pattern includes all Unicode characters except whitespace
+        clean_words = [re.sub(r'[^\w\s]+', '', word.lower()) for word in words]
+        return clean_words
+
     def create_index(self, indexer_id):
         """
         Generate an inverted index from the given runner.
@@ -81,10 +89,7 @@ class InvertedIndex:
                 dl = 0  # Compute the document length (number of words).
                 doc_id += 1
                 # TODO: I think the regular expression for tokenization should be configured by the GUI
-                for word in re.split("[^A-Za-z]+", inspector_value.value):
-                    # Neglect capital differences
-                    word = word.lower()
-
+                for word in self.tokenize(inspector_value.value):
                     # Ignore the word if it is empty or small, or it is in the skip list.
                     if (
                         len(word) <= small_words_threshold
