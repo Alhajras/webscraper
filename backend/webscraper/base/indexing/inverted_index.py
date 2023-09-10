@@ -2,12 +2,15 @@
 This class is inspired and reuses the code from the course Information Retrieval by Prof. Dr. Hannah Bast
 https://ad-wiki.informatik.uni-freiburg.de/teaching/InformationRetrievalWS2223
 """
+import itertools
 import re
 import math
+import time
 from concurrent.futures import ThreadPoolExecutor, Future, wait
+from typing import Tuple
 
 from sympy import sympify
-from .qgram_index import SingletonMeta
+from .qgram_index import SingletonMeta, ped
 from ..models import InspectorValue, Inspector, Indexer
 
 DEFAULT_B = 0.75
@@ -19,11 +22,64 @@ class InvertedIndex:
     Class used to create the inverted list of the crawled documents.
     """
 
-    def __init__(self):
+    def __init__(self, q: int):
         """
         inverted_lists is a map from words that found in the documents to the documents ids.
         """
         self.inverted_lists = {}
+
+        """
+        Creates an empty qgram index.
+        """
+        self.q = q
+        self.padding = "$" * (self.q - 1)
+        self.q_inverted_lists = {}
+        self.entities = []
+        self.norm_names = []
+        self.names = []
+        self.name_ent = []
+
+        # statistics
+        self.ped_calcs = None
+        self.ped_time = 0
+        self.merges = None
+        self.merge_time = 0
+
+    def normalize(self, word: str) -> str:
+        """
+        Normalize the given string (remove non-word characters and lower case).
+        """
+        low = word.lower()
+        return "".join([i for i in low if i.isalnum()])
+
+    def compute_qgrams(self, word: str) -> list[str]:
+        """
+        Compute q-grams for padded version of given string.
+        """
+        ret = []
+        padded = self.padding + word
+        for i in range(0, len(word)):
+            ret.append(padded[i : i + self.q])
+        return ret
+
+    def process_qgrams(self, name: str, name_id: int):
+        normed_name = self.normalize(name)
+        self.entities.append(name)
+        # cache the normalized names
+        self.norm_names.append(normed_name)
+        self.names.append(name)
+
+        for qgram in self.compute_qgrams(normed_name):
+            if qgram not in self.q_inverted_lists:
+                self.q_inverted_lists[qgram] = []
+            if (
+                    len(self.q_inverted_lists[qgram]) > 0
+                    and self.q_inverted_lists[qgram][-1][0] == name_id
+            ):
+                freq = self.q_inverted_lists[qgram][-1][1] + 1
+                self.q_inverted_lists[qgram][-1] = (name_id, freq)
+            else:
+                self.q_inverted_lists[qgram].append((name_id, 1))
 
     def tokenize(self, sentence: str):
         # Split the sentence into words based on spaces
@@ -41,12 +97,6 @@ class InvertedIndex:
         """
         # The list which contains the ids of the
         #         inspectors to be included in the indexing process.
-        singleton_cache = SingletonMeta
-        cache_key = f"indexer:{indexer_id}"
-        hit = singleton_cache.indexers_cache.get(cache_key, None)
-        if hit is not None:
-            print("Cached")
-            return hit
 
         indexer = Indexer.objects.get(id=indexer_id)
 
@@ -82,9 +132,10 @@ class InvertedIndex:
             return
 
         # Init all lengths to zero
-        doc_lengths = [0] * len(inspector_values)
+        doc_lengths = [0] * (len(inspector_values) + 1)
 
         def collect_words(inspector_values, doc_id) -> None:
+            word_id = 0
             for inspector_value in inspector_values:
                 dl = 0  # Compute the document length (number of words).
                 doc_id += 1
@@ -96,7 +147,6 @@ class InvertedIndex:
                         or word in skip_words_dictionary
                     ):
                         continue
-
                     dl += 1
                     # Skip empty spaces
                     if word not in self.inverted_lists:
@@ -105,6 +155,9 @@ class InvertedIndex:
                         self.inverted_lists[word] = [
                             (doc_id, inspector_value.id, 1, inspector_value.document.id)
                         ]
+
+                        word_id += 1
+                        self.process_qgrams(word, word_id)
                         continue
 
                     # Get last posting to check if the doc was already seen.
@@ -125,22 +178,8 @@ class InvertedIndex:
                 # Register the document length.
                 doc_lengths[doc_id] = dl
 
-        threads = 2
-        # Step 1: Calculate the size of each partition
-        partition_size = len(inspector_values) // threads
+        collect_words(inspector_values, 0)
 
-        # Step 2: Create the partitions
-        partitions = [
-            inspector_values[i : i + partition_size]
-            for i in range(0, len(inspector_values), partition_size)
-        ]
-
-        with ThreadPoolExecutor(max_workers=threads) as executor:
-            thread_1: Future = executor.submit(collect_words, partitions[0], 0)
-            thread_2: Future = executor.submit(
-                collect_words, partitions[1], len(partitions[0]) - 1
-            )
-            wait([thread_1, thread_2])
         # Compute N (the total number of documents).
         n = inspector_values.count()
         # Compute AVDL (the average document length).
@@ -166,8 +205,6 @@ class InvertedIndex:
                 if word in words_weights:
                     score += words_weights[word]
                 inverted_list[i] = (doc_id, document_score[1], score, document_score[3])
-
-        singleton_cache.indexers_cache[cache_key] = self.inverted_lists
 
     def cached_indexers_keys(self):
         singleton_cache = SingletonMeta
@@ -309,15 +346,6 @@ class InvertedIndex:
         if not keywords:
             return []
 
-        singleton_cache = SingletonMeta
-        cache_key = f"indexer:{indexer_id}"
-        self.inverted_lists = singleton_cache.indexers_cache.get(cache_key, None)
-        if self.inverted_lists is None:
-            print(
-                f"There is no indexer found with an ID {indexer_id}!"
-                f" Please create an indexer first and then try to run queries."
-            )
-            return []
         # Fetch the inverted lists for each of the given keywords.
         lists = []
         for keyword in keywords:
@@ -336,3 +364,85 @@ class InvertedIndex:
         union = [x for x in union if x[2] != 0]
         # Sort the postings by BM25 scores, in descending order.
         return sorted(union, key=lambda x: x[2], reverse=True)
+
+
+    def find_matches(
+        self, prefix: str, delta: int
+    ) -> list[str]:
+        """
+        Finds all entities y with PED(x, y) <= delta for a given integer delta
+        and a given (normalized) prefix x.
+
+        The test checks for a tuple that contains (1) a list of triples
+        containing the entity ID, the PED distance and its score and (2) the
+        number of PED calculations
+
+        ([(entity id, PED, score), ...], #ped calculations)
+
+        The entity IDs are one-based (starting with 1).
+        """
+        threshold = len(prefix) - (self.q * delta)
+        matches = []
+        tot = 0
+        c = 0
+
+        lists = []
+        for qgram in self.compute_qgrams(prefix):
+            if qgram in self.q_inverted_lists:
+                lists.append(self.q_inverted_lists[qgram])
+
+        merged = self.merge_lists(lists)
+
+        start = time.monotonic()
+
+        for pair in merged:
+            tot += 1
+            if pair[1] >= threshold:
+                # ids are 1-based
+                pedist = ped(prefix, self.norm_names[pair[0] - 1], delta)
+                c += 1
+                if pedist <= delta:
+                    matches.append((self.entities[pair[0] - 1], pedist, pair[0]))
+                    continue
+
+        self.ped_calcs = (c, tot)
+        self.ped_time = (time.monotonic() - start) * 1000
+
+        # only one result per entity, namely the best PED
+        matches = [m[0] for m in sorted(matches, key=lambda post: (post[1], -post[2]))[:2]]
+        print(matches)
+        if len(matches) != 0:
+            return matches
+        return [prefix]
+
+    def rank_matches(
+        self, matches: list[Tuple[int, int, int, int]]
+    ) -> list[Tuple[int, int, int, int]]:
+        """
+        Ranks the given list of (entity id, PED, s), where PED is the PED
+        value and s is the popularity score of an entity.
+
+        The test check for a list of triples containing the entity ID,
+        the PED distance and its score:
+
+        [(entity id, PED, score), ...]
+        """
+        return sorted(matches, key=lambda post: (post[1], -post[2]))
+
+    def merge_lists(self, lists: list[list[Tuple[int, int]]]) -> list[Tuple[int, int]]:
+        """
+        Merges the given inverted lists.
+        """
+        start = time.monotonic()
+        merged = []
+        c = 0
+        for el in sorted(itertools.chain.from_iterable(lists)):
+            c += 1
+            if len(merged) != 0 and merged[-1][0] == el[0]:
+                merged[-1] = (merged[-1][0], merged[-1][1] + el[1])
+            else:
+                merged.append(el)
+
+        self.merges = (len(lists), c)
+        self.merge_time = (time.monotonic() - start) * 1000
+        return merged

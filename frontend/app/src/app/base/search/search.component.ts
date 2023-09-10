@@ -83,6 +83,11 @@ export class SearchComponent implements OnInit {
       headers: string[],
       docs: Record<number, any[]>
     }) => {
+      if (values == null) {
+              this.loading = false
+
+        return
+      }
       this.headers = values.headers
       this.documents = Object.keys(values.docs).map((key) => {
         const  inspectorValue= values.docs[+key][0] as InspectorValue

@@ -109,7 +109,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
 
     @action(detail=False, url_path="available-indexers", methods=["GET"])
     def available_indexers(self, request: Request) -> Response:
-        inverted_index = InvertedIndex()
+        inverted_index = InvertedIndex(0)
         serialized_indexers = [
             IndexerSerializer(indexer).data
             for indexer in inverted_index.cached_indexers_keys()
@@ -143,12 +143,14 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             import time
 
             start_time = time.time()
+            cache_key = f"indexer:{indexer_id}"
             print("Creating an index!")
-            inverted_index = InvertedIndex()
+            inverted_index = InvertedIndex(indexer.q_gram_q)
             inverted_index.create_index(indexer_id)
             indexer.status = IndexerStatus.COMPLETED
             indexer.completed_at = timezone.now()
             indexer.save()
+            singleton_cache.indexers_cache[cache_key] = inverted_index
             print(start_time - time.time())
             print("Done creating an index!")
 
@@ -161,8 +163,22 @@ class IndexerViewSet(EverythingButDestroyViewSet):
     @action(detail=True, url_path="search", methods=["POST"])
     def search(self, request: Request, pk: int) -> Response:
         query = request.data["q"].lower().strip()
-        inverted_index = InvertedIndex()
-        result = inverted_index.process_query(query.split(" "), pk)[:25]
+        indexer = Indexer.objects.get(id=pk)
+        singleton_cache = SingletonMeta
+        cache_key = f"indexer:{pk}"
+        inverted_index = singleton_cache.indexers_cache.get(cache_key, None)
+        words = query.split()
+        q_list = []
+        for word in words:
+            q = inverted_index.normalize(word)
+
+            # Process the keywords.
+            delta = int(len(q) / 4)
+            postings = inverted_index.find_matches(q, delta)
+            q_list = q_list + postings
+        if len(q_list) == 0:
+            return Response(data=None)
+        result = inverted_index.process_query(q_list, pk)[:25]
         for r in result:
             print(r[2])
         # TODO: 25 should be configurable
