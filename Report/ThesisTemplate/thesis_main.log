@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  11 SEP 2023 14:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  11 SEP 2023 16:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1196,7 +1196,7 @@ File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 \tf@lot=\write7
 \openout7 = `thesis_main.lot'.
 
-Package hyperref Info: Option `pageanchor' set `true' on input line 82.
+Package hyperref Info: Option `pageanchor' set `true' on input line 85.
  [11] [12
 
 
@@ -1226,7 +1226,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7]
-<images/google_arch.png, id=213, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=215, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 15.
@@ -1267,13 +1267,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [14] [15]
-<images/engine_components.png, id=257, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=259, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
  [16 <./images/engine_components.png (PNG copy)>] [17] [18]
-<images/crawler_architecture.png, id=273, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=275, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
@@ -1294,7 +1294,7 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 [22]
-<images/inverted_index.png, id=291, 608.2725pt x 233.37187pt>
+<images/inverted_index.png, id=293, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
@@ -1309,82 +1309,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 169--169
  []
 
 [24 <./images/inverted_index.png (PNG copy)>]
-! Undefined control sequence.
-l.199 Document ID & Document content\T
-                                      \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.199 Document ID & Document content\T\B
-                                        
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
-! Undefined control sequence.
-l.202 ...Breisgau, Baden-Württemberg, Germany. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.202 ...eisgau, Baden-Württemberg, Germany. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.205 ...tate of Baden-Württemberg in Germany. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.205 ...te of Baden-Württemberg in Germany. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.208 ... colleges that have a graduate school. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.208 ...olleges that have a graduate school. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 197--214
 [][]
  []
@@ -1395,205 +1322,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 197--214
  []
 
 [25]
-! Undefined control sequence.
-l.223 Token & (Doc. ID, BM25 Score)\T
-                                     \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.223 Token & (Doc. ID, BM25 Score)\T\B
-                                       
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.226 the & [(1, 0.0), (2, 0.0), (3, 0.0)] \T
-                                             \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.226 the & [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B
-                                               
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.229 ...1288144682), (3, 0.46664430652429906)] \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.229 ...88144682), (3, 0.46664430652429906)] \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.232 of  &  [(1, 0.0), (2, 0.0), (3, 0.0)] \T
-                                              \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.232 of  &  [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B
-                                                
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.235 ...011288144682), (2, 0.975283837792052)] \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.235 ...1288144682), (2, 0.975283837792052)] \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.238 officially  &  [(1, 1.7407388463458566)] \T
-                                                 \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.238 ...cially  &  [(1, 1.7407388463458566)] \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.241 albert  & [(1, 1.7407388463458566)]\T
-                                           \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.241 albert  & [(1, 1.7407388463458566)]\T\B
-                                             
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.244 ludwig  &  [(1, 1.7407388463458566)] \T
-                                             \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.244 ludwig  &  [(1, 1.7407388463458566)] \T\B
-                                               
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.247 is  & [(1, 0.0), (2, 0.0), (3, 0.0)] \T
-                                             \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.247 is  & [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B
-                                               
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.250 ...49149886022), (3, 0.8859381868218585)] \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.250 ...149886022), (3, 0.8859381868218585)] \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.253 public  &  [(1, 1.7407388463458566)] \T
-                                             \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.253 public  &  [(1, 1.7407388463458566)] \T\B
-                                               
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 221--259
 [][]
  []
@@ -1603,19 +1331,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 221--259
 
  []
 
-
-Underfull \vbox (badness 1755) has occurred while \output is active []
-
- [26]
-(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-33.def
+[26] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-33.def
 File: uni-33.def 2013/05/13 UCS: Unicode data U+2100..U+21FF
-) [27] [28]
-(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
+) [27]
+[28] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
 File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
 ) [29])
 (./chapters/4-approach.tex [30]
 chapter 4.
-<images/software_arch.png, id=332, 1252.52943pt x 871.75688pt>
+<images/software_arch.png, id=334, 1252.52943pt x 871.75688pt>
 File: images/software_arch.png Graphic file (type png)
 <use images/software_arch.png>
 Package pdftex.def Info: images/software_arch.png  used on input line 12.
@@ -1688,7 +1412,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [38]
 [39] [40]
-<images/demo-3.png, id=377, 851.43094pt x 511.15968pt>
+<images/demo-3.png, id=379, 851.43094pt x 511.15968pt>
 File: images/demo-3.png Graphic file (type png)
 <use images/demo-3.png>
 Package pdftex.def Info: images/demo-3.png  used on input line 157.
@@ -1696,278 +1420,6 @@ Package pdftex.def Info: images/demo-3.png  used on input line 157.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-! Undefined control sequence.
-<recently read> \T 
-                   
-l.168 \textbf{Attribute} & \textbf{Description}\T
-                                                 \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.168 ...tbf{Attribute} & \textbf{Description}\T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.171 ...ser-defined identifier for the crawler \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.171 ...r-defined identifier for the crawler \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.174 ...HTML elements for crawling and storage \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.174 ...ML elements for crawling and storage \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.177 ...be visited during the crawling process \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.177 ... visited during the crawling process \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.180 ...um number of documents to be collected \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.180 ... number of documents to be collected \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.183 ...be visited during the crawling process \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.183 ... visited during the crawling process \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.186 ...includes the protocol (e.g., https://) \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.186 ...cludes the protocol (e.g., https://) \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.189 ...ere the robots.txt file can be located \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.189 ...e the robots.txt file can be located \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.192 ...o be employed in the crawling process. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.192 ...be employed in the crawling process. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.195 ...[contains(@class, 'product-overview')] \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.195 ...ontains(@class, 'product-overview')] \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.198 ...er clear of and refrain from visiting. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.198 ... clear of and refrain from visiting. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.203 ...rs difficulties while crawling a page. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.203 ... difficulties while crawling a page. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.206 ...crawler should navigate through pages. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.206 ...awler should navigate through pages. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.209 ...d wait before making the next request. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.209 ...wait before making the next request. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.212 ... is beneficial for debugging purposes. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.212 ...s beneficial for debugging purposes. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
 
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 166--218
@@ -1980,7 +1432,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--218
  []
 
 [41]
-<images/demo-8.png, id=384, 1082.54437pt x 620.3175pt>
+<images/demo-8.png, id=386, 1082.54437pt x 620.3175pt>
 File: images/demo-8.png Graphic file (type png)
 <use images/demo-8.png>
 Package pdftex.def Info: images/demo-8.png  used on input line 225.
@@ -1989,7 +1441,7 @@ Package pdftex.def Info: images/demo-8.png  used on input line 225.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/demo-10.png, id=385, 1013.28563pt x 511.9125pt>
+<images/demo-10.png, id=387, 1013.28563pt x 511.9125pt>
 File: images/demo-10.png Graphic file (type png)
 <use images/demo-10.png>
 Package pdftex.def Info: images/demo-10.png  used on input line 237.
@@ -1999,225 +1451,6 @@ Package pdftex.def Info: images/demo-10.png  used on input line 237.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [43]
-! Undefined control sequence.
-<recently read> \T 
-                   
-l.252 \textbf{Attribute} & \textbf{Description}\T
-                                                 \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.252 ...tbf{Attribute} & \textbf{Description}\T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.255 ...ser-defined identifier for the indexer \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.255 ...r-defined identifier for the indexer \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.258 ...lable inspectors used by the crawlers. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.258 ...ble inspectors used by the crawlers. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.261 ...r} & B parameter for the BM25 formula. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.261 ... & B parameter for the BM25 formula. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.264 ...r} & K parameter for the BM25 formula. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.264 ... & K parameter for the BM25 formula. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.267 ...d be excluded during indexing process. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.267 ...be excluded during indexing process. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.270 ...will be skipped from indexing process. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.270 ...ll be skipped from indexing process. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.273 ...the score when Freiburg word is found. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.273 ...e score when Freiburg word is found. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.276 ...al score, it uses inspectors variable. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.276 ... score, it uses inspectors variable. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.279 ...e suggestions list by using synonymes. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.279 ...suggestions list by using synonymes. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.282 ... result on 'United States of America'. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.282 ...esult on 'United States of America'. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.285 ..., 'rei', 'eib', 'ibu', 'bur', 'urg' }. \T
-                                                  \B
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.285 ...'rei', 'eib', 'ibu', 'bur', 'urg' }. \T\B
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 250--291
 [][]
  []
@@ -2228,17 +1461,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 250--291
  []
 
 [44 <./images/demo-8.png (PNG copy)>]
-<images/demo-12.png, id=399, 1017.04968pt x 411.03563pt>
+<images/demo-12.png, id=401, 1017.04968pt x 411.03563pt>
 File: images/demo-12.png Graphic file (type png)
 <use images/demo-12.png>
 Package pdftex.def Info: images/demo-12.png  used on input line 300.
 (pdftex.def)             Requested size: 369.88582pt x 149.48424pt.
-
-Underfull \vbox (badness 1394) has occurred while \output is active []
-
- [45 <./images/demo-10.png (PNG copy)> <./images/demo-12.png (PNG copy)>])
-(./chapters/5-datasets.tex [46]
+ [45 <./images/demo-10.png (PNG copy)> <./images/demo-12.png (PNG copy)>]) (./c
+hapters/5-datasets.tex [46]
 chapter 5.
+
+Overfull \hbox (15.41899pt too wide) in paragraph at lines 11--28
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--28
+
+ []
+
 [47
 
 
@@ -2390,16 +1630,16 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
  )
 (\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 11 ({)
+### simple group (level 1) entered at line 36 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 34676 strings out of 480129
- 687289 string characters out of 5893410
+ 34677 strings out of 480129
+ 687305 string characters out of 5893410
  1132015 words of memory out of 5000000
  51871 multiletter control sequences out of 15000+600000
  499782 words of font info for 110 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
- 108i,10n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 108i,11n,106p,10753b,943s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/e
 ctt1095.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecb
 x0900.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1
@@ -2423,10 +1663,10 @@ t/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts
 public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy8.pfb>
-Output written on thesis_main.pdf (67 pages, 1837504 bytes).
+Output written on thesis_main.pdf (67 pages, 1839392 bytes).
 PDF statistics:
- 1223 PDF objects out of 1440 (max. 8388607)
- 569 compressed objects within 6 object streams
- 125 named destinations out of 1000 (max. 500000)
+ 1229 PDF objects out of 1440 (max. 8388607)
+ 571 compressed objects within 6 object streams
+ 126 named destinations out of 1000 (max. 500000)
  375 words of extra memory for PDF output out of 10000 (max. 10000000)
 
