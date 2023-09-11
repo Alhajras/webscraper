@@ -47,6 +47,15 @@ To evaluate the web crawler, the following criteria can be employed for measurem
 
 \end{itemize}
 
+\subsection{Datasets} 
+Evaluating a web crawler necessitates the utilization of a static website as a reliable reference point. The crawler-test\footnote{\url{https://crawler-test.com/}} website serves as an excellent choice for this purpose due to its diverse range of content and links, containing a wide range of scenarios that a crawler might encounter. This website effectively employs robots.txt to provide guidance to the crawler, allowing for an assessment of its politeness. Moreover, it includes a section containing links that yield various HTTP request status codes, such as 4xx and 5xx, which proves valuable for ensuring the crawler's robustness. Additionally, it incorporates multiple instances of page redirection, including scenarios like infinite redirection, which serves the dual purpose of evaluating the crawler's ability to avoid traps and enhancing its overall resilience.
+
+To enhance the coverage and versatility of our crawler testing, we are considering two additional websites encompassing a broader range of use cases, ensuring that the crawler can effectively handle various HTML structures and more generic scenarios.
+The first use case involves extracting product information from an E-commerce platform like Douglas\footnote{\url{https://www.douglas.de/}}. This website offers over 160,000 diverse products, making it an ideal candidate for testing different content types, including images. We will categorize our testing into three distinct datasets: small (with 100 products), medium (with 1,000 products), and large (with 10,000 products) to evaluate the crawler's performance under different data sizes thoroughly.
+The second website, Times Higher Education\footnote{\url{https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking}}, specializes in annually ranking universities. This unique characteristic allows us to evaluate content changes occurring on a yearly basis, setting it apart from other websites that undergo daily alterations, which can prove challenging for accurate evaluation.
+
+In order to assess the extent of crawler coverage, our objective is to initiate the crawler from the website's root path and subsequently compare the number of visited links with those manually gathered to validate their accuracy.
+
 
 \section{Indexer}  
 \section{User Experience} 
