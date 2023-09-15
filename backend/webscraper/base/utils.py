@@ -173,8 +173,8 @@ def execute_all_before_actions(template: Template, driver: WebDriver) -> None:
     :param driver:
     :return:
     """
-    actions_chain = ActionChain.objects.get(template=template)
-    if actions_chain.disabled:
+    actions_chain = ActionChain.objects.filter(template=template).first()
+    if actions_chain == None or actions_chain.disabled:
         return
     all_actions = (
         Action.objects.filter(action_chain=actions_chain)

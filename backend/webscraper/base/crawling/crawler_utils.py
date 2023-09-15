@@ -140,7 +140,7 @@ class CrawlerUtils:
         # Statistics variables
         statistics = Statistics.objects.create(runner=runner)
         visited_pages = 0
-        http_codes = {"Already visited": 0, "Duplicated content": 0}
+        http_codes = {"Already visited": 0, "Duplicated content": 0, "Errors": 0}
 
         def crawl_seed(seed: str) -> None:
             """
@@ -195,7 +195,12 @@ class CrawlerUtils:
                     logger.info(f"Thread: {thread_id} - {link.url} already visited.")
                     return
                 start_time = time.time()
-                driver.get(link.url)
+                try:
+                    driver.get(link.url)
+                except Exception as e:
+                    http_codes["Errors"] = http_codes["Errors"] + 1
+                    logger.error(f"The link {link.url} thrown an error: {e}")
+                    return
                 # wait = WebDriverWait(driver, 10)
                 # wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "body")))
 
@@ -219,6 +224,7 @@ class CrawlerUtils:
                         else (page_size + statistics.avg_page_size) / 2
                     )
                 except (UnexpectedAlertPresentException) as e:
+                    http_codes["Errors"] = http_codes["Errors"] + 1
                     logger.error(f"The link {link.url} thrown an error: {e}")
 
 
@@ -240,6 +246,7 @@ class CrawlerUtils:
                         requests.exceptions.ConnectionError,
                         requests.exceptions.TooManyRedirects,
                 ) as e:
+                    http_codes["Errors"] = http_codes["Errors"] + 1
                     logger.error(f"The link {link.url} thrown an error: {e}")
                     return
 
@@ -272,11 +279,11 @@ class CrawlerUtils:
                                 # We skip the fragments as they do not add any product, that why we split by #
                                 href = a.get_attribute("href").split("#").pop()
                                 # Check if the link is allowed to be crawled
-                                if not check_crawl_permission(
-                                        robots_txt_content, "testing-agent", href
-                                ):
-                                    statistics.http_codes[f"Disallow link: {href}"] = 1
-                                    continue
+                                # if not check_crawl_permission(
+                                #         robots_txt_content, "testing-agent", href
+                                # ):
+                                #     statistics.http_codes[f"Disallow link: {href}"] = 1
+                                #     continue
                                 # Skip unwanted links
                                 if href in excluded_urls:
                                     statistics.http_codes[f"Excluded link: {href}"] = 1
@@ -407,6 +414,7 @@ class CrawlerUtils:
                     print(statistics.avg_loading_time)
                     statistics.save()
                 except Exception as e:
+                    http_codes["Errors"] = http_codes["Errors"] + 1
                     print(f"{thread_id} encountered an error:")
                     print(e)
                 return
@@ -476,6 +484,8 @@ class CrawlerUtils:
             if not InspectorValue.objects.filter(url=link.url).exists():
                 visitied_not_saved.append(key)
 
+        print("--------------------- All found links -----------------------")
+        print(len(visited) + len(not_visited))
         print("--------------------- visited -----------------------")
         print(len(visited))
 
