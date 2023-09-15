@@ -310,7 +310,7 @@ class InspectorValue(models.Model):
     deleted = models.BooleanField(default=False)
     inspector = models.ForeignKey(Inspector, on_delete=models.PROTECT)
     runner = models.ForeignKey(Runner, on_delete=models.PROTECT, default=1)
-    document = models.ForeignKey(Document, on_delete=models.PROTECT, default=1)
+    document = models.ForeignKey(Document, on_delete=models.CASCADE, default=1)
 
     def __str__(self) -> str:
         return (
