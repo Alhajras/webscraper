@@ -271,7 +271,7 @@ class Runner(models.Model):
 
 
 class LinkFragment(models.Model):
-    fragment = models.CharField(max_length=100)
+    fragment = models.CharField(max_length=250)
     parent = models.ForeignKey("self", on_delete=models.PROTECT, null=True)
     runner = models.ForeignKey(Runner, on_delete=models.PROTECT)
 
