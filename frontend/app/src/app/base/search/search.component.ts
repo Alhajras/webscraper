@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
   public readonly columnCount = 8
   public loading = false
   public documents: Document[] = []
-
+  protected columns = 0
   public searchText = ''
   public cached_indexers = []
   public selectedIndexerForm!: Indexer
@@ -89,6 +89,7 @@ export class SearchComponent implements OnInit {
         return
       }
       this.headers = values.headers
+      this.columns = this.headers.length
       this.documents = Object.keys(values.docs).map((key) => {
         const  inspectorValue= values.docs[+key][0] as InspectorValue
         const doc:Document = {id: +key, score: inspectorValue.boosted_score, inspector_values: values.docs[+key]}

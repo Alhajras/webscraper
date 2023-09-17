@@ -45,7 +45,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-document>
         <tr>
-          <td *ngFor="let value of document.inspector_values">
+          <td *ngFor="let value of document.inspector_values.slice(0, columns)">
             <p>
               <container-element [ngSwitch]="value.inspector__type">
                 <img
