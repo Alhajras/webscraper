@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Template} from "src/app/models/template.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
-import {Action, ActionChain} from "src/app/models/action.model";
+import {Action} from "src/app/models/action.model";
 import {ActionService} from "src/app/services/action.service";
 import {MessageService} from "primeng/api";
 

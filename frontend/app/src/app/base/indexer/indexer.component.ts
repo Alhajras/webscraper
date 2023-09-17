@@ -6,7 +6,6 @@ import {IndexerService} from "src/app/services/indexer.service";
 import {InspectorService} from "src/app/services/inspector.service";
 import {lastValueFrom} from "rxjs";
 import {Inspector} from "src/app/models/inspector.model";
-import {OverlayPanel} from "primeng/overlaypanel";
 import {MessageService} from "primeng/api";
 
 @Component({
