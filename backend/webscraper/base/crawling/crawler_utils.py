@@ -173,6 +173,7 @@ class CrawlerUtils:
                 if runner.status == str(RunnerStatus.EXIT):
                     driver.quit()
                     return
+                print(f"{thread_id}  - {start_url}")
 
                 if len(current_active_queue) == 0:
                     return
@@ -279,11 +280,11 @@ class CrawlerUtils:
                                 # We skip the fragments as they do not add any product, that why we split by #
                                 href = a.get_attribute("href").split("#").pop()
                                 # Check if the link is allowed to be crawled
-                                # if not check_crawl_permission(
-                                #         robots_txt_content, "testing-agent", href
-                                # ):
-                                #     statistics.http_codes[f"Disallow link: {href}"] = 1
-                                #     continue
+                                if not check_crawl_permission(
+                                        robots_txt_content, "deepcrawl", href
+                                ):
+                                    statistics.http_codes[f"Disallow link: {href}"] = 1
+                                    continue
                                 # Skip unwanted links
                                 if href in excluded_urls:
                                     statistics.http_codes[f"Excluded link: {href}"] = 1
@@ -463,9 +464,7 @@ class CrawlerUtils:
         with ThreadPoolExecutor(max_workers=threads_number) as executor:
             futures: list[Future] = []
             for i in range(threads_number):
-                seed_url = ''
-                if i == 0:
-                    seed_url = crawler.seed_url
+                seed_url = crawler.seed_url
                 futures.append(executor.submit(crawl_seed, seed_url))
             wait(futures)
 
