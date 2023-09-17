@@ -239,7 +239,6 @@ class QGramIndex:
                 ret.append(
                     (match[0], match[1], int(self.entities[match[0] - 1][1]), match[2])
                 )
-
         return ret, c
 
     def normalize(self, word: str) -> str:

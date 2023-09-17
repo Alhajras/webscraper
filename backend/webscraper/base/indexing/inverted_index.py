@@ -407,10 +407,9 @@ class InvertedIndex:
 
         self.ped_calcs = (c, tot)
         self.ped_time = (time.monotonic() - start) * 1000
-
         # only one result per entity, namely the best PED
-        matches = [m[0] for m in sorted(matches, key=lambda post: (post[1], -post[2]))[:2]]
-        print(matches)
+        matches = [m[0] for m in sorted(matches, key=lambda post: (post[1], post[2]))[:1]]
+
         if len(matches) != 0:
             return matches
         return [prefix]
