@@ -135,7 +135,9 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                 )
                 pathlib.Path().resolve()
                 file_path = os.path.join(
-                    f"{pathlib.Path().resolve()}/base/indexing/dictionaries", indexer.dictionary)
+                    f"{pathlib.Path().resolve()}/base/indexing/dictionaries",
+                    indexer.dictionary,
+                )
                 q_obj.build_from_file(file_path)
                 singleton_cache.suggestions_cache[cache_key] = q_obj
                 print("Done creating dictionary!")
@@ -163,7 +165,6 @@ class IndexerViewSet(EverythingButDestroyViewSet):
     @action(detail=True, url_path="search", methods=["POST"])
     def search(self, request: Request, pk: int) -> Response:
         query = request.data["q"].lower().strip()
-        indexer = Indexer.objects.get(id=pk)
         singleton_cache = SingletonMeta
         cache_key = f"indexer:{pk}"
         inverted_index = singleton_cache.indexers_cache.get(cache_key, None)
@@ -199,8 +200,12 @@ class IndexerViewSet(EverythingButDestroyViewSet):
                     "inspector__clean_up_expression",
                     "inspector__variable_name",
                 )
-                .order_by("document__id", "inspector__name")  # Match the expressions here
-                .distinct("document__id", "inspector__name")  # Match the expressions here
+                .order_by(
+                    "document__id", "inspector__name"
+                )  # Match the expressions here
+                .distinct(
+                    "document__id", "inspector__name"
+                )  # Match the expressions here
             )
             variables_names = (
                 InspectorValue.objects.filter(document__id=doc_id)

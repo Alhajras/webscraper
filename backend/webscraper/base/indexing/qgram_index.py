@@ -8,7 +8,6 @@ Natalie Prange <prange@cs.uni-freiburg.de>
 """
 
 import itertools
-import os
 
 import readline  # NOQA
 import time
@@ -118,10 +117,11 @@ class QGramIndex:
         The entity IDs are one-based (starting with one).
         """
 
-        with open(file_name,
-                  "r",
-                  encoding="utf-8",
-                  ) as f:
+        with open(
+            file_name,
+            "r",
+            encoding="utf-8",
+        ) as f:
             ent_id = 0
             name_id = 0
             f.readline()  # skip first line

@@ -6,7 +6,6 @@ import itertools
 import re
 import math
 import time
-from concurrent.futures import ThreadPoolExecutor, Future, wait
 from typing import Tuple
 
 from sympy import sympify
@@ -73,8 +72,8 @@ class InvertedIndex:
             if qgram not in self.q_inverted_lists:
                 self.q_inverted_lists[qgram] = []
             if (
-                    len(self.q_inverted_lists[qgram]) > 0
-                    and self.q_inverted_lists[qgram][-1][0] == name_id
+                len(self.q_inverted_lists[qgram]) > 0
+                and self.q_inverted_lists[qgram][-1][0] == name_id
             ):
                 freq = self.q_inverted_lists[qgram][-1][1] + 1
                 self.q_inverted_lists[qgram][-1] = (name_id, freq)
@@ -86,7 +85,7 @@ class InvertedIndex:
         words = sentence.split()
         # Remove special characters using a regular expression pattern
         # This pattern includes all Unicode characters except whitespace
-        clean_words = [re.sub(r'[^\w\s]+', '', word.lower()) for word in words]
+        clean_words = [re.sub(r"[^\w\s]+", "", word.lower()) for word in words]
         return clean_words
 
     def create_index(self, indexer_id):
@@ -365,10 +364,7 @@ class InvertedIndex:
         # Sort the postings by BM25 scores, in descending order.
         return sorted(union, key=lambda x: x[2], reverse=True)
 
-
-    def find_matches(
-        self, prefix: str, delta: int
-    ) -> list[str]:
+    def find_matches(self, prefix: str, delta: int) -> list[str]:
         """
         Finds all entities y with PED(x, y) <= delta for a given integer delta
         and a given (normalized) prefix x.
@@ -408,7 +404,9 @@ class InvertedIndex:
         self.ped_calcs = (c, tot)
         self.ped_time = (time.monotonic() - start) * 1000
         # only one result per entity, namely the best PED
-        matches = [m[0] for m in sorted(matches, key=lambda post: (post[1], post[2]))[:1]]
+        matches = [
+            m[0] for m in sorted(matches, key=lambda post: (post[1], post[2]))[:1]
+        ]
 
         if len(matches) != 0:
             return matches

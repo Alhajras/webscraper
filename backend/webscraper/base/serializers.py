@@ -11,7 +11,8 @@ from .models import (
     InspectorValue,
     ClickAction,
     ScrollAction,
-    WaitAction, Statistics,
+    WaitAction,
+    Statistics,
 )
 
 
@@ -142,6 +143,7 @@ class RunnerSerializer(serializers.ModelSerializer):
             "crawler_name",
             "statistics",
         ]
+
     statistics = StatisticsSerializer(read_only=True)
 
 

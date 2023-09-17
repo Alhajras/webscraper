@@ -159,7 +159,7 @@ class CrawlerUtils:
             if thread_id not in shared_threads_pool:
                 shared_threads_pool[thread_id] = crawler_thread
 
-            if seed == '':
+            if seed == "":
                 return
             # This is the base URL that the crawler should only crawl from
             base_url = urlparse(seed).hostname
@@ -228,7 +228,6 @@ class CrawlerUtils:
                     http_codes["Errors"] = http_codes["Errors"] + 1
                     logger.error(f"The link {link.url} thrown an error: {e}")
 
-
                 # Get the current URL from Selenium
                 # Send a separate HTTP request using requests library to retrieve the status code\
                 try:
@@ -243,9 +242,9 @@ class CrawlerUtils:
                         http_codes[status_code] = 1
                     statistics.http_codes = http_codes
                 except (
-                        WebDriverException,
-                        requests.exceptions.ConnectionError,
-                        requests.exceptions.TooManyRedirects,
+                    WebDriverException,
+                    requests.exceptions.ConnectionError,
+                    requests.exceptions.TooManyRedirects,
                 ) as e:
                     http_codes["Errors"] = http_codes["Errors"] + 1
                     logger.error(f"The link {link.url} thrown an error: {e}")
@@ -281,7 +280,7 @@ class CrawlerUtils:
                                 href = a.get_attribute("href").split("#").pop()
                                 # Check if the link is allowed to be crawled
                                 if not check_crawl_permission(
-                                        robots_txt_content, "deepcrawl", href
+                                    robots_txt_content, "deepcrawl", href
                                 ):
                                     statistics.http_codes[f"Disallow link: {href}"] = 1
                                     continue
@@ -297,11 +296,13 @@ class CrawlerUtils:
                                     continue
 
                                 if not len(links) < max_visited_links:
-                                    statistics.http_codes[f"Max visited links reached"] = max_rec_level
+                                    statistics.http_codes[
+                                        "Max visited links reached"
+                                    ] = max_rec_level
                                 if (
-                                        link.url != href
-                                        and href not in links
-                                        and len(links) < max_visited_links
+                                    link.url != href
+                                    and href not in links
+                                    and len(links) < max_visited_links
                                 ):
                                     found_link = Link(
                                         url=href, visited=False, level=current_rec_level
@@ -339,7 +340,7 @@ class CrawlerUtils:
                                 threads_metrics[thread_id] = 1
                             else:
                                 threads_metrics[thread_id] = (
-                                        threads_metrics[thread_id] + 1
+                                    threads_metrics[thread_id] + 1
                                 )
                             threads_metrics[thread_id] += 1
                             documents_dict[inspector].append(
@@ -373,7 +374,7 @@ class CrawlerUtils:
                             inspector_values
                         )
                         if not Document.objects.filter(
-                                hash_code=document_hash_code
+                            hash_code=document_hash_code
                         ).exists():
                             Document.objects.create(
                                 template=crawler.template, hash_code=document_hash_code
@@ -391,7 +392,7 @@ class CrawlerUtils:
                                 )
                         else:
                             http_codes["Duplicated content"] = (
-                                    http_codes["Duplicated content"] + 1
+                                http_codes["Duplicated content"] + 1
                             )
                             print(
                                 f"Found duplicated contents with hashcode: {document_hash_code}"
@@ -408,9 +409,9 @@ class CrawlerUtils:
                         average_processing_time
                         if statistics.average_processing_time == 0
                         else (
-                                     average_processing_time + statistics.average_processing_time
-                             )
-                             / 2
+                            average_processing_time + statistics.average_processing_time
+                        )
+                        / 2
                     )
                     print(statistics.avg_loading_time)
                     statistics.save()
@@ -430,7 +431,7 @@ class CrawlerUtils:
             current_active_queue = links_queues[level]
             #  We only stop the thread if one queue is done AND all other threads are also completed
             while len(current_active_queue) != 0 or not all_threads_completed(
-                    shared_threads_pool
+                shared_threads_pool
             ):
                 runner = Runner.objects.get(id=self.runner_id)
                 if runner.status == str(RunnerStatus.EXIT):
