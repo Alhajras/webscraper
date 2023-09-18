@@ -95,7 +95,7 @@ export class SearchComponent implements OnInit {
         const doc:Document = {id: +key, score: inspectorValue.boosted_score, inspector_values: values.docs[+key]}
         return doc;
       });
-      this.documents=this.documents.sort((a, b) => a.score - b.score);
+      this.documents=this.documents.sort((a, b) => b.score - a.score);
       this.loading = false
     })
   }

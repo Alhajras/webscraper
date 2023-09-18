@@ -305,11 +305,13 @@ class InvertedIndex:
                 if variable_name != "":
                     value = inspector_value["value"].strip()
                     # Applying the clean-up expressions
-                    for reg_expression in inspector_value[
-                        "inspector__clean_up_expression"
-                    ].split('";"'):
-                        k, v = reg_expression.split("=")
-                        value = re.sub(k, v, value)
+                    reg_expressions = inspector_value["inspector__clean_up_expression"]
+                    if reg_expressions != '':
+                        for reg_expression in inspector_value[
+                            "inspector__clean_up_expression"
+                        ].split('";"'):
+                            k, v = reg_expression.split("=")
+                            value = re.sub(k, v, value)
                     variable_value_map[variable_name] = float(value)
 
             from math import log
