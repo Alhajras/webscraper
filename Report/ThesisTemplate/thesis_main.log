@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  22 SEP 2023 13:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  22 SEP 2023 21:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1226,7 +1226,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7]
-<images/google_arch.png, id=221, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=223, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 15.
@@ -1267,13 +1267,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [14] [15]
-<images/engine_components.png, id=265, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=267, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
  [16 <./images/engine_components.png (PNG copy)>] [17] [18]
-<images/crawler_architecture.png, id=281, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=283, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
@@ -1294,7 +1294,7 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 [22]
-<images/inverted_index.png, id=299, 608.2725pt x 233.37187pt>
+<images/inverted_index.png, id=301, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
@@ -1339,7 +1339,7 @@ File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
 ) [29])
 (./chapters/4-approach.tex [30]
 chapter 4.
-<images/software_arch.png, id=340, 1252.52943pt x 871.75688pt>
+<images/software_arch.png, id=342, 1252.52943pt x 871.75688pt>
 File: images/software_arch.png Graphic file (type png)
 <use images/software_arch.png>
 Package pdftex.def Info: images/software_arch.png  used on input line 12.
@@ -1412,7 +1412,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [38]
 [39] [40]
-<images/demo-3.png, id=385, 851.43094pt x 511.15968pt>
+<images/demo-3.png, id=387, 851.43094pt x 511.15968pt>
 File: images/demo-3.png Graphic file (type png)
 <use images/demo-3.png>
 Package pdftex.def Info: images/demo-3.png  used on input line 157.
@@ -1432,7 +1432,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--218
  []
 
 [41]
-<images/demo-8.png, id=392, 1082.54437pt x 620.3175pt>
+<images/demo-8.png, id=394, 1082.54437pt x 620.3175pt>
 File: images/demo-8.png Graphic file (type png)
 <use images/demo-8.png>
 Package pdftex.def Info: images/demo-8.png  used on input line 225.
@@ -1441,7 +1441,7 @@ Package pdftex.def Info: images/demo-8.png  used on input line 225.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/demo-10.png, id=393, 1013.28563pt x 511.9125pt>
+<images/demo-10.png, id=395, 1013.28563pt x 511.9125pt>
 File: images/demo-10.png Graphic file (type png)
 <use images/demo-10.png>
 Package pdftex.def Info: images/demo-10.png  used on input line 237.
@@ -1461,7 +1461,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 250--291
  []
 
 [44 <./images/demo-8.png (PNG copy)>]
-<images/demo-12.png, id=407, 1017.04968pt x 411.03563pt>
+<images/demo-12.png, id=409, 1017.04968pt x 411.03563pt>
 File: images/demo-12.png Graphic file (type png)
 <use images/demo-12.png>
 Package pdftex.def Info: images/demo-12.png  used on input line 300.
@@ -1488,12 +1488,22 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [48]
-Overfull \hbox (15.41899pt too wide) in paragraph at lines 64--81
+Overfull \hbox (1.19261pt too wide) in paragraph at lines 64--96
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--81
+Underfull \hbox (badness 10000) in paragraph at lines 64--96
+
+ []
+
+
+Overfull \hbox (1.19261pt too wide) in paragraph at lines 103--130
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--130
 
  []
 
@@ -1643,8 +1653,8 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 ### simple group (level 1) entered at line 36 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 34689 strings out of 480129
- 687433 string characters out of 5893410
+ 34690 strings out of 480129
+ 687449 string characters out of 5893410
  1132015 words of memory out of 5000000
  51874 multiletter control sequences out of 15000+600000
  500095 words of font info for 111 fonts, out of 8000000 for 9000
@@ -1676,10 +1686,10 @@ s/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 msy8.pfb>
-Output written on thesis_main.pdf (69 pages, 1852661 bytes).
+Output written on thesis_main.pdf (69 pages, 1855150 bytes).
 PDF statistics:
- 1307 PDF objects out of 1440 (max. 8388607)
- 613 compressed objects within 7 object streams
- 134 named destinations out of 1000 (max. 500000)
+ 1314 PDF objects out of 1440 (max. 8388607)
+ 616 compressed objects within 7 object streams
+ 135 named destinations out of 1000 (max. 500000)
  391 words of extra memory for PDF output out of 10000 (max. 10000000)
 
