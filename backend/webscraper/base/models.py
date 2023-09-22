@@ -45,8 +45,8 @@ class CrawlingAlgorithms(models.TextChoices):
     This is used to declare the supported parsing algorithms
     """
 
-    BFS_TOP_DOWN = "BFS_TOP_DOWN"
-    BFS_BOTTOM_UP = "BFS_BOTTOM_UP"
+    BFS = "BFS"
+    DFS = "DFS"
 
 
 class ActionChainEvent(models.TextChoices):
@@ -226,7 +226,7 @@ class Crawler(models.Model):
     parsing_algorithm = models.CharField(
         max_length=20,
         choices=CrawlingAlgorithms.choices,
-        default=CrawlingAlgorithms.BFS_BOTTOM_UP,
+        default=CrawlingAlgorithms.DFS,
     )
 
     def __str__(self) -> str:

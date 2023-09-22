@@ -79,7 +79,7 @@ def find_the_links_current_level(
     if len(levels_with_links) == 0:
         return -1
 
-    if crawler.parsing_algorithm == CrawlingAlgorithms.BFS_BOTTOM_UP:
+    if crawler.parsing_algorithm == CrawlingAlgorithms.DFS:
         levels_with_links.sort(reverse=True)
     else:
         levels_with_links.sort()

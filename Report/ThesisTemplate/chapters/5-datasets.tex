@@ -54,8 +54,47 @@ To enhance the coverage and versatility of our crawler testing, we are consideri
 The first use case involves extracting product information from an E-commerce platform like Douglas\footnote{\url{https://www.douglas.de/}}. This website offers over 160,000 diverse products, making it an ideal candidate for testing different content types, including images. We will categorize our testing into three distinct datasets: small (with 100 products), medium (with 1,000 products), and large (with 10,000 products) to evaluate the crawler's performance under different data sizes thoroughly.
 The second website, Times Higher Education\footnote{\url{https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking}}, specializes in annually ranking universities. This unique characteristic allows us to evaluate content changes occurring on a yearly basis, setting it apart from other websites that undergo daily alterations, which can prove challenging for accurate evaluation.
 
-\subsection{Experiments} 
-In order to assess the extent of crawler coverage, our objective is to initiate the crawler from the website's root path and subsequently compare the number of visited links with those manually gathered to validate their accuracy.
+\subsection{Experiments}
+The crawler-test website is selected to assess and experiment with various crawler configurations. This choice is attributed to its stable, non-changing nature, which facilitates straightforward and meaningful comparisons of results across different configurations.
+ 
+The first testing case is the coverage. It is vital to ensure the crawler can find the links inside the page, navigate to them and crawl them. 
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{2.5cm} ||P{11.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Seed URL} & \href{https://crawler-test.com/}{https://crawler-test.com/}\T\B 
+\\ 
+\hline
+\textbf{Allow Multi Elements Crawling} & False \T\B 
+\\ 
+\hline
+\textbf{Max Pages} & 32GB\T\B 
+\\ 
+\hline
+\textbf{Threads} & 1\T\B 
+\\ 
+\hline
+\textbf{Max Depth} & 1\T\B 
+\\ 
+\hline
+\textbf{Pagination} & ''\T\B 
+\\ 
+\hline
+\textbf{Actions} & ''\T\B 
+\\ 
+\hline
+\textbf{Inspectors} & ''\T\B 
+\\ 
+\hline
+\textbf{Max Collected Docs} & Lenovo ThinkPad P15s Gen 1\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configuration}
+\end{table}
 
 
 \section{Indexer}  

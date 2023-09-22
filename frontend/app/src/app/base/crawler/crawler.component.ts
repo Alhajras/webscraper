@@ -40,7 +40,7 @@ export class CrawlerComponent {
 
   public form!: FormGroup
   public templatesList: TemplateDropDown[] = []
-  public parsingAlgorithmsList = ['BFS_BOTTOM_UP', 'BFS_TOP_DOWN']
+  public parsingAlgorithmsList = ['DFS', 'BFS']
   public currentlySubmitting = false
   public displayModal = false
   public header = 'Crawler form'
@@ -245,7 +245,7 @@ export class CrawlerComponent {
   private initForm(): void {
     const urlReg = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.[a-z]{2,}(:[0-9]+)?(\/.*)?$/;
     this.template = this.fb.control('', [Validators.required])
-    this.parsingAlgorithm = this.fb.control('BFS_TOP_DOWN')
+    this.parsingAlgorithm = this.fb.control('DFS')
     this.description = this.fb.control('')
     this.seedUrl = this.fb.control('', [Validators.required, Validators.pattern(urlReg)])
     this.name = this.fb.control('', [Validators.required])
