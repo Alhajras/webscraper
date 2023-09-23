@@ -102,9 +102,6 @@ The first testing case is the coverage. It is vital to ensure the crawler can fi
 {\footnotesize
 \begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
  \hline \hline
-\textbf{Seed URL} & \href{https://crawler-test.com/}{https://crawler-test.com/}\T\B 
-\\ 
-\hline
 \textbf{Links} & Collected: 406/415 . Visited Correctly: 402. Cross Site: 6 . Already Visited: 0\T\B 
 \\ 
 \hline
@@ -129,6 +126,250 @@ The first testing case is the coverage. It is vital to ensure the crawler can fi
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
 \end{table}
+
+Checking if changing thew depth will increase the coverage.
+
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Seed URL} & \href{https://crawler-test.com/}{https://crawler-test.com/}\T\B 
+\\ 
+\hline
+\textbf{Allow Multi Elements} & False \T\B 
+\\ 
+\hline
+\textbf{Max Pages} & 1000\T\B 
+\\ 
+\hline
+\textbf{Threads} & 1\T\B 
+\\ 
+\hline
+\textbf{Max Depth} & 10\T\B 
+\\ 
+\hline
+\textbf{Pagination} & None\T\B 
+\\ 
+\hline
+\textbf{Actions} & None\T\B 
+\\ 
+\hline
+\textbf{Inspectors} & //*[contains(@class, 'large-12 columns')]\T\B 
+\\ 
+\hline
+\textbf{Max Docs} & 1000\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configuration}
+\end{table}
+
+
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Links} & Collected: 895 . Visited Correctly: 697. Cross Site: 198 . Already Visited: 0. Excluded: 1\T\B 
+\\ 
+\hline
+\textbf{Time} & Tot. Spent: 760.84 s. Avg. Processing: 3.26 s. Avg. Page Loading: 1.03 s\T\B 
+\\
+\hline
+\textbf{Status Codes} &     101: 1  102: 1  200: 220  201: 1  202: 1  203: 1  206: 3  207: 1  226: 1  300: 1  305: 2  306: 1  400: 1  401: 1  402: 1  403: 2  404: 7  405: 1  406: 1  407: 1  408: 1  409: 1  410: 1  411: 1  412: 1  413: 1  414: 1  415: 1  416: 1  417: 1  418: 1  419: 1  420: 1  421: 1  422: 1  423: 1  424: 1  426: 1  428: 1  429: 1  431: 1  440: 1  444: 1  449: 1  450: 1  451: 1  494: 1  495: 1  496: 1  497: 1  498: 1  499: 1  500: 2  501: 1  502: 1  503: 1  504: 1  505: 1  506: 1  507: 1  508: 1  509: 1  510: 1  511: 1  520: 1  598: 1  
+599: 1\T\B 
+\\ 
+\hline
+\textbf{Docs \& Content} & Tot. Docs Found: 375. Duplicated Content: 667. Avg. Docs Per Page:1. Average page size: 0.0562\T\B 
+\\ 
+\hline
+\textbf{Robots.txt Exists} & True\T\B 
+\\ 
+\hline
+\textbf{Tot. Errors} & 21\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configuration}
+\end{table}
+
+
+Multi threading
+
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Seed URL} & \href{https://crawler-test.com/}{https://crawler-test.com/}\T\B 
+\\ 
+\hline
+\textbf{Allow Multi Elements} & False \T\B 
+\\ 
+\hline
+\textbf{Max Pages} & 1000\T\B 
+\\ 
+\hline
+\textbf{Threads} & 4\T\B 
+\\ 
+\hline
+\textbf{Max Depth} & 10\T\B 
+\\ 
+\hline
+\textbf{Pagination} & None\T\B 
+\\ 
+\hline
+\textbf{Actions} & None\T\B 
+\\ 
+\hline
+\textbf{Inspectors} & //*[contains(@class, 'large-12 columns')]\T\B 
+\\ 
+\hline
+\textbf{Max Docs} & 1000\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configuration}
+\end{table}
+
+
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Links} & Collected: 895 . Visited Correctly: 697. Cross Site: 199 . Already Visited: 227. Excluded: 1\T\B 
+\\ 
+\hline
+\textbf{Time} & Tot. Spent: 760.84 s. Avg. Processing: 3.26 s. Avg. Page Loading: 1.03 s\T\B 
+\\
+\hline
+\textbf{Status Codes} &     101: 2, 102: 2, 200: 823, 201: 2, 202: 2, 203: 2, 204: 1, 206: 5, 207: 2, 226: 2, 300: 2, 305: 4, 306: 2, 400: 2, 401: 2, 402: 2, 403: 4, 404: 66, 405: 2, 406: 2, 407: 2, 408: 2, 409: 2, 410: 2, 411: 2, 412: 2, 413: 2, 414: 2, 415: 2, 416: 2, 417: 2, 418: 2, 419: 2, 420: 2, 421: 2, 422: 2, 423: 2, 424: 2, 426: 2, 428: 2, 429: 2, 431: 2, 440: 2, 444: 2, 449: 2, 450: 2, 451: 2, 494: 2, 495: 2, 496: 2, 497: 2, 498: 2, 499: 2, 500: 4, 501: 2, 502: 2, 503: 2, 504: 2, 505: 2, 506: 2, 507: 2, 508: 2, 509: 2, 510: 2, 511: 2, 520: 2, 598: 2, 599: 2\T\B 
+\\ 
+\hline
+\textbf{Docs \& Content} & Tot. Docs Found: 533. Duplicated Content: 333. Avg. Docs Per Page:1. Average page size: 0.0562\T\B 
+\\ 
+\hline
+\textbf{Robots.txt Exists} & True\T\B 
+\\ 
+\hline
+\textbf{Tot. Errors} & 21\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configuration}
+\end{table}
+
+
+Comparing threads impact
+
+\begin{figure}[h]	
+     \centering
+     \includegraphics[width=13cm]{images/threads-table.png}
+     \caption{Comparing threads performance.}
+     \label{fig:google-arch}
+\end{figure}
+
+Threads docs sharing
+
+\begin{figure}[h]	
+     \centering
+     \includegraphics[width=13cm]{images/threads_share.png}
+     \caption{Threads documents distribution.}
+     \label{fig:google-arch}
+\end{figure}
+
+Testing other different sites: 
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Seed URL} & \href{https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking}{https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking}\T\B 
+\\ 
+\hline
+\textbf{Allow Multi Elements} & False \T\B 
+\\ 
+\hline
+\textbf{Max Pages} & 100\T\B 
+\\ 
+\hline
+\textbf{Threads} & 1\T\B 
+\\ 
+\hline
+\textbf{Max Depth} & 100\T\B 
+\\ 
+\hline
+\textbf{Pagination} & //*[contains(@class, 'pagination')]\T\B 
+\\ 
+\hline
+\textbf{Actions} & None\T\B 
+\\ 
+\hline
+\textbf{Inspectors} & //*[contains(@class, 'ranking-institution-title')] \newline //*[contains(concat(' ', normalize-space(@class), ' '), ' location ')] \newline //*[contains(@class, 'rank') and contains(@class, 'sorting\_1') and contains(@class, 'sorting\_2')]
+\T\B 
+\\ 
+\hline
+\textbf{Max Docs} & 1000\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configuration}
+\end{table}
+
+
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{2.5cm} ||P{11.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Links} & 
+\begin{tabular}{c|c|c|c|c}
+       Collected   & Visited Correctly & Already Visited & Cross Site &  Excluded\T\B \\\hline
+       95/95 & 95 & 0 & 0 & 1
+\end{tabular}
+\\ 
+\hline
+\textbf{Time} &
+\begin{tabular}{P{3cm}|P{3cm}|P{3cm}}
+       Tot. Spent & Avg. Processing & Avg. Page Loading \T\B \\\hline
+       395.209 s & 3.16 s & 1.26 s 
+\end{tabular}
+\\
+\hline
+\textbf{Status Codes} &     403: 95\T\B 
+\\ 
+\hline
+\textbf{Docs \& Content} & 
+\begin{tabular}{c|c|c|c}
+       Tot. Docs   & Duplicated Content & Avg. Docs Per Page & Avg. Page Size\T\B \\\hline
+       2389 & 0 & 25 & 0.2227
+\end{tabular}
+\\ 
+\hline
+\textbf{Robots.txt Exists} & True\T\B 
+\\ 
+\hline
+\textbf{Tot. Errors} & 1\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configuration}
+\end{table}
+
 
 \section{Indexer}  
 \section{User Experience} 
