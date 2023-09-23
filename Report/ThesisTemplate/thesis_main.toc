@@ -38,6 +38,6 @@
 \contentsline {subsection}{\numberline {5.2.2}Experiments}{49}{subsection.5.2.2}%
 \contentsline {section}{\numberline {5.3}Indexer}{50}{section.5.3}%
 \contentsline {section}{\numberline {5.4}User Experience}{50}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{55}{chapter.6}%
-\contentsline {chapter}{Bibliography}{59}{section*.35}%
+\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{57}{chapter.6}%
+\contentsline {chapter}{Bibliography}{61}{section*.37}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

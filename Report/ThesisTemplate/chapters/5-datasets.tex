@@ -297,7 +297,7 @@ Testing other different sites:
 \textbf{Seed URL} & \href{https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking}{https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking}\T\B 
 \\ 
 \hline
-\textbf{Allow Multi Elements} & False \T\B 
+\textbf{Allow Multi Elements} & True \T\B 
 \\ 
 \hline
 \textbf{Max Pages} & 100\T\B 
@@ -381,7 +381,7 @@ Douglas Use case:
 \textbf{Seed URL} & \href{https://www.douglas.de/de/c/parfum/damenduefte/duftsets/010111}{https://www.douglas.de/de/c/parfum/damenduefte/duftsets/010111}\T\B 
 \\ 
 \hline
-\textbf{Allow Multi Elements} & False \T\B 
+\textbf{Allow Multi Elements} & True \T\B 
 \\ 
 \hline
 \textbf{Max Pages} & 1000\T\B 
@@ -455,6 +455,93 @@ Douglas Use case:
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
 \end{table}
+
+
+Stack Overflow use case
+
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Seed URL} & \href{https://stackoverflow.com/questions/tagged/python}{https://stackoverflow.com/questions/tagged/python}\T\B 
+\\ 
+\hline
+\textbf{Allow Multi Elements} & True \T\B 
+\\ 
+\hline
+\textbf{Max Pages} & 100\T\B 
+\\ 
+\hline
+\textbf{Threads} & 4\T\B 
+\\ 
+\hline
+\textbf{Max Depth} & 25\T\B 
+\\ 
+\hline
+\textbf{Pagination} & //*[contains(@class, 's-pagination')]\T\B 
+\\ 
+\hline
+\textbf{Actions} & None\T\B 
+\\ 
+\hline
+\textbf{Inspectors} & //*[contains(@class, 's-post-summary--content-title')]\T\B  \newline
+//*[contains(@class, 's-post-summary--content-excerpt')]	
+ \newline
+//*[contains(@class, 's-post-summary--stats-item\_\_emphasized')]	
+\\ 
+\hline
+\textbf{Max Docs} & 1000\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configuration}
+\end{table}
+
+
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{2.5cm} ||P{11.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Links} & 
+\begin{tabular}{c|c|c|c|c}
+       Collected   & Visited Correctly & Already Visited & Cross Site &  Excluded\T\B \\\hline
+       72140/72138 & 25 & 6 & 160 & 84
+\end{tabular}
+\\ 
+\hline
+\textbf{Time} &
+\begin{tabular}{P{3cm}|P{3cm}|P{3cm}}
+       Tot. Spent & Avg. Processing & Avg. Page Loading \T\B \\\hline
+       58.627 s & 11.545 s & 0.63 s 
+\end{tabular}
+\\
+\hline
+\textbf{Status Codes} & 200: 21, 404:1, 406:206 \T\B 
+\\ 
+\hline
+\textbf{Docs \& Content} & 
+\begin{tabular}{c|c|c|c}
+       Tot. Docs   & Duplicated Content & Avg. Docs Per Page & Avg. Page Size\T\B \\\hline
+       188 & 6 & 41 & 0.217
+\end{tabular}
+\\ 
+\hline
+\textbf{Robots.txt Exists} & True\T\B 
+\\ 
+\hline
+\textbf{Tot. Errors} & 0\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configuration}
+\end{table}
+
 
 \section{Indexer}  
 \section{User Experience} 
