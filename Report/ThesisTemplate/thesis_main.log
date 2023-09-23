@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  23 SEP 2023 13:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  23 SEP 2023 15:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1232,7 +1232,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7]
-<images/google_arch.png, id=239, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=243, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 15.
@@ -1273,13 +1273,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [14] [15]
-<images/engine_components.png, id=283, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=287, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
 (pdftex.def)             Requested size: 284.52756pt x 186.48668pt.
  [16 <./images/engine_components.png (PNG copy)>] [17] [18]
-<images/crawler_architecture.png, id=299, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=303, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
@@ -1300,7 +1300,7 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 [22]
-<images/inverted_index.png, id=318, 608.2725pt x 233.37187pt>
+<images/inverted_index.png, id=322, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
@@ -1345,7 +1345,7 @@ File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
 ) [29])
 (./chapters/4-approach.tex [30]
 chapter 4.
-<images/software_arch.png, id=358, 1252.52943pt x 871.75688pt>
+<images/software_arch.png, id=362, 1252.52943pt x 871.75688pt>
 File: images/software_arch.png Graphic file (type png)
 <use images/software_arch.png>
 Package pdftex.def Info: images/software_arch.png  used on input line 12.
@@ -1418,7 +1418,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [38]
 [39] [40]
-<images/demo-3.png, id=403, 851.43094pt x 511.15968pt>
+<images/demo-3.png, id=407, 851.43094pt x 511.15968pt>
 File: images/demo-3.png Graphic file (type png)
 <use images/demo-3.png>
 Package pdftex.def Info: images/demo-3.png  used on input line 157.
@@ -1438,7 +1438,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--218
  []
 
 [41]
-<images/demo-8.png, id=410, 1082.54437pt x 620.3175pt>
+<images/demo-8.png, id=414, 1082.54437pt x 620.3175pt>
 File: images/demo-8.png Graphic file (type png)
 <use images/demo-8.png>
 Package pdftex.def Info: images/demo-8.png  used on input line 225.
@@ -1447,7 +1447,7 @@ Package pdftex.def Info: images/demo-8.png  used on input line 225.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/demo-10.png, id=411, 1013.28563pt x 511.9125pt>
+<images/demo-10.png, id=415, 1013.28563pt x 511.9125pt>
 File: images/demo-10.png Graphic file (type png)
 <use images/demo-10.png>
 Package pdftex.def Info: images/demo-10.png  used on input line 237.
@@ -1467,7 +1467,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 250--291
  []
 
 [44 <./images/demo-8.png (PNG copy)>]
-<images/demo-12.png, id=425, 1017.04968pt x 411.03563pt>
+<images/demo-12.png, id=429, 1017.04968pt x 411.03563pt>
 File: images/demo-12.png Graphic file (type png)
 <use images/demo-12.png>
 Package pdftex.def Info: images/demo-12.png  used on input line 300.
@@ -1553,7 +1553,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 246--269
 
  []
 
-<images/threads-table.png, id=457, 560.8453pt x 348.55219pt>
+<images/threads-table.png, id=461, 560.8453pt x 348.55219pt>
 File: images/threads-table.png Graphic file (type png)
 <use images/threads-table.png>
 Package pdftex.def Info: images/threads-table.png  used on input line 277.
@@ -1561,7 +1561,7 @@ Package pdftex.def Info: images/threads-table.png  used on input line 277.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/threads_share.png, id=458, 560.0925pt x 345.54094pt>
+<images/threads_share.png, id=462, 560.0925pt x 345.54094pt>
 File: images/threads_share.png Graphic file (type png)
 <use images/threads_share.png>
 Package pdftex.def Info: images/threads_share.png  used on input line 286.
@@ -1589,8 +1589,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 335--370
 
  []
 
-) (./chapters/8-conclusions.tex [49] [50] [51] [52 <./images/threads-table.png 
-(PNG copy)>] [53 <./images/threads_share.png (PNG copy)>] [54]
+
+Overfull \hbox (1.19261pt too wide) in paragraph at lines 379--414
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 379--414
+
+ []
+
+[49]
+Overfull \hbox (15.41899pt too wide) in paragraph at lines 421--456
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 421--456
+
+ []
+
+) (./chapters/8-conclusions.tex [50] [51] [52 <./images/threads-table.png (PNG 
+copy)>] [53 <./images/threads_share.png (PNG copy)>] [54]
 chapter 6.
 (./thesis_main.bbl [55
 
@@ -1736,9 +1756,9 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 ### simple group (level 1) entered at line 36 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 34716 strings out of 480129
- 687991 string characters out of 5893410
- 1152015 words of memory out of 5000000
+ 34718 strings out of 480129
+ 688023 string characters out of 5893410
+ 1160015 words of memory out of 5000000
  51886 multiletter control sequences out of 15000+600000
  500095 words of font info for 111 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
@@ -1769,10 +1789,10 @@ s/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 msy8.pfb>
-Output written on thesis_main.pdf (73 pages, 1906571 bytes).
+Output written on thesis_main.pdf (73 pages, 1907899 bytes).
 PDF statistics:
- 1358 PDF objects out of 1440 (max. 8388607)
- 652 compressed objects within 7 object streams
- 147 named destinations out of 1000 (max. 500000)
+ 1363 PDF objects out of 1440 (max. 8388607)
+ 657 compressed objects within 7 object streams
+ 149 named destinations out of 1000 (max. 500000)
  401 words of extra memory for PDF output out of 10000 (max. 10000000)
 
