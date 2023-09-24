@@ -59,6 +59,10 @@ The crawler-test website is selected to assess and experiment with various crawl
  
 The first testing case is the coverage. It is vital to ensure the crawler can find the links inside the page, navigate to them and crawl them. 
 
+Table \ref{table:crawler_test_config} displays the testing configurations used in the experiment. The Seed URL serves as the initial point from which the crawler begins its procedure, set to the root path of the crawler-test. The "Allow Multi Elements" checkbox is disabled (set to False) because the objective is not to gather a list of documents; each page contains a single text field. The Max Pages parameter is configured to a limit of 500, ensuring that the crawler does not exceed this number of pages. This figure can be adjusted based on the website's size to be crawled; for instance, smaller websites with around 50 pages may require a lower limit. The number of threads is set to the default value of 1.
+We have set the Max Depth to 1 to enable easier coverage testing. This choice allows for easier comparison between the number of visited pages and the number of URLs discovered in the site's root path, which, upon simple page inspection, contains 415 links. Since the expected maximum number of pages is 415, the Max Docs parameter can be constrained to 500.
+The inspectors are set to target the content of each page; thus, one inspector is only needed. No automated actions, such as scrolling or waiting, are necessary for this use case; therefore, they can be left. Any properties not explicitly mentioned can be left at their default settings.
+
 \begin{table}[ht] 
 {\footnotesize
 \begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
@@ -69,7 +73,7 @@ The first testing case is the coverage. It is vital to ensure the crawler can fi
 \textbf{Allow Multi Elements} & False \T\B 
 \\ 
 \hline
-\textbf{Max Pages} & 1000\T\B 
+\textbf{Max Pages} & 500\T\B 
 \\ 
 \hline
 \textbf{Threads} & 1\T\B 
@@ -87,25 +91,27 @@ The first testing case is the coverage. It is vital to ensure the crawler can fi
 \textbf{Inspectors} & //*[contains(@class, 'large-12 columns')]\T\B 
 \\ 
 \hline
-\textbf{Max Docs} & 1000\T\B 
+\textbf{Max Docs} & 500\T\B 
 \\ 
 \hline \hline
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
+  \label{table:crawler_test_config}
 \end{table}
 
+After creating a runner that runs, starts the crawling process and is completed, the result of the crawler should be similar to the one shown in Table \ref{table:crawler_test_result}. Looking at the Links row, we can note that the crawler found 406 out of the expected 415 links. This is normal as the crawler will normalize all the found links, including skipping the link fragments, duplicated links and any broken links. 402 pages out of 406 found links are crawled correctly. The other four pages are categorized as Cross Site links, meaning they do not belong to the Seed URL hostname crawler-test.com. This is important to evaluate to ensure that the crawler stays focused, does not jump to sites out of the intended scope, and does not spend valuable resources. Already Visited links is a counter that checks how many times the crawler found a link that has already been visited and skipped, in this case, 0. When no multithreading is used, and the Max Depth is only set to 1, the Already Visited is expected to be 0 because the duplicated links will be already excluded in the normalizing process before starting to crawl. 
 
 
 \begin{table}[ht] 
 {\footnotesize
 \begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
  \hline \hline
-\textbf{Links} & Collected: 406/415 . Visited Correctly: 402. Cross Site: 6 . Already Visited: 0\T\B 
+\textbf{Links} & Collected: 406/415 . Visited Correctly: 402. Cross Site: 4 . Already Visited: 0\T\B 
 \\ 
 \hline
-\textbf{Time} & Tot. Spent: 671.19 s. Avg. Processing: 1.98 s. Avg. Page Loading: 0.697 s\T\B 
+\textbf{Time} & Tot. Spent: 671.19 s. Avg. Processing: 1.68 s. Avg. Page Rendering: 0.697 s\T\B 
 \\
 \hline
 \textbf{Status Codes} &   101: 1  102: 1  200: 321  201: 1  202: 1  203: 1  206: 3  207: 1  226: 1  300: 1  305: 2  306: 1  400: 1  401: 1  402: 1  403: 2  404: 11  405: 1  406: 1  407: 1  408: 1  409: 1  410: 1  411: 1  412: 1  413: 1  414: 1  415: 1  416: 1  417: 1  418: 1  419: 1  420: 1  421: 1  422: 1  423: 1  424: 1  426: 1  428: 1  429: 1  431: 1  440: 1  444: 1  449: 1  450: 1  451: 1  494: 1  495: 1  496: 1  497: 1  498: 1  499: 1  500: 2  501: 1  502: 1  503: 1  504: 1  505: 1  506: 1  507: 1  508: 1  509: 1  510: 1  511: 1  520: 1  598: 1  
@@ -125,7 +131,38 @@ The first testing case is the coverage. It is vital to ensure the crawler can fi
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
+    \label{table:crawler_test_result}
 \end{table}
+
+
+Evaluating the performance of a web crawler is challenging as it depends on different aspects, such as the page's size and how fast the page loads. Moreover, if the site uses pagination, this can add extra waiting time to render the rest of the content. However, some valuable matrices can be helpful to give a good insight like those shown in the Time row. The total time spent to crawl 406 pages took approximately 11 minutes. To give a better perspective, the enterprise solution Parsehub \footnote{\url{https://www.parsehub.com/pricing}} the free teer without IP Rotation, can crawl 200 pages in 40 minutes, and the Standard expensive teer with IP Rotation that costs \$189 can crawl 200 pages in 10 minutes. This means crawling the 406 pages inside the crawler-test will take 20 minutes. Comparing the crawler with the Standard tier, it is faster by 2X. Note that in this evaluation, the performance can be increased by using more threads or nodes to distribute the loads, which we will evaluate. 
+
+
+\begin{lstlisting}
+<body>
+	<h1 id="h1"></h1> 
+	<p id="par"></p>
+<script> var title = "Some random text with no result in Google so we can see if the page ranks for this text";
+var content = "Same idea here for the content of the paragraph. Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask."; 
+document.getElementById("h1").innerHTML = title; 
+document.getElementById("par").innerHTML = content; </script>
+</body>
+\end{lstlisting}
+
+\begin{lstlisting}
+<body>
+	<h1 id="h1">
+	"Some random text with no result in Google so we can see if the page 	ranks for this text"
+	</h1> 
+	<p id="par">
+	"Same idea here for the content of the paragraph. Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask."
+	</p>
+<script> var title = "Some random text with no result in Google so we can see if the page ranks for this text";
+var content = "Same idea here for the content of the paragraph. Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask."; 
+document.getElementById("h1").innerHTML = title; 
+document.getElementById("par").innerHTML = content; </script>
+</body>
+\end{lstlisting}
 
 Checking if changing thew depth will increase the coverage.
 
@@ -176,7 +213,7 @@ Checking if changing thew depth will increase the coverage.
 \textbf{Links} & Collected: 895 . Visited Correctly: 697. Cross Site: 198 . Already Visited: 0. Excluded: 1\T\B 
 \\ 
 \hline
-\textbf{Time} & Tot. Spent: 760.84 s. Avg. Processing: 3.26 s. Avg. Page Loading: 1.03 s\T\B 
+\textbf{Time} & Tot. Spent: 760.84 s. Avg. Processing: 3.26 s. Avg. Page Rendering: 1.03 s\T\B 
 \\
 \hline
 \textbf{Status Codes} &     101: 1  102: 1  200: 220  201: 1  202: 1  203: 1  206: 3  207: 1  226: 1  300: 1  305: 2  306: 1  400: 1  401: 1  402: 1  403: 2  404: 7  405: 1  406: 1  407: 1  408: 1  409: 1  410: 1  411: 1  412: 1  413: 1  414: 1  415: 1  416: 1  417: 1  418: 1  419: 1  420: 1  421: 1  422: 1  423: 1  424: 1  426: 1  428: 1  429: 1  431: 1  440: 1  444: 1  449: 1  450: 1  451: 1  494: 1  495: 1  496: 1  497: 1  498: 1  499: 1  500: 2  501: 1  502: 1  503: 1  504: 1  505: 1  506: 1  507: 1  508: 1  509: 1  510: 1  511: 1  520: 1  598: 1  
@@ -248,7 +285,7 @@ Multi threading
 \textbf{Links} & Collected: 895 . Visited Correctly: 697. Cross Site: 199 . Already Visited: 227. Excluded: 1\T\B 
 \\ 
 \hline
-\textbf{Time} & Tot. Spent: 760.84 s. Avg. Processing: 3.26 s. Avg. Page Loading: 1.03 s\T\B 
+\textbf{Time} & Tot. Spent: 760.84 s. Avg. Processing: 3.26 s. Avg. Page Rendering: 1.03 s\T\B 
 \\
 \hline
 \textbf{Status Codes} &     101: 2, 102: 2, 200: 823, 201: 2, 202: 2, 203: 2, 204: 1, 206: 5, 207: 2, 226: 2, 300: 2, 305: 4, 306: 2, 400: 2, 401: 2, 402: 2, 403: 4, 404: 66, 405: 2, 406: 2, 407: 2, 408: 2, 409: 2, 410: 2, 411: 2, 412: 2, 413: 2, 414: 2, 415: 2, 416: 2, 417: 2, 418: 2, 419: 2, 420: 2, 421: 2, 422: 2, 423: 2, 424: 2, 426: 2, 428: 2, 429: 2, 431: 2, 440: 2, 444: 2, 449: 2, 450: 2, 451: 2, 494: 2, 495: 2, 496: 2, 497: 2, 498: 2, 499: 2, 500: 4, 501: 2, 502: 2, 503: 2, 504: 2, 505: 2, 506: 2, 507: 2, 508: 2, 509: 2, 510: 2, 511: 2, 520: 2, 598: 2, 599: 2\T\B 
@@ -343,7 +380,7 @@ Testing other different sites:
 \hline
 \textbf{Time} &
 \begin{tabular}{P{3cm}|P{3cm}|P{3cm}}
-       Tot. Spent & Avg. Processing & Avg. Page Loading \T\B \\\hline
+       Tot. Spent & Avg. Processing & Avg. Page Rendering \T\B \\\hline
        395.209 s & 3.16 s & 1.26 s 
 \end{tabular}
 \\
@@ -429,7 +466,7 @@ Douglas Use case:
 \hline
 \textbf{Time} &
 \begin{tabular}{P{3cm}|P{3cm}|P{3cm}}
-       Tot. Spent & Avg. Processing & Avg. Page Loading \T\B \\\hline
+       Tot. Spent & Avg. Processing & Avg. Page Rendering \T\B \\\hline
        395.209 s & 7.87 s & 2.638 s 
 \end{tabular}
 \\
@@ -515,7 +552,7 @@ Stack Overflow use case
 \hline
 \textbf{Time} &
 \begin{tabular}{P{3cm}|P{3cm}|P{3cm}}
-       Tot. Spent & Avg. Processing & Avg. Page Loading \T\B \\\hline
+       Tot. Spent & Avg. Processing & Avg. Page Rendering \T\B \\\hline
        58.627 s & 11.545 s & 0.63 s 
 \end{tabular}
 \\
