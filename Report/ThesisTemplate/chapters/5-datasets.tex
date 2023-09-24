@@ -138,18 +138,24 @@ After creating a runner that runs, starts the crawling process and is completed,
 Evaluating the performance of a web crawler is challenging as it depends on different aspects, such as the page's size and how fast the page loads. Moreover, if the site uses pagination, this can add extra waiting time to render the rest of the content. However, some valuable matrices can be helpful to give a good insight like those shown in the Time row. The total time spent to crawl 406 pages took approximately 11 minutes. To give a better perspective, the enterprise solution Parsehub \footnote{\url{https://www.parsehub.com/pricing}} the free teer without IP Rotation, can crawl 200 pages in 40 minutes, and the Standard expensive teer with IP Rotation that costs \$189 can crawl 200 pages in 10 minutes. This means crawling the 406 pages inside the crawler-test will take 20 minutes. Comparing the crawler with the Standard tier, it is faster by 2X. Note that in this evaluation, the performance can be increased by using more threads or nodes to distribute the loads, which we will evaluate. 
 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={The dynamically-inserted-text link content before rendering},captionpos=b, label={lst:no_rendering}]
 <body>
 	<h1 id="h1"></h1> 
 	<p id="par"></p>
-<script> var title = "Some random text with no result in Google so we can see if the page ranks for this text";
-var content = "Same idea here for the content of the paragraph. Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask."; 
-document.getElementById("h1").innerHTML = title; 
-document.getElementById("par").innerHTML = content; </script>
+<script>
+	var title = "Some random text with no result in Google so we can see if the page ranks for this text";
+	var content = "Same idea here for the content of the paragraph. Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask."; 
+	document.getElementById("h1").innerHTML = title; 
+	document.getElementById("par").innerHTML = content; </script>
 </body>
 \end{lstlisting}
 
-\begin{lstlisting}
+Improving the average page rendering time (0.679) is achievable by avoiding using rendering engines like Selenium. Processing a simple HTTP request is often quicker than rendering the entire page. However, it's essential to note that the rendering step is crucial in handling dynamic content. For instance, consider the dynamically inserted text, indicated by the link \footnote{\url{https://crawler-test.com/javascript/dynamically-inserted-text}}. This link is a straightforward example to illustrate the significance of the rendering process for web crawlers.
+Using a simple wget command in Linux, you can download the content depicted in \ref{lst:no_rendering}. This content reveals that the two HTML tags, h1 and p, lack the inner text that the crawler can collect as a document. Although there's a script tag designed to replace the innerHTML for each tag with text, without a rendering engine, the JavaScript logic remains unexecuted. Consequently, gathering the inner text of these tags becomes an impossibility. On the other hand, \ref{lst:rendered} shows the same page content after rendering where both tags are updated, and both contain the right content that the crawler can see and download.
+While this is a simplified example, it's easy to visualise more complicated websites employing advanced JavaScript frameworks and libraries for client-side rendering. This complexity increases the rendering time due to the execution of all JavaScript logic and the subsequent updating of the HTML DOM. Given that the crawler's objective is to locate and collect all HTML content, striking a balance between efficiency and comprehensiveness is a challenge that must be addressed.
+
+
+\begin{lstlisting}[caption={The dynamically-inserted-text link content after rendering},captionpos=b, label={lst:rendered}]
 <body>
 	<h1 id="h1">
 	"Some random text with no result in Google so we can see if the page 	ranks for this text"
@@ -157,14 +163,28 @@ document.getElementById("par").innerHTML = content; </script>
 	<p id="par">
 	"Same idea here for the content of the paragraph. Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask."
 	</p>
-<script> var title = "Some random text with no result in Google so we can see if the page ranks for this text";
-var content = "Same idea here for the content of the paragraph. Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask."; 
-document.getElementById("h1").innerHTML = title; 
-document.getElementById("par").innerHTML = content; </script>
+<script>
+	var title = "Some random text with no result in Google so we can see if the page ranks for this text";
+	var content = "Same idea here for the content of the paragraph. Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask."; 
+	document.getElementById("h1").innerHTML = title; 
+	document.getElementById("par").innerHTML = content; </script>
 </body>
 \end{lstlisting}
 
+The Status Codes metric reveals the variety of distinct status codes encountered while crawling. Given that this website serves as a testing ground for various scenarios, it naturally exhibits a range of status codes. Evaluating the crawler's resilience across these diverse cases is vital for enhancing its stability. Notably, the crawler should remain operational even when encountering a status code other than 200.
+In the specific test case, it's worth noting that the crawler confronted 66 different status codes without terminating and completed the crawling operation. This outcome encompasses status codes from the 1xx, 2xx, 3xx, 4xx, and 5xx ranges.
+
+The "Docs & Content" section provides information regarding the collected and downloaded content. The "Tot. Docs found" metric indicates that 255 documents have been successfully downloaded. Among these, 25 documents are duplicates. This duplication is intentional, as this testing site contains repetitive information designed to verify the functionality of this feature.
+The "Avg. Docs per page" value is 1, indicating that the site typically presents one document per page. The presence of the "Robots.txt Exists" flag covers the commitment to polite crawling behaviour. The flag is set to True when this file is located and successfully downloaded. It's essential to emphasize the importance of respectful crawling and commitment to the Robots.txt file protocol.
+Lastly, the "Tot. Errors" metric accounts for various Selenium exceptions\footnote{\url{https://www.selenium.dev/selenium/docs/api/py/common/selenium.common.exceptions.html}} that may arise during the crawling process. As mentioned, many errors are expected since this is a testing site with different edge cases, and not terminating under those conditions is a good sign.
+
+
 Checking if changing thew depth will increase the coverage.
+
+
+The next step is to evaluate if the crawler jumps between pages and can increase the coverage. We will change the Max Depth from 1 to 10 to evaluate this. This will allow the crawler to jump up to 10 levels deeper, collecting more links and documents. Table \ref{table:crawler_test_config_depth_10} shows the configurations used for this test case. 
+
+Unfortunately, knowing exactly how many links the crawler-test site contains is challenging. However, since we have evaluated how the crawler behaves when the Max Depth is, one can give some assurance on the rest of the results. The table \ref{table:crawler_test_result_depth_10} shows 895 links has been found which was expected as the depth of the crawler has increased from 1 to 10. 
 
 
 \begin{table}[ht] 
@@ -202,6 +222,7 @@ Checking if changing thew depth will increase the coverage.
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
+    \label{table:crawler_test_config_depth_10}
 \end{table}
 
 
@@ -233,6 +254,7 @@ Checking if changing thew depth will increase the coverage.
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
+      \label{table:crawler_test_result_depth_10}
 \end{table}
 
 
