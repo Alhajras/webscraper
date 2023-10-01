@@ -481,7 +481,6 @@ class CrawlerUtils:
             else:
                 not_visited.append(key)
             if not InspectorValue.objects.filter(url=link.url).exists():
-                print("dadadadada")
                 print(link.url)
                 visitied_not_saved.append(key)
 

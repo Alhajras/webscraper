@@ -544,7 +544,9 @@ Additionally, it's worth mentioning that the Douglas crawler was used without is
 \end{table}
 
 
-Stack Overflow use case
+Parshub encountered a crash while running Douglas's project, resulting in the error message: "Segmentation fault (core dumped)." Although this made it challenging to compare performance, it shed light on Parsehub's stability issues, as Parsehub frequently struggles to handle websites without crashing.
+
+Another use case involved crawling Stackoverflow questions, focusing solely on the "python" tag in the seed URL to retrieve Python-related questions. The configured inspectors collected question titles, descriptions, and vote counts. Initially, running the crawler with four threads led to a website ban after only ten pages were crawled. To resolve this, I reduced the thread count to one, reducing the number of requests and resolving the issue.
 
 
 \begin{table}[ht] 
@@ -560,10 +562,10 @@ Stack Overflow use case
 \textbf{Max Pages} & 100\T\B 
 \\ 
 \hline
-\textbf{Threads} & 4\T\B 
+\textbf{Threads} & 1\T\B 
 \\ 
 \hline
-\textbf{Max Depth} & 25\T\B 
+\textbf{Max Depth} & 100\T\B 
 \\ 
 \hline
 \textbf{Pagination} & //*[contains(@class, 's-pagination')]\T\B 
@@ -588,6 +590,10 @@ Stack Overflow use case
 \end{table}
 
 
+Table \ref{table:crawler_result_stack} presents the crawler's results after this thread adjustment. Notably, the collected links exceeded those displayed in the pagination, indicating an issue with the pagination selector "s-pagination" collecting additional links. The number of visited pages reached 100, the configured limit, as intended, preventing the crawler from continuing to crawl all 27,200 found links. Many cross-site and excluded links signalled that the crawler had lost track and was collecting incorrect links. While 885 documents were collected correctly, there was no guarantee that they were all related to the chosen "Python" topic. Fortunately, termination conditions like Max Pages, Max Docs, and Max Depth were in place to conserve resources.
+
+To troubleshoot the crawler, I enabled the 'Show Browser' option and reran it. This allowed for easier visualization of the crawler's behaviour and the links it was crawling. It revealed that the crawler was indeed lost and opening the wrong links. Despite the correct seed URL and pagination, the pagination selector 's-pagination' was missing from the configuration. This issue demonstrates how easy it is to debug and identify problems when a crawler loses its way, highlighting the crawler's politeness and stability.
+
 
 \begin{table}[ht] 
 {\footnotesize
@@ -596,24 +602,24 @@ Stack Overflow use case
 \textbf{Links} & 
 \begin{tabular}{c|c|c|c|c}
        Collected   & Visited Correctly & Already Visited & Cross Site &  Excluded\T\B \\\hline
-       72140/72138 & 25 & 6 & 160 & 84
+       27200 & 100 & 0 & 460 & 666
 \end{tabular}
 \\ 
 \hline
 \textbf{Time} &
 \begin{tabular}{P{3cm}|P{3cm}|P{3cm}}
        Tot. Spent & Avg. Processing & Avg. Page Rendering \T\B \\\hline
-       58.627 s & 11.545 s & 0.63 s 
+       588.505 s & 6.38 s & 0.561 s 
 \end{tabular}
 \\
 \hline
-\textbf{Status Codes} & 200: 21, 404:1, 406:206 \T\B 
+\textbf{Status Codes} & 200: 99, 404:1 \T\B 
 \\ 
 \hline
 \textbf{Docs \& Content} & 
 \begin{tabular}{c|c|c|c}
        Tot. Docs   & Duplicated Content & Avg. Docs Per Page & Avg. Page Size\T\B \\\hline
-       188 & 6 & 41 & 0.217
+       885 & 241 & 14 & 0.155
 \end{tabular}
 \\ 
 \hline
@@ -627,8 +633,53 @@ Stack Overflow use case
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
+  \label{table:crawler_result_stack}
 \end{table}
 
+After fixing the second issue and rerunning the crawler, it operated correctly and yielded results in Table \ref{table:crawler_result_stack_2}. Notably, cross-site and excluded links were reduced to zero, a positive sign. Additionally, the number of collected links was lower than in the first attempt, totalling 900, with nine links collected per page. Interestingly, there were a significant number of 404 and 429 status codes. To address this, it could be beneficial to include a wait action between requests to mitigate the 429 errors.
+
+When the same test was conducted using ParseHub, it took 20 minutes to complete, which was slower than the crawler's 6-minute runtime. It is worth noting that the two issues encountered during crawling were not experienced with ParseHub. This is because ParseHub's request rate is slower, reducing the risk of being banned. This is achieved by reducing the number of threads and can be further improved by adding wait actions. The second issue, concerning incorrect selectors, is where ParseHub shines as it offers an easy autodetect feature, simplifying selector selection with a simple click instead of manual XPATH insertion as required in the current crawler implementation.
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{2.5cm} ||P{11.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Links} & 
+\begin{tabular}{c|c|c|c|c}
+       Collected   & Visited Correctly & Already Visited & Cross Site &  Excluded\T\B \\\hline
+       900 & 100 & 0 & 0 & 0
+\end{tabular}
+\\ 
+\hline
+\textbf{Time} &
+\begin{tabular}{P{3cm}|P{3cm}|P{3cm}}
+       Tot. Spent & Avg. Processing & Avg. Page Rendering \T\B \\\hline
+       354.734 s & 2.66 s & 0.155 s 
+\end{tabular}
+\\
+\hline
+\textbf{Status Codes} & 200: 54, 404:21, 429: 25 \T\B 
+\\ 
+\hline
+\textbf{Docs \& Content} & 
+\begin{tabular}{c|c|c|c}
+       Tot. Docs   & Duplicated Content & Avg. Docs Per Page & Avg. Page Size\T\B \\\hline
+       2750 & 0 & 50 & 0.155
+\end{tabular}
+\\ 
+\hline
+\textbf{Robots.txt Exists} & True\T\B 
+\\ 
+\hline
+\textbf{Tot. Errors} & 0\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Crawler configuration}
+  \label{table:crawler_result_stack_2}
+\end{table}
 
 \section{Indexer}  
 \section{User Experience} 
