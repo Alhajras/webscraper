@@ -225,6 +225,9 @@ Unfortunately, knowing exactly how many links the crawler-test site contains is 
     \label{table:crawler_test_config_depth_10}
 \end{table}
 
+The next step is to evaluate if the crawler jumps between pages and can increase the coverage. We will change the Max Depth from 1 to 10 to evaluate this. This will allow the crawler to jump up to 10 levels deeper, collecting more links and documents. Table \ref{table:crawler_test_config_depth_10} shows the configurations used for this test case. 
+
+Unfortunately, knowing exactly how many links the crawler-test site contains is challenging. However, since we have evaluated how the crawler behaves when the Max Depth is, one can give some assurance on the rest of the results. The table \ref{table:crawler_test_result_depth_10} shows 895 links has been found which was expected as the depth of the crawler has increased from 1 to 10. One excluded link indicates that the found link is excluded as it is restricted by the Robots.txt file. We can not that both the average processing and rendering time have increased this is a sign that indicates more biggere slower pages have been found.
 
 
 \begin{table}[ht] 
@@ -329,25 +332,34 @@ Multi threading
 \end{table}
 
 
-Comparing threads impact
+It is crucial to assess the scalability of the crawler, especially since it employs intelligent multi-threading for link sharing. We must thoroughly test it. We will use the same configurations detailed in Table \ref{table:crawler_test_config_depth_10} but adjust the threads parameter and monitor the overall time spent. The results are presented in Figure \ref{fig:threads-table}, illustrating the outcomes of eight different runs using identical crawler settings while varying the number of threads.
+When we switch from one thread to two, we observe a reduction in time from 722 seconds to 595 seconds, representing a $17.5\%$ improvement, increasing the threads to four results in a time of 438 seconds, which is a $39.33\%$ improvement compared to using just one thread. However, further increasing the threads to six or eight does not yield any additional performance enhancements; in fact, it begins to have a detrimental effect, causing the time spent to increase. This is primarily because all threads communicate to share unvisited links and avoid revisiting links already processed by other threads. Consequently, as the number of threads increases, the communication overhead escalates.
+Users must fine-tune this parameter until they find the optimal setting, which appears to be four threads.
 
-\begin{figure}[h]	
+\begin{figure}[H]	
      \centering
      \includegraphics[width=13cm]{images/threads-table.png}
      \caption{Comparing threads performance.}
-     \label{fig:google-arch}
+     \label{fig:threads-table}
 \end{figure}
 
-Threads docs sharing
 
-\begin{figure}[h]	
+Another vital step in evaluating the effectiveness of multithreading is examining the distribution of shared links among threads. This is crucial to prevent one thread from overburdening while others remain idle, which would be inefficient, especially when using cloud services like AWS, where resources come at a cost. We'll perform this evaluation using the same configurations from Table \ref{table:crawler_test_config_depth_10}, employing four threads.
+
+Figure \ref{fig:threads-share} displays the results of four runs, with each run showcasing a distinct distribution of crawled links among threads. While the ideal scenario would involve each thread handling 25\% of the discovered links, the averages in the columns reveal variations. Thread #4 crawls more than 25\%, while Thread #1 crawls less, which is normal due to considerations like communication overhead and thread-specific conditions. Additionally, threads won't split links if their queue contains fewer than five links, further affecting equal distribution.
+
+\begin{figure}[H]	
      \centering
      \includegraphics[width=13cm]{images/threads_share.png}
      \caption{Threads documents distribution.}
-     \label{fig:google-arch}
+     \label{fig:threads-share}
 \end{figure}
 
-Testing other different sites: 
+
+In order to assess the versatility of the web crawler and its adaptability to various usage scenarios, we will test three additional websites. The initial test case involves crawling a university ranking website to retrieve comprehensive information about all the universities listed, including their titles, respective countries, and current world rankings. The configuration parameters used for crawling this university-ranking website are detailed in Table \ref{table:crawler_conf_uni}.
+To accommodate the structure of the website, where each page displays a table containing 25 universities, the "Allow Multi Element" flag is set to True. Considering the pagination feature on the website, which goes up to page 94, we have set the "Max Pages" parameter to 100, as it is unlikely that there will be more than 100 pages to crawl. Since we aim to extract three distinct pieces of information from the table, namely each university's Title, Location, and Ranking, we require three separate inspectors.
+Given that each page comprises 25 universities, and there are 94 pages in total, we estimate a maximum of 2,350 documents to be collected during the crawling process.
+
 
 \begin{table}[ht] 
 {\footnotesize
@@ -378,16 +390,19 @@ Testing other different sites:
 \T\B 
 \\ 
 \hline
-\textbf{Max Docs} & 1000\T\B 
+\textbf{Max Docs} & 2350\T\B 
 \\ 
 \hline \hline
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
+  \label{table:crawler_conf_uni}
 \end{table}
 
-
+The collected and visited links are accurate and match the expected count of 94. The fact that there are zero already visited links indicates that no duplicate URLs have been encountered. The total time spent during this process is approximately 8 minutes, which is significantly shorter compared to a similar test conducted using ParseHub, which took 20 minutes to complete all 94 pages.
+Interestingly, even though the crawler successfully parsed and collected the results correctly, it consistently received a 403\footnote{The HTTP 403 Forbidden status code signifies that the server comprehends the request but declines to grant authorization for it.} status code in response to all HTTP requests instead of the expected 200. This issue may be attributed to the website's use of Cloudflare service, as suggested by the information available at ScrapeOps\footnote{\url{https://scrapeops.io/web-scraping-playbook/403-forbidden-error-web-scraping/}} .
+In this particular use case, the number of collected documents representing universities in the table matches the total results displayed in the page pagination, totalling 2345. It is worth noting that the website also deploys a Robots.txt file, which the crawler successfully detected and used.
 
 \begin{table}[ht] 
 {\footnotesize
@@ -396,41 +411,44 @@ Testing other different sites:
 \textbf{Links} & 
 \begin{tabular}{c|c|c|c|c}
        Collected   & Visited Correctly & Already Visited & Cross Site &  Excluded\T\B \\\hline
-       95/95 & 95 & 0 & 0 & 1
+       94/94 & 94 & 0 & 0 & 0
 \end{tabular}
 \\ 
 \hline
 \textbf{Time} &
 \begin{tabular}{P{3cm}|P{3cm}|P{3cm}}
        Tot. Spent & Avg. Processing & Avg. Page Rendering \T\B \\\hline
-       395.209 s & 3.16 s & 1.26 s 
+       351.66 s & 2.57 s & 1.020 s 
 \end{tabular}
 \\
 \hline
-\textbf{Status Codes} &     403: 95\T\B 
+\textbf{Status Codes} &  403: 94\T\B 
 \\ 
 \hline
 \textbf{Docs \& Content} & 
 \begin{tabular}{c|c|c|c}
        Tot. Docs   & Duplicated Content & Avg. Docs Per Page & Avg. Page Size\T\B \\\hline
-       2389 & 0 & 25 & 0.2227
+       2345 & 0 & 25 & 0.2227
 \end{tabular}
 \\ 
 \hline
 \textbf{Robots.txt Exists} & True\T\B 
 \\ 
 \hline
-\textbf{Tot. Errors} & 1\T\B 
+\textbf{Tot. Errors} & 0\T\B 
 \\ 
 \hline \hline
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
+  \label{table:crawler_result_uni}
 \end{table}
 
 
-Douglas Use case:
+The following use case involves extracting a specific category of products from an e-commerce website. In this scenario, we will gather various types of data, including text and images. You can find the crawler configurations for this task in Table \ref{table:crawler_conf_douglas}, designed to scrape a particular product category.
+Given that the Seed URL link's pagination indicates the presence of 7 pages, we can configure the Max Pages and Max Docs parameters to be 10. We can employ multithreading to increase performance by setting the number of threads to 4. Douglas employs lazy loading for image loading, which, in turn, causes the crawler to fetch only 30 out of the available 48 products on the page. To address this issue, we can utilize the actions tab to introduce a scrolling action, repeating it ten times until we reach the bottom of the page.
+The ability to configure automated actions depends on the website's functionality. For instance, if the website experiences prolonged loading times, we can include a waiting action to account for the estimated waiting time. If the website necessitates a clicking action to reveal more information, the click action can be utilized for that purpose. The inspectors in this context encompass four fields: brand, title, price, and product images.
 
 
 \begin{table}[ht] 
@@ -443,7 +461,7 @@ Douglas Use case:
 \textbf{Allow Multi Elements} & True \T\B 
 \\ 
 \hline
-\textbf{Max Pages} & 1000\T\B 
+\textbf{Max Pages} & 10\T\B 
 \\ 
 \hline
 \textbf{Threads} & 4\T\B 
@@ -455,13 +473,13 @@ Douglas Use case:
 \textbf{Pagination} & //*[contains(@class, 'pagination')]\T\B 
 \\ 
 \hline
-\textbf{Actions} & None\T\B 
+\textbf{Actions} & Scolling down 10 times\T\B 
 \\ 
 \hline
-\textbf{Inspectors} & //*[contains(@class, 'header-name')]\T\B  \newline
-//*[contains(@class, 'product-price\_\_price')][1] \newline
-//*[contains(@class, 'zoom-image')]/img \newline
-//*[contains(@class, 'third-line')] 
+\textbf{Inspectors} & //*[contains(@class, 'top-brand')]\T\B  \newline
+//a[contains(@class, 'product-tile\_\_main-link')]/div[1]/div/img \newline
+//*[contains(@class, 'text')][contains(@class, 'name')] \newline
+//div[contains(concat(' ', normalize-space(@class), ' '), ' price-row ')]\B  
 \\ 
 \hline
 \textbf{Max Docs} & 1000\T\B 
@@ -471,9 +489,18 @@ Douglas Use case:
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
+  \label{table:crawler_conf_douglas}
 \end{table}
 
+Table \ref{table:crawler_result_douglas} displays the outcomes obtained following the execution of the Douglas crawler. The "Collected" and "Visited" links align with the expected numbers within the targeted pagination. The estimated time taken for this operation is approximately 6.7 minutes. Notably, the "Average processing time" is more than double the time reported in the uni-ranking results in Table \ref{table:crawler_result_uni}. The primary reason for this extended processing time is the inclusion of additional scrolling-down actions.
 
+It is noteworthy to consider an alternative approach: instead of scrolling down ten times to reach the page's end for image loading, why not employ a "scroll to the end of the page" event? This approach was tested on the Douglas website but proved ineffective. The reason is that specific frontend frameworks only load content when it is within the browser's view. Additionally, some websites, such as Facebook, initially display a limited number of posts on a user's home page, progressively loading more as the user scrolls down. In such cases, a single "jump to the end of the page" action will not suffice, as multiple scrolling-down actions are required.
+
+The total count of collected documents indicates that 245 products were downloaded, which appears to be less than anticipated. Given that there are seven pages, with the first page containing 48 products, the theoretical result should be around 336 products. Further investigation revealed that only some pages contain exactly 48 products; some have more, while others have fewer.
+
+It is important to note that, despite employing the robots.txt file for politeness and ensuring a relatively low crawler request rate (calculated as the number of threads divided by the Average Page Rendering, yielding 1.516 requests per second, which is relatively low and unlikely to overload the server), the IP address was eventually banned, and access to the site was blocked after several attempts. This highlights that each website may have its own unique security implementation based on its firewall\footnote{A firewall is a network security tool that filters and controls network traffic to safeguard against unauthorized access and cyber threats, serving as a barrier between trusted internal networks and untrusted external networks, such as the Internet.} rules and the reverse proxy\footnote{A reverse proxy is a server or software component that sits between client devices and a web server, forwarding client requests to the appropriate server and often providing additional functionalities like load balancing, caching, and security protection.} it uses.
+
+Additionally, it's worth mentioning that the Douglas crawler was used without issue for three months, but a ban was encountered recently. This underscores that websites can adapt and modify their security measures over time.
 
 \begin{table}[ht] 
 {\footnotesize
@@ -482,7 +509,7 @@ Douglas Use case:
 \textbf{Links} & 
 \begin{tabular}{c|c|c|c|c}
        Collected   & Visited Correctly & Already Visited & Cross Site &  Excluded\T\B \\\hline
-       8/8 & 8 & 0 & 0 & 0
+       7/7 & 7 & 0 & 0 & 0
 \end{tabular}
 \\ 
 \hline
@@ -493,7 +520,7 @@ Douglas Use case:
 \end{tabular}
 \\
 \hline
-\textbf{Status Codes} &     200: 8\T\B 
+\textbf{Status Codes} & 200: 7\T\B 
 \\ 
 \hline
 \textbf{Docs \& Content} & 
@@ -513,6 +540,7 @@ Douglas Use case:
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
+  \label{table:crawler_result_douglas}
 \end{table}
 
 

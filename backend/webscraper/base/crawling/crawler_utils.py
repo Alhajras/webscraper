@@ -239,7 +239,6 @@ class CrawlerUtils:
                         http_codes[status_code] = http_codes[status_code] + 1
                     else:
                         http_codes[status_code] = 1
-                        http_codes[status_code] = 1
                     statistics.http_codes = http_codes
                 except (
                     WebDriverException,
@@ -482,6 +481,8 @@ class CrawlerUtils:
             else:
                 not_visited.append(key)
             if not InspectorValue.objects.filter(url=link.url).exists():
+                print("dadadadada")
+                print(link.url)
                 visitied_not_saved.append(key)
 
         print("--------------------- All found links -----------------------")
