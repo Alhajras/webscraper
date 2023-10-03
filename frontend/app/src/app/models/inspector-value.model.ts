@@ -6,4 +6,5 @@ export interface InspectorValue {
   attribute: string
   type: string
   boosted_score: number
+  organic_score: number
 }

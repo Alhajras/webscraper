@@ -181,7 +181,8 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             return Response(data=None)
         result = inverted_index.process_query(q_list, pk)[:25]
         for r in result:
-            print(r[2])
+            print(f"{r[3]}  - {r[2]}")
+
         # TODO: 25 should be configurable
         docs_ids = [d[3] for d in result]
         headers = {}
@@ -218,6 +219,7 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             for inspector_value in inspector_values:
                 inspector_value["boosted_score"] = doc_score
                 document = inspector_value["document"]
+                inspector_value["organic_score"] = [d[2] for d in result if d[3] == document][0]
                 if document not in documents:
                     documents[document] = [inspector_value]
                 else:

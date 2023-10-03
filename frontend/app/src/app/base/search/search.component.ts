@@ -92,7 +92,7 @@ export class SearchComponent implements OnInit {
       this.columns = this.headers.length
       this.documents = Object.keys(values.docs).map((key) => {
         const  inspectorValue= values.docs[+key][0] as InspectorValue
-        const doc:Document = {id: +key, score: inspectorValue.boosted_score, inspector_values: values.docs[+key]}
+        const doc:Document = {id: +key, score: inspectorValue.boosted_score + inspectorValue.organic_score, inspector_values: values.docs[+key]}
         return doc;
       });
       this.documents=this.documents.sort((a, b) => b.score - a.score);

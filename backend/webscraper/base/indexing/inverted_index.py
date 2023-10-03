@@ -8,7 +8,7 @@ import math
 import time
 from typing import Tuple
 
-from sympy import sympify
+from sympy import sympify, zoo, I
 from .qgram_index import SingletonMeta, ped
 from ..models import InspectorValue, Inspector, Indexer
 

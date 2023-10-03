@@ -256,7 +256,7 @@ Unfortunately, knowing exactly how many links the crawler-test site contains is 
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
-  \caption{Crawler configuration}
+  \caption{Crawler results}
       \label{table:crawler_test_result_depth_10}
 \end{table}
 
@@ -328,7 +328,7 @@ Multi threading
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
-  \caption{Crawler configuration}
+  \caption{Crawler results}
 \end{table}
 
 
@@ -539,7 +539,7 @@ Additionally, it's worth mentioning that the Douglas crawler was used without is
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
-  \caption{Crawler configuration}
+  \caption{Crawler results}
   \label{table:crawler_result_douglas}
 \end{table}
 
@@ -632,7 +632,7 @@ To troubleshoot the crawler, I enabled the 'Show Browser' option and reran it. T
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
-  \caption{Crawler configuration}
+  \caption{Crawler results}
   \label{table:crawler_result_stack}
 \end{table}
 
@@ -677,10 +677,52 @@ When the same test was conducted using ParseHub, it took 20 minutes to complete,
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
-  \caption{Crawler configuration}
+  \caption{Crawler results}
   \label{table:crawler_result_stack_2}
 \end{table}
 
 \section{Indexer}  
+
+After the initial crawling phase, the subsequent step is indexing, which needs a distinct section for evaluation. To effectively assess indexing, two primary criteria must be satisfied for the dataset: it should possess a substantial size and a reasonable benchmark for testing. In this context, we will examine the movies\footnote{\url{http://ad-teaching.informatik.uni-freiburg.de/InformationRetrievalWS2223/datasets/movies.tsv}} dataset, sourced from the Information Retrieval course taught by Professor Hannah Bast.
+
+\subsection{Datasets}
+
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Name} & Movies\T\B 
+\\ 
+\hline
+\textbf{File Size} & 46.2MB \T\B 
+\\ 
+\hline
+\textbf{Entries Count} & 104,609\T\B 
+\\ 
+\hline
+\textbf{Words Count} & 7,817,751\T\B 
+\\ 
+\hline
+\textbf{Fields} & Movie Title (Movies), Movie Description (Movies), Movie Rating (Movies)\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Movies dataset overview}
+\end{table}
+
+\subsection{Metrics}
+We assess precision at a given value k (P@k), calculate the average precision (AP), and compute the normalized discounted cumulative gain at a specific position k (nDCG@k).
+
+\subsection*{Precision at k}
+P@k represents the proportion of valid predictions within the system's top k predictions. We define Q_valid as the collection of valid predictions for a question prefix q, as specified in the ground truth. Additionally, we denote Qk Q_result as the set of the system's top k completion predictions for a given question prefix q. The calculation for P@k is as follows:
+
+\begin{equation}
+P@k = \frac{Q_valid Q_valid}{k}
+\label{eq:depth}
+\end{equation}
+
 \section{User Experience} 
  
