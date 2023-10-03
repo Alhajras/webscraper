@@ -1,0 +1,6 @@
+how to set up a virtual environment by virtualenv	288168, 288651, 288657, 289357, 289834, 289851, 288911
+how to set up a virtual invironment by virtualinv	288168, 288651, 288657, 289357, 289834, 289851, 288911
+import panda library	289346, 288449, 289302, 288902, 288963
+pip install does not work	288250, 288678, 288296, 289561, 288681, 288282
+SQL Database with Jupyter Notebook	288788, 288219, 290351, 288890, 288479
+for loop in python	289128, 288581, 289329, 290423, 288348
