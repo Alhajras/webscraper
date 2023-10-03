@@ -587,6 +587,7 @@ Another use case involved crawling Stackoverflow questions, focusing solely on t
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Crawler configuration}
+  \label{table:crawler_conf_stack}
 \end{table}
 
 
@@ -683,7 +684,7 @@ When the same test was conducted using ParseHub, it took 20 minutes to complete,
 
 \section{Indexer}  
 
-After the initial crawling phase, the subsequent step is indexing, which needs a distinct section for evaluation. To effectively assess indexing, two primary criteria must be satisfied for the dataset: it should possess a substantial size and a reasonable benchmark for testing. In this context, we will examine the movies\footnote{\url{http://ad-teaching.informatik.uni-freiburg.de/InformationRetrievalWS2223/datasets/movies.tsv}} dataset, sourced from the Information Retrieval course taught by Professor Hannah Bast.
+Following the initial crawling phase, the next step involves indexing, which requires a dedicated section for evaluation. To perform a thorough assessment of indexing, we will utilize a real-world dataset obtained through one of the crawlers employed during the evaluation process. We selected the Stack Overflow dataset presented in Table \ref{table:crawler_conf_stack} out of the three available use cases. The primary rationale for this choice is its larger size compared to the others, along with the presence of descriptions that can be employed for index evaluation. It is important to note that the crawler was rerun to gather additional Stack Overflow posts.
 
 \subsection{Datasets}
 
@@ -692,25 +693,22 @@ After the initial crawling phase, the subsequent step is indexing, which needs a
 {\footnotesize
 \begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
  \hline \hline
-\textbf{Name} & Movies\T\B 
+\textbf{File Size} & 1.4MB \T\B 
 \\ 
 \hline
-\textbf{File Size} & 46.2MB \T\B 
+\textbf{Entries Count} & 2415\T\B 
 \\ 
 \hline
-\textbf{Entries Count} & 104,609\T\B 
+\textbf{Words Count} & 108122\T\B 
 \\ 
 \hline
-\textbf{Words Count} & 7,817,751\T\B 
-\\ 
-\hline
-\textbf{Fields} & Movie Title (Movies), Movie Description (Movies), Movie Rating (Movies)\T\B 
+\textbf{Fields} & Title, Summary\T\B 
 \\ 
 \hline \hline
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
-  \caption{Movies dataset overview}
+  \caption{Stack Overflow posts dataset}
 \end{table}
 
 \subsection{Metrics}

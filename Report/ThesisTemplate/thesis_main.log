@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  2 OCT 2023 13:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  3 OCT 2023 18:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1088,6 +1088,9 @@ LaTeX Warning: Label `fig:software-arch' multiply defined.
 
 LaTeX Warning: Label `fig:software-arch' multiply defined.
 
+
+LaTeX Warning: Label `eq:depth' multiply defined.
+
 )
 \openout1 = `thesis_main.aux'.
 
@@ -1717,45 +1720,65 @@ Underfull \hbox (badness 10000) in paragraph at lines 554--589
  []
 
 [63]
-Overfull \hbox (15.41899pt too wide) in paragraph at lines 600--635
+Overfull \hbox (15.41899pt too wide) in paragraph at lines 601--636
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 600--635
+Underfull \hbox (badness 10000) in paragraph at lines 601--636
 
  []
 
 [64]
-Overfull \hbox (15.41899pt too wide) in paragraph at lines 645--680
+Overfull \hbox (15.41899pt too wide) in paragraph at lines 646--681
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 645--680
+Underfull \hbox (badness 10000) in paragraph at lines 646--681
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 686--686
-  [][][][]$\T1/cmtt/m/n/9 http : / / ad-[]teaching . informatik . uni-[]freibur
-g . de / InformationRetrievalWS2223 / datasets /
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [65]
-Overfull \hbox (1.19261pt too wide) in paragraph at lines 693--713
+Overfull \hbox (1.19261pt too wide) in paragraph at lines 694--711
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 693--713
+Underfull \hbox (badness 10000) in paragraph at lines 694--711
 
  []
 
-[66]) (./chapters/8-conclusions.tex [67] [68
+[66]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.718 ... system's top k predictions. We define Q_
+                                                  valid as the collection of...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.719 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (850.10466pt too wide) in paragraph at lines 718--719
+\T1/cmr/m/n/10.95 tions. We de-fine Q$[]\OML/cmm/m/it/10.95 alidasthecollection
+ofvalidpredictionsforaquestionprefixq; asspecifiedinthegroundtruth:Additionally
+; wedenoteQkQ[]esultasthesetofthesystem[]stopkcompletionpredictionsforagivenque
+stionprefixq:ThecalculationforP\OT1/cmr/m/n/10.95 @\OML/cmm/m/it/10.95 kisasfol
+lows \OT1/cmr/m/n/10.95 :$ 
+ []
+
+) (./chapters/8-conclusions.tex [67] [68
 
 
 ]
@@ -1902,45 +1925,43 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 ### bottom level 
 Here is how much of TeX's memory you used:
  36789 strings out of 480129
- 716178 string characters out of 5893410
+ 716193 string characters out of 5893410
  1323922 words of memory out of 5000000
- 53875 multiletter control sequences out of 15000+600000
+ 53876 multiletter control sequences out of 15000+600000
  500408 words of font info for 112 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,19n,106p,10753b,2702s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{section*.39} has been referenced bu
-t does not exist, replaced by a fixed one
-
- </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> <
-/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </h
-ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0900.600pk> </hom
-e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/
-oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/oc
-/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.600pk> </home/oc/.
-texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1095.600pk> </home/oc/.te
-xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/oc/.texl
-ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </home/oc/.texliv
-e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </home/oc/.texlive2
-021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/oc/.texlive202
-1/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </home/oc/.texlive2021/
-texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oc/.texlive2021/te
-xmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/oc/.texlive2021/texm
-f-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/oc/.texlive2021/texmf-
-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/oc/.texlive2021/texmf-va
-r/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.texlive2021/texmf-var/
-fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texlive2021/texmf-var/fo
-nts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texlive2021/texmf-var/font
-s/pk/ljfour/jknappen/ec/ecrm1440.600pk></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on thesis_main.pdf (87 pages, 1967433 bytes).
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/e
+ctt1095.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ect
+t1000.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0
+900.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm060
+0.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.
+600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.60
+0pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1095.600p
+k> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk>
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> <
+/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </h
+ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </hom
+e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </home/
+oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oc
+/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/oc/.
+texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/oc/.te
+xlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/oc/.texl
+ive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/oc/.texliv
+e2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2488.600pk> </home/oc/.texlive2
+021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk> </home/oc/.texlive202
+1/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y8.pfb>
+Output written on thesis_main.pdf (87 pages, 1968583 bytes).
 PDF statistics:
- 1606 PDF objects out of 1728 (max. 8388607)
- 801 compressed objects within 9 object streams
- 203 named destinations out of 1000 (max. 500000)
+ 1598 PDF objects out of 1728 (max. 8388607)
+ 798 compressed objects within 8 object streams
+ 202 named destinations out of 1000 (max. 500000)
  417 words of extra memory for PDF output out of 10000 (max. 10000000)
 
