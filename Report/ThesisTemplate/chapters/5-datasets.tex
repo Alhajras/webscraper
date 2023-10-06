@@ -714,13 +714,171 @@ Following the initial crawling phase, the next step involves indexing, which req
 \subsection{Metrics}
 We assess precision at a given value k (P@k), calculate the average precision (AP), and compute the normalized discounted cumulative gain at a specific position k (nDCG@k).
 
-\subsection*{Precision at k}
-P@k represents the proportion of valid predictions within the system's top k predictions. We define Q_valid as the collection of valid predictions for a question prefix q, as specified in the ground truth. Additionally, we denote Qk Q_result as the set of the system's top k completion predictions for a given question prefix q. The calculation for P@k is as follows:
+\subsection*{Precision at k (P@k)}
+P@k represents the proportion of valid predictions within the system's top k predictions. We define $Q_{valid}$ as the collection of valid predictions for a question prefix q, as specified in the ground truth. Additionally, we denote $Q^k_{result}$ as the set of the system's top k completion predictions for a given question prefix q. The calculation for P@k is as follows:
 
 \begin{equation}
-P@k = \frac{Q_valid Q_valid}{k}
+P@k = \frac{|Q_{valid} \cap Q^k_{result}|}{k}
 \label{eq:depth}
 \end{equation}
 
+We will compute the precision at 5 (p@5) for all the various indexing configurations.
+
+\subsection*{Average Precision (AP)}
+Consider $R_1$ through $R_k $ as the ordered list of positions where relevant documents are located within the result list of a specific query. In this context, Average Precision (AP) is computed as the mean of the k Precision at $R_i$ ($P@R_i$) values. AP is computed as:
+
+\begin{equation}
+AP = \frac{\sum_{i=1}^{n} P@r_i}{n}
+\label{eq:depth}
+\end{equation}
+
+For the predictions from $Q_{valid}$ that are absent in $Q_{result}$, we assign a Precision at position $r_i $ (P@ri) value of 0. We then calculate the average precision by averaging these values across all question prefixes in the ground truth.
+
+\subsection*{Mean Precisions (MP@k, MP@R, MAP)}
+Having a benchmark containing multiple queries and their corresponding ground truth data, we can assess the system's performance by calculating the average value of a specific metric across all the queries.
+
+MP@k represents the mean precision at k values across all queries, MP@R represents the mean precisionat R values across all queries, and MAP signifies the mean average precision values across all queries.
+
 \section{User Experience} 
  
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Inspectors} & Title, Summary \T\B 
+\\ 
+\hline
+\textbf{BM25 Parameters} & B=0.75, K=1.75\T\B 
+\\ 
+\hline
+\textbf{Stop Words} & None\T\B 
+\\ 
+\hline
+\textbf{Small Words Threshold} & 2\T\B 
+\\ 
+\hline
+\textbf{Q-gram} & 3\T\B 
+\\ 
+\hline
+\textbf{Boosting Formula} & None\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Stack Overflow indexing configuration}
+\end{table}
+
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Inspectors} & Title, Summary \T\B 
+\\ 
+\hline
+\textbf{BM25 Parameters} & B=0.1, K=0.81\T\B 
+\\ 
+\hline
+\textbf{Stop Words} & None\T\B 
+\\ 
+\hline
+\textbf{Small Words Threshold} & 2\T\B 
+\\ 
+\hline
+\textbf{Q-gram} & 3\T\B 
+\\ 
+\hline
+\textbf{Boosting Formula} & None\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Stack Overflow indexing configuration}
+\end{table}
+
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Inspectors} & Title, Summary \T\B 
+\\ 
+\hline
+\textbf{BM25 Parameters} & B=0.1, K=0.81\T\B 
+\\ 
+\hline
+\textbf{Stop Words} & [how, to, by, with, in, not, does]\T\B 
+\\ 
+\hline
+\textbf{Small Words Threshold} & 2\T\B 
+\\ 
+\hline
+\textbf{Q-gram} & 3\T\B 
+\\ 
+\hline
+\textbf{Boosting Formula} & None\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Stack Overflow indexing configuration}
+\end{table}
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Inspectors} & Title, Summary \T\B 
+\\ 
+\hline
+\textbf{BM25 Parameters} & B=0.1, K=0.81\T\B 
+\\ 
+\hline
+\textbf{Stop Words} & None\T\B 
+\\ 
+\hline
+\textbf{Small Words Threshold} & 0\T\B 
+\\ 
+\hline
+\textbf{Q-gram} & 3\T\B 
+\\ 
+\hline
+\textbf{Boosting Formula} & None\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Stack Overflow indexing configuration}
+\end{table}
+
+\begin{table}[ht] 
+{\footnotesize
+\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+ \hline \hline
+\textbf{Inspectors} & Title, Summary \T\B 
+\\ 
+\hline
+\textbf{BM25 Parameters} & B=0.1, K=0.81\T\B 
+\\ 
+\hline
+\textbf{Stop Words} & None\T\B 
+\\ 
+\hline
+\textbf{Small Words Threshold} & 2\T\B 
+\\ 
+\hline
+\textbf{Q-gram} & 3\T\B 
+\\ 
+\hline
+\textbf{Boosting Formula} & $\frac{votes}{10}$\T\B 
+\\ 
+\hline \hline
+    \end{tabular}
+}
+  \captionsetup{justification=centering,margin=2cm}
+  \caption{Stack Overflow indexing configuration}
+\end{table}
