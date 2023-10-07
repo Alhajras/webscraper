@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  7 OCT 2023 15:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  7 OCT 2023 22:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1784,35 +1784,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 832--862
 
  []
 
-
-Overfull \hbox (1.19261pt too wide) in paragraph at lines 867--897
+[70]
+Overfull \hbox (1.19261pt too wide) in paragraph at lines 876--906
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 867--897
+Underfull \hbox (badness 10000) in paragraph at lines 876--906
 
  []
 
-
-Overfull \hbox (1.19261pt too wide) in paragraph at lines 902--932
+[71]
+Overfull \hbox (1.19261pt too wide) in paragraph at lines 914--944
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 902--932
+Underfull \hbox (badness 10000) in paragraph at lines 914--944
 
  []
 
-) (./chapters/8-conclusions.tex [70] [71] [72
-
-
-]
+[72] [73]) (./chapters/8-conclusions.tex [74]
 chapter 6.
-(./thesis_main.bbl [73] [74
+[75
 
 
-]
+] (./thesis_main.bbl [76]
 ! Undefined control sequence.
 <argument> \protect \citeauthoryear 
                                     {Kimathi}{Kimathi}{{\protect \APACyear {...
@@ -1935,10 +1932,13 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [75] [76
+)) [77
 
 
-] [77] (./thesis_main.aux)
+] [78
+
+
+] [79] (./thesis_main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1950,10 +1950,10 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 ### simple group (level 1) entered at line 36 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 36807 strings out of 480129
- 716452 string characters out of 5893410
+ 36812 strings out of 480129
+ 716532 string characters out of 5893410
  1323922 words of memory out of 5000000
- 53881 multiletter control sequences out of 15000+600000
+ 53884 multiletter control sequences out of 15000+600000
  500408 words of font info for 112 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,19n,106p,10753b,2702s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1985,10 +1985,10 @@ amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on thesis_main.pdf (91 pages, 2000051 bytes).
+Output written on thesis_main.pdf (93 pages, 2008897 bytes).
 PDF statistics:
- 1661 PDF objects out of 1728 (max. 8388607)
- 844 compressed objects within 9 object streams
- 215 named destinations out of 1000 (max. 500000)
+ 1677 PDF objects out of 1728 (max. 8388607)
+ 857 compressed objects within 9 object streams
+ 217 named destinations out of 1000 (max. 500000)
  425 words of extra memory for PDF output out of 10000 (max. 10000000)
 

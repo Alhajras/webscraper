@@ -837,7 +837,7 @@ The initial parameters to adjust are b and k. Table \ref{table:indexer_conf_2} d
 \textbf{BM25 Parameters} & B=0.1, K=0.81\T\B 
 \\ 
 \hline
-\textbf{Stop Words} & [how, to, by, with, in, not, does]\T\B 
+\textbf{Stop Words} & how, to, by, with, in, not, does\T\B 
 \\ 
 \hline
 \textbf{Small Words Threshold} & 2\T\B 
@@ -860,7 +860,16 @@ The initial parameters to adjust are b and k. Table \ref{table:indexer_conf_2} d
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Stack Overflow indexing configuration}
+    \label{table:indexer_conf_3}
 \end{table}
+
+
+Let us retain the modified b and k parameters instead of using the default values, as they produce improved results. The following attribute we consider for indexing includes stop words and examining their impact on accuracy. Initially, the intuition is to remove common words such as "how," "to," "by," "with," "in," "not," and "does" from the benchmark queries since they may seem insignificant and lack essential information. Surprisingly, though, removing these words leads to a reduction in accuracy as illustraded in Table \ref{table:indexer_conf_3}.
+
+This could be attributed to the Stack Overflow dataset not being exceptionally large, and the assumption that these words are common in the English language may not hold for some queries in the small Stack Overflow dataset. Furthermore, stop words are not just about eliminating common words; they can also be used to consistently disregard words that typically provide no meaningful information in a query. For example, in the current Stack Overflow dataset, which encompasses all posts related to Python, including the term "python" in the query should have no impact, as all the posts are Python-related, even if they do not explicitly mention the word "python" but discuss Python libraries, for instance.
+
+It is important to note that stop words containing two characters or fewer have no impact in this context and can be safely eliminated. The rationale is that they should already be filtered out due to the Small Words Threshold being set to two.
+
 
 \begin{table}[ht] 
 {\footnotesize
@@ -895,7 +904,10 @@ The initial parameters to adjust are b and k. Table \ref{table:indexer_conf_2} d
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Stack Overflow indexing configuration}
+  \label{table:indexer_conf_4}
 \end{table}
+
+In the following evaluation in Table \ref{table:indexer_conf_4}, we adjust the Small Words Threshold to zero, which implies that no words are excluded during the indexing process. While the results remain reasonably good, there has been a decrease in precision. This suggests that in certain cases, increasing the Small Words Threshold and not setting it to zero may be advisable. However, it's essential to exercise caution when eliminating small words, particularly those with one to three characters, depending on the language. Additionally, it's worth noting that some two-character words can be acronyms, such as "OS" (Operating System).
 
 \begin{table}[ht] 
 {\footnotesize
@@ -930,6 +942,21 @@ The initial parameters to adjust are b and k. Table \ref{table:indexer_conf_2} d
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Stack Overflow indexing configuration}
+  \label{table:indexer_conf_5}
 \end{table}
 
+The final attribute to adjust is the Boosting Formula. The Boosting Formula is an optional field and particularly useful for ranking documents containing a numeric field. Examples of such fields include product prices, product reviews, post likes, post shares, or the order of items in a list, like the example of university rankings.
+In the specific context of the Stack Overflow example, each post is associated with an upvote number, which indicates how helpful an answer is. This numeric field can be a valuable indicator of document quality and relevance. The more users find a post helpful, the more valuable it becomes to display it as one of the top results. To assign a higher score to posts with a high number of votes, we can employ the Boosting Formula. One practical choice is to use the logarithm of the votes. However, since votes can be zero or even negative, more suitable options may exist. We will utilize the formula shown in \ref{table:indexer_conf_5} for this straightforward use case.
+
+
 \section{User Experience} 
+
+Throughout this project, I had the opportunity to work with ParseHub software. While this experience does not make me an expert, I did gain practical knowledge in using ParseHub for various aspects of web crawling, which proved beneficial for the thesis. There are notable advantages and disadvantages when comparing ParseHub with the current implementation used in the thesis.
+
+One of the standout features of ParseHub is its automatic detection of document fields, achieved by clicking. In contrast, my implementation requires manual input of HTML element XPATH to obtain this information. Creating the crawlers manually in my implementation often took more than ten minutes, whereas ParseHub accomplished the same results in half the time. Another advantage of ParseHub is its project-based approach to crawling, as opposed to my implementation's list of crawlers. Starting a crawler in ParseHub can be done by providing only the Seed URL without further options, simplifying the process. However, it is essential to note that this feature can be easily extended and is a manageable hurdle.
+
+In terms of performance, the current implementation excels, as demonstrated in the evaluation tables. Additionally, the current implementation allows for the addition of more threads and nodes to enhance performance, a flexibility not available in ParseHub. Furthermore, the current implementation has proven resilient in handling various edge cases, whereas ParseHub struggled to manage these scenarios effectively. The adaptability and configuration options offered by the current implementation make it well-suited for various websites and scenarios.
+
+The user interface employed in ParseHub needs to be updated; it lacks responsiveness and features a font that is challenging to read. However, the most frustrating aspect is the frequent occurrence of the browser unexpectedly crashing and shutting down without apparent cause. In contrast, utilizing a frontend framework like Angular with PrimeNG significantly improved the current implementation, making it responsive and delivering a seamless user experience.
+
+One notable drawback of ParseHub is its need for indexing capabilities. When crawling a large dataset, having an indexed version of the data becomes crucial, mainly if the dataset is intended to be served as an API, for example.
