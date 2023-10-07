@@ -702,13 +702,14 @@ Following the initial crawling phase, the next step involves indexing, which req
 \textbf{Words Count} & 108122\T\B 
 \\ 
 \hline
-\textbf{Fields} & Title, Summary\T\B 
+\textbf{Fields} & Title, Summary, Votes\T\B 
 \\ 
 \hline \hline
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Stack Overflow posts dataset}
+    \label{table:indexer_dataset}
 \end{table}
 
 \subsection{Metrics}
@@ -739,11 +740,17 @@ Having a benchmark containing multiple queries and their corresponding ground tr
 
 MP@k represents the mean precision at k values across all queries, MP@R represents the mean precisionat R values across all queries, and MAP signifies the mean average precision values across all queries.
 
-\section{User Experience} 
+\subsection{Experiments}
  
+ To assess the performance of our indexing, we will employ the Stack Overflow dataset listed in Table \ref{table:indexer_dataset}. We will modify the indexing attributes' settings and examine how these changes impact the evaluation metrics.
+ 
+ We will initiate our indexing process using the default settings specified in Table \ref{table:indexer_conf_1}. The Stack Overflow dataset consists of three inspector fields: Title, Summary, and Votes. However, we intend to index only the textual fields, such as Title and Summary, while retaining Votes as they contain numerical data intended solely for ranking purposes. All other configuration parameters are set to their default values. For a clearer understanding of the configuration attributes, please refer to Table \ref{table:indexing-config}, which provides descriptions of each attribute.
+ 
+
+
 \begin{table}[ht] 
 {\footnotesize
-\begin{tabular}{ P{3cm} ||P{10.1cm}  }      % centered columns (3 columns) 
+\begin{tabular}{ P{3cm} ||P{10.1cm} }      % centered columns (3 columns) 
  \hline \hline
 \textbf{Inspectors} & Title, Summary \T\B 
 \\ 
@@ -762,13 +769,25 @@ MP@k represents the mean precision at k values across all queries, MP@R represen
 \hline
 \textbf{Boosting Formula} & None\T\B 
 \\ 
+\hline
+\textbf{Result} & 
+\begin{tabular}{P{2cm}|P{2cm}|P{2cm}|P{2cm}}
+       \textbf{MP@5} & \textbf{MP@R} & \textbf{MAP} & \textbf{Time(s)}\T\B \\\hline
+       0.73 & 0.72 & 0.87 & 0.31
+\end{tabular}
+\\
 \hline \hline
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
-  \caption{Stack Overflow indexing configuration}
+  \caption{Stack Overflow indexing configuration, test the default settings without any changes.}
+      \label{table:indexer_conf_1}
 \end{table}
 
+Upon initiating the indexing process for the first time, without the availability of any caching, it may take up to two minutes to complete. This indexing procedure consists of two distinct stages: the first involves the creation of a dictionary, which aids in providing suggestions in the dropdown menu to help users locate the appropriate queries. Creating this dictionary is the longer of the two stages, typically taking around 1.8 minutes, while the indexing phase takes approximately seven seconds. The primary disparity between these stages lies in the size of the entities involved; the dictionary comprises 2.6 million entities, whereas the Stack Overflow entities used for indexing consist of only two thousand entities. It is worth noting that the overall duration of the indexing process is highly contingent on the size of the file being indexed and, in this case, the volume of documents crawled by the web crawler. Following the initial indexing process, the dictionary index will be cached and no longer require further indexing.
+
+Even though the search results return 25 documents, we will set the value of k for the P@k metric to 5. This choice is based on the everyday user preference for focusing on the top results in a search list. The overall metrics are presented in Table \ref{table:indexer_conf_1}. While these results indicate reasonable accuracy, it is essential to acknowledge that assessing relevance can be subjective, as it varies among users. For instance, Google's ranking system considers factors like user location, link authenticity, and text matching, leading to potentially inconsistent results for the same query across different users.
+Furthermore, aiming for an extremely high level of accuracy can lead to model overfitting\footnote{Overfitting in data science happens when a model fits its training data too closely. This leads to poor performance when dealing with new, unseen data.}, causing it to struggle with generalization. While it may achieve a high precision score with benchmark data, it may need to improve when faced with new, unseen queries. This is because all the model's parameters have been fine-tuned to fit the benchmark datasets perfectly. Therefore, balancing achieving a reasonable precision score and ensuring that the model performs well on new, previously unseen datasets is crucial. Therefore, achieving perfect accuracy scores in evaluations is challenging and involves a trade-off. The Precision@K metric is significantly affected by the selection of both the value of K and the relevance threshold. Different choices for K and the threshold can result in varying Precision@K scores for the same model. As a result, it is essential to carefully and consistently choose these parameters when comparing different models.
 
 \begin{table}[ht] 
 {\footnotesize
@@ -791,13 +810,22 @@ MP@k represents the mean precision at k values across all queries, MP@R represen
 \hline
 \textbf{Boosting Formula} & None\T\B 
 \\ 
+\hline
+\textbf{Result} & 
+\begin{tabular}{P{2cm}|P{2cm}|P{2cm}|P{2cm}}
+       \textbf{MP@5} & \textbf{MP@R} & \textbf{MAP} & \textbf{Time(s)}\T\B \\\hline
+       0.8 & 0.84 & 0.89 & 0.31
+\end{tabular}
+\\
 \hline \hline
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Stack Overflow indexing configuration}
+  \label{table:indexer_conf_2}
 \end{table}
 
+The initial parameters to adjust are b and k. Table \ref{table:indexer_conf_2} displays the configuration of the Stack Overflow indexer, with modifications made to the default b and k values. These values have increased. The key takeaway is that modifying the attributes available in the indexing user interface can enhance or diminish accuracy, providing users with a convenient way to fine-tune their model.
 
 \begin{table}[ht] 
 {\footnotesize
@@ -820,6 +848,13 @@ MP@k represents the mean precision at k values across all queries, MP@R represen
 \hline
 \textbf{Boosting Formula} & None\T\B 
 \\ 
+\hline
+\textbf{Result} & 
+\begin{tabular}{P{2cm}|P{2cm}|P{2cm}|P{2cm}}
+       \textbf{MP@5} & \textbf{MP@R} & \textbf{MAP} & \textbf{Time(s)}\T\B \\\hline
+       0.66 & 0.624 & 0.76 & 0.31
+\end{tabular}
+\\
 \hline \hline
     \end{tabular}
 }
@@ -848,6 +883,13 @@ MP@k represents the mean precision at k values across all queries, MP@R represen
 \hline
 \textbf{Boosting Formula} & None\T\B 
 \\ 
+\hline
+\textbf{Result} & 
+\begin{tabular}{P{2cm}|P{2cm}|P{2cm}|P{2cm}}
+       \textbf{MP@5} & \textbf{MP@R} & \textbf{MAP} & \textbf{Time(s)}\T\B \\\hline
+       0.8 & 0.77 & 0.84 & 0.31
+\end{tabular}
+\\
 \hline \hline
     \end{tabular}
 }
@@ -876,9 +918,18 @@ MP@k represents the mean precision at k values across all queries, MP@R represen
 \hline
 \textbf{Boosting Formula} & $\frac{votes}{10}$\T\B 
 \\ 
+\hline
+\textbf{Result} & 
+\begin{tabular}{P{2cm}|P{2cm}|P{2cm}|P{2cm}}
+       \textbf{MP@5} & \textbf{MP@R} & \textbf{MAP} & \textbf{Time(s)}\T\B \\\hline
+       0.53 & 0.62 & 0.63 & 0.31
+\end{tabular}
+\\
 \hline \hline
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
   \caption{Stack Overflow indexing configuration}
 \end{table}
+
+\section{User Experience} 
