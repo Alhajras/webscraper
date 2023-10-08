@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  8 OCT 2023 15:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  8 OCT 2023 16:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1276,7 +1276,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
 ! You can't use `macro parameter character #' in horizontal mode.
-l.40 ...statistics/871513/worldwide-data-created/#
+l.38 ...statistics/871513/worldwide-data-created/#
                                                   :~:text=The%20total%20amou...
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -1284,7 +1284,7 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 
-Overfull \hbox (56.87108pt too wide) in paragraph at lines 36--41
+Overfull \hbox (56.87108pt too wide) in paragraph at lines 34--39
 \T1/cmr/m/n/10.95 Pub-lished by Petroc Tay-lor , Sep 8, 2022 https://www.statis
 ta.com/statistics/871513/worldwide-
  []
@@ -1295,7 +1295,7 @@ ta.com/statistics/871513/worldwide-
 ]
 chapter 2.
 [7]
-<images/google_arch.png, id=267, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=274, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 15.
@@ -1335,7 +1335,7 @@ and I'll forget about whatever was undefined.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [14]
-<images/engine_components.png, id=304, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=311, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
@@ -1345,7 +1345,7 @@ Package pdftex.def Info: images/engine_components.png  used on input line 55.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [15] [16 <./images/engine_components.png (PNG copy)>] [17]
-<images/crawler_architecture.png, id=323, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=330, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
@@ -1370,7 +1370,7 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 [21]
-<images/inverted_index.png, id=342, 608.2725pt x 233.37187pt>
+<images/inverted_index.png, id=349, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
@@ -1428,7 +1428,7 @@ Underfull \vbox (badness 1163) has occurred while \output is active []
 
 ]
 chapter 4.
-<images/software_arch.png, id=386, 1252.52943pt x 871.75688pt>
+<images/software_arch.png, id=392, 1252.52943pt x 871.75688pt>
 File: images/software_arch.png Graphic file (type png)
 <use images/software_arch.png>
 Package pdftex.def Info: images/software_arch.png  used on input line 12.
@@ -1502,7 +1502,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [38]
 [39] [40]
-<images/demo-3.png, id=432, 851.43094pt x 511.15968pt>
+<images/demo-3.png, id=438, 851.43094pt x 511.15968pt>
 File: images/demo-3.png Graphic file (type png)
 <use images/demo-3.png>
 Package pdftex.def Info: images/demo-3.png  used on input line 157.
@@ -1518,7 +1518,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--218
  []
 
 [41 <./images/demo-3.png (PNG copy)>]
-<images/demo-8.png, id=438, 1082.54437pt x 620.3175pt>
+<images/demo-8.png, id=444, 1082.54437pt x 620.3175pt>
 File: images/demo-8.png Graphic file (type png)
 <use images/demo-8.png>
 Package pdftex.def Info: images/demo-8.png  used on input line 225.
@@ -1527,7 +1527,7 @@ Package pdftex.def Info: images/demo-8.png  used on input line 225.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [42]
-<images/demo-10.png, id=444, 1013.28563pt x 511.9125pt>
+<images/demo-10.png, id=451, 1013.28563pt x 511.9125pt>
 File: images/demo-10.png Graphic file (type png)
 <use images/demo-10.png>
 Package pdftex.def Info: images/demo-10.png  used on input line 237.
@@ -1547,7 +1547,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 250--291
  []
 
 [44 <./images/demo-10.png (PNG copy)>]
-<images/demo-12.png, id=454, 1017.04968pt x 411.03563pt>
+<images/demo-12.png, id=460, 1017.04968pt x 411.03563pt>
 File: images/demo-12.png Graphic file (type png)
 <use images/demo-12.png>
 Package pdftex.def Info: images/demo-12.png  used on input line 301.
@@ -1663,7 +1663,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 308--331
  []
 
 [55]
-<images/threads-table.png, id=562, 560.8453pt x 348.55219pt>
+<images/threads-table.png, id=566, 560.8453pt x 348.55219pt>
 File: images/threads-table.png Graphic file (type png)
 <use images/threads-table.png>
 Package pdftex.def Info: images/threads-table.png  used on input line 341.
@@ -1689,7 +1689,7 @@ I'll just pretend that you didn't ask for it.
 If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
-<images/threads_share.png, id=573, 560.0925pt x 345.54094pt>
+<images/threads_share.png, id=577, 560.0925pt x 345.54094pt>
 File: images/threads_share.png Graphic file (type png)
 <use images/threads_share.png>
 Package pdftex.def Info: images/threads_share.png  used on input line 353.
@@ -1985,23 +1985,23 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 ### simple group (level 1) entered at line 36 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 36806 strings out of 480129
- 716447 string characters out of 5893410
+ 36808 strings out of 480129
+ 716471 string characters out of 5893410
  1296716 words of memory out of 5000000
  53881 multiletter control sequences out of 15000+600000
  500408 words of font info for 112 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
- 108i,19n,106p,10753b,2710s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 108i,19n,106p,10753b,2712s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/e
 ctt1095.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ect
 t1000.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0
-900.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm060
-0.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.
-600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0900.60
-0pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1095.600p
+900.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx090
+0.600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1095.
+600pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.60
+0pk> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600p
 k> </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk>
- </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> <
-/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </h
+ </home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> <
+/home/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </h
 ome/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </hom
 e/oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1095.600pk> </home/
 oc/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/oc
@@ -2020,10 +2020,10 @@ amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on thesis_main.pdf (91 pages, 2008514 bytes).
+Output written on thesis_main.pdf (91 pages, 2009146 bytes).
 PDF statistics:
- 1666 PDF objects out of 1728 (max. 8388607)
- 847 compressed objects within 9 object streams
- 215 named destinations out of 1000 (max. 500000)
+ 1674 PDF objects out of 1728 (max. 8388607)
+ 855 compressed objects within 9 object streams
+ 217 named destinations out of 1000 (max. 500000)
  425 words of extra memory for PDF output out of 10000 (max. 10000000)
 
