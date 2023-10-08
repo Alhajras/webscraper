@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  8 OCT 2023 19:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  8 OCT 2023 19:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1277,7 +1277,7 @@ chapter 1.
 ]
 chapter 2.
 [5]
-<images/google_arch.png, id=273, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=275, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 15.
@@ -1317,7 +1317,7 @@ and I'll forget about whatever was undefined.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12]
-<images/engine_components.png, id=306, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=308, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
@@ -1327,7 +1327,7 @@ Package pdftex.def Info: images/engine_components.png  used on input line 55.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [13] [14 <./images/engine_components.png (PNG copy)>] [15]
-<images/crawler_architecture.png, id=323, 623.32875pt x 252.945pt>
+<images/crawler_architecture.png, id=325, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
@@ -1352,7 +1352,7 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 [19]
-<images/inverted_index.png, id=343, 608.2725pt x 233.37187pt>
+<images/inverted_index.png, id=345, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
@@ -1410,7 +1410,7 @@ Underfull \vbox (badness 1163) has occurred while \output is active []
 
 ]
 chapter 4.
-<images/software_arch.png, id=385, 1252.52943pt x 871.75688pt>
+<images/software_arch.png, id=387, 1252.52943pt x 871.75688pt>
 File: images/software_arch.png Graphic file (type png)
 <use images/software_arch.png>
 Package pdftex.def Info: images/software_arch.png  used on input line 12.
@@ -1484,7 +1484,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [36]
 [37] [38]
-<images/demo-3.png, id=432, 851.43094pt x 511.15968pt>
+<images/demo-3.png, id=434, 851.43094pt x 511.15968pt>
 File: images/demo-3.png Graphic file (type png)
 <use images/demo-3.png>
 Package pdftex.def Info: images/demo-3.png  used on input line 157.
@@ -1500,7 +1500,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--218
  []
 
 [39 <./images/demo-3.png (PNG copy)>]
-<images/demo-8.png, id=437, 1082.54437pt x 620.3175pt>
+<images/demo-8.png, id=439, 1082.54437pt x 620.3175pt>
 File: images/demo-8.png Graphic file (type png)
 <use images/demo-8.png>
 Package pdftex.def Info: images/demo-8.png  used on input line 225.
@@ -1509,7 +1509,7 @@ Package pdftex.def Info: images/demo-8.png  used on input line 225.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [40]
-<images/demo-10.png, id=443, 1013.28563pt x 511.9125pt>
+<images/demo-10.png, id=446, 1013.28563pt x 511.9125pt>
 File: images/demo-10.png Graphic file (type png)
 <use images/demo-10.png>
 Package pdftex.def Info: images/demo-10.png  used on input line 237.
@@ -1529,7 +1529,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 250--291
  []
 
 [42 <./images/demo-10.png (PNG copy)>]
-<images/demo-12.png, id=454, 1017.04968pt x 411.03563pt>
+<images/demo-12.png, id=456, 1017.04968pt x 411.03563pt>
 File: images/demo-12.png Graphic file (type png)
 <use images/demo-12.png>
 Package pdftex.def Info: images/demo-12.png  used on input line 301.
@@ -1645,7 +1645,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 308--331
  []
 
 [53]
-<images/threads-table.png, id=560, 560.8453pt x 348.55219pt>
+<images/threads-table.png, id=562, 560.8453pt x 348.55219pt>
 File: images/threads-table.png Graphic file (type png)
 <use images/threads-table.png>
 Package pdftex.def Info: images/threads-table.png  used on input line 341.
@@ -1671,7 +1671,7 @@ I'll just pretend that you didn't ask for it.
 If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
-<images/threads_share.png, id=571, 560.0925pt x 345.54094pt>
+<images/threads_share.png, id=573, 560.0925pt x 345.54094pt>
 File: images/threads_share.png Graphic file (type png)
 <use images/threads_share.png>
 Package pdftex.def Info: images/threads_share.png  used on input line 353.
@@ -1967,8 +1967,8 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 ### simple group (level 1) entered at line 36 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 36807 strings out of 480129
- 716469 string characters out of 5893410
+ 36808 strings out of 480129
+ 716481 string characters out of 5893410
  1296716 words of memory out of 5000000
  53881 multiletter control sequences out of 15000+600000
  500408 words of font info for 112 fonts, out of 8000000 for 9000
@@ -2002,10 +2002,10 @@ amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on thesis_main.pdf (89 pages, 2008614 bytes).
+Output written on thesis_main.pdf (89 pages, 2009683 bytes).
 PDF statistics:
- 1665 PDF objects out of 1728 (max. 8388607)
- 846 compressed objects within 9 object streams
- 216 named destinations out of 1000 (max. 500000)
+ 1673 PDF objects out of 1728 (max. 8388607)
+ 852 compressed objects within 9 object streams
+ 217 named destinations out of 1000 (max. 500000)
  425 words of extra memory for PDF output out of 10000 (max. 10000000)
 
