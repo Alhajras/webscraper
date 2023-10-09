@@ -2,11 +2,11 @@ This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis_main.aux
 The style file: apacite.bst
-Illegal, another \bibstyle command---line 227 of file thesis_main.aux
+Illegal, another \bibstyle command---line 233 of file thesis_main.aux
  : \bibstyle
  :          {alphabetic}
 I'm skipping whatever remains of this command
-Illegal, another \bibdata command---line 228 of file thesis_main.aux
+Illegal, another \bibdata command---line 234 of file thesis_main.aux
  : \bibdata
  :         {References}
 I'm skipping whatever remains of this command
@@ -23,45 +23,45 @@ Database file #1: References.bib
 Warning--entry type for "statista" isn't style-file defined
 --line 8 of file References.bib
 apacite.bst [2013/07/21 v6.03 APA bibliography style]
-You've used 2 entries,
+You've used 3 entries,
             6951 wiz_defined-function locations,
-            1279 strings with 11003 characters,
-and the built_in function-call counts, 3457 in all, are:
-= -- 458
-> -- 20
-< -- 154
-+ -- 138
-- -- 6
-* -- 186
-:= -- 641
-add.period$ -- 8
-call.type$ -- 2
-change.case$ -- 36
+            1284 strings with 11163 characters,
+and the built_in function-call counts, 5049 in all, are:
+= -- 661
+> -- 30
+< -- 228
++ -- 214
+- -- 8
+* -- 276
+:= -- 937
+add.period$ -- 12
+call.type$ -- 3
+change.case$ -- 53
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 60
-empty$ -- 139
-format.name$ -- 28
-if$ -- 678
+cite$ -- 6
+duplicate$ -- 94
+empty$ -- 207
+format.name$ -- 42
+if$ -- 989
 int.to.chr$ -- 0
-int.to.str$ -- 6
+int.to.str$ -- 9
 missing$ -- 0
-newline$ -- 47
-num.names$ -- 16
-pop$ -- 64
+newline$ -- 69
+num.names$ -- 24
+pop$ -- 109
 preamble$ -- 1
-purify$ -- 10
+purify$ -- 14
 quote$ -- 0
-skip$ -- 277
+skip$ -- 376
 stack$ -- 0
-substring$ -- 147
-swap$ -- 29
-text.length$ -- 7
+substring$ -- 230
+swap$ -- 44
+text.length$ -- 9
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 232
+type$ -- 312
 warning$ -- 0
-while$ -- 12
+while$ -- 17
 width$ -- 0
-write$ -- 50
+write$ -- 74
 (There were 2 error messages)

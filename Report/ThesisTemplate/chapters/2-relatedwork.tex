@@ -28,13 +28,17 @@ Since using a general search engine like Google directly is currently not an opt
 
 \section{High Level Google Architecture}\label{sec:high-level-google-architecture}
 
-The Google search engine's design gives a good overview of the essential components to create a scalable search engine. Hence, it is a great starting point for any search engine research; we will explain it in this section. Most code written in the Google search engine was implemented in C or C++ for efficiency and because it can run on either Solaris or Linux [2]. Google uses distributed crawlers to download internet web pages. The URLserver keeps a list of the available found URLs that need to be crawled by the crawlers. URLserver acts as a load balancer that sends the URLs to the following free crawler. Afterwards, the crawlers download the documents needed from the page, associate a unique ID for this page called docID, and then the page's content are stored in Soreservers. Storeservers then compress the pages and save them on a repository. The indexer component then uncompresses the pages and parses them. Each document is then converted into a set of words called hits. The hits represent the word and its position in the document. Afterwards, the indexer distributes those hits into barrels. Moreover, the indexer collects links found in the crawled page and stores them in the anchor's file. The anchors' file contains the links and their relationship with each other [2].
+As highlighted in the prior section, Google's foundational architecture serves as the blueprint for designing Scriburg. Google's search engine architecture provides a comprehensive framework for building a scalable search engine, making it an ideal starting point for any research in this domain. Most code within the Google search engine was developed in C or C++ to ensure efficiency and compatibility with operating systems like Solaris and Linux \cite{google}. On the contrary, Scriburg is implemented in Python. This choice was made because, in general, Python has a milder learning curve compared to C and C++, making it more appealing to the majority of data scientists for adjustments and modifications.
+
+Google employs a distributed crawler system to retrieve web pages from the internet. The URL server maintains a list of discovered URLs that require crawling, effectively serving as a load balancer by dispatching these URLs to available crawlers. The crawlers then download the required documents from the web pages, assign a unique identifier known as a "docID" to each page, and store the page content on Store servers. Subsequently, the Store servers compress and archive the pages in a repository.
+
+The next phase involves the indexer component, which decompresses the pages and parses their content. Each document transforms into a set of words referred to as "hits," where each hit records the word and its position within the document. These hits are later organized into "barrels" by the indexer. Furthermore, the indexer collects links within the crawled pages and maintains them in an anchor file. This anchor file contains information about the links and their interrelationships \cite{google}.
 
 
 \begin{figure}[h]	
      \centering
      \includegraphics[width=10cm]{images/google_arch.png}
-     \caption{High level view of Google web crawlers archeticture.}
+     \caption{High level view of Google web crawlers archeticture \cite{google}.}
      \label{fig:google-arch}
 \end{figure}
 

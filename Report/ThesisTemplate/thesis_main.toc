@@ -7,40 +7,40 @@
 \contentsline {chapter}{\numberline {2}Related Work}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Existing Web Crawlers}{5}{section.2.1}%
 \contentsline {section}{\numberline {2.2}High Level Google Architecture}{7}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Background}{9}{chapter.3}%
-\contentsline {section}{\numberline {3.1}The nature of the web}{9}{section.3.1}%
-\contentsline {section}{\numberline {3.2}History}{9}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Web Search Engine}{11}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Requierments and Features}{12}{subsection.3.3.1}%
-\contentsline {section}{\numberline {3.4}Cralwer}{12}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Cralwer Specifications}{12}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Crawler architecture}{13}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Web Crawler Types}{15}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Challenges and issues}{15}{subsection.3.4.4}%
-\contentsline {section}{\numberline {3.5}Indexing}{16}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Inverted index}{17}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Document Unit}{17}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Tokenization}{18}{subsection.3.5.3}%
-\contentsline {section}{\numberline {3.6}Ranking}{19}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Ranking Refinements}{21}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Fuzzy search}{22}{subsection.3.6.2}%
-\contentsline {chapter}{\numberline {4}Approach}{25}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Software Architecture}{25}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Crawler Implmentation}{27}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Links Data Structure}{28}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Practical Challenges}{28}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Indexer Implmentation}{30}{section.4.3}%
-\contentsline {section}{\numberline {4.4}User Interface Design}{32}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Evaluation}{39}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Testing Environment}{39}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Crawler}{39}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Datasets}{40}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Experiments}{41}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}Indexer}{55}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Datasets}{56}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Metrics}{56}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}Experiments}{57}{subsection.5.3.3}%
-\contentsline {section}{\numberline {5.4}User Experience}{61}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{63}{chapter.6}%
-\contentsline {chapter}{Bibliography}{67}{section*.47}%
+\contentsline {chapter}{\numberline {3}Background}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}The nature of the web}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}History}{11}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Web Search Engine}{13}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Requierments and Features}{14}{subsection.3.3.1}%
+\contentsline {section}{\numberline {3.4}Cralwer}{14}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Cralwer Specifications}{14}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Crawler architecture}{15}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Web Crawler Types}{17}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Challenges and issues}{17}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Indexing}{18}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Inverted index}{19}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Document Unit}{19}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Tokenization}{20}{subsection.3.5.3}%
+\contentsline {section}{\numberline {3.6}Ranking}{21}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Ranking Refinements}{23}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Fuzzy search}{24}{subsection.3.6.2}%
+\contentsline {chapter}{\numberline {4}Approach}{27}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Software Architecture}{27}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Crawler Implmentation}{29}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Links Data Structure}{30}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Practical Challenges}{30}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Indexer Implmentation}{32}{section.4.3}%
+\contentsline {section}{\numberline {4.4}User Interface Design}{34}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Evaluation}{41}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Testing Environment}{41}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Crawler}{41}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Datasets}{42}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Experiments}{43}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Indexer}{57}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Datasets}{58}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Metrics}{58}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Experiments}{59}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}User Experience}{63}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{65}{chapter.6}%
+\contentsline {chapter}{Bibliography}{69}{section*.47}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

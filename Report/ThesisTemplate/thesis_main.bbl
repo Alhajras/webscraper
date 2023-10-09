@@ -24,6 +24,31 @@ Pinkerton, B.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Sergey~Brin%
+}{%
+Sergey~Brin%
+}{%
+{\protect \APACyear {1998}}%
+}]{%
+google}
+\APACinsertmetastar {%
+google}%
+\begin{APACrefauthors}%
+Sergey~Brin, L\BPBI P.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{1998}.
+\newblock
+\APACrefbtitle {The anatomy of a large-scale hypertextual Web search engine}
+  {The anatomy of a large-scale hypertextual web search engine}.
+\newblock
+\begin{APACrefURL}
+  \url{https://snap.stanford.edu/class/cs224w-readings/Brin98Anatomy.pdf}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Statista%
 }{%
 Statista%
