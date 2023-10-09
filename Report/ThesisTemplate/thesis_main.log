@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  9 OCT 2023 14:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  9 OCT 2023 18:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -349,7 +349,7 @@ Package chngcntr Info: \counterwithout already defined.
 (/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-Package scrhack Info: loading setspace hack on input line 38.
+Package scrhack Info: loading setspace hack on input line 36.
 
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/setspace.hak
 File: setspace.hak 2021/11/13 v3.35 KOMA-Script scrhack part (hacking package s
@@ -437,7 +437,7 @@ Package: amsthm 2020/05/29 v2.20.6
 Class scrbook Info: amsthm's \deferred@thm@head patched.
 Package scrhack Info: hyperref hack deactivated because of
 (scrhack)             detection of KOMA-Script class, that doesn't
-(scrhack)             need that hack, on input line 53.
+(scrhack)             need that hack, on input line 51.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
@@ -584,7 +584,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.54 \documentclass{
+l.52 \documentclass{
                     scrreprt}
 The document may only declare one class.
 
@@ -618,7 +618,7 @@ File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
-Package scrhack Info: loading listings hack on input line 61.
+Package scrhack Info: loading listings hack on input line 59.
 
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/listings.hak
 File: listings.hak 2021/11/13 v3.35 KOMA-Script scrhack part (hacking package l
@@ -1006,8 +1006,8 @@ Package: lipsum 2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
 )
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 195.
-Package hyperref Info: Option `plainpages' set `false' on input line 195.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 193.
+Package hyperref Info: Option `plainpages' set `false' on input line 193.
 \c@todos=\count348
 \c@extends=\count349
 \c@drafts=\count350
@@ -1093,6 +1093,12 @@ LaTeX Warning: Label `eq:depth' multiply defined.
 
 
 LaTeX Warning: Label `eq:depth' multiply defined.
+
+
+LaTeX Warning: Label `webcrawler' multiply defined.
+
+
+LaTeX Warning: Label `statista' multiply defined.
 
 )
 \openout1 = `thesis_main.aux'.
@@ -1280,23 +1286,62 @@ chapter 1.
 
 ]
 chapter 2.
-[5] [6]
-Underfull \vbox (badness 5288) has occurred while \output is active []
+! Undefined control sequence.
+<argument> \citeauthoryear 
+                           {Pinkerton}{Pinkerton}{{\APACyear {2000}}}
+l.10 ... Brian Pinkerton in 1994 \cite{webcrawler}
+                                                  , is considered the first ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
- [7]
-<images/google_arch.png, id=286, 748.29562pt x 600.74437pt>
+! Undefined control sequence.
+<argument> ...r {Pinkerton}{Pinkerton}{{\APACyear 
+                                                  {2000}}}
+l.10 ... Brian Pinkerton in 1994 \cite{webcrawler}
+                                                  , is considered the first ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> \citeauthoryear 
+                           {Statista}{Statista}{{\APACyear {2023}}}
+l.12 ...share of approximately 84\%\cite{statista}
+                                                  , which surpasses its clos...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...ear {Statista}{Statista}{{\APACyear 
+                                                  {2023}}}
+l.12 ...share of approximately 84\%\cite{statista}
+                                                  , which surpasses its clos...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[5] [6] [7]
+<images/google_arch.png, id=293, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
-Package pdftex.def Info: images/google_arch.png  used on input line 51.
+Package pdftex.def Info: images/google_arch.png  used on input line 36.
 (pdftex.def)             Requested size: 284.52756pt x 228.42273pt.
-
-[8 <./images/google_arch.png (PNG copy)>]) (./chapters/3-background.tex
-[9] [10
-
-
-]
+) (./chapters/3-background.tex [8 <./images/google_arch.png (PNG copy)>]
 chapter 3.
-[11] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-3.def
+[9
+
+
+] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-3.def
 File: uni-3.def 2013/05/13 UCS: Unicode data U+0300..U+03FF
 )
 ! Undefined control sequence.
@@ -1321,8 +1366,8 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[12]
-<images/engine_components.png, id=312, 670.75594pt x 439.6425pt>
+[10]
+<images/engine_components.png, id=310, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 55.
@@ -1330,14 +1375,14 @@ Package pdftex.def Info: images/engine_components.png  used on input line 55.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13 <./images/engine_components.png (PNG copy)>] [14] [15]
-<images/crawler_architecture.png, id=329, 623.32875pt x 252.945pt>
+ [11 <./images/engine_components.png (PNG copy)>] [12] [13]
+<images/crawler_architecture.png, id=328, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
 Package pdftex.def Info: images/crawler_architecture.png  used on input line 10
 0.
 (pdftex.def)             Requested size: 284.52756pt x 115.46068pt.
- [16 <./images/crawler_architecture.png>] [17]
+ [14 <./images/crawler_architecture.png>] [15]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1351,8 +1396,8 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[18]
-<images/inverted_index.png, id=344, 608.2725pt x 233.37187pt>
+[16]
+<images/inverted_index.png, id=342, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
 Package pdftex.def Info: images/inverted_index.png  used on input line 154.
@@ -1361,7 +1406,7 @@ Package pdftex.def Info: images/inverted_index.png  used on input line 154.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[19]
+[17]
 Underfull \hbox (badness 10000) in paragraph at lines 169--169
 \T1/cmr/m/n/10.95 Out-put: The Uni-ver-sity of
  []
@@ -1369,7 +1414,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 169--169
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [20 <./images/inverted_index.png (PNG copy)>]
+ [18 <./images/inverted_index.png (PNG copy)>]
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
@@ -1382,7 +1427,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 197--214
 
  []
 
-[21]
+[19]
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 221--259
 [][]
  []
@@ -1395,25 +1440,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 221--259
 
 Underfull \vbox (badness 6380) has occurred while \output is active []
 
- [22]
+ [20]
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-33.def
 File: uni-33.def 2013/05/13 UCS: Unicode data U+2100..U+21FF
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [23]
+ [21]
 Underfull \vbox (badness 1418) has occurred while \output is active []
 
- [24]
+ [22]
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
 File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
 ))
-(./chapters/4-approach.tex [25] [26
+(./chapters/4-approach.tex [23] [24
 
 
 ]
 chapter 4.
-<images/software_arch.png, id=382, 1252.52943pt x 871.75688pt>
+<images/software_arch.png, id=381, 1252.52943pt x 871.75688pt>
 File: images/software_arch.png Graphic file (type png)
 <use images/software_arch.png>
 Package pdftex.def Info: images/software_arch.png  used on input line 12.
@@ -1421,10 +1466,10 @@ Package pdftex.def Info: images/software_arch.png  used on input line 12.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[27] [28 <./images/software_arch.png>]
+[25] [26 <./images/software_arch.png>]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 35.
- [29] [30] [31]
+ [27] [28] [29]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1438,7 +1483,7 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[32]
+[30]
 ! Extra }, or forgotten \endgroup.
 l.107           \State $doc\_length$ $\gets$ 0}
                                                
@@ -1478,9 +1523,9 @@ deleted material, e.g., by typing `I$}'.
 
 Underfull \vbox (badness 1052) has occurred while \output is active []
 
- [33]
-[34]
-<images/demo-3.png, id=420, 851.43094pt x 511.15968pt>
+ [31]
+[32]
+<images/demo-3.png, id=419, 851.43094pt x 511.15968pt>
 File: images/demo-3.png Graphic file (type png)
 <use images/demo-3.png>
 Package pdftex.def Info: images/demo-3.png  used on input line 157.
@@ -1495,8 +1540,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--218
 
  []
 
-[35 <./images/demo-3.png (PNG copy)>]
-<images/demo-8.png, id=426, 1082.54437pt x 620.3175pt>
+[33 <./images/demo-3.png (PNG copy)>]
+<images/demo-8.png, id=424, 1082.54437pt x 620.3175pt>
 File: images/demo-8.png Graphic file (type png)
 <use images/demo-8.png>
 Package pdftex.def Info: images/demo-8.png  used on input line 225.
@@ -1505,8 +1550,8 @@ Package pdftex.def Info: images/demo-8.png  used on input line 225.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[36]
-<images/demo-10.png, id=432, 1013.28563pt x 511.9125pt>
+[34]
+<images/demo-10.png, id=430, 1013.28563pt x 511.9125pt>
 File: images/demo-10.png Graphic file (type png)
 <use images/demo-10.png>
 Package pdftex.def Info: images/demo-10.png  used on input line 237.
@@ -1518,7 +1563,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 Underfull \vbox (badness 5359) has occurred while \output is active []
 
- [37 <./images/demo-8.png (PNG copy)>]
+ [35 <./images/demo-8.png (PNG copy)>]
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 250--291
 [][]
  []
@@ -1528,7 +1573,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 250--291
 
  []
 
-<images/demo-12.png, id=437, 1017.04968pt x 411.03563pt>
+<images/demo-12.png, id=436, 1017.04968pt x 411.03563pt>
 File: images/demo-12.png Graphic file (type png)
 <use images/demo-12.png>
 Package pdftex.def Info: images/demo-12.png  used on input line 301.
@@ -1536,8 +1581,8 @@ Package pdftex.def Info: images/demo-12.png  used on input line 301.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[38 <./images/demo-10.png (PNG copy)>]) (./chapters/5-datasets.tex [39]
-[40 <./images/demo-12.png (PNG copy)>]
+[36 <./images/demo-10.png (PNG copy)>]) (./chapters/5-datasets.tex [37]
+[38 <./images/demo-12.png (PNG copy)>]
 chapter 5.
 
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 11--28
@@ -1549,7 +1594,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--28
 
  []
 
-[41
+[39
 
 
 ]
@@ -1557,7 +1602,7 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
 1.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [42]
+) [40]
 Overfull \hbox (1.19261pt too wide) in paragraph at lines 68--100
 [][]
  []
@@ -1570,7 +1615,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--100
 
 Underfull \vbox (badness 1418) has occurred while \output is active []
 
- [43]
+ [41]
 Overfull \hbox (1.19261pt too wide) in paragraph at lines 109--133
 [][]
  []
@@ -1580,12 +1625,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 109--133
 
  []
 
-[44]
+[42]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 141.
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 142.
- [45] [46]
+ [43] [44]
 ! Misplaced alignment tab character &.
 l.177 The "Docs &
                   Content" section provides information regarding the collec...
@@ -1612,7 +1657,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 192--224
 
  []
 
-[47]
+[45]
 Overfull \hbox (1.19261pt too wide) in paragraph at lines 235--259
 [][]
  []
@@ -1632,7 +1677,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 269--301
 
  []
 
-[48]
+[46]
 Overfull \hbox (1.19261pt too wide) in paragraph at lines 308--331
 [][]
  []
@@ -1642,8 +1687,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 308--331
 
  []
 
-[49]
-<images/threads-table.png, id=548, 560.8453pt x 348.55219pt>
+[47]
+<images/threads-table.png, id=547, 560.8453pt x 348.55219pt>
 File: images/threads-table.png Graphic file (type png)
 <use images/threads-table.png>
 Package pdftex.def Info: images/threads-table.png  used on input line 341.
@@ -1665,8 +1710,8 @@ I'll just pretend that you didn't ask for it.
 If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
-[50 <./images/threads-table.png (PNG copy)>]
-<images/threads_share.png, id=555, 560.0925pt x 345.54094pt>
+[48 <./images/threads-table.png (PNG copy)>]
+<images/threads_share.png, id=554, 560.0925pt x 345.54094pt>
 File: images/threads_share.png Graphic file (type png)
 <use images/threads_share.png>
 Package pdftex.def Info: images/threads_share.png  used on input line 353.
@@ -1681,7 +1726,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 366--399
 
  []
 
-[51 <./images/threads_share.png (PNG copy)>]
+[49 <./images/threads_share.png (PNG copy)>]
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 409--444
 [][]
  []
@@ -1691,7 +1736,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 409--444
 
  []
 
-[52]
+[50]
 Overfull \hbox (1.19261pt too wide) in paragraph at lines 456--491
 [][]
  []
@@ -1704,7 +1749,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 456--491
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [53]
+ [51]
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 507--542
 [][]
  []
@@ -1714,7 +1759,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 507--542
 
  []
 
-[54]
+[52]
 Overfull \hbox (1.19261pt too wide) in paragraph at lines 554--589
 [][]
  []
@@ -1727,7 +1772,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 554--589
 
 Underfull \vbox (badness 3058) has occurred while \output is active []
 
- [55]
+ [53]
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 601--636
 [][]
  []
@@ -1740,7 +1785,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 601--636
 
 Underfull \vbox (badness 1122) has occurred while \output is active []
 
- [56]
+ [54]
 Overfull \hbox (15.41899pt too wide) in paragraph at lines 646--681
 [][]
  []
@@ -1763,8 +1808,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 694--711
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [57]
-[58]
+ [55]
+[56]
 Overfull \hbox (1.19261pt too wide) in paragraph at lines 753--783
 [][]
  []
@@ -1774,7 +1819,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 753--783
 
  []
 
-[59]
+[57]
 Overfull \hbox (1.19261pt too wide) in paragraph at lines 794--824
 [][]
  []
@@ -1784,7 +1829,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 794--824
 
  []
 
-[60]
+[58]
 Overfull \hbox (1.19261pt too wide) in paragraph at lines 832--862
 [][]
  []
@@ -1794,7 +1839,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 832--862
 
  []
 
-[61]
+[59]
 Overfull \hbox (1.19261pt too wide) in paragraph at lines 876--906
 [][]
  []
@@ -1814,17 +1859,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 914--944
 
  []
 
-[62] [63]) (./chapters/8-conclusions.tex [64]
+[60] [61]) (./chapters/8-conclusions.tex [62]
 chapter 6.
-(./thesis_main.bbl [65
+(./thesis_main.bbl [63
 
 
-] [66]
+] [64]
 ! Undefined control sequence.
 <argument> \protect \citeauthoryear 
-                                    {Kimathi}{Kimathi}{{\protect \APACyear {...
-l.10 Kimathi2020}
-                 
+                                    {Pinkerton}{Pinkerton}{{\protect \APACye...
+l.10 webcrawler}
+                
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1832,10 +1877,10 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-<argument> ...mathi}{Kimathi}{{\protect \APACyear 
-                                                  {2020}}}
-l.10 Kimathi2020}
-                 
+<argument> ...ton}{Pinkerton}{{\protect \APACyear 
+                                                  {2000}}}
+l.10 webcrawler}
+                
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1879,8 +1924,8 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 ! Undefined control sequence.
-l.18 \APACrefYearMonthDay
-                         {2020}{June}{}.
+l.18 \APACrefYear
+                 {2000}.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1889,7 +1934,7 @@ and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 l.20 \APACrefbtitle
-                    {What Is Ray Tracing Technology and How It Works in GPUs...
+                    {Finding what people want} {Finding what people want}.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1903,9 +1948,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.23 \begin{APACrefURL}
-                        \url{https://www.dignited.com/62084/how-ray-tracing-...
-
+l.22 \begin{APACrefURL}
+                        \url{http://www.thinkpink.com/bp/Thesis/Thesis.pdf}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
@@ -1918,14 +1962,14 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.24   \end{APACrefURL}
+l.23   \end{APACrefURL}
                        
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 ! Undefined control sequence.
-l.25 \PrintBackRefs
+l.24 \PrintBackRefs
                    {\CurrentBib}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1934,7 +1978,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.25 \PrintBackRefs{\CurrentBib
+l.24 \PrintBackRefs{\CurrentBib
                                }
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1942,13 +1986,403 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-)) [67
+! Undefined control sequence.
+<argument> \protect \citeauthoryear 
+                                    {Statista}{Statista}{{\protect \APACyear...
+l.33 statista}
+              
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...ista}{Statista}{{\protect \APACyear 
+                                                  {2023}}}
+l.33 statista}
+              
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.34 \APACinsertmetastar
+                         {%
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
 
-] [68
+! LaTeX Error: Environment APACrefauthors undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 \begin{APACrefauthors}
+                           %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
-] [69] (./thesis_main.aux)
+! LaTeX Error: \begin{thebibliography} on input line 1 ended by \end{APACrefaut
+hors}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.38 \end{APACrefauthors}
+                         %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.41 \APACrefYearMonthDay
+                         {2023}{July}{}.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.43 \APACrefbtitle
+                    {Market share of leading desktop search engines worldwid...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Environment APACrefURL undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 \begin{APACrefURL}
+                       
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{thebibliography} on input line 1 ended by \end{APACrefURL
+}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49   \end{APACrefURL}
+                       
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.50 \PrintBackRefs
+                   {\CurrentBib}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.50 \PrintBackRefs{\CurrentBib
+                               }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--51
+\T1/cmtt/m/n/10.95 / / www . dignited . com / 62084 / how-[]ray-[]tracing-[]wor
+kshttps : / / www . statista .
+ []
+
+)) [65
+
+
+] [66
+
+
+] (./thesis_main.bblpdfTeX warning (ext4): destination with the same identifier
+ (name{cite.webcrawler}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.10 webcrawler}
+                
+! Undefined control sequence.
+<argument> \protect \citeauthoryear 
+                                    {Pinkerton}{Pinkerton}{{\protect \APACye...
+l.10 webcrawler}
+                
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...ton}{Pinkerton}{{\protect \APACyear 
+                                                  {2000}}}
+l.10 webcrawler}
+                
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.11 \APACinsertmetastar
+                         {%
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Environment APACrefauthors undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.13 \begin{APACrefauthors}
+                           %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{thebibliography} on input line 1 ended by \end{APACrefaut
+hors}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \end{APACrefauthors}
+                         %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.18 \APACrefYear
+                 {2000}.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.20 \APACrefbtitle
+                    {Finding what people want} {Finding what people want}.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Environment APACrefURL undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.22 \begin{APACrefURL}
+                        \url{http://www.thinkpink.com/bp/Thesis/Thesis.pdf}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{thebibliography} on input line 1 ended by \end{APACrefURL
+}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.23   \end{APACrefURL}
+                       
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.24 \PrintBackRefs
+                   {\CurrentBib}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.24 \PrintBackRefs{\CurrentBib
+                               }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+pdfTeX warning (ext4): destination with the same identifier (name{cite.statista
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.33 statista}
+              
+! Undefined control sequence.
+<argument> \protect \citeauthoryear 
+                                    {Statista}{Statista}{{\protect \APACyear...
+l.33 statista}
+              
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...ista}{Statista}{{\protect \APACyear 
+                                                  {2023}}}
+l.33 statista}
+              
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.34 \APACinsertmetastar
+                         {%
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Environment APACrefauthors undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 \begin{APACrefauthors}
+                           %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{thebibliography} on input line 1 ended by \end{APACrefaut
+hors}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.38 \end{APACrefauthors}
+                         %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.41 \APACrefYearMonthDay
+                         {2023}{July}{}.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.43 \APACrefbtitle
+                    {Market share of leading desktop search engines worldwid...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Environment APACrefURL undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 \begin{APACrefURL}
+                       
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{thebibliography} on input line 1 ended by \end{APACrefURL
+}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49   \end{APACrefURL}
+                       
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.50 \PrintBackRefs
+                   {\CurrentBib}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.50 \PrintBackRefs{\CurrentBib
+                               }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--51
+\T1/cmtt/m/n/10.95 / / www . dignited . com / 62084 / how-[]ray-[]tracing-[]wor
+kshttps : / / www . statista .
+ []
+
+) [67
+
+
+] [68] (./thesis_main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1960,10 +2394,10 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 ### simple group (level 1) entered at line 36 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 36805 strings out of 480129
- 716509 string characters out of 5893410
+ 36810 strings out of 480129
+ 716578 string characters out of 5893410
  1325716 words of memory out of 5000000
- 53883 multiletter control sequences out of 15000+600000
+ 53884 multiletter control sequences out of 15000+600000
  500408 words of font info for 112 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,19n,106p,10753b,1560s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1995,10 +2429,10 @@ amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on thesis_main.pdf (83 pages, 2006939 bytes).
+Output written on thesis_main.pdf (82 pages, 2008388 bytes).
 PDF statistics:
- 1647 PDF objects out of 1728 (max. 8388607)
- 832 compressed objects within 9 object streams
- 212 named destinations out of 1000 (max. 500000)
+ 1662 PDF objects out of 1728 (max. 8388607)
+ 845 compressed objects within 9 object streams
+ 214 named destinations out of 1000 (max. 500000)
  425 words of extra memory for PDF output out of 10000 (max. 10000000)
 
