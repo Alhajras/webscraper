@@ -4,15 +4,15 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces High level view of Google web crawlers archeticture.\relax }}{6}{figure.caption.8}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2}{\ignorespaces The basic crawler architecture.\relax }}{16}{figure.caption.10}%
-\contentsline {figure}{\numberline {3}{\ignorespaces An illustration of an inverted index featuring three documents. All tokens are included in this example, and the sole text normalization applied is converting all tokens to lowercase. Queries that involve multiple keywords are resolved using set operations. [3]\relax }}{21}{figure.caption.11}%
+\contentsline {figure}{\numberline {3}{\ignorespaces An illustration of an inverted index featuring three documents. All tokens are included in this example, and the sole text normalization applied is converting all tokens to lowercase. Queries that involve multiple keywords are resolved using set operations. [3]\relax }}{20}{figure.caption.11}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4}{\ignorespaces High-level view of the software archtiticture.\relax }}{30}{figure.caption.14}%
-\contentsline {figure}{\numberline {5}{\ignorespaces An overview of the Templates table containing inspectors list projecting the targeted feilds in a document\relax }}{39}{figure.caption.15}%
-\contentsline {figure}{\numberline {6}{\ignorespaces An overview of the runners table, showing the runners status and progress.\relax }}{41}{figure.caption.17}%
-\contentsline {figure}{\numberline {7}{\ignorespaces An overview of the indwxwea table, showing the their status and progress.\relax }}{42}{figure.caption.18}%
-\contentsline {figure}{\numberline {8}{\ignorespaces High-level view of the software archtiticture.\relax }}{44}{figure.caption.20}%
+\contentsline {figure}{\numberline {4}{\ignorespaces High-level view of the software archtiticture.\relax }}{28}{figure.caption.14}%
+\contentsline {figure}{\numberline {5}{\ignorespaces An overview of the Templates table containing inspectors list projecting the targeted feilds in a document\relax }}{35}{figure.caption.15}%
+\contentsline {figure}{\numberline {6}{\ignorespaces An overview of the runners table, showing the runners status and progress.\relax }}{37}{figure.caption.17}%
+\contentsline {figure}{\numberline {7}{\ignorespaces An overview of the indwxwea table, showing the their status and progress.\relax }}{38}{figure.caption.18}%
+\contentsline {figure}{\numberline {8}{\ignorespaces High-level view of the software archtiticture.\relax }}{40}{figure.caption.20}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {9}{\ignorespaces Comparing threads performance.\relax }}{55}{figure.caption.28}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Threads documents distribution.\relax }}{56}{figure.caption.29}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Comparing threads performance.\relax }}{50}{figure.caption.28}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Threads documents distribution.\relax }}{51}{figure.caption.29}%
 \addvspace {10\p@ }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -2,31 +2,31 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {1}{\ignorespaces Documents sample\relax }}{23}{table.caption.12}%
-\contentsline {table}{\numberline {2}{\ignorespaces The first 10 tokens of the result inverted index and the scores of the docuemnts. \relax }}{24}{table.caption.13}%
+\contentsline {table}{\numberline {1}{\ignorespaces Documents sample\relax }}{22}{table.caption.12}%
+\contentsline {table}{\numberline {2}{\ignorespaces The first 10 tokens of the result inverted index and the scores of the docuemnts. \relax }}{22}{table.caption.13}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3}{\ignorespaces Crawler configurations options\relax }}{40}{table.caption.16}%
-\contentsline {table}{\numberline {4}{\ignorespaces Indexer configurations options\relax }}{43}{table.caption.19}%
+\contentsline {table}{\numberline {3}{\ignorespaces Crawler configurations options\relax }}{36}{table.caption.16}%
+\contentsline {table}{\numberline {4}{\ignorespaces Indexer configurations options\relax }}{39}{table.caption.19}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5}{\ignorespaces Local machine setup\relax }}{45}{table.caption.21}%
-\contentsline {table}{\numberline {6}{\ignorespaces Crawler configuration\relax }}{48}{table.caption.22}%
-\contentsline {table}{\numberline {7}{\ignorespaces Crawler configuration\relax }}{49}{table.caption.23}%
-\contentsline {table}{\numberline {8}{\ignorespaces Crawler configuration\relax }}{53}{table.caption.24}%
-\contentsline {table}{\numberline {9}{\ignorespaces Crawler results\relax }}{53}{table.caption.25}%
-\contentsline {table}{\numberline {10}{\ignorespaces Crawler configuration\relax }}{54}{table.caption.26}%
-\contentsline {table}{\numberline {11}{\ignorespaces Crawler results\relax }}{55}{table.caption.27}%
-\contentsline {table}{\numberline {12}{\ignorespaces Crawler configuration\relax }}{57}{table.caption.30}%
-\contentsline {table}{\numberline {13}{\ignorespaces Crawler configuration\relax }}{58}{table.caption.31}%
-\contentsline {table}{\numberline {14}{\ignorespaces Crawler configuration\relax }}{59}{table.caption.32}%
-\contentsline {table}{\numberline {15}{\ignorespaces Crawler results\relax }}{60}{table.caption.33}%
-\contentsline {table}{\numberline {16}{\ignorespaces Crawler configuration\relax }}{61}{table.caption.34}%
-\contentsline {table}{\numberline {17}{\ignorespaces Crawler results\relax }}{62}{table.caption.35}%
-\contentsline {table}{\numberline {18}{\ignorespaces Crawler results\relax }}{63}{table.caption.36}%
-\contentsline {table}{\numberline {19}{\ignorespaces Stack Overflow posts dataset\relax }}{63}{table.caption.37}%
-\contentsline {table}{\numberline {20}{\ignorespaces Stack Overflow indexing configuration, test the default settings without any changes.\relax }}{65}{table.caption.41}%
-\contentsline {table}{\numberline {21}{\ignorespaces Stack Overflow indexing configuration\relax }}{67}{table.caption.42}%
-\contentsline {table}{\numberline {22}{\ignorespaces Stack Overflow indexing configuration\relax }}{67}{table.caption.43}%
-\contentsline {table}{\numberline {23}{\ignorespaces Stack Overflow indexing configuration\relax }}{68}{table.caption.44}%
-\contentsline {table}{\numberline {24}{\ignorespaces Stack Overflow indexing configuration\relax }}{69}{table.caption.45}%
+\contentsline {table}{\numberline {5}{\ignorespaces Local machine setup\relax }}{41}{table.caption.21}%
+\contentsline {table}{\numberline {6}{\ignorespaces Crawler configuration\relax }}{44}{table.caption.22}%
+\contentsline {table}{\numberline {7}{\ignorespaces Crawler configuration\relax }}{44}{table.caption.23}%
+\contentsline {table}{\numberline {8}{\ignorespaces Crawler configuration\relax }}{48}{table.caption.24}%
+\contentsline {table}{\numberline {9}{\ignorespaces Crawler results\relax }}{48}{table.caption.25}%
+\contentsline {table}{\numberline {10}{\ignorespaces Crawler configuration\relax }}{49}{table.caption.26}%
+\contentsline {table}{\numberline {11}{\ignorespaces Crawler results\relax }}{49}{table.caption.27}%
+\contentsline {table}{\numberline {12}{\ignorespaces Crawler configuration\relax }}{52}{table.caption.30}%
+\contentsline {table}{\numberline {13}{\ignorespaces Crawler configuration\relax }}{53}{table.caption.31}%
+\contentsline {table}{\numberline {14}{\ignorespaces Crawler configuration\relax }}{53}{table.caption.32}%
+\contentsline {table}{\numberline {15}{\ignorespaces Crawler results\relax }}{55}{table.caption.33}%
+\contentsline {table}{\numberline {16}{\ignorespaces Crawler configuration\relax }}{55}{table.caption.34}%
+\contentsline {table}{\numberline {17}{\ignorespaces Crawler results\relax }}{56}{table.caption.35}%
+\contentsline {table}{\numberline {18}{\ignorespaces Crawler results\relax }}{57}{table.caption.36}%
+\contentsline {table}{\numberline {19}{\ignorespaces Stack Overflow posts dataset\relax }}{58}{table.caption.37}%
+\contentsline {table}{\numberline {20}{\ignorespaces Stack Overflow indexing configuration, test the default settings without any changes.\relax }}{59}{table.caption.41}%
+\contentsline {table}{\numberline {21}{\ignorespaces Stack Overflow indexing configuration\relax }}{61}{table.caption.42}%
+\contentsline {table}{\numberline {22}{\ignorespaces Stack Overflow indexing configuration\relax }}{61}{table.caption.43}%
+\contentsline {table}{\numberline {23}{\ignorespaces Stack Overflow indexing configuration\relax }}{62}{table.caption.44}%
+\contentsline {table}{\numberline {24}{\ignorespaces Stack Overflow indexing configuration\relax }}{63}{table.caption.45}%
 \addvspace {10\p@ }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
