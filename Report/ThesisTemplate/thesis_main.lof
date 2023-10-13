@@ -7,13 +7,13 @@
 \contentsline {figure}{\numberline {3}{\ignorespaces A generic web crawler architecture overview \cite {introduction-ir}.\relax }}{14}{figure.caption.10}%
 \contentsline {figure}{\numberline {4}{\ignorespaces An illustration of an inverted index featuring three documents. All tokens are included in this example, and the sole text normalization applied is converting all tokens to lowercase. Queries that involve multiple keywords are resolved using set operations. [3]\relax }}{16}{figure.caption.11}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5}{\ignorespaces High-level view of the software archtiticture.\relax }}{26}{figure.caption.14}%
-\contentsline {figure}{\numberline {6}{\ignorespaces An overview of the Templates table containing inspectors list projecting the targeted feilds in a document\relax }}{33}{figure.caption.15}%
-\contentsline {figure}{\numberline {7}{\ignorespaces An overview of the runners table, showing the runners status and progress.\relax }}{35}{figure.caption.17}%
-\contentsline {figure}{\numberline {8}{\ignorespaces An overview of the indwxwea table, showing the their status and progress.\relax }}{36}{figure.caption.18}%
-\contentsline {figure}{\numberline {9}{\ignorespaces High-level view of the software archtiticture.\relax }}{38}{figure.caption.20}%
+\contentsline {figure}{\numberline {5}{\ignorespaces High-level view of the software archtiticture.\relax }}{24}{figure.caption.14}%
+\contentsline {figure}{\numberline {6}{\ignorespaces An overview of the Templates table containing inspectors list projecting the targeted feilds in a document\relax }}{31}{figure.caption.15}%
+\contentsline {figure}{\numberline {7}{\ignorespaces An overview of the runners table, showing the runners status and progress.\relax }}{33}{figure.caption.17}%
+\contentsline {figure}{\numberline {8}{\ignorespaces An overview of the indwxwea table, showing the their status and progress.\relax }}{34}{figure.caption.18}%
+\contentsline {figure}{\numberline {9}{\ignorespaces High-level view of the software archtiticture.\relax }}{36}{figure.caption.20}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {10}{\ignorespaces Comparing threads performance.\relax }}{48}{figure.caption.28}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Threads documents distribution.\relax }}{49}{figure.caption.29}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Comparing threads performance.\relax }}{46}{figure.caption.28}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Threads documents distribution.\relax }}{47}{figure.caption.29}%
 \addvspace {10\p@ }
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
