@@ -18,11 +18,11 @@
 \contentsline {section}{\numberline {3.3}Indexing}{17}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Inverted index}{17}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Document Unit}{18}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Tokenization}{19}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.3}Tokenization}{18}{subsection.3.3.3}%
 \contentsline {section}{\numberline {3.4}Ranking}{19}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Ranking Refinements}{21}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}Fuzzy search}{22}{subsection.3.4.2}%
-\contentsline {section}{\numberline {3.5}The nature of the web}{24}{section.3.5}%
+\contentsline {section}{\numberline {3.5}The nature of the web}{23}{section.3.5}%
 \contentsline {section}{\numberline {3.6}History}{24}{section.3.6}%
 \contentsline {chapter}{\numberline {4}Approach}{27}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Software Architecture}{27}{section.4.1}%
@@ -42,5 +42,5 @@
 \contentsline {subsection}{\numberline {5.3.3}Experiments}{59}{subsection.5.3.3}%
 \contentsline {section}{\numberline {5.4}User Experience}{63}{section.5.4}%
 \contentsline {chapter}{\numberline {6}Conclusions and Future Work}{65}{chapter.6}%
-\contentsline {chapter}{Bibliography}{69}{section*.47}%
+\contentsline {chapter}{Bibliography}{67}{section*.46}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
