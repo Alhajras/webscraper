@@ -5,24 +5,25 @@ This section tackles the fundamental principles and groundwork of the theory enc
 
 \section{Web Search Engine}
 \label{sec:web-search-engine}
-Web Search Engine is software that collects information from the web and indexes them efficiently to optimize the searching process by the user. Users enter their queries to ask for information. The engine performs queries, looks up the pre-built organized index, and returns relevant results. The returned result is presented by Search Engine Results Pages as known as SERPs. The result is then ranked based on predefined criteria. 
+Web Search Engine is software that collects information from the web and indexes them efficiently to optimize the searching process by the end user. When users enter their queries to ask for information, the engine performs queries, looks up the pre-built organized index, and returns relevant results. Search Engine Results Pages, known as SERPs, present the returned results. The result is then ranked based on predefined criteria. 
 
-Web search engines use web crawlers or spiders to collect and harvest the internet jumping from one page to another. Each page can contain several links. The crawler's task is to find the links, visit them, and harvest them. Followed by crawlers, indexing is the next process where information is organized and optimized for search. 
+Web search engines use web crawlers or spiders to collect and harvest the internet, jumping from one page to another. Each page can contain several links. The crawler's task is to find the links, visit them, and harvest them. Followed by crawlers, indexing is the next process where information is organized and optimized for search.
 
 \begin{figure}[h]	
      \centering
          \includegraphics[width=10cm]{images/engine_components.png}
+              \caption{An overview of a generic search engine system.}
+     \label{fig:search-engine-overvoew}
 \end{figure}
 
 \subsection{Requierments and Features}
-Search engines, regardless of their imp[lmentation and design there, are some features and requirements that make a good one; following is a list of the most fundamentals features:  
+Regardless of their implementation and design, all search engines share certain features and prerequisites crucial for their effectiveness. Below is a compilation of the most essential features: 
 
 \begin{itemize}
-  \item Web Crawling and Indexing: Each search engine needs two main big components, Crawler and Indexer. The Crawler is the component responsible for collecting pages and downloading them from the web. An indexer is used to create an index to facilitate efficient searching.
-  \item Ranking and Relevancy: The algorithm determines the order in which search results are presented to users based on relevance.
-  \item User Interface: The user interface where users enter their search queries and view results.
-  \item Scalability and Performance: Distributed Architecture: A distributed system helps handle the vast amount of data and traffic. This needs a Load balancer to distribute the cralwing tasks betrween the nodes and threads. 
-  \item Data Storage and Management: A robust database system is necessary for storing indexed data and metadata.
+	\item[] \textbf{Web Crawling and Indexing:} As shown in Figure \ref{fig:search-engine-overvoew}, the initial step in the search engine's operation is web crawling. Crawlers initiate the process by connecting to the web and downloading the required pages. Subsequently, indexing comes into play, where the downloaded files are organized and indexed to enhance querying and search efficiency. Parsing the downloaded pages can be carried out in either the crawling phase or during indexing, and Scriburg, this parsing occurs during the crawling process. It is worth noting that, in Scriburg, pages are not downloaded; the targeted documents are parsed, stored in the database, and the pages themselves are discarded.
+  \item[] \textbf{Ranking and Relevancy:} As indicated in Figure \ref{fig:search-engine-overview}, when users input a query to search for relevant documents, they face the Search Engine Results Pages (SERP). Users typically focus on the top results while overlooking the lower results. Hence, we must maintain relevancy. Ensuring relevance is a challenging task. Ranking the discovered documents and prioritizing the most pertinent documents at the top and the less relevant ones further down is crucial. 
+  \item[] \textbf{Scalability and Performance:} A distributed system is essential for managing the extensive data and traffic demands. A load balancer is critical in distributing the crawling tasks efficiently among nodes and threads. In this, we will discuss the implemented loading balance mechanism to distribute the crawling tasks among the crawlers. 
+
 \end{itemize}
 
 \section{Cralwer}

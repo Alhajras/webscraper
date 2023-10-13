@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  13 OCT 2023 10:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.9.7)  13 OCT 2023 11:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1398,7 +1398,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-<images/google_arch.png, id=297, 748.29562pt x 600.74437pt>
+<images/google_arch.png, id=299, 748.29562pt x 600.74437pt>
 File: images/google_arch.png Graphic file (type png)
 <use images/google_arch.png>
 Package pdftex.def Info: images/google_arch.png  used on input line 40.
@@ -1460,7 +1460,7 @@ Underfull \vbox (badness 1484) has occurred while \output is active []
 
 ]
 chapter 3.
-<images/engine_components.png, id=316, 670.75594pt x 439.6425pt>
+<images/engine_components.png, id=318, 670.75594pt x 439.6425pt>
 File: images/engine_components.png Graphic file (type png)
 <use images/engine_components.png>
 Package pdftex.def Info: images/engine_components.png  used on input line 14.
@@ -1468,17 +1468,19 @@ Package pdftex.def Info: images/engine_components.png  used on input line 14.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[11] [12 <./images/engine_components.png (PNG copy)>] [13]
-<images/crawler_architecture.png, id=333, 623.32875pt x 252.945pt>
+[11]
+
+LaTeX Warning: Reference `fig:search-engine-overview' on page 12 undefined on i
+nput line 24.
+
+[12 <./images/engine_components.png (PNG copy)>] [13]
+<images/crawler_architecture.png, id=335, 623.32875pt x 252.945pt>
 File: images/crawler_architecture.png Graphic file (type png)
 <use images/crawler_architecture.png>
-Package pdftex.def Info: images/crawler_architecture.png  used on input line 60
+Package pdftex.def Info: images/crawler_architecture.png  used on input line 61
 .
 (pdftex.def)             Requested size: 284.52756pt x 115.46068pt.
- [14 <./images/crawler_architecture.png>]
-Underfull \vbox (badness 4805) has occurred while \output is active []
-
- [15]
+ [14 <./images/crawler_architecture.png>] [15] [16]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1486,59 +1488,62 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.98 
+l.99 
      
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[16]
-<images/inverted_index.png, id=347, 608.2725pt x 233.37187pt>
+[17]
+<images/inverted_index.png, id=354, 608.2725pt x 233.37187pt>
 File: images/inverted_index.png Graphic file (type png)
 <use images/inverted_index.png>
-Package pdftex.def Info: images/inverted_index.png  used on input line 115.
+Package pdftex.def Info: images/inverted_index.png  used on input line 116.
 (pdftex.def)             Requested size: 284.52756pt x 109.16489pt.
- [17]
-Underfull \hbox (badness 10000) in paragraph at lines 130--130
+ [18 <./images/inverted_index.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 131--131
 \T1/cmr/m/n/10.95 Out-put: The Uni-ver-sity of
  []
 
-[18 <./images/inverted_index.png (PNG copy)>]
-(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+[19] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
-Overfull \hbox (15.41899pt too wide) in paragraph at lines 159--176
+Overfull \hbox (15.41899pt too wide) in paragraph at lines 160--177
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--176
+Underfull \hbox (badness 10000) in paragraph at lines 160--177
 
  []
 
-[19]
-Overfull \hbox (15.41899pt too wide) in paragraph at lines 183--221
+
+Overfull \hbox (15.41899pt too wide) in paragraph at lines 184--222
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 183--221
+Underfull \hbox (badness 10000) in paragraph at lines 184--222
 
  []
 
-[20] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-33.def
+
+Underfull \vbox (badness 6300) has occurred while \output is active []
+
+ [20]
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-33.def
 File: uni-33.def 2013/05/13 UCS: Unicode data U+2100..U+21FF
-) [21]
-[22] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
+) [21] [22]
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
 File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
-) [23]
-[24] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-3.def
+) [23] [24]
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-3.def
 File: uni-3.def 2013/05/13 UCS: Unicode data U+0300..U+03FF
 )
 ! Undefined control sequence.
 \u-default-955 #1->\textlambda 
                                
-l.297 The parameter λ
+l.298 The parameter λ
                       p signifies the rate of modifications occurring on pag...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1549,7 +1554,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 \u-default-955 #1->\textlambda 
                                
-l.297 ... derived this estimation technique for λ
+l.298 ... derived this estimation technique for λ
                                                   p [8].
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1562,7 +1567,7 @@ and I'll forget about whatever was undefined.
 
 ]
 chapter 4.
-<images/software_arch.png, id=399, 1252.52943pt x 871.75688pt>
+<images/software_arch.png, id=401, 1252.52943pt x 871.75688pt>
 File: images/software_arch.png Graphic file (type png)
 <use images/software_arch.png>
 Package pdftex.def Info: images/software_arch.png  used on input line 12.
@@ -1629,7 +1634,7 @@ Underfull \vbox (badness 1052) has occurred while \output is active []
 
  [33]
 [34]
-<images/demo-3.png, id=437, 851.43094pt x 511.15968pt>
+<images/demo-3.png, id=439, 851.43094pt x 511.15968pt>
 File: images/demo-3.png Graphic file (type png)
 <use images/demo-3.png>
 Package pdftex.def Info: images/demo-3.png  used on input line 157.
@@ -1645,7 +1650,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--218
  []
 
 [35 <./images/demo-3.png (PNG copy)>]
-<images/demo-8.png, id=444, 1082.54437pt x 620.3175pt>
+<images/demo-8.png, id=446, 1082.54437pt x 620.3175pt>
 File: images/demo-8.png Graphic file (type png)
 <use images/demo-8.png>
 Package pdftex.def Info: images/demo-8.png  used on input line 225.
@@ -1655,7 +1660,7 @@ Package pdftex.def Info: images/demo-8.png  used on input line 225.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [36]
-<images/demo-10.png, id=450, 1013.28563pt x 511.9125pt>
+<images/demo-10.png, id=452, 1013.28563pt x 511.9125pt>
 File: images/demo-10.png Graphic file (type png)
 <use images/demo-10.png>
 Package pdftex.def Info: images/demo-10.png  used on input line 237.
@@ -1677,7 +1682,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 250--291
 
  []
 
-<images/demo-12.png, id=455, 1017.04968pt x 411.03563pt>
+<images/demo-12.png, id=457, 1017.04968pt x 411.03563pt>
 File: images/demo-12.png Graphic file (type png)
 <use images/demo-12.png>
 Package pdftex.def Info: images/demo-12.png  used on input line 301.
@@ -1792,7 +1797,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 308--331
  []
 
 [49]
-<images/threads-table.png, id=565, 560.8453pt x 348.55219pt>
+<images/threads-table.png, id=567, 560.8453pt x 348.55219pt>
 File: images/threads-table.png Graphic file (type png)
 <use images/threads-table.png>
 Package pdftex.def Info: images/threads-table.png  used on input line 341.
@@ -1815,7 +1820,7 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 [50 <./images/threads-table.png (PNG copy)>]
-<images/threads_share.png, id=572, 560.0925pt x 345.54094pt>
+<images/threads_share.png, id=574, 560.0925pt x 345.54094pt>
 File: images/threads_share.png Graphic file (type png)
 <use images/threads_share.png>
 Package pdftex.def Info: images/threads_share.png  used on input line 353.
@@ -2355,6 +2360,9 @@ kshttps : / / www . statista .
 
 ] [69] (./thesis_main.aux)
 
+LaTeX Warning: There were undefined references.
+
+
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis_main.out' has not changed.
@@ -2365,10 +2373,10 @@ Package rerunfilecheck Info: File `thesis_main.out' has not changed.
 ### simple group (level 1) entered at line 36 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 36814 strings out of 480129
- 716624 string characters out of 5893410
+ 36816 strings out of 480129
+ 716680 string characters out of 5893410
  1325716 words of memory out of 5000000
- 53889 multiletter control sequences out of 15000+600000
+ 53891 multiletter control sequences out of 15000+600000
  500408 words of font info for 112 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  108i,19n,106p,10753b,1560s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2400,10 +2408,10 @@ amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on thesis_main.pdf (83 pages, 2010607 bytes).
+Output written on thesis_main.pdf (83 pages, 2012180 bytes).
 PDF statistics:
- 1675 PDF objects out of 1728 (max. 8388607)
- 853 compressed objects within 9 object streams
+ 1679 PDF objects out of 1728 (max. 8388607)
+ 855 compressed objects within 9 object streams
  215 named destinations out of 1000 (max. 500000)
  425 words of extra memory for PDF output out of 10000 (max. 10000000)
 
