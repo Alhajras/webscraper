@@ -3,8 +3,8 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1}{\ignorespaces High level view of Google web crawlers archeticture \cite {google}.\relax }}{8}{figure.caption.8}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2}{\ignorespaces The basic crawler architecture.\relax }}{16}{figure.caption.10}%
-\contentsline {figure}{\numberline {3}{\ignorespaces An illustration of an inverted index featuring three documents. All tokens are included in this example, and the sole text normalization applied is converting all tokens to lowercase. Queries that involve multiple keywords are resolved using set operations. [3]\relax }}{20}{figure.caption.11}%
+\contentsline {figure}{\numberline {2}{\ignorespaces The basic crawler architecture.\relax }}{14}{figure.caption.10}%
+\contentsline {figure}{\numberline {3}{\ignorespaces An illustration of an inverted index featuring three documents. All tokens are included in this example, and the sole text normalization applied is converting all tokens to lowercase. Queries that involve multiple keywords are resolved using set operations. [3]\relax }}{18}{figure.caption.11}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4}{\ignorespaces High-level view of the software archtiticture.\relax }}{28}{figure.caption.14}%
 \contentsline {figure}{\numberline {5}{\ignorespaces An overview of the Templates table containing inspectors list projecting the targeted feilds in a document\relax }}{35}{figure.caption.15}%

@@ -1,51 +1,10 @@
 \chapter{Background}\
 \label{chap:background}
-This section tackles the fundamental principles and groundwork of the theory encompassing concepts, terminology, and methodologies related to search engines as applied within this thesis.
+This section tackles the fundamental principles and groundwork of the theory encompassing concepts, terminology, and methodologies related to search engines as applied within this thesis. Section \ref{sec:web-search-engine} dives into the essential components and characteristics required to implement the search engine discussed in this thesis. Section \ref{sec:crawler} provides a comprehensive examination of the crawler's specifications and architecture. Section \ref{sec:indexing} offers an in-depth explanation of the fundamental indexing terms and concepts essential to this thesis, while Section \ref{sec:ranking} explores the ranking score used in this research.
 
-\section{The nature of the web}
-The web we know today, Web 2.0, is known as "the participative social web" and is massive, and its rate of change is enormous due to its highly dynamic content. Due to this big sample space, finding the relevant pages or documents from the web isn't easy. To overcome this issue, there are two main approaches to sampling: 
-Vertical sampling: Focus only on the pages that are restricted by the domain name. This can be done in different levels. For example, one can restrict the crawling process based on the country, such as .de, .ly, uk. When vertical sampling is done at the second level, it limits the crawling to domains (e.g. stanford.edu) [3].
-Horizontal sampling: In this approach, it is important to know the most visited pages and domains to keep crawling from them, giving them more priority than others. This can be done by collecting data logs from the ISP or utilising a web crawler to estimate the page's popularity [3]. 
-
-
-\section{History}
-\numberwithin{equation}{chapter}
-
-The World Wide Web is an unlimited space to share provide and share information. Those information can have different format and cover different doamins. The use case of the web is only limtied by the developers imagination. This is benifital as the Web keept evolving rapidaly form Web 1.0 to Web 2.0 to Web 3.0. Web 1.0 used static pages to serve information, those information were moslty news, blogs and personal langing pages. Some refre to the Web 1.0 as "the read-only web". Although Web 1.0 was massive however most content were created was by deverlopers or at least users who knew basics of the HTML and CSS, moreover by that time content were only static they did not depen on fancy JavaScript libraries and frameworks like Angular and React, this made it limited to some use cases only. Fast forward, pages become more dynamic after using sessions, databases and clint rendering schemas. Those changes made the Web focused not only reading and gathering information by gave the power to more audiounce who did not know any programming or coding to participate and interact with the Web via browsers. Social media, e-commerce and trading stocks platforms was one of the reasons made the internet buble inflate, Use cases where unlimited as useres could create and deploy their own websites by using simple tools as Content Manament System CMS. This made Web 2.0 known as "the participative social web".
-
-To optimize the allocation of crawler resources, estimating the page's freshness must be considered. This prevents outdated pages from remaining unrefreshed for prolonged periods or where lesser-significant pages are needlessly recrawled despite unchanged content.
-
-
-It can be understood intuitively that the likelihood of a copy of page p being up-to-date at time t, denoted as up(t), declines over time when the page is not revisited.
-
-\begin{equation}
-u_p(t) \propto e^{-\lambda_pt}
-\label{eq:depth}
-\end{equation}
-
-The parameter λp signifies the rate of modifications occurring on page p, and its estimation can be deduced from past observations, mainly when the web server indicates the page's last modification date during visits. Cho and Garcia-Molina derived this estimation technique for λp [8].
-
-\begin{equation}
-\lambda_p \approx \frac{(X_p-1) - \frac{X_p}{N_p\log(1-X_p/N_p)}}{S_pT}
-\label{eq:depth}
-\end{equation}
-
-\begin{itemize}
-  \item Np number of visits to p.  
-  \item Sp time since the first visit to p.
-\item Xp number of times the server has informed that the page has changed.
-\item Tp total time with no modification, according to the server, summed over all the visits.
-\end{itemize}
-
-Note that some pages do not include the last-modified time stamp, and in this case, one can estimate this manually by comparing the
-downloaded copies at two different times and using the following equation. Where Xp now will be the number of times a modification is detected.
-
-\begin{equation}
-\lambda_p \approx \frac{-N_p\log(1-X_p/N_p)}{S_p}
-\label{eq:depth}
-\end{equation}
 
 \section{Web Search Engine}
+\label{sec:web-search-engine}
 Web Search Engine is software that collects information from the web and indexes them efficiently to optimize the searching process by the user. Users enter their queries to ask for information. The engine performs queries, looks up the pre-built organized index, and returns relevant results. The returned result is presented by Search Engine Results Pages as known as SERPs. The result is then ranked based on predefined criteria. 
 
 Web search engines use web crawlers or spiders to collect and harvest the internet jumping from one page to another. Each page can contain several links. The crawler's task is to find the links, visit them, and harvest them. Followed by crawlers, indexing is the next process where information is organized and optimized for search. 
@@ -67,6 +26,7 @@ Search engines, regardless of their imp[lmentation and design there, are some fe
 \end{itemize}
 
 \section{Cralwer}
+\label{sec:crawler}
 Web crawler or spider is a software which gathers pages information from the web, to prived the necessary data to the Indexer to build a search engine. The essential role of crawlers is to effectively and reliably collect as much information from the web. This thesis invests more time on this component than the Indexer as it serves as the bottleneck to the Search engine performance. 
 
 \subsection{Cralwer Specifications}
@@ -91,7 +51,7 @@ fetching "useful" pages first.
 \item Extensible: Crawler design should possess extensibility across numerous dimensions, facilitating adaptation to novel data formats, emerging fetch protocols, and similar challenges. This necessitates a modular architecture that accommodates expansion.
 \end{itemize}
 
-\subsection{Crawler architecture}
+\subsection{Crawler Architecture}
 
 The simple crawler architecture is made of the following fundamental modules, as shown in the following Figure. Fetch module that communicates with the internet and collects the pages passed by the URL Frontier module using HTTP requests from the URLs. URL frontier module contains a list of the URLs that need to be fetched by the Fetch module. Parsing module that takes the page content found by the fetch module and parses the page content to find the following links to be passed to the URL frontier and also to parse any value needed from the page, like text and images. Duplication filter that is used to exclude seen URLs. The DNS resolution module is responsible for identifying the web server from which to retrieve the page indicated by a given URL [9]. 
 
@@ -138,6 +98,7 @@ no universal norm to build a website. Due to lack of uniformity, collecting data
 
 
 \section{Indexing}
+\label{sec:indexing}
 In a search engine, an indexer is a component responsible for analyzing and organizing the content of web pages or documents in order to create an index, which is a structured database that enables efficient and fast retrieval of relevant information during search queries.
 When a search engine's crawler or web spider gathers data from websites, the indexer processes this data by breaking down the content into smaller units like words, phrases, and metadata. It then associates these units with the URLs or documents they came from. This organized information is stored in the index, which serves as a map or reference for the search engine to quickly locate and present relevant results when a user makes a search query.
 The indexer plays a crucial role in improving the speed and accuracy of search results because it precomputes and structures the data in a way that enables the search engine to match queries with indexed content more efficiently. Although supporintg indexing is fundemantal in this thesis however it will be given less attention than the crawling component. 
@@ -169,6 +130,7 @@ Output: The University of Freiburg
 \end{minipage}}
 
 \section{Ranking}
+\label{sec:ranking}
 As discussed indexing process prepares a map that can be looked up to find relevant terms that match the search query; however, one needs to rank the returned result based on relevance. For example, a user searching "for what is Freiburg?" will be expecting a result about Freiburg and not to return all documents that contain tokens like "what" and "is". So how can we find the relevant documents? There are many algorithms for document ranking. However, in this thesis, BM25 will be adopted. 
 
 \begin{equation}
@@ -309,3 +271,47 @@ To implement fuzzy search with q-gram, one can use Q-gram index. For each q-gram
 \$fr : frankfurt, freiburg, freetown, fresno, …
 
 More information about the implementation will be discussed in the approach section.
+
+
+\section{The nature of the web}
+The web we know today, Web 2.0, is known as "the participative social web" and is massive, and its rate of change is enormous due to its highly dynamic content. Due to this big sample space, finding the relevant pages or documents from the web isn't easy. To overcome this issue, there are two main approaches to sampling: 
+Vertical sampling: Focus only on the pages that are restricted by the domain name. This can be done in different levels. For example, one can restrict the crawling process based on the country, such as .de, .ly, uk. When vertical sampling is done at the second level, it limits the crawling to domains (e.g. stanford.edu) [3].
+Horizontal sampling: In this approach, it is important to know the most visited pages and domains to keep crawling from them, giving them more priority than others. This can be done by collecting data logs from the ISP or utilising a web crawler to estimate the page's popularity [3]. 
+
+
+\section{History}
+\numberwithin{equation}{chapter}
+
+The World Wide Web is an unlimited space to share provide and share information. Those information can have different format and cover different doamins. The use case of the web is only limtied by the developers imagination. This is benifital as the Web keept evolving rapidaly form Web 1.0 to Web 2.0 to Web 3.0. Web 1.0 used static pages to serve information, those information were moslty news, blogs and personal langing pages. Some refre to the Web 1.0 as "the read-only web". Although Web 1.0 was massive however most content were created was by deverlopers or at least users who knew basics of the HTML and CSS, moreover by that time content were only static they did not depen on fancy JavaScript libraries and frameworks like Angular and React, this made it limited to some use cases only. Fast forward, pages become more dynamic after using sessions, databases and clint rendering schemas. Those changes made the Web focused not only reading and gathering information by gave the power to more audiounce who did not know any programming or coding to participate and interact with the Web via browsers. Social media, e-commerce and trading stocks platforms was one of the reasons made the internet buble inflate, Use cases where unlimited as useres could create and deploy their own websites by using simple tools as Content Manament System CMS. This made Web 2.0 known as "the participative social web".
+
+To optimize the allocation of crawler resources, estimating the page's freshness must be considered. This prevents outdated pages from remaining unrefreshed for prolonged periods or where lesser-significant pages are needlessly recrawled despite unchanged content.
+
+
+It can be understood intuitively that the likelihood of a copy of page p being up-to-date at time t, denoted as up(t), declines over time when the page is not revisited.
+
+\begin{equation}
+u_p(t) \propto e^{-\lambda_pt}
+\label{eq:depth}
+\end{equation}
+
+The parameter λp signifies the rate of modifications occurring on page p, and its estimation can be deduced from past observations, mainly when the web server indicates the page's last modification date during visits. Cho and Garcia-Molina derived this estimation technique for λp [8].
+
+\begin{equation}
+\lambda_p \approx \frac{(X_p-1) - \frac{X_p}{N_p\log(1-X_p/N_p)}}{S_pT}
+\label{eq:depth}
+\end{equation}
+
+\begin{itemize}
+  \item Np number of visits to p.  
+  \item Sp time since the first visit to p.
+\item Xp number of times the server has informed that the page has changed.
+\item Tp total time with no modification, according to the server, summed over all the visits.
+\end{itemize}
+
+Note that some pages do not include the last-modified time stamp, and in this case, one can estimate this manually by comparing the
+downloaded copies at two different times and using the following equation. Where Xp now will be the number of times a modification is detected.
+
+\begin{equation}
+\lambda_p \approx \frac{-N_p\log(1-X_p/N_p)}{S_p}
+\label{eq:depth}
+\end{equation}
