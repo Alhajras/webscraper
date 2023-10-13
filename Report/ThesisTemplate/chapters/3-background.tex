@@ -62,6 +62,70 @@ Following parsing, a filtering process is essential. Firstly, the content's uniq
 
 The Robots.txt file can be obtained at the start of the crawling process and cached for efficiency, assuming it will not change during crawling. This approach is more efficient than making repeated HTTP requests for the file, reducing the number of requests and server load. Including Robots.txt in the crawling process aligns with the politeness guidelines discussed in the crawler specifications section \ref{sec:cralwer-specifications}.
 
+\subsection{Crawler Data Structure}
+Considering the link planned for crawling as a vertex, it is worth noting that web pages can be conceptualized as graphs rather than trees. In contrast to trees, graphs can include cycles, which means we might revisit the same vertex. For instance, a basic illustration of this is the home page link, which essentially represents a self-loop in a graph. We can maintain two distinct data structures to prevent processing a vertex multiple times: "Visited" and "Not Visited" vertices. The "Visited" vertices can be stored in a hashmap where the link serves as the key, and the boolean value represents whether the link has already been visited (true for visited, false for unvisited). The second data structure is a queue containing links that still need to be visited.
+
+\begin{figure}[ht] 
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/bfs-1.png} 
+    \caption{Initial condition} 
+    \label{fig7:a} 
+    \vspace{4ex}
+  \end{subfigure}%% 
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/bfs-2.png} 
+    \caption{Visit the 0 vertex}  
+    \label{fig7:b} 
+    \vspace{4ex}
+  \end{subfigure} 
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/bfs-3.png} 
+    \caption{Visit 1 and 2 vertices} 
+    \label{fig7:c} 
+  \end{subfigure}%%
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/bfs-4.png} 
+    \caption{Completed condition} 
+    \label{fig7:d} 
+  \end{subfigure} 
+  \caption{Illustration of various images}
+  \label{fig7} 
+\end{figure}
+
+\begin{figure}[ht] 
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/dfs-1.png} 
+    \caption{Initial condition} 
+    \label{fig7:a} 
+    \vspace{4ex}
+  \end{subfigure}%% 
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/dfs-2.png} 
+    \caption{Visit the 0 vertex}  
+    \label{fig7:b} 
+    \vspace{4ex}
+  \end{subfigure} 
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/dfs-3.png} 
+    \caption{Visit 1 and 2 vertices} 
+    \label{fig7:c} 
+  \end{subfigure}%%
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/dfs-4.png} 
+    \caption{Completed condition} 
+    \label{fig7:d} 
+  \end{subfigure} 
+  \caption{Illustration of various images}
+  \label{fig7} 
+\end{figure}
 
 \\
 
