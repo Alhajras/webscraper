@@ -78,5 +78,8 @@
     <requires type="dynamic">
       <file>thesis_main.bcf</file>
     </requires>
+    <requires type="editable">
+      <file>sample.bib</file>
+    </requires>
   </external>
 </requests>

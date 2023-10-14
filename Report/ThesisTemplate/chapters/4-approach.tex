@@ -87,8 +87,6 @@ To address these challenges, Selenium establishes a genuine session and fully re
 To mitigate this risk, it's crucial to introduce a waiting period between each request made by the same crawler. Additionally, when using Selenium, a deliberate delay of at least one second or more is already integrated to allow for the complete rendering of web pages. Nevertheless, these precautions alone may not prevent users from adding more nodes and executing DDoS attacks. Consequently, it is strongly advisable to exercise cautious management by monitoring and regulating the number of threads and nodes. This approach demonstrates respect for the targeted servers and helps prevent overloading them.
 \end{itemize}
 
-\\
-
 \section{Indexer Implmentation}
 
 The indexing phase follows the crawling step, as it necessitates the downloading of documents. Unlike crawling, which can be computationally intensive, indexing is relatively lightweight. Hence, it is carried out on the localhost with multithreading support.
@@ -104,13 +102,13 @@ Algorithm [2] clarifies the indexing process. Firstly, the algorithm loads the u
 		\State $threshold$ $\gets$ get\_small\_words\_threshold($config$)
 	    \State $stop\_list$ $\gets$ stop\_words\_list($config$)
         \For{$doc$ in $documents$}
-          \State $doc\_length$ $\gets$ 0}
-          \State $words$ $\gets$ tokenize($doc$)}
+          \State $doc\_length$ $\gets$ 0
+          \State $words$ $\gets$ tokenize($doc$)
           \For{$word$ in $words$}
-          	\State $doc\_length$ $\gets$ 0}
+          	\State $doc\_length$ $\gets$ 0
           	\If{$word$ > threshold and $word$ not in $stop\_list$}
 		    	\State add\_word\_and\_doc\_id\_to\_inverted\_list($word$, $doc.id$)
-		    	\State $doc\_length$ $\mathrel{+}=$ 1}
+		    	\State $doc\_length$ $\mathrel{+}=$ 1
 			\EndIf
           \EndFor
           \State add\_to\_doc\_lengths\_list($doc\_length$)

@@ -14,13 +14,13 @@
 \contentsline {subsection}{\numberline {3.2.1}Cralwer Specifications}{13}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Crawler Architecture}{14}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}Crawler Data Structure}{15}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Indexing}{16}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Inverted index}{16}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Document Unit}{17}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Tokenization}{18}{subsection.3.3.3}%
-\contentsline {section}{\numberline {3.4}Ranking}{18}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Ranking Refinements}{20}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Fuzzy search}{21}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.3}Indexing}{17}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Inverted index}{18}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Document Unit}{18}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Tokenization}{19}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Ranking}{19}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Ranking Refinements}{21}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Fuzzy search}{22}{subsection.3.4.2}%
 \contentsline {chapter}{\numberline {4}Approach}{25}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Software Architecture}{25}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Crawler Implmentation}{27}{section.4.2}%

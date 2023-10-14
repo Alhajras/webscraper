@@ -2,14 +2,14 @@ This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis_main.aux
 I couldn't open style file alphabetic.bst
----line 240 of file thesis_main.aux
+---line 258 of file thesis_main.aux
  : \bibstyle{alphabetic
  :                     }
 I'm skipping whatever remains of this command
 I found no style file---while reading file thesis_main.aux
-You've used 4 entries,
+You've used 7 entries,
             0 wiz_defined-function locations,
-            89 strings with 555 characters,
+            92 strings with 589 characters,
 and the built_in function-call counts, 0 in all, are:
 = -- 0
 > -- 0
