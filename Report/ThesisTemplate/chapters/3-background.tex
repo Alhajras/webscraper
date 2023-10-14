@@ -96,12 +96,12 @@ Scriburg employs two distinct data structures for its crawling implementation: i
   \end{subfigure} 
   \caption{Illustration of the Breadth First Search or BFS for a Graph algorithm.
  \cite{bfs}}
-  \label{fig7} 
+  \label{fig:bfs} 
 \end{figure}
 
 The traversal proceeds from the root by visiting all the nodes within a specific level before moving on to the next level. This is accomplished by employing a queue. The unvisited nodes adjacent to the current level are enqueued, while the nodes in the current level are marked as visited and dequeued. One way to perceive this is by initiating the crawling process from the seed URL page, which serves as the root node, and the next level represents all the links discovered within the root page.
 
-Figure 4 illustrates the BFS algorithm in operation to enhance visual understanding. Let us visualize a seed URL, denoted as vertex 0. The seed URL page contains two additional links, 1 and 2. The page represented by vertex 1 contains three links: 0, 2, and 3. Similarly, the page associated with vertex 2 includes three links: 0, 1, and 4. Our primary aim is to visit all nodes (links), which is the fundamental objective of the crawler. The crawler must avoid infinite looping and avoid revisiting previously visited nodes (links).
+Figure \ref{fig:bfs} illustrates the BFS algorithm in operation to enhance visual understanding. Let us visualize a seed URL, denoted as vertex 0. The seed URL page contains two additional links, 1 and 2. The page represented by vertex 1 contains three links: 0, 2, and 3. Similarly, the page associated with vertex 2 includes three links: 0, 1, and 4. Our primary aim is to visit all nodes (links), which is the fundamental objective of the crawler. The crawler must avoid infinite looping and avoid revisiting previously visited nodes (links).
 
 Initially, the queue and the visited hashmap are empty of any entries, which is the ideal state of the crawler. As the crawler launches on its crawling journey, it begins by pushing the seed URL, identified as node 0, into the queue and setting it as visited after visiting it. Subsequently, once the 0 page has been visited, it is dequeued, and the following two discovered links, 1 and 2, are added to the queue. These links, 1 and 2, are similarly dequeued and recorded in the hashmap as visited links. This process persists until the queue is empty, ensuring all the links (nodes) have been visited. It is essential to observe that when the crawler encounters a loop or a link pointing to a previously visited link, we can verify if the link has been marked as visited in the hashmap before introducing it to the queue.
 
@@ -134,8 +134,12 @@ In the case of a random graph, the time complexity of BFS is denoted as $O(|V|+|
     \label{fig7:d} 
   \end{subfigure} 
   \caption{Illustration of various images}
-  \label{fig7} 
+  \label{fig:dfs} 
 \end{figure}
+
+\textbf{Depth First Search (DFS):} It operates similarly to Breadth First Search (BFS). However, instead of visiting the nodes (or links) discovered first, it explores the most recently discovered nodes. Unlike BFS, DFS can be implemented using a stack. In Figure \ref{fig:dfs}, there is a visual representation of how DFS operates while crawling a website.
+
+The crawler begins with the root node, labeled 0, where the crawler first explores the seed URL node (0) and identifies the links within it (1, 2, and 3). Each of these links is added to the stack. The next node to be visited is node 1. Since it does not lead to any further linked nodes, the crawler proceeds to the next node in the stack, node 2. Upon visiting node 2, it becomes noticeable that it contains an additional link, denoted as 4. In contrast to BFS, which would visit node 3 in this scenario, DFS prioritizes node 4 before 3 due to its use of a stack rather than a queue. Similar to the BFS example, we use a hashmap to keep tracking the visited links to avoid loops. Like BFS, DFS has a time complexity of $O(|V|)$.
 
 \section{Indexing}
 \label{sec:indexing}
