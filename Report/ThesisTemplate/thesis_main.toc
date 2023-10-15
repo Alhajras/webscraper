@@ -16,7 +16,7 @@
 \contentsline {subsection}{\numberline {3.2.3}Crawler Data Structure}{15}{subsection.3.2.3}%
 \contentsline {section}{\numberline {3.3}Indexing}{18}{section.3.3}%
 \contentsline {section}{\numberline {3.4}Ranking}{21}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Fuzzy search}{24}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.5}Fuzzy Search}{24}{section.3.5}%
 \contentsline {chapter}{\numberline {4}Approach}{27}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Software Architecture}{27}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Crawler Implmentation}{29}{section.4.2}%
