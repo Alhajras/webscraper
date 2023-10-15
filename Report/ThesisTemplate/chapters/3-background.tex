@@ -143,14 +143,33 @@ The crawler begins with the root node, labeled 0, where the crawler first explor
 
 \section{Indexing}
 \label{sec:indexing}
-In a search engine, an indexer is a component responsible for analyzing and organizing the content of web pages or documents in order to create an index, which is a structured database that enables efficient and fast retrieval of relevant information during search queries.
-When a search engine's crawler or web spider gathers data from websites, the indexer processes this data by breaking down the content into smaller units like words, phrases, and metadata. It then associates these units with the URLs or documents they came from. This organized information is stored in the index, which serves as a map or reference for the search engine to quickly locate and present relevant results when a user makes a search query.
-The indexer plays a crucial role in improving the speed and accuracy of search results because it precomputes and structures the data in a way that enables the search engine to match queries with indexed content more efficiently. Although supporintg indexing is fundemantal in this thesis however it will be given less attention than the crawling component. 
+Within a search engine system, the indexer plays a crucial role in examining and structuring the content found in web pages or documents. Its primary function is to generate an index, an organized data structure that facilitates rapid and effective retrieval of pertinent information when users initiate search queries.
+
+Inderxer breaks the content into smaller components, words, and phrases, known as tokens. Afterward, it links these tokens to the respective URLs or documents from which they were created. This structured data is then stored within the index, serving as a vital reference for the search engine. It allows the search engine to swiftly locate and present relevant search results, delivering a seamless and efficient user experience.
+
+\subsection{Tokenization}
+Tokenization, within the context of indexing, entails fragmenting a textual document or a text string into smaller components known as tokens. These tokens are typically composed of words or subwords and are the fundamental building blocks for indexing and searching within a text. Tokenization represents a foundational and essential stage in natural language processing. A straightforward approach to tokenization involves dividing the text content based on spaces. For instance, the sentence "university of freiburg" would yield these tokens: "university", "of" and "freiburg".
+While dividing text by spaces is a straightforward and convenient solution, tokenization is a more convoluted task than it initially seems. For instance, words like "Freiburg.", "Freiburg!", and "Freiburg" should be treated as a single word, "Freiburg." Additionally, words such as "write," "writes," and "writing" essentially convey the same meaning and should not be distinguished from one another. Lastly, in cases where phrases like "Freiburg-University" are connected by a hyphen, splitting solely by spaces would treat it as a single word, even though it comprises two distinct words.
+
+Various approaches to tokenization exist, and in this thesis, each document undergoes a series of steps:
+
+\begin{itemize}
+	\item Initial text segmentation by spaces.
+	\item Conversion of all words to lowercase.
+	\item Removal of all special characters using regular expressions.
+\end{itemize}
+
+
+For example, the sentence "What! Is this the 'University of Freiburg '!" will be transformed after undergoing these processes to "what", "is", "this", "the", "of" and "freiburg". 
+
+The regular expression used in Python is \verb|[^\w\s]+|. The regular expression \verb|[^\w\s]+| matches one or more characters that are neither word characters (letters, digits, or underscores) nor whitespace characters (spaces, tabs, line breaks). In other words, it matches any sequence of characters that contains characters other than letters, digits, underscores, spaces, tabs, or line breaks.
+
+\subsection{Document Unit}
+The term "document" frequently mentions the specific information intended for retrieval from a webpage. While, in some instances, this term encompasses the entirety of a page's content, this holds primarily for Universal crawlers like Google. However, in the case of the Preferential crawler employed in this thesis, the definition of a document unit is adjustable, depending on the nature of the website and the specific data the user aims to collect. For instance, the document unit may be viewed as a single product listing on an E-commerce website featuring product titles, prices, and descriptions. Contrarily, a news website might treat each article as an individual document. The chapter \ref{chap:approach} will provide more comprehensive guidance on creating a template corresponding to a document.
 
 \subsection{Inverted index}
-Crawlers collect information from the web and prepare them to be searched. However, looking up each term with brute forcing is a performance issue and is impossible. Hence inverted index data structure is used. 
-An inverted index or inverted file is a data structure used in information retrieval systems, particularly in search engines, to store and efficiently retrieve information about the occurrences of terms (words or phrases) within a collection of documents. It is called "inverted" because it inverts the relationship between terms and documents compared to traditional databases, where documents are associated with their content.
-In an inverted index, each unique term in the collection of documents is treated as a key, and the value associated with each term is a list of references to the documents where that term appears. This list of references allows for rapid access to all the documents containing a specific term.
+As we discussed, crawlers are responsible for collecting data from the web and preparing it for users to search. Let us define "q" as the query string provided by the user and "D" as the number of documents the user attempts to search for that query. If we were to implement a simple solution, we would need to iterate over each term in "q" and then search each term against every document, each of which contains |D| terms. This approach results in a cubic complexity of O(|q| * D * |D|), which is inefficient. Implementing an inverted index is a more efficient solution to address this issue. An inverted index or inverted file is a data structure used in information retrieval systems, particularly in search engines, to store and efficiently retrieve information about the occurrences of terms (words or phrases) within a collection of documents. It is called "inverted" because it inverts the relationship between terms and documents.
+In an inverted index, each unique token in the collection of documents is treated as a key, and the value associated with each token is a list of references to the documents where that token appears. This list of references allows for rapid access to all the documents containing a specific token. Some inverted indexes also include the position of the token in the document. 
 
 Creating an Inverted index requires the next steps. The first step is to collect the documents to be indexed. In the context of this thesis, the documents referred to the content inside the crawled pages. The second step is to tokenize the text, turning each document into a list of words known as tokens. The last step is to create a dictionary that maps each term with a list of the ids of the documents that occurred. The tokenized terms are called dictionaries, and the list of ids is called postings. 
 
@@ -162,16 +181,9 @@ An illustration of an inverted index featuring three documents. All tokens are i
      \label{fig:google-arch}
 \end{figure}
 
-\subsection{Document Unit}
-The term "document" has frequently been mentioned in reference to the specific information intended for retrieval from a webpage. While, in most instances, this term encompasses the entirety of a page's content, this holds true primarily for Universal crawlers. However, in the case of the Preferential crawler employed in this thesis, the definition of a document unit is adaptable, contingent upon the nature of the website and the specific data the user seeks to gather. For instance, in an E-commerce website featuring product titles, prices, and descriptions, the document unit may be viewed as a single product listing. Conversely, a news website might treat each news article as an individual document. More comprehensive guidance on creating a template that corresponds to a document will be provided in the Approach chapter.
+Given that the inverted list can be implemented as a hashmap or dictionary in Python, where the average time complexity of a hashmap operation is O(1), the process of finding all the documents containing the query |q| has an overall time complexity of O(|q| * 1), which simplifies to O(|q|). The next step involves merging the resulting documents for each term in the query q. The time complexity of merging two sorted lists is O(n + m), where "n" is the length of the first list, and "m" is the length of the second list. Since there will be a resulting list for each term in the query q, the number of lists to merge is |q|. Consequently, the time complexity of the inverted list becomes 𝑂( |𝑞| ∗ |𝐿|), where |𝐿| represents the average length of the posting list.
 
-\subsection{Tokenization}
-Tokenization in indexing is the process of breaking down a text document or a string of text into smaller units called tokens. These tokens are typically words or subwords, and they serve as the basic units for indexing and searching within a text corpus. Tokenization is a fundamental step in natural language processing and information retrieval tasks.
-
-\fbox{\begin{minipage}{15em}
-Input: The University of Freiburg
-Output: The University of Freiburg
-\end{minipage}}
+It is worth noting that both |q| and |L| are typically small. The essential advantage of using the inverted list is that it makes indexing independent of the document length |D|, significantly improving performance.
 
 \section{Ranking}
 \label{sec:ranking}
