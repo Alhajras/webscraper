@@ -147,7 +147,7 @@ Within a search engine system, the indexer plays a crucial role in examining and
 
 Inderxer breaks the content into smaller components, words, and phrases, known as tokens. Afterward, it links these tokens to the respective URLs or documents from which they were created. This structured data is then stored within the index, serving as a vital reference for the search engine. It allows the search engine to swiftly locate and present relevant search results, delivering a seamless and efficient user experience.
 
-\subsection{Tokenization}
+\subsection*{Tokenization}
 Tokenization, within the context of indexing, entails fragmenting a textual document or a text string into smaller components known as tokens. These tokens are typically composed of words or subwords and are the fundamental building blocks for indexing and searching within a text. Tokenization represents a foundational and essential stage in natural language processing. A straightforward approach to tokenization involves dividing the text content based on spaces. For instance, the sentence "university of freiburg" would yield these tokens: "university", "of" and "freiburg".
 While dividing text by spaces is a straightforward and convenient solution, tokenization is a more convoluted task than it initially seems. For instance, words like "Freiburg.", "Freiburg!", and "Freiburg" should be treated as a single word, "Freiburg." Additionally, words such as "write," "writes," and "writing" essentially convey the same meaning and should not be distinguished from one another. Lastly, in cases where phrases like "Freiburg-University" are connected by a hyphen, splitting solely by spaces would treat it as a single word, even though it comprises two distinct words.
 
@@ -164,10 +164,12 @@ For example, the sentence "What! Is this the 'University of Freiburg '!" will be
 
 The regular expression used in Python is \verb|[^\w\s]+|. The regular expression \verb|[^\w\s]+| matches one or more characters that are neither word characters (letters, digits, or underscores) nor whitespace characters (spaces, tabs, line breaks). In other words, it matches any sequence of characters that contains characters other than letters, digits, underscores, spaces, tabs, or line breaks.
 
-\subsection{Document Unit}
+\subsection*{Stop Words}
+Tokens such as 'the' and 'of' contribute no importance to the overall outcome of the query. Eliminating these terms via stop words can lead to excluding certain frequently used words from the indexing process. A stop words list is a list that holds words that can be excluded from the indexing process. Selecting appropriate stop words can enhance search retrieval by using a more compact indexer while also allowing user queries to bypass terms contained in the stop words list. The exclusion of stop words from the indexer can result in more relevant search results, as the search engine can direct its attention to the informative words within the documents.
+\subsection*{Document Unit}
 The term "document" frequently mentions the specific information intended for retrieval from a webpage. While, in some instances, this term encompasses the entirety of a page's content, this holds primarily for Universal crawlers like Google. However, in the case of the Preferential crawler employed in this thesis, the definition of a document unit is adjustable, depending on the nature of the website and the specific data the user aims to collect. For instance, the document unit may be viewed as a single product listing on an E-commerce website featuring product titles, prices, and descriptions. Contrarily, a news website might treat each article as an individual document. The chapter \ref{chap:approach} will provide more comprehensive guidance on creating a template corresponding to a document.
 
-\subsection{Inverted index}
+\subsection*{Inverted index}
 As we discussed, crawlers are responsible for collecting data from the web and preparing it for users to search. Let us define "q" as the query string provided by the user and "D" as the number of documents the user attempts to search for that query. If we were to implement a simple solution, we would need to iterate over each term in "q" and then search each term against every document, each of which contains |D| terms. This approach results in a cubic complexity of O(|q| * D * |D|), which is inefficient. Implementing an inverted index is a more efficient solution to address this issue. An inverted index or inverted file is a data structure used in information retrieval systems, particularly in search engines, to store and efficiently retrieve information about the occurrences of terms (words or phrases) within a collection of documents. It is called "inverted" because it inverts the relationship between terms and documents.
 In an inverted index, each unique token in the collection of documents is treated as a key, and the value associated with each token is a list of references to the documents where that token appears. This list of references allows for rapid access to all the documents containing a specific token. Some inverted indexes also include the position of the token in the document. 
 
@@ -187,7 +189,7 @@ It is worth noting that both |q| and |L| are typically small. The essential adva
 
 \section{Ranking}
 \label{sec:ranking}
-As discussed indexing process prepares a map that can be looked up to find relevant terms that match the search query; however, one needs to rank the returned result based on relevance. For example, a user searching "for what is Freiburg?" will be expecting a result about Freiburg and not to return all documents that contain tokens like "what" and "is". So how can we find the relevant documents? There are many algorithms for document ranking. However, in this thesis, BM25 will be adopted. 
+As discussed, the indexing process prepares a hashmap that can be looked up to find relevant terms that match the search query; however, one needs to rank the returned result based on relevance. For example, a user searching for "what is Freiburg?" will be expecting a result about Freiburg and not to return all documents that contain tokens like "what" and "is", which are less important than the most informative term in the sentence which is "Freiburg". There are many algorithms for document ranking. However, in this thesis, BM25 will be adopted. 
 
 \begin{equation}
 BM25\_score = tf^*.\log_2(\frac{N}{df})
@@ -203,12 +205,15 @@ tf^* = \frac{tf.(k+1)}{k.\alpha+tf}
 \end{equation}
 
 \textit{N} = Total number of docuemnts, \textit{tf} = term frequency, the number of times a word occurs in a document, \textit{df} = docuemnt frequency, The number of documents containing a particular word, \textit{DL} = document length, \textit{AVDL} =
-average document length (measured in number of words)
-Standard setting for BM25: \textit{k} = 1.75 and \textit{b} = 0.75.
+average document length (measured in number of words).
 
-The following example dives into the details of the BM25 equation and how it impacts ranking.  Table [] shows a list of documents as an example of an input to be indexed and ranked against different search queries. We start by calculating the variables needed to find the BM25 scores for each term in a document.    
+Parameter b prevents the impact of document length normalization. It is a numeric value within the range of 0 to 1. When "b" is set to 0, there is no normalization, implying that longer documents do not face any penalties. In contrast, a value of 1 indicates complete normalization, where longer documents are penalized in proportion to their length. The default value will be set in the implementation is 0.75.
 
-Since we have three documents, the N variable will equal 3. The second step is to find document length DF for each document {1: 26, 2: 21, 3: 49}. AVDL will equal 32. Plugging those values into the equation, we get an inverted list as follows: 
+The parameter "k" governs the impact of term frequency saturation in scoring. It is a positive parameter that dictates the speed at which the term frequency component of the score achieves its peak value. When "k1" is set to 0, there is no consideration of term frequency, implying that the score remains unaffected by the number of times query terms appear in the document. On the other hand, when "k" is set to a significant value, more weight is given to term frequency, and the score escalates linearly with term frequency. The default value will be set in the implementation is 1.75.
+
+The following example dives into the details of the BM25 equation and how it impacts ranking. Table \ref{table:bm25-documents} shows a list of documents as an example of an input to be indexed and ranked against different search queries. We start by calculating the variables needed to find the BM25 scores for each term in a document.    
+
+Given that we have three documents, we set the variable "N" to 3. In the next step, we calculate each document's length (DF), resulting in {1: 26, 2: 21, 3: 49}. The average document length (AVDL) is determined to be 32. Substituting these values into the equation, we obtain the inverted list shown in Table \ref{table:bm25-result}.
 
 \begin{table}[ht] 
 {\footnotesize
@@ -229,71 +234,63 @@ Document ID & Document content\T\B
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
-  \caption{Documents sample}
+  \caption{Documents content used as an example of MB25 ranking.}
+  \label{table:bm25-documents}
 \end{table}
 
-Examining Table [], we can note that the tokens that appear in all three documents, like 'the', 'of' and 'is' have scores of 0. If the term searched for is common, we should give less weight or value to the search query. For example, users often search for queries such as 'What is ...', 'who is ..' , and 'Where is ...'. Those queries contain common words that are not informative in documents like 'What', 'Who', 'Where' and 'is', the term coming after those sentences should be more valuable and have more weight. Unique words like 'albert' and 'ludwig' have high scores as they only occur in one document. Words like 'freiburg' and 'university' have different scores for each document depending on the word's appearance relative to the document's length. 
+When we analyze the data in Table \ref{table:bm25-result}, it becomes evident that tokens shared by all three documents, such as 'the,' 'of,' and 'is,' have corresponding scores of 0. When dealing with common search terms, assigning lower importance or weight to the search query is advisable. For instance, users frequently search for queries like 'What is ...,' 'who is ...,' and 'Where is ...,' which include common but less informative words like 'What,' 'Who,' 'Where,' and 'is.' In such cases, the terms following these common words should be given greater value and weight.
+
+On the other hand, unique words like 'albert' and 'ludwig' receive high scores since they are exclusive to a single document. Words such as 'freiburg' and 'university' have varying scores for each document, depending on their relative occurrences in relation to the document's length.
 
 \begin{table}[ht] 
 {\footnotesize
 \begin{tabular}{ P{2.5cm} ||P{11.1cm}  }      % centered columns (3 columns) 
  \hline \hline
-Token & (Doc. ID, BM25 Score)\T\B 
+\textbf{Token} & \textbf{(Doc. ID, BM25 Score)}\T\B 
 \\ 
 \hline
-the & [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B 
+the & (1, 0.0), (2, 0.0), (3, 0.0) \T\B 
 \\ 
 \hline
-university &  [(1, 1.071), (3, 0.466)] \T\B 
+university &  (1, 1.071), (3, 0.466) \T\B 
 \\ 
 \hline
-of  &  [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B 
+of  &  (1, 0.0), (2, 0.0), (3, 0.0) \T\B 
 \\
 \hline
-freiburg  &  [(1, 1.071), (2, 0.975)] \T\B 
+freiburg  &  (1, 1.071), (2, 0.975) \T\B 
 \\ 
 \hline
-officially  &  [(1, 1.740)] \T\B 
+officially  &  (1, 1.740) \T\B 
 \\ 
 \hline
-albert  & [(1, 1.740)]\T\B 
+albert  & (1, 1.740)\T\B 
 \\ 
 \hline
-ludwig  &  [(1, 1.740)] \T\B 
+ludwig  &  (1, 1.740) \T\B 
 \\ 
 \hline
-is  & [(1, 0.0), (2, 0.0), (3, 0.0)] \T\B 
+is  & (1, 0.0), (2, 0.0), (3, 0.0) \T\B 
 \\ 
 \hline
-a  & [(1, 0.642), (3, 0.885)] \T\B 
+a  & (1, 0.642), (3, 0.885) \T\B 
 \\ 
 \hline
-public  &  [(1, 1.740)] \T\B 
+public  &  (1, 1.740) \T\B 
 \\ 
 \hline \hline
     \end{tabular}
 }
   \captionsetup{justification=centering,margin=2cm}
-  \caption{The first 10 tokens of the result inverted index and the scores of the docuemnts. }
+  \caption{The first ten tokens from the resulting inverted index and the corresponding document scores. }
+  \label{table:bm25-result}
 \end{table}
 
-User search for 'university of freiburg' will return the next result: (1, 2.14), (2, 0.97), (0.46). The first document with id 1 has the highest score as it contains both words. This is the correct result, as the first document talks about the university of freiburg. The second document 2, which talks about the city Freiburg, is higher than the third because freiburg is mentioned twice in the same document, and the content is shorter. The next section will examplin how can one refine the ranking of documents.
+A user's query for 'university of Freiburg' will yield the following results: (1, 2.142), (2, 0.975), (3, 0.466). The initial document with ID 1 receives the highest score since it encompasses both of the query terms. This outcome aligns with expectations, given that the first document is indeed about the University of Freiburg.
 
-\subsection{Ranking Refinements}
-Some methods can be implemented to boost the document's ranking. The first step is to focus on tokenization of the documents. 
+However, the concern regarding relevancy lies in the two primary keywords, "university" and "Freiburg," mentioned in documents 2 and 3. The question then becomes, which one should be prioritized in this scenario? This distinction can be influenced by adjusting the values of the "b" and "k" parameters. In this case, document 2 takes importance over document 3 because the term "Freiburg" is repeated twice, and the document itself is shorter than document 3.
 
-In the previous example, we can note that the univerisy term has appeared in documnet 3 only once; however, the term universities appeared twice. In the ranking, the relation between the two words is not achieved because the inverted index will include university and universities separately. This will reduce the score of document 3 when the user searches for university, although both terms are associated and linked and should be accumulated. Stemming and lemmatization, Both stemming and lemmatization aim to simplify inflectional forms and occasionally derivationally related forms of a word, bringing them down to a shared foundational form. As an example:
-
-am, are, is ⇒ be \\
-car, cars, car’s, cars’ ⇒ car
-
-Stemming typically involves employing a simple rule-based approach to truncate word endings, aiming to achieve accurate results in most cases. This approach often involves eliminating derivational affixes. In contrast, lemmatization follows a more meticulous process that involves utilizing vocabulary and morphological analysis of words. The primary objective is to exclusively remove inflectional endings and to restore words to their fundamental or dictionary forms, which are referred to as lemmas [5].
-
-We observed that small or frequently occurring tokens such as 'the' and 'of' possess scores of 0, contributing no significance to the overall outcome of the query. Eliminating these terms via stop words can lead to the exclusion of certain frequently used words from the indexing process. A stop words list is a list that holds words that can be excluded from the indexing process. The selection of stop words is language-dependent; each language has its own set of prevalent words. For instance, in English, the subsequent list provides an example of such stop words that could be omitted from the indexing procedure:
-
-a an and are as at be by for from
-has he in is it its of on that the
-to was were will with
+The subsequent section will delve into how one can further refine the document ranking process.
 
 
 \subsection{Fuzzy search}
