@@ -1,0 +1,21 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1}{\ignorespaces High level view of Google web crawlers archeticture \cite {brin1998anatomy}.\relax }}{8}{figure.caption.7}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2}{\ignorespaces An overview of a generic search engine system.\relax }}{10}{figure.caption.8}%
+\contentsline {figure}{\numberline {3}{\ignorespaces A generic web crawler architecture overview \cite {manning2008}.\relax }}{13}{figure.caption.9}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Illustration of the Breadth First Search or BFS for a Graph algorithm. \cite {bfs}\relax }}{14}{figure.caption.10}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Illustration of various images\relax }}{16}{figure.caption.11}%
+\contentsline {figure}{\numberline {6}{\ignorespaces An illustration of an inverted index featuring three documents. All tokens are included in this example, and the sole text normalization applied is converting all tokens to lowercase. Queries that involve multiple keywords are resolved using set operations. \cite {castillo2005effective}\relax }}{19}{figure.caption.16}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7}{\ignorespaces High-level view of the software archtiticture.\relax }}{26}{figure.caption.19}%
+\contentsline {figure}{\numberline {8}{\ignorespaces An overview of the Templates table containing inspectors list projecting the targeted feilds in a document\relax }}{34}{figure.caption.20}%
+\contentsline {figure}{\numberline {9}{\ignorespaces An overview of the runners table, showing the runners status and progress.\relax }}{35}{figure.caption.22}%
+\contentsline {figure}{\numberline {10}{\ignorespaces An overview of the indwxwea table, showing the their status and progress.\relax }}{36}{figure.caption.23}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Search result view.\relax }}{37}{figure.caption.25}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {12}{\ignorespaces Comparing threads performance.\relax }}{50}{figure.caption.33}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Threads documents distribution.\relax }}{51}{figure.caption.34}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
