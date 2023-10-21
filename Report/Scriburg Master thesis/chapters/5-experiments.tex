@@ -724,7 +724,7 @@ P@k represents the proportion of valid predictions within the system's top k pre
 
 \begin{equation}
 P@k = \frac{|Q_{valid} \cap Q^k_{result}|}{k}
-\label{eq:depth}
+\label{eq:patq}
 \end{equation}
 
 We will compute the precision at 5 (p@5) for all the various indexing configurations.
@@ -734,7 +734,7 @@ Consider $R_1$ through $R_k $ as the ordered list of positions where relevant do
 
 \begin{equation}
 AP = \frac{\sum_{i=1}^{n} P@r_i}{n}
-\label{eq:depth}
+\label{eq:ap}
 \end{equation}
 
 For the predictions from $Q_{valid}$ that are absent in $Q_{result}$, we assign a Precision at position $r_i $ (P@ri) value of 0. We then calculate the average precision by averaging these values across all question prefixes in the ground truth.

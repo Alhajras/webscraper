@@ -168,7 +168,7 @@ Tokens such as 'the' and 'of' contribute no importance to the overall outcome of
 \subsection*{Document Unit}
 The term "document" frequently mentions the specific information intended for retrieval from a webpage. While, in some instances, this term encompasses the entirety of a page's content, this holds primarily for Universal crawlers like Google. However, in the case of the Preferential crawler employed in this thesis, the definition of a document unit is adjustable, depending on the nature of the website and the specific data the user aims to collect. For instance, the document unit may be viewed as a single product listing on an E-commerce website featuring product titles, prices, and descriptions. Contrarily, a news website might treat each article as an individual document. The chapter \ref{chap:approach} will provide more comprehensive guidance on creating a template corresponding to a document.
 
-\subsection*{Inverted index}
+\subsection*{Inverted Index}\label{sec:inverted-index}
 As we discussed, crawlers are responsible for collecting data from the web and preparing it for users to search. Let us define "q" as the query string provided by the user and "D" as the number of documents the user attempts to search for that query. If we were to implement a simple solution, we would need to iterate over each term in "q" and then search each term against every document, each of which contains |D| terms. This approach results in a cubic complexity of O(|q| * D * |D|), which is inefficient. Implementing an inverted index is a more efficient solution to address this issue. An inverted index or inverted file is a data structure used in information retrieval systems, particularly in search engines, to store and efficiently retrieve information about the occurrences of terms (words or phrases) within a collection of documents. It is called "inverted" because it inverts the relationship between terms and documents.
 In an inverted index, each unique token in the collection of documents is treated as a key, and the value associated with each token is a list of references to the documents where that token appears. This list of references allows for rapid access to all the documents containing a specific token. Some inverted indexes also include the position of the token in the document. 
 
@@ -293,35 +293,38 @@ The subsequent section will delve into how one can further refine the document r
 
 
 \section{Fuzzy Search}
-Frequently, users make spelling errors in their input queries or may employ American English spellings, such as "color," which are equivalent to British English spellings, like "colour." It would be less than ideal to return no results solely because the user chose a word variant over another. Other situations may occur where users need clarification about the correct spelling of a new term or someone's name.
+Frequently, users make spelling errors in their input queries or may employ American English spellings, such as "color," which are equivalent to British English spellings, like "colour." It would be less than ideal to return no results solely because the user chose a word variant over another. Other situations may occur where users need clarification about the correct spelling of a new term or someone's name. In Scriburg, we will use the fuzzy-search feature to offer users suggestions as they type their queries and to identify the closest matching query entered by the user.
 
 Fuzzy search is a technique used in natural language processing (NLP) and information retrieval to find approximate matches for a given query or search term, even when the exact spelling or wording might not be present in the target text. This is particularly useful when dealing with typos, misspellings, phrasing variations, or other minor deviations from the original text.
+
+In Scriburg, the fuzzy search method employed for spelling correction is labeled isolated-term \cite{manning2008}. This approach focuses on correcting individual query terms one by one rather than fixing the entire sentence within a contextual context.
 
 Fuzzy search algorithms typically involve techniques like Levenshtein distance (edit distance), which calculates the minimum number of single-character edits (insertions, deletions, substitutions) required to change one string into another. Other techniques include using phonetic algorithms to find similar-sounding words or tokenization and comparing word n-grams to identify overlapping substrings. The greater the shared substring between the two texts, the more likely this is the intended word the user was trying to search for.
 
 
-Considering two character strings, s1 and s2, the edit distance that separates them represents the minimal count of edit operations needed to transform s1 into s2. The typical edit operations permitted for this purpose include inserting a character into a string, deleting a character from a string, and replacing a character within a string with another character. In the context of these operations, the term "Levenshtein distance" is sometimes used interchangeably with edit distance. For example, the edit distance between "black" and "back" is one.
+Considering two character strings, s1 and s2, the edit distance that separates them represents the minimal count of edit operations needed to transform s1 into s2. The typical edit operations permitted for this purpose include inserting a character into a string, deleting a character from a string, and replacing a character within a string with another character. In the context of these operations, the term "Levenshtein distance" is sometimes used interchangeably with edit distance. For example, the edit distance between "black" and "back" is one. In Screiburg, we use Prefix edit distance instead of Edit distance.  Prefix edit distance is a variation of edit distance that focuses on finding the minimum number of edit operations needed to transform one string into a prefix of the other. The prefix edit distance between $s_1$ and $s_2$ is defined as $PED(s_1, s_2) = min_{s_2^{'}} ED(s_1, s_2^{'})$ where $s_2^{'}$ is a prefix of $s_2$ \cite{freiburg2023ir}.
 
 
-Q-grams can be used to implement the edit distance. For a string x, and an integer q ∈ N, the multiset of q-grams, denoted by Q q(x), , consists of all substrings of length q 3("freiburg") = { "fre", "rei", "eib", "ibu", "bur", "urg" } \cite{freiburg2023ir}
-We define it as a multiset because the same q-gram may occur multiple times and we want to know when it does 
+Fuzzy search requires the existence of a dictionary, which comprises a collection of words for conducting searches to locate the closest match and then return the result. The creation of this dictionary can take various forms, and in the case of Scriburg, we employ two distinct dictionaries.
 
-Q 3("ababa") = { "aba", "bab", "aba" }
+The initial dictionary is the same one used during the document indexing process when crawling the web. This choice derives from our desire to ensure that the words indexed from the crawled documents can be effectively looked up.
 
-The number of q-grams of a string x is:
+The second dictionary, which the user predefines, is presented by using Wikidata in Scriburg. This dictionary is particularly valuable in scenarios where synonyms are employed. For instance, if a user inputs 'USA,' a dropdown menu will display 'United States' as a suggestion.
 
-|Q q(x)| = |x| - q + 1
+In the Scriburg user interface (UI), we offer users the flexibility to select the dictionary of their choice. This option is essential, especially in specific domains where using a particular dictionary is crucial for accurate results. The dictionary construction process is carried out before indexing the crawled documents.
 
-Similar words have many q-grams in common, that's why it can be used to find similar words. 
-Lemma: for strings x and y: |Q q(x) \ Q q(y)| ≤ q ∙ ED(x, y)
-Understand: A \ B denotes the set difference, that is, the elements of A without the elements from B If B is very similar to A, then A \ B is small [13]
-Example:
-x = freiburgerin, y = breifurgerin, ED(x, y) = Q 2(x) = { fr, re, ei, ib, bu, ur, rg, ge, er, ri, in } Q 2(y) = { br, re, ei, if, fu, ur, rg, ge, er, ri, in } 
-Q 2(x) \ Q 2(y) = {fr, ib, bu}
-|Q 2(x) \ Q 2(y)| = 3
+\subsection{Fuzzy Search With Q-grams}
+Calculating the prefix edit distance for a given word s within a dictionary $D$ is computationally costly and can be accelerated. One approach involves using q-grams. For a given string s and a natural number $q \in N$,  we form the multiset of q-grams, represented as $Q_q(s)$, which encompasses all substrings of length $q$ (Freiburg, 2023).
 
-To implement fuzzy search with q-gram, one can use Q-gram index. For each q-gram of a string from D, store an inverted list of all strings from D containing it, sorted lexicographically
+\subsection{Q-gram Index}
+When indexing and building the inverted index, as previously described in Section \ref{sec:inverted-index}, the tokens derived from documents will be organized within a dictionary or hashmap. The q-grams of strings extracted from the documents will be saved in a separate dictionary. This q-gram dictionary is structured with q-grams as keys and values containing lists of tokens from the documents, along with the corresponding q-gram frequencies.
 
-\$fr : frankfurt, freiburg, freetown, fresno, …
 
-More information about the implementation will be discussed in the approach section.
+\begin{figure}[h]	
+     \centering
+         \includegraphics[width=10cm]{figures/q-gram.png}
+              \caption{A simple q-gram dictionary where three q-grams are linked to the tokens that contain them \cite{manning2008}.}
+     \label{fig:q-gram-example}
+\end{figure}
+
+Figure \ref{fig:q-gram-example} presents a visual representation illustrating the fundamental concept of the q-gram inverted list. It is essential to clarify that in the actual implementation, we'll store references to the tokens associated with the q-gram rather than the tokens themselves as strings. Furthermore, we will also record the frequency of occurrences of the q-gram within a token. The fuzzy search implementation is rooted in the principles of the Information Retrieval course \cite{freiburg2023ir}. I strongly recommend thoroughly reviewing the course lectures for a more detailed understanding of its functionality and implementation guidance.
