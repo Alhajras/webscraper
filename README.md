@@ -13,7 +13,7 @@
   <p align="center">
     Master thesis project at the University of Freiburg
     <br />
-    <a href="https://github.com/Alhajras/webscraper/blob/main/Report/ThesisTemplate/thesis_main.pdf"><strong>Read thesis »</strong></a>
+    <a href="https://github.com/Alhajras/webscraper/blob/main/Report/Scriburg%20Master%20thesis/Scriburg_Master_thesis_algdairy.pdf"><strong>Read thesis »</strong></a>
     <br />
     <br />
 <a class="mailto" href="mailto:alhajras.algdairy@gmail.com">Report Bug</a>
@@ -182,7 +182,8 @@ Max depth: 10000
 ```
 This is how it should look like:
 
-![image](https://github.com/Alhajras/webscraper/assets/36598060/45c8f3e0-b5a0-4860-bf73-024c56367cdf)
+![image](https://github.com/Alhajras/webscraper/assets/36598060/3e1967ee-b195-4f2d-a76b-56ce1f4e7549)
+
 
 - Click on `Create` button
 
