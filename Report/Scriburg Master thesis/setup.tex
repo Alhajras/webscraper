@@ -5,7 +5,6 @@
     % font encoding is set up for pdflatex, for other environments see
     % http://tex.stackexchange.com/questions/44694/fontenc-vs-inputenc
     \usepackage[T1]{fontenc}  % 8-bit fonts, improves handling of hyphenations
-    \usepackage[utf8x]{inputenc}
     % provides `old' commands for table of contents. Eases the ability to switch
     % between book and scrbook
     \usepackage{scrhack}
@@ -14,6 +13,12 @@
     \usepackage{multirow}
     \usepackage{listings}
 
+    % Table settings
+    \usepackage[utf8]{inputenc}
+    \setlength{\tabcolsep}{2pt} %Gap before text Starts
+    \renewcommand{\arraystretch}{1.3} %Cell Height scaling
+    \setlength{\arrayrulewidth}{0.5mm} %Table Border Thickness
+    % End of settings
     % ------------------- layout, default -------------------
     % adjust the style of float's captions, separated from text to improve readabilty
     \usepackage[labelfont=bf, labelsep=colon, format=hang, textfont=singlespacing]{caption}

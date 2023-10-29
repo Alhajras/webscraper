@@ -3,22 +3,26 @@
 \section{Motivation}
 
 
-Since the beginning of the Digital Revolution, known as the Third Industrial Revolution, in the latter half of the 20\textsuperscript{th} century, the importance of data has increased as it became the new currency shaping the dynamics of our interconnected world. From social media platforms and e-commerce transactions to information sharing and entertainment consumption, online activities generate enormous amounts of data. The online data is sometimes referred to as the 'new oil' or the 'new currency', as it impacts almost the same economies and societies as oil. Businesses and organizations understand the power of data as they provide insight into consumer behaviour, refine business strategies, and enhance decision-making processes. Furthermore, the rise of artificial intelligence has further amplified the value of Internet data. Natural language processing (NLP)\footnote{Natural language processing is an interdisciplinary field that enables computers to understand and manipulate speech.} is becoming a new hot topic as all the giant firms race to create their model; however, data is the fuel to power those models. The more data is collected, the better the model can become. Consequently, collecting, analyzing, and leveraging internet data has become a cornerstone of competitiveness, innovation, and progress in the digital age.
+Since the beginning of the Digital Revolution, known as the Third Industrial Revolution, in the latter half of the 20\textsuperscript{th} century, the importance of data has increased as it became the new currency shaping the dynamics of our interconnected world. From social media platforms and e-commerce transactions to information sharing and entertainment consumption, online activities generate enormous amounts of data. The online data is sometimes called the "new oil" or the "new currency," as it impacts almost the same economies and societies as oil. Businesses and organizations understand the power of data as they provide insight into consumer behavior, refine business strategies, and enhance decision-making processes. Furthermore, the rise of artificial intelligence has further amplified the value of Internet data. \textbf{Natural Language Processing} \textbf{(NLP)}\footnote{Natural language processing is an interdisciplinary field that enables computers to understand and manipulate speech.} is becoming a new hot topic as all the giant firms race to create their model; however, data is the fuel to power those models. The more data is collected, the better the model can become. Consequently, collecting, analyzing, and leveraging internet data has become a cornerstone of competitiveness, innovation, and progress in the digital age.
 
-Internet data can be harvested by using automated software programs called Web crawlers, also known as web spiders or web bots. Their main goal is to discover, retrieve, and index\footnote{Indexing involves the storage of document indexes to enhance the speed and performance of locating relevant documents in response to a search query.} information from websites. The applications and use cases of internet crawlers are diverse and valuable; however, the main application that sparked this thesis was market research. Businesses use web crawlers to collect data about their competitors, market trends, and consumer opinion. This information helps in making informed business decisions.
+
+Internet data can be harvested by using automated software programs called \textbf{web crawlers}, also known as web spiders or web bots. Their main goal is to discover, retrieve, and \textbf{index}\footnote{Indexing involves the storage of document indexes to enhance the speed and performance of locating relevant documents in response to a search query.} information from websites. The applications and use cases of internet crawlers are diverse and valuable; however, the main application that sparked this thesis was market research. Businesses use web crawlers to collect data about their competitors, market trends, and consumer opinion. This information helps in making informed business decisions.
  
-Search engines like Google, Bing, and DuckDuckGo excel at web crawling and indexing, but businesses, especially in E-commerce, require competitive pricing insights beyond standard search results. Google's parameters, including brand visibility, user location, SEO\footnote{SEO, or Search Engine Optimization, is the practice of optimizing online content and websites to improve their visibility and ranking in search engine results.} proficiency, and hidden variables, impact document rankings. Different search engines yield unique results, and companies may want to exclude parts of the internet from indexing. Customization to specific domains and use cases, like price comparison, is necessary.
+Search engines like Google, Bing, and DuckDuckGo excel at web crawling and indexing, but businesses, especially in e-commerce, require competitive pricing insights beyond standard search results. Google's parameters, including brand visibility, user location, SEO\footnote{SEO, or Search Engine Optimization, is the practice of optimizing online content and websites to improve their visibility and ranking in search engine results.} ability and more hidden variables impact document rankings. Different search engines yield unique results, and companies may want to exclude parts of the internet from indexing. Customization to specific domains and use cases, like price comparison, is necessary.
 
-Businesses often seek a subset of the internet relevant to their domain. Indexing and ranking criteria vary by use case, necessitating tailored configurations. Employing domain expertise is crucial. However, data scientists face initial setup challenges and costs. An infrastructure allowing data scientists to use adaptable scripts with minimal programming knowledge would be valuable. 
+Businesses often seek a subset of the internet relevant to their domain. Indexing and ranking criteria vary by use case, necessitating tailored configurations. Employing domain expertise is crucial. However, data scientists face initial setup challenges and costs. An infrastructure allowing data scientists to use adaptable scripts with minimal programming knowledge would be valuable. Data scientists do not have to reinvent the wheel to adjust a basic search engine and extend it whenever needed.  
 
 \section{Task Definition}
-Given a set of URLs, denoted as $U = \{U_1, U_2, U_3, ...U_n\}$, the objective is to identify, for each URL in $U$, a set of prospective URLs, $U_{new} = \{U_1, U_2, U_3, ...U_n\}$, to augment the existing URLs in $U$, creating $U_{tot} = U \cup U_{new}$. Furthermore, for each URL $U$, the goal is to specify the desired documents for downloading and indexing, forming a collection denoted as $D = \{D_1, D_2, D_3, ...D_n\}$.
+Given a set of URLs, denoted as $U = \{U_1, U_2, U_3, ... U_n\}$, the objective is to identify, for each URL in $U$, a set of prospective URLs, $\hat U = \{\hat U_1, \hat U_2, \hat U_3, ... \hat 
+  U_n\}$, to extend the existing URLs in $U$, creating $U_{tot} = U \cup \hat U$.
+  
+  Furthermore, for each URL $U$, the goal is to specify the desired documents for downloading and indexing, forming a set denoted as $D = \{D_1, D_2, D_3, ...D_n\}$.
 
 After completing the web crawling process and successfully retrieving the document set $D$, the subsequent step involves indexing all these documents. 
 
 All crawling and indexing processes must be easily configurable and adjustable through a user-friendly interface. Moreover, users should be able to search against the indexed documents. Given a user input query $q$, we define relevant documents as the subset of the crawled and indexed documents $R \subset D$.
 
-\section{Contribution}
+\section{Contribution}\label{sec:contribution}
 
 In this thesis, we aim to answer the following questions:
 
@@ -28,7 +32,7 @@ In this thesis, we aim to answer the following questions:
 \setlength{\parsep}{0pt} % Reduce spacing between paragraphs within items
 \setlength{\topsep}{0pt} % Reduce spacing before and after the list
 
-  \item What are the challenges and bottlenecks to creating a scalable, configurable generic search engine?
+  \item What are the challenges and bottlenecks to creating a scalable, configurable search engine?
 \item Can we outperform a similar tool like ParseHub?
 \item How does changing the configurations provided by the user interface affect the results in the crawling and indexing accuracy?
     \item Can we create a decent User Interface UI that intuitively allows users to crawl and index targeted websites from the internet?
@@ -48,7 +52,7 @@ The organization of this thesis is as follows:
 
   \item Chapter 2 dives into the prior research that serves as the foundation for this thesis.
   \item Chapter 3 clarifies the essential theoretical background for understanding this thesis's fundamental concepts.
-  \item Chapter 4 presents an overview of the system's architecture and design, detailing the implementation of the crawling process and addressing the challenges faced in the process.
+  \item Chapter 4 presents an overview of the system's architecture and design, describing the implementation of the crawling process and addressing the challenges faced in the process.
   \item Chapter 5 discusses the process of crawling and indexing datasets used for evaluation and the methodologies employed for conducting the evaluation.
   \item Chapter 6 summarises the findings from the thesis experiments and outlines future opportunities for further enhancements and research.
 \end{itemize}

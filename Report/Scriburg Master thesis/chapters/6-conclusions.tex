@@ -1,11 +1,36 @@
-\chapter{Conclusions and Future Work}
-\label{chap:conclusion}
-In this thesis, I delved deeply into the complexities of building a search engine and crafting a crawling and indexing process suitable for distributed cluster operation. The crawling phase presented the most formidable challenges among these due to its various edge cases. Achieving the right balance between being a fast crawler and maintaining proper politeness to avoid overloading servers and causing potential Denial of Service (DoS) issues proved one of the most demanding aspects. Additionally, the prevalence of high-speed internet applications posed a tough challenge in creating a crawler capable of effectively handling diverse use cases.
+\chapter{Conclusions and Future Work}\label{chap:conclusion}
 
-Crawling extensive websites encompassing millions of documents often necessitates multiple machines, as relying on a single machine can be problematic. Fortunately, many gigantic websites offer APIs to access their database information, presenting a viable alternative to crawling.
+Within this chapter, we address the questions initially introduced at the opening of the thesis (Section \ref{sec:contribution}), conclude our experiments, and open the door for additional research to enhance the solution and explore areas that have not been previously examined.
+\section{Conclusions}
 
-While evaluating Douglas and StackOverflow, we encountered issues such as IP address bans. To address this, we mitigated the problem by reducing the HTTP request rate by reducing the number of threads. However, other services like ParseHub circumvent this issue by implementing IP Rotation. This technique, while advantageous, typically requires users to invest in an IP pool for rotation purposes. Incorporating this feature into our crawler is a potential enhancement, though it necessitates additional consideration, including cost implications.
+It is crucial to remember the primary questions and contributions intended to be accomplished by this thesis and whether we have successfully addressed them or if they remain abstract. In the following list, we iterate through the contributions mentioned in Section \ref{sec:contribution}  and discuss our final findings.
 
-I suggest adding IP Rotation if it is affordable and always remaining polite for future work. Furthermore, I am enthusiastic about enhancing our inspection tool to be more user-friendly and accessible, similar to the one utilized in ParseHub. Additionally, I find it fascinating to introduce new features, such as a health bar, to offer users quick insights into the progress of their crawling processes. While we currently display status codes, errors, and helpful statistics, I aim to simplify this information into a more intuitive visualization.
+\begin{itemize}
+  \item \textit{What are the challenges and bottlenecks to creating a scalable, configurable search engine?}
+Two primary bottlenecks restrict the crawler's performance. The first is the loading time, or the time it takes to render a page, which varies for each page and ultimately affects the rate at which the crawler can make requests. The second challenge is that websites can block the crawler if the request rate increases, which is also contingent on the configurations of the websites' firewalls.
 
-Another route for improvement involves the development of a tailored protocol that both crawlers and websites can attach to. While using the Robots.txt file is a positive step, there is potential to expand and refine this approach further.
+\item \textit{Can we outperform a similar tool like ParseHub?}
+ParseHub demonstrated an advantage with its smoother workflow and improved automated field selection. Nonetheless, Scriburg surpassed ParseHub in terms of performance and overall robustness.
+
+\item \textit{How does changing the configurations provided by the user interface affect the results in the crawling and indexing accuracy?} The user interface offers forms, including optional and advanced crawling and indexing options. The used options deliver a helpful and adaptable user experience. Even users with limited programming experience can easily configure and execute straightforward crawling and indexing tasks by relying on the default values provided.
+
+    \item \textit{Can we create a decent User Interface UI that intuitively allows users to crawl and index targeted websites from the internet?} Yes, we did. However, manually adding and removing inspectors was time-consuming and should be refined.
+    
+\item \textit{How well do crawlers react to different websites with different DOM structures?} While the internet hosts millions of websites, making it impossible to ensure coverage for all possible use cases, we have evaluated many websites and effectively managed their diverse implementations.
+
+    \item \textit{Can we integrate the indexing and crawling processes in the same tool?} It was possible to provide a user-friendly interface that combines both functionalities.
+    
+    \item \textit{Can we find meaningful evaluation metrics for the implemented search engine?} We have discovered that evaluating crawling can pose challenges, but certain aspects can be addressed to provide insights into the crawler's performance.
+    
+\end{itemize}
+
+\section{Future Work}
+While evaluating \textbf{Scriburg}, the most wanted feature was to automate the inspector's selections. The solution should be similar to what \textbf{ParseHub} is implementing. The user should be faced with a live session where they can click on any title or price they want to collect simply by clicking. However, This feature is not easy to implement and can take up to \textbf{three months} to perfect. 
+
+Adding \textbf{IP Rotation} is highly recommended because although the crawling rate was not high in the evaluation, the crawler got banned twice from different websites. Implementing IP Rotation is relatively easy. Some services provide free proxy list API\footnote{SSL Proxies: \url{https://www.sslproxies.org/}} to be used to make proxied requests. One can add each proxy bypassing the flag \texttt{proxy-server} in Selenium. This feature can take up to \textbf{three days} to implement and test.
+
+Adding a \textbf{Steps}\footnote{PrimeNG Steps: \url{https://primeng.org/steps/personal}} component can allow the users to crawl and index step by step. For example, the first step is to create a project name like Stack Overflow. This name will be used for all templates, runners, crawlers, and indexers instead of entering the name in each form. The steps will make running a crawler intuitive and reduce user confusion. Using the \textbf{Steps} component from \textbf{PrimeNg} will take \textbf{two weeks} to implement and add this functionality. This feature can solve the issue by making the user interface more intuitive and easily used.
+
+Early stopping the crawlers once they are inefficient helps save resources. This can be due to an internet connection; the website is down, the crawler needs to be better configured, and more issues can make crawling inefficient. Although we are serving valuable information to help monitor the crawling process, for non-technical users, it can be hard to understand what the HTTP status codes stand for. To fix this, we can set up some rules to convert errors into valuable messages that users can understand. This feature can take between \textbf{two weeks} to \textbf{one month} to implement.
+
+Leveraging the \texttt{robots.txt} file to direct web crawlers can be effective, but there is a need for further research into establishing a robust protocol for crawler behavior. For instance, it proves beneficial for crawlers to gain insights into website characteristics, such as estimating the number of links, products, or items present. This information helps users in determining the appropriate scaling of their crawlers. Additionally, the file can specify the maximum allowable requests per second to prevent potential denial-of-service (DoS) issues. It could also contain preferences regarding crawl timings, such as restricting activity to nighttime.
