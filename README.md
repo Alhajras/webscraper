@@ -160,16 +160,18 @@ This is how your inspector's list should look like:
 
 ## 2 -  Crawlers
 
-After creating a _Template_, we want to create and configure a _Crawler_.
+After creating a _**Template**_, we want to create and configure a _**Crawler**_.
 
 ### Steps:
 
-- Navigate to the Crawlers page
+- Navigate to the [Crawlers](http://localhost:4200/crawlers) page
 - Click on `Create a crawler` and expand `Advanced options`
 - Fill the next values:
+
+**Note**: After filling the `Links Scope (Pagination)` press enter to apply changes to the field because it is a list of text.
 ```
-Name: {yourname}-uni-crawler
-Template: {your-name}-uni-ranking 
+Name: uni-crawler
+Template: uni-ranking-template 
 Max pages: 10000
 Max collected docs: 300000
 Seed URL: https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking
