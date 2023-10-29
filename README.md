@@ -153,7 +153,8 @@ Type: text
 
 This is how your inspector's list should look like:
 
-![image](https://github.com/Alhajras/webscraper/assets/36598060/7f5127fc-95a0-4d2e-ad4e-9dbc6e2e7c8e)
+![image](https://github.com/Alhajras/webscraper/assets/36598060/6609c955-dd8e-435e-9f10-f29888384045)
+
 
 ------------------------
 
