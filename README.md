@@ -13,7 +13,7 @@
   <p align="center">
     Master thesis project at the University of Freiburg
     <br />
-    <a href="https://github.com/Alhajras/webscraper/blob/main/Report/ThesisTemplate/thesis_main.pdf"><strong>Read thesis »</strong></a>
+    <a href="https://github.com/Alhajras/webscraper/blob/main/Report/Scriburg%20Master%20thesis/thesis_main.pdf"><strong>Read thesis »</strong></a>
     <br />
     <br />
 <a class="mailto" href="mailto:alhajras.algdairy@gmail.com">Report Bug</a>
