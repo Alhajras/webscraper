@@ -52,11 +52,11 @@ Examples of valid use cases:
 
 | Crawlers Dashboard | Crawler Configuration |
 | --------  | ------------------- |
-| ![showcase scene](https://raw.githubusercontent.com/Alhajras/webscraper/main/Report/ThesisTemplate/images/demo-6.png) | ![showcase scene 3](https://raw.githubusercontent.com/Alhajras/webscraper/main/Report/ThesisTemplate/images/demo-7.png) |
+| ![showcase scene](https://raw.githubusercontent.com/Alhajras/webscraper/main/Report/Scriburg%20Master%20thesis/figures/demo-6.png) | ![showcase scene 3](https://raw.githubusercontent.com/Alhajras/webscraper/main/Report/Scriburg%20Master%20thesis/figures/demo-7.png) |
 
 | Indexers Dashboard | Search Result |
 | --------  | ------------------- |
-| ![showcase scene](https://raw.githubusercontent.com/Alhajras/webscraper/main/Report/ThesisTemplate/images/demo-10.png) | ![showcase scene 3](https://raw.githubusercontent.com/Alhajras/webscraper/main/Report/ThesisTemplate/images/demo-12.png) |
+| ![showcase scene](https://raw.githubusercontent.com/Alhajras/webscraper/main/Report/Scriburg%20Master%20thesis/figures/demo-10.png) | ![showcase scene 3](https://raw.githubusercontent.com/Alhajras/webscraper/main/Report/Scriburg%20Master%20thesis/figures/demo-12.png) |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
