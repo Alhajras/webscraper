@@ -306,7 +306,7 @@ class InvertedIndex:
                     value = inspector_value["value"].strip()
                     # Applying the clean-up expressions
                     reg_expressions = inspector_value["inspector__clean_up_expression"]
-                    if reg_expressions != '':
+                    if reg_expressions != "":
                         for reg_expression in inspector_value[
                             "inspector__clean_up_expression"
                         ].split('";"'):

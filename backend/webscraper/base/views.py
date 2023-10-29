@@ -219,7 +219,9 @@ class IndexerViewSet(EverythingButDestroyViewSet):
             for inspector_value in inspector_values:
                 inspector_value["boosted_score"] = doc_score
                 document = inspector_value["document"]
-                inspector_value["organic_score"] = [d[2] for d in result if d[3] == document][0]
+                inspector_value["organic_score"] = [
+                    d[2] for d in result if d[3] == document
+                ][0]
                 if document not in documents:
                     documents[document] = [inspector_value]
                 else:
