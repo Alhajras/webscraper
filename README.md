@@ -195,13 +195,13 @@ Now, we can run/stop the crawlers from the Runners page.
 
 ### Steps:
 
-- Navigate to the Runners page:
+- Navigate to the [Runners](http://localhost:4200/runners) page:
 - Click on `Create a Runner`
 - Fill the following:
 
 ```
-Name: {yourname}-uni-runner
-Crawler: {yourname}-uni-crawler
+Name: uni-runner
+Crawler: uni-crawler
 Machine: localhost
 
 ```
