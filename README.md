@@ -126,27 +126,27 @@ To do so, we will follow the next steps:
 
 ![image](https://github.com/Alhajras/webscraper/assets/36598060/ce1b5e88-b483-4232-a020-8c8fd5bcff6c)
  
-We start by creating a _Template_, which is the blueprint that maps to the fields that want to be downloaded as a document. 
+We start by creating a _**Template**_, which is the blueprint that maps to the fields that want to be downloaded as a document. 
 
 ### Steps:
 
-- Go to the Templates page
+- Go to the [Templates](http://localhost:4200/templates) page
 -  Click on `Create a template` button
--  Give a name of the template `{your-name}-uni-ranking` and click on save.
--  Expand the template you created.
--  Now we want to create the fields we want to capture from the page: `Uni name`, `Uni location` and `Uni ranking`. 
+-  Give a name of the template `uni-ranking-template` and click on `save`.
+-  Expand the template you created by clicking on the `>` button.
+-  Now we want to create the fields we want to capture from the page: `uni-name`, `uni-location` and `uni-ranking`. 
 -  Click on `Create an inspector` button and create the following inspectors:
 
 ```
-Name: Uni name {yourname}
+Name: uni-name
 Selector: //*[contains(@class, 'ranking-institution-title')]
 Type: text
 
-Name: Uni location {yourname}
+Name: uni-location
 Selector: //*[contains(concat(' ', normalize-space(@class), ' '), ' location ')]	
 Type: text
 
-Name: Uni ranking {yourname}
+Name: uni-ranking
 Selector: //*[contains(@class, 'rank') and contains(@class, 'sorting_1') and contains(@class, 'sorting_2')]
 Type: text
 ```
