@@ -294,7 +294,7 @@ class Statistics(models.Model):
     avg_loading_time = models.FloatField(default=0)
     average_processing_time = models.FloatField(default=0)
     avg_page_size = models.FloatField(default=0)
-    http_codes = models.JSONField(default="")
+    http_codes = models.JSONField(default=dict)
     average_docs_per_page = models.PositiveIntegerField(default=0)
 
     def __str__(self) -> str:
