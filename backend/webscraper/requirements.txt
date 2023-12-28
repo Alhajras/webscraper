@@ -6,7 +6,7 @@ djangorestframework==3.14.0
 markdown==3.4.1
 django-filter==22.1
 django-extensions==3.2.1
-selenium==4.7.2
+selenium==4.15.1
 django-solo==2.0.0
 django-simple-bulma==2.5.0
 paramiko==3.4.0
