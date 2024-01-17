@@ -107,7 +107,7 @@ If you do not have docker compose you can install it from here [Docker compose](
 ## Usage 
 
 ### Use Case - 1: World University Rankings 2023
-You are a university professor and would like to maintain a local version list of the universities worldwide and their ranking. To do this, we will use the website [timeshighereducation](www.timeshighereducation.com) to download and index the information. **The Times Higher Education World University Rankings 2023** include 1,799 universities across 104 countries and regions, making them the largest and most diverse university rankings to date.
+You are a university professor and would like to maintain a local version list of the universities worldwide and their ranking. To do this, we will use the website ([www.timeshighereducation.com](https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking?page=4)) to download and index the information. **The Times Higher Education World University Rankings 2023** include 1,799 universities across 104 countries and regions, making them the largest and most diverse university rankings to date.
 
 <details>
 <summary>Read more ...</summary>
