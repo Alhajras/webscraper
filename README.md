@@ -30,9 +30,10 @@
   - [Screenshots](#screenshots) 
 - [Getting Started](#getting-started) 
   - [Installation](#installation)
-- [Usage](#usage) 
-  - [Uni Ranking](#Use-Case---1-World-University-Rankings-2023)
-  - [Comparing Prices](#Use-Case---2-Comparing-Products-Prices)
+- [Usage](#usage)
+  - [Stack Overflow Questions](#Use-Case---1-Stack-Overflow-Questions)
+  - [Uni Ranking](#Use-Case---2-World-University-Rankings-2023)
+  - [Comparing Prices](#Use-Case---3-Comparing-Products-Prices)
 - [Contact](#contact)
 
 
