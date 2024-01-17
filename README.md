@@ -106,8 +106,156 @@ If you do not have docker compose you can install it from here [Docker compose](
 
  
 ## Usage 
+### Use Case - 1: Stack Overflow Questions
+You want to create a small search engine that can answer any question related to Python. To do so you want to collect
+all the questions on Stack Overflow related to Python topic. 
+<details>
+<summary>Read more ...</summary>
+This is a screenshot on how the table we want to extract information from looks like:
 
-### Use Case - 1: World University Rankings 2023
+ ![image](https://github.com/Alhajras/webscraper/assets/36598060/cce29dfc-92de-40db-83eb-e425dcac70e8)
+
+
+**Goal:** We would like to extract the following Fields: **Title, Description** and **Votes** 
+
+To do so, we will follow the next steps: 
+
+------------------------
+## 1 - Templates
+
+![image](https://github.com/Alhajras/webscraper/assets/36598060/ce1b5e88-b483-4232-a020-8c8fd5bcff6c)
+ 
+We start by creating a _**Template**_, which is the blueprint that maps to the fields that want to be downloaded as a document. 
+
+### Steps:
+
+- Go to the [Templates](http://localhost:4200/templates) page
+-  Click on `Create a template` button
+-  Give a name of the template `stack-overflow-template` and click on `save`.
+-  Expand the template you created by clicking on the `>` button.
+-  Now we want to create the fields we want to capture from the page: `title`, `description` and `votes`. 
+-  Click on `Create an inspector` button and create the following inspectors:
+
+```
+Name: title
+Selector: //*[contains(@class, 's-post-summary--content-title')]
+Type: text
+
+Name: description
+Selector: //*[contains(@class, 's-post-summary--content-excerpt')]	
+Type: text
+
+Name: votes
+Selector: //*[contains(@class, 's-post-summary--stats-item__emphasized')]
+Type: text
+```
+
+This is how your inspector's list should look like:
+
+![image](https://github.com/Alhajras/webscraper/assets/36598060/7d63ef96-6ee6-4a2d-8445-f3589b909910)
+
+
+------------------------
+
+## 2 -  Crawlers
+
+After creating a _**Template**_, we want to create and configure a _**Crawler**_.
+
+### Steps:
+
+- Navigate to the [Crawlers](http://localhost:4200/crawlers) page
+- Click on `Create a crawler` and expand `Advanced options`
+- Fill the next values:
+
+**Note**: After filling the `Links Scope (Pagination)` press enter to apply changes to the field because it is a list of text.
+```
+Name: stack-overflow-crawler
+Template: stack-overflow-template 
+Max pages: 1000
+Max collected docs: 1000
+Seed URL: https://stackoverflow.com/questions/tagged/python
+Allow multi elements crawling: Enable
+Links Scope (Pagination): //*[contains(@class, 's-pagination')]
+Threads: 1
+Max depth: 10000
+```
+This is how it should look like:
+
+![image](https://github.com/Alhajras/webscraper/assets/36598060/3e1967ee-b195-4f2d-a76b-56ce1f4e7549)
+
+
+- Click on `Create` button
+
+------------------------
+
+## 3 - Runners
+
+Runners are jobs that run the crawling process in a cluster or locally. After creating the _Crawler_, we create a _Runner_.
+Now, we can run/stop the crawlers from the Runners page.
+
+### Steps:
+
+- Navigate to the [Runners](http://localhost:4200/runners) page:
+- Click on `Create a Runner`
+- Fill the following:
+
+```
+Name: stack-overflow-runner
+Crawler: stack-overflow-crawler
+Machine: localhost
+
+```
+- Click on Create
+
+Find your runner in the list. Click on the burger menu to start crawling and click on `Start`.
+
+![image](https://github.com/Alhajras/webscraper/assets/36598060/df26e6f5-3b3c-45de-988d-f0fb83ee76ad)
+
+The list will keep refreshing. You don't have to keep reloading the page.
+You can monitor the progress by looking at the `progress` column and `status` column.
+
+You can see the log and statistics by clicking on: 
+![image](https://github.com/Alhajras/webscraper/assets/36598060/ee956f61-817a-46f5-ab09-07e50eff5e26)
+
+
+------------------------
+
+## 4 - Indexing
+
+After the runner is completed, we can start indexing the results.
+
+### Steps:
+
+- Navigate to Indexers
+- Click on `create an indexer`
+- Fill the following:
+```
+name: stack-overflow-indexer
+Inspectors:  stack-overflow (Title), stack-overflow (Description)
+``` 
+- Click on Create.
+- Find your indexer from the list and click on `Start indexing`.
+- Watch the indexing going from status `New` to `Completed`
+------------------------
+
+## 5 - Searching
+
+After crawling (Collecting data) and Indexing (Preparing them for searching), we can test if searching returns the right results.
+
+### Steps:
+
+- Navigate to Search
+- Select your indexer
+- Search for:
+  - `python` (Covering a normal query case)
+  - `pythen` (Fuzzy search test)
+  -  `what is ruby` (Covering a case where only one word should be more important than others)
+  - `django` (Covering a normal query case)
+  - `SQL database` (Covering a normal query case)
+  - `Python 2.6` (Covering a normal query case with a number)
+</details>
+
+### Use Case - 2: World University Rankings 2023
 You are a university professor and would like to maintain a local version list of the universities worldwide and their ranking. To do this, we will use the website ([www.timeshighereducation.com](https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking?page=4)) to download and index the information. **The Times Higher Education World University Rankings 2023** include 1,799 universities across 104 countries and regions, making them the largest and most diverse university rankings to date.
 
 <details>
@@ -262,7 +410,7 @@ After crawling (Collecting data) and Indexing (Preparing them for searching), we
   - Enter  `university oxford`, should show results including `university of oxford` 
 </details>
 
-### Use Case - 2: Comparing Products Prices
+### Use Case - 3: Comparing Products Prices
 You are a small business owner who would like to monitor and track the competitors. You can create more than one crawler to monitor different websites and for this use case, we will focus on Douglas.
 
 <details>
