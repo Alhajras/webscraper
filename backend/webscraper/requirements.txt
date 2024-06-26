@@ -2,7 +2,7 @@ Django==4.1
 django-bulma==0.8.3
 flake8-django==1.1.5
 black==24.3.0
-djangorestframework==3.14.0
+djangorestframework==3.15.2
 markdown==3.4.1
 django-filter==22.1
 django-extensions==3.2.1
