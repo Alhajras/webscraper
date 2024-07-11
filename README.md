@@ -74,7 +74,7 @@ Examples of valid use cases:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To simplify the installations process, `docker compose` is used and recommended. 
+To simplify the installation process, `docker-compose` is used and recommended. 
 
 ### Installation
 
@@ -92,14 +92,14 @@ If you do not have docker compose you can install it from here [Docker compose](
     ```
     docker compose up -d
     ```
-- If you want to only run the pbs cluster run:
+- If you want to run only the pbs cluster run:
     ```
-    docker compose up -d pbs-head-node pbs-sim-node
+    docker compose up -d pbs-head-node pbs-crawl-node
     ```
-- To register the simulation node in the head node, first you have to invlike the head container and run the following: 
+- To register the crawler node in the head node, first, you have to invoke the head container and run the following: 
     ```
     . /etc/profile.d/pbs.sh
-    qmgr -c "create node pbs-sim-node"
+    qmgr -c "create node pbs-crawl-node"
     ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
