@@ -16,3 +16,4 @@ django-polymorphic==3.1.0
 django-rest-polymorphic==0.1.9
 sympy==1.12
 sqlparse>=0.5.0 # not directly required, pinned by Snyk to avoid a vulnerability
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
